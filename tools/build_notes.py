@@ -5,7 +5,7 @@ The notes page holds words and phrases only (not grammar, and not the zhuyin
 chart, whose rows have type "sound"). This script also rebuilds the lesson and
 grammar pages in topics/ (see build_topics.py).
 
-Run from the repo root after editing vocab.csv, grammar.md or lessons/:
+Run from the repo root after editing vocab.csv, lessons/ or grammar/:
 
     python3 tools/build_notes.py
 
@@ -39,14 +39,6 @@ TYPE_ORDER = [
     "direction word", "number", "measure word", "question word", "particle", "conjunction", "suffix",
     "phrase", "grammar pattern", "sentence", "sound",
 ]
-# Which situations each grammar section belongs to (default: Grammar glue).
-GRAMMAR_USES = {
-    "Yes / no and other questions": ["Asking questions"],
-    "Adverbs and describing": ["Describing things"],
-    "Numbers, measure words, dates and time": ["Numbers & counting", "Clock & calendar"],
-    "Location and \"there is\"": ["Directions"],
-}
-STATUS = {"✅": "✅ in your notes", "◐": "◐ partly in your notes", "○": "○ not learned yet"}
 
 
 def vocab_entries():
@@ -61,78 +53,6 @@ def vocab_entries():
                 "flag": bool(r["check"]),
             })
     return out
-
-
-def clean(md):
-    """Strip simple Markdown so text reads plainly on the page."""
-    md = re.sub(r"\*\*(.+?)\*\*", r"\1", md)
-    md = re.sub(r"`(.+?)`", r"\1", md)
-    md = re.sub(r"\*(.+?)\*", r"\1", md)
-    return md.strip()
-
-
-def grammar_entries():
-    text = (ROOT / "grammar.md").read_text(encoding="utf8")
-    entries, section, cur = [], None, None
-    in_table = False
-
-    def flush():
-        if cur:
-            entries.append(cur)
-
-    for line in text.splitlines():
-        if line.startswith("## AllSet A1 checklist") or line.startswith("## Corrections"):
-            flush(); cur = None; section = None
-            continue
-        if line.startswith("## Practice sentences"):
-            flush(); cur = None; section = "Practice sentences"; in_table = True
-            continue
-        if in_table:
-            cells = [c.strip() for c in line.strip().strip("|").split("|")]
-            if len(cells) == 4 and cells[0] not in ("Chinese",) and not set(cells[0]) <= set("-"):
-                entries.append({
-                    "kind": "sentence", "s": cells[0], "t": "", "p": cells[1], "m": cells[2],
-                    "topic": "Practice sentences", "type": "sentence", "uses": [], "b": "",
-                    "n": cells[3], "hsk": False, "src": "notes", "flag": False,
-                })
-            continue
-        m = re.match(r"^## \d+\. (.+)$", line)
-        if m:
-            flush(); cur = None; section = m.group(1).strip()
-            continue
-        m = re.match(r"^#### (.+)$", line)
-        if m and section:
-            flush()
-            head = m.group(1)
-            tag = re.search(r"`(.+?)`", head)
-            sym = next((k for k in STATUS if k in head), "")
-            title = re.sub(r"`.+?`", "", head)
-            for k in list(STATUS) + ["⚑"]:
-                title = title.replace(k, "")
-            status = " · ".join(x for x in [STATUS.get(sym, ""), tag.group(1) if tag else ""] if x)
-            cur = {
-                "kind": "grammar", "s": title.strip(), "t": "", "p": "", "m": "", "n": "",
-                "topic": "Grammar: " + section, "type": "grammar pattern",
-                "uses": GRAMMAR_USES.get(section, ["Grammar glue"]), "b": "", "hsk": False,
-                "src": "notes", "flag": "⚑" in head, "status": status, "extra": [],
-            }
-            continue
-        if cur and line.startswith("- "):
-            body = line[2:]
-            if "⚑" in body:
-                cur["flag"] = True
-            lab = re.match(r"^(?:⚑ )?\*\*(.+?):\*\*\s*(.*)$", body)
-            if lab and lab.group(1) in ("Pattern", "Use", "Rule") and not cur["m"]:
-                cur["m"] = clean(lab.group(2))
-            elif lab and lab.group(1) == "Example" and not cur["n"]:
-                cur["n"] = clean(lab.group(2))
-            else:
-                cur["extra"].append(clean(body))
-    flush()
-    for e in entries:
-        if e["kind"] == "grammar" and not e["m"] and e["extra"]:
-            e["m"] = e["extra"].pop(0)
-    return entries
 
 
 def ordered(values, order):

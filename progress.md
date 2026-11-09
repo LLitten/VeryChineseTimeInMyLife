@@ -13,6 +13,7 @@ One line per session: date, what happened, what to focus on next. Add a line at 
 | Nov 2026 | Short practice on 不 vs 没, 要 vs 会, 也 and 都, reporting speech with 说 and 听…说. | Longer sentences with friends |
 | Nov 2026 | Reorganized notes by notebook topic with filters for word type, situation and HSK 1. Notes site published on GitHub Pages. | 6 A1 grammar points not yet learned (see the grammar checklist below) |
 | Nov 2026 | Turned the topic pages into 8 short lessons (words, tips, examples, practice), plus grammar pages. Notes page trimmed to words and phrases. | Work through the People and Conversation lessons |
+| Nov 2026 | Rewrote grammar as 11 lessons, checked against the AllSet Chinese Grammar Wiki, with sources on every section. | Grammar lessons 2 (questions) and 3 (negation) |
 
 ## Baseline exam (November 2026)
 
@@ -99,7 +100,7 @@ Several of these (医生, 商店, 电视, 衣服, 东西, 下雨, 时候, 呢, �
 
 ## Grammar checklist (AllSet A1)
 
-Which of the 40 AllSet A1 grammar points are in the notes. "Section" is the section of `grammar.md`. ✅ in the notes · ◐ partly (the words are known, but the pattern isn't written up) · ○ not learned yet.
+Which of the 40 AllSet A1 grammar points are in the notes. "Section" is the number of the grammar lesson in `grammar/`. ✅ in the notes · ◐ partly (the words are known, but the pattern isn't written up) · ○ not learned yet.
 
 | A1 # | Point | Section | Status |
 |---|---|---|---|
@@ -157,6 +158,7 @@ What the transcription changed, so the notebook can be updated to match.
 - **Adverbs:** the notes say adverbs can't come before the subject, and also that some can open a sentence. Most can't; 也许 and 可能 can.
 - **不太:** the notes write bù tài. It's pronounced bú tài, and it takes no 了.
 - **Long-sentence order:** a guideline, not a fixed rule.
+- **Verbs with 在 after them:** the notes list 住, 走 and 坐. AllSet lists 住, 坐, 放 and 站; 走 doesn't belong.
 - **没 and 了:** the notes say "never use 了 with 没." That holds for 没 + verb; 没钱了 ("out of money") is fine.
 
 **Vocabulary**

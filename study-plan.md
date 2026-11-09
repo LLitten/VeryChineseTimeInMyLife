@@ -4,7 +4,7 @@ About 30 minutes a day, mostly in the evening, plus a short daytime review. The 
 
 ## Principles
 - Fill gaps; don't restart. Most misses were words not yet learned, not words mixed up.
-- Practice new words inside frames the learner already knows (see `grammar.md`).
+- Practice new words inside frames the learner already knows (see the grammar lessons in `grammar/`).
 - Space reviews: the next day, three days later, a week later.
 - Consistency beats length. A 5-minute day beats a skipped day. Don't try to catch up.
 

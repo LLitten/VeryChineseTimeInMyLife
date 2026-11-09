@@ -28,7 +28,7 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 | File | What it holds |
 |---|---|
 | `vocab.csv` | Every word and phrase (383 rows, including the zhuyin chart), grouped by the learner's notebook topics in notebook order. Columns are described below. |
-| `grammar.md` | Grammar grouped by the learner's notebook sections. Each pattern has an AllSet tag (`A1 #n` or `Beyond A1`). Ends with 13 practice sentences from the notes. |
+| `grammar/` | Grammar lessons, one per notebook section, plus practice sentences from the notes. Same format as `lessons/`, with a level tag, a pattern box and `source:` lines per section. Checked against the AllSet Chinese Grammar Wiki, the learner's main reference. |
 | `progress.md` | Everything personal: session log, exam results, mistakes to watch, the A1 grammar checklist with what's learned, corrections to the handwritten notes, and open questions. |
 | `study-plan.md` | Daily routine, weekly rhythm, four-week roadmap and checkpoints. |
 | `lessons/` | Lessons in Markdown, one per situation group plus Pronunciation. Each section lists its words (pulled from `vocab.csv`), short tips, example sentences and a "Try it" practice. Format is described at the top of `tools/build_topics.py`. |
@@ -50,12 +50,13 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 
 ## Rules for changing the repo
 - **Keep the learner's organization.** Group by their notebook topics and sections. HSK 1 and AllSet A1 are tags and checklists, not the layout.
-- **Mark where things came from.** New words get `source` = `added` unless they come from the learner. Examples you write in `grammar.md` must not be marked *(your notes)*.
-- **Keep notes plain.** Notes in `vocab.csv` and `grammar.md` are general reference: no "your note says…", quiz results or past mistakes. Anything personal (corrections to the handwritten notes, exam and quiz results, mistakes, what's been learned, open questions) goes in `progress.md`. When a handwritten note is wrong, write the correct version plainly and log the correction in `progress.md`.
+- **Mark where things came from.** New words get `source` = `added` unless they come from the learner. Every lesson section needs `source:` lines: the AllSet article (with its URL) or other reputable source it was checked against, or "Your notes" when nothing else covers it. Mark examples taken from a source in their 4th field (`your notes`, `AllSet`); unmarked examples are understood to be written by the AI.
+- **Keep notes plain.** Notes in `vocab.csv`, `lessons/` and `grammar/` are general reference: no "your note says…", quiz results or past mistakes. Anything personal (corrections to the handwritten notes, exam and quiz results, mistakes, what's been learned, open questions) goes in `progress.md`. When a handwritten note is wrong, write the correct version plainly and log the correction in `progress.md`.
 - **Vocabulary is words and phrases only.** Keep each `note` to one short line (about 60 characters). Longer explanations, patterns and examples belong in a lesson.
 - **Every word belongs in a lesson.** When adding a word to `vocab.csv`, add it to a lesson's `words:` line too; the build lists any word no lesson uses. Words a lesson introduces must be in `vocab.csv`.
 - **Lessons stay short:** a few one-line tips per section, not paragraphs. Example sentences should mostly use words already in `vocab.csv`.
-- **Rebuild the site data** after editing `vocab.csv`, `grammar.md` or `lessons/`: `python3 tools/fill_zhuyin.py` (for new words), then `python3 tools/build_notes.py`. The page can't parse other formats, so keep `grammar.md`'s heading structure (`## n. Section`, `#### Pattern` with its AllSet tag in backticks, `- **Label:** text` bullets).
+- **Grammar follows AllSet.** The AllSet Chinese Grammar Wiki (https://resources.allsetlearning.com/chinese/grammar/Main_Page) is the learner's main reference. Check grammar rules and levels against it, and say so when the notes and AllSet disagree.
+- **Rebuild the site data** after editing `vocab.csv`, `lessons/` or `grammar/`: `python3 tools/fill_zhuyin.py` (for new words), then `python3 tools/build_notes.py`. The lesson format is described at the top of `tools/build_topics.py`.
 - **Publishing:** the site deploys from `main` with GitHub Pages, usually within a couple of minutes of a push. Pages must stay mobile-friendly and self-contained (no build step; Google Fonts is the only external resource).
 - **Log sessions:** add a dated line to the session log in `progress.md` at the end of each study session.
 - **The repo is public.** Don't add anything private about the learner or their friends.
