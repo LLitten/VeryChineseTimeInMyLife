@@ -238,7 +238,7 @@ def word_row(e):
     same = "" if e["t"] else " same"
     note = f'<span class="note">{esc(e["n"])}</span>' if e["n"] else ""
     if e.get("by"):
-        note += f'<span class="from">taught by {esc(e["by"])}</span>'
+        note += f'<span class="from">from {esc(e["by"])}</span>'
     if e["type"] == "sound":
         tw_cell = '<span class="c-tw"></span>'
     else:
@@ -328,7 +328,7 @@ def sources_line(s, words):
     if words:
         counts = {}
         for w in words:
-            k = f'taught by {w["by"]}' if w.get("by") else SOURCE_LABEL.get(w["src"], w["src"])
+            k = f'from {w["by"]}' if w.get("by") else SOURCE_LABEL.get(w["src"], w["src"])
             counts[k] = counts.get(k, 0) + 1
         bits.append("Words: " + ", ".join(f"{k} ({n})" for k, n in counts.items()))
     for label, url in s["sources"]:
