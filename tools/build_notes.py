@@ -15,24 +15,30 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 PAGE = ROOT / "tools" / "mandarin-notes.html"
 
-# Order of the filter menus. Anything not listed is appended at the end.
-USE_ORDER = [
-    "Meeting people", "Chatting & reacting", "Family & friends", "Food & drink", "Shopping & money",
-    "Getting around", "Time & plans", "Home & daily life", "School & work", "Weather",
-    "Describing things", "Asking questions", "On the phone", "Learning Chinese", "Animals & nature",
-    "Grammar glue", "Strong language", "Pronunciation",
+# Situations, grouped. vocab.csv's `use` column holds the situation names
+# (several per word, separated by semicolons). The page shows the groups first.
+GROUPS = [
+    ("People", ["Greetings & goodbyes", "Introducing yourself", "Family & friends"]),
+    ("Conversation", ["Reacting & agreeing", "Feelings & opinions", "Asking questions",
+                      "When you're stuck", "Polite words", "On the phone"]),
+    ("Food & drink", ["Drinks", "Food & flavors", "Eating out & ordering"]),
+    ("Out & about", ["Transport", "Directions", "Places in town", "Shopping & money"]),
+    ("Time", ["Clock & calendar", "Making plans", "Weather"]),
+    ("Home & life", ["Daily routine", "Around the house", "School & work", "Animals & plants"]),
+    ("Building blocks", ["Describing things", "Numbers & counting", "Grammar glue"]),
+    ("Other", ["Strong language", "Pronunciation"]),
 ]
 TYPE_ORDER = [
     "verb", "helping verb", "noun", "pronoun", "adjective", "adverb", "time word", "place",
     "direction word", "number", "measure word", "question word", "particle", "conjunction", "suffix",
     "phrase", "grammar pattern", "sentence", "sound",
 ]
-# Which situations each grammar section belongs to.
+# Which situations each grammar section belongs to (default: Grammar glue).
 GRAMMAR_USES = {
     "Yes / no and other questions": ["Asking questions"],
     "Adverbs and describing": ["Describing things"],
-    "Numbers, measure words, dates and time": ["Time & plans", "Shopping & money"],
-    "Location and \"there is\"": ["Getting around"],
+    "Numbers, measure words, dates and time": ["Numbers & counting", "Clock & calendar"],
+    "Location and \"there is\"": ["Directions"],
 }
 STATUS = {"✅": "✅ in your notes", "◐": "◐ partly in your notes", "○": "○ not learned yet"}
 
@@ -42,7 +48,7 @@ def vocab_entries():
     with open(ROOT / "vocab.csv", encoding="utf8") as f:
         for r in csv.DictReader(f):
             out.append({
-                "kind": "word", "s": r["simplified"], "t": r["traditional_tw"], "p": r["pinyin"],
+                "kind": "word", "s": r["simplified"], "t": r["traditional_tw"], "p": r["pinyin"], "z": r["zhuyin"],
                 "m": r["meaning"], "topic": r["topic"], "type": r["type"],
                 "uses": [u.strip() for u in r["use"].split(";") if u.strip()],
                 "b": r["parts"], "n": r["note"], "hsk": r["hsk1"] == "yes", "src": r["source"],
@@ -130,10 +136,14 @@ def ordered(values, order):
 
 def main():
     entries = vocab_entries() + grammar_entries()
+    known = {u for _, subs in GROUPS for u in subs}
+    unknown = sorted({u for e in entries for u in e["uses"]} - known)
+    if unknown:
+        raise SystemExit(f"Situations not listed in GROUPS: {unknown}")
     data = {
         "topics": list(dict.fromkeys(e["topic"] for e in entries)),
         "types": ordered([e["type"] for e in entries], TYPE_ORDER),
-        "uses": ordered([u for e in entries for u in e["uses"]], USE_ORDER),
+        "groups": [{"name": g, "uses": subs} for g, subs in GROUPS],
         "entries": entries,
     }
     page = PAGE.read_text(encoding="utf8")

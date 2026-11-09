@@ -32,15 +32,17 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 | `progress.md` | Session log, baseline exam results, and the mistakes to watch for. |
 | `study-plan.md` | Daily routine, weekly rhythm, four-week roadmap and checkpoints. |
 | `index.html`, `tools/` | The website: a home page and four pages (notes, recall quiz, vocabulary check, vocabulary exam). |
-| `tools/build_notes.py` | Regenerates the notes page's data from `vocab.csv` and `grammar.md`. |
+| `tools/build_notes.py` | Regenerates the notes page's data from `vocab.csv` and `grammar.md`. Also defines the situation groups. |
+| `tools/fill_zhuyin.py` | Fills in zhuyin for new `vocab.csv` rows. |
 
 ### `vocab.csv` columns
-- `simplified`, `traditional_tw`, `pinyin`, `meaning`
+- `simplified`, `traditional_tw` (blank when the same as simplified), `pinyin`, `meaning`
+- `zhuyin`: generated from the row's pinyin by `tools/fill_zhuyin.py` (needs `pip install pypinyin`), which fills empty cells only. Hand-set readings, such as Taiwan's 星期 xīngqí, live in that script's `OVERRIDES`.
 - `topic`: the learner's notebook topic. **This is the organizing scheme; keep it.**
 - `type`: verb, noun, adjective, measure word, time word, direction word, phrase, and so on.
-- `use`: situations, separated by semicolons, for example `Food & drink; Shopping & money`. Reuse the existing situation names (the list is in `tools/build_notes.py`).
+- `use`: situations, separated by semicolons, for example `Drinks; Eating out & ordering`. Use only the names in `GROUPS` in `tools/build_notes.py` (the build stops on unknown names). To add a situation, add it there first.
 - `parts`: literal meaning of each character. `note`: usage notes.
-- `hsk1`: `yes` if the word is on the 150-word HSK 1 list (HSK 2.0, hsk.academy).
+- `hsk1`: `yes` if the word is on the 150-word HSK 1 list (HSK 2.0, hsk.academy). Reference only: the learner isn't studying for the HSK exam, so the site doesn't filter by it.
 - `source`: `notes` (handwritten notes), `hsk-list` (HSK 1 word not yet in the notes), or `added` (added by an AI; check with friends).
 - `check`: `check` if a reading was unclear or the note may be wrong.
 
@@ -48,7 +50,7 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 - **Keep the learner's organization.** Group by their notebook topics and sections. HSK 1 and AllSet A1 are tags and checklists, not the layout.
 - **Mark where things came from.** New words get `source` = `added` unless they come from the learner. Examples you write in `grammar.md` must not be marked *(your notes)*.
 - **Flag, don't silently fix.** When a note from the learner is wrong, keep it recognizable, state the correction, and mark it (⚑ in `grammar.md`, or `check` / a note in `vocab.csv`).
-- **Rebuild the site data** after editing `vocab.csv` or `grammar.md`: `python3 tools/build_notes.py`. The page can't parse other formats, so keep `grammar.md`'s heading structure (`## n. Section`, `#### Pattern` with status and tag, `- **Label:** text` bullets).
+- **Rebuild the site data** after editing `vocab.csv` or `grammar.md`: `python3 tools/fill_zhuyin.py` (for new words), then `python3 tools/build_notes.py`. The page can't parse other formats, so keep `grammar.md`'s heading structure (`## n. Section`, `#### Pattern` with status and tag, `- **Label:** text` bullets).
 - **Publishing:** the site deploys from `main` with GitHub Pages, usually within a couple of minutes of a push. Pages must stay mobile-friendly and self-contained (no build step; Google Fonts is the only external resource).
 - **Log sessions:** add a dated line to the session log in `progress.md` at the end of each study session.
 - **The repo is public.** Don't add anything private about the learner or their friends.
