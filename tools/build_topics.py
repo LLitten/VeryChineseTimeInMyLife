@@ -1,24 +1,32 @@
 #!/usr/bin/env python3
-"""Build the topic pages in topics/ from vocab.csv, grammar.md and guides/*.md.
+"""Build the lesson and grammar pages in topics/ from lessons/*.md, vocab.csv and grammar.md.
 
 Normally run through tools/build_notes.py, which calls this at the end:
 
     python3 tools/build_notes.py
 
 Pages built:
-  topics/index.html            list of all topic pages
-  topics/<group>.html          one per situation group (GROUPS in build_notes.py)
-  topics/grammar-<n>.html      one per section of grammar.md
-  topics/guide-<name>.html     one per study guide in guides/
+  topics/index.html               list of lessons and grammar sections
+  topics/lesson-<name>.html       one per lessons/<n>-<name>.md, in file-name order
+  topics/grammar-<n>-<name>.html  one per section of grammar.md
 
-Study guide format (guides/<name>.md):
+Lesson format (lessons/<n>-<name>.md). Keep it short: no long paragraphs.
   # Title
-  related: People, Conversation, Grammar: <section title>   (optional; links)
-  summary: one line for the index                           (optional)
-  Paragraph text, ## Section headings, and bullets:
-  - 中文 | pinyin | English | optional note     a phrase
-  - A: 中文 | pinyin | English                  a line of dialogue (speaker before the colon)
-  - Plain text                                 an ordinary bullet; **bold** and `code` work
+  summary: one line for the index and the top of the page
+  related: Lesson title; Grammar: <grammar.md section title>   (links, separated by semicolons)
+  ## Section heading
+  words: 早上, 晚上, 中午          word cards, pulled from vocab.csv by exact `simplified`
+                                  (for a word listed twice, add its type: 听 [measure word])
+  - A short tip                   tips (**bold** and `code` work)
+  ### Examples
+  - 中文 | pinyin | English         an example sentence
+  - A: 中文 | pinyin | English      a line of dialogue (speaker before the colon)
+  ### Try it
+  - try: English prompt | 中文 | pinyin     answer stays hidden until tapped
+  Any other line is a short paragraph.
+
+The build stops if a lesson names a word that isn't in vocab.csv, and lists
+vocab.csv words that no lesson uses.
 """
 import html
 import re
@@ -28,7 +36,7 @@ import build_notes as bn
 
 ROOT = bn.ROOT
 OUT = ROOT / "topics"
-GUIDES = ROOT / "guides"
+LESSONS = ROOT / "lessons"
 
 
 def esc(s):
@@ -46,9 +54,6 @@ def slug(s):
     s = s.lower().replace("&", "and")
     return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
 
-
-def group_page(name):
-    return slug(name) + ".html"
 
 
 CSS = """
@@ -123,6 +128,21 @@ code { font-size: 0.9em; }
 .subnav a { display: inline-block; padding: 4px 11px; font-size: 14px; text-decoration: none; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); }
 .pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; font-size: 15px; }
 .foot { margin-top: 28px; font-size: 13px; color: var(--muted); }
+.lesson { margin-top: 30px; padding-top: 4px; border-top: 2px solid var(--line); scroll-margin-top: 60px; }
+.lesson h2 { margin-top: 14px; }
+.lesson h3 { margin: 18px 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.tips { margin-top: 14px; padding: 2px 14px 10px; background: var(--accent-soft); border-radius: 12px; }
+.tips ul { margin: 0; padding-left: 18px; }
+.tips li { margin-top: 5px; }
+.try { display: block; padding: 10px 12px; background: var(--surface); border: 1.5px dashed var(--accent); border-radius: 12px; cursor: pointer; }
+.try .q { display: block; font-weight: 600; }
+.try .ans { display: block; margin-top: 4px; filter: blur(8px); }
+.try.peek .ans { filter: none; }
+.try .zh { font-size: 20px; }
+.try .pyx { display: block; font-size: 15px; color: var(--muted); }
+.try .hint { display: block; margin-top: 4px; font-size: 12px; color: var(--muted); }
+.try.peek .hint { display: none; }
+.subnav li a { color: var(--accent); }
 """
 
 TOGGLE_JS = """
@@ -185,7 +205,7 @@ def page(title, crumbs, body, toggles=True, skip=""):
 <nav class="crumbs">{crumbs}</nav>
 {tg}
 {body}
-<p class="foot">Built from handwritten notes. Grammar examples and study guides were written by Claude unless marked (your notes). Native-speaker friends have the last word on usage.</p>
+<p class="foot">Built from handwritten notes. Lesson tips and examples, and grammar examples, were written by Claude unless marked (your notes). Native-speaker friends have the last word on usage.</p>
 </main>
 <script>{TOGGLE_JS}</script>
 </body>
@@ -193,7 +213,7 @@ def page(title, crumbs, body, toggles=True, skip=""):
 """
 
 
-CRUMB_HOME = '<a href="../index.html">← All tools</a> · <a href="index.html">Topics</a>'
+CRUMB_HOME = '<a href="../index.html">← All tools</a> · <a href="index.html">Lessons</a>'
 
 
 def size_class(s):
@@ -238,122 +258,126 @@ def grammar_sections(entries):
     return secs
 
 
-def parse_guide(path):
-    lines = path.read_text(encoding="utf8").splitlines()
-    g = {"title": path.stem, "related": [], "summary": "", "file": f"guide-{path.stem}.html", "blocks": []}
-    for line in lines:
-        st = line.strip()
+def parse_lesson(path):
+    name = re.sub(r"^\d+-", "", path.stem)
+    L = {"title": name, "summary": "", "related": [], "file": f"lesson-{name}.html", "sections": []}
+    sec = None
+    sub = None  # None (tips area), "Examples" or "Try it"
+    for raw in path.read_text(encoding="utf8").splitlines():
+        st = raw.strip()
         if not st:
             continue
         if st.startswith("# "):
-            g["title"] = st[2:].strip()
-        elif st.startswith("related:"):
-            g["related"] = [x.strip() for x in st[8:].split(",") if x.strip()]
-        elif st.startswith("summary:"):
-            g["summary"] = st[8:].strip()
+            L["title"] = st[2:].strip()
+        elif st.startswith("summary:") and sec is None:
+            L["summary"] = st[8:].strip()
+        elif st.startswith("related:") and sec is None:
+            L["related"] = [x.strip() for x in st[8:].split(";") if x.strip()]
         elif st.startswith("## "):
-            g["blocks"].append(("h2", st[3:].strip()))
+            sec = {"title": st[3:].strip(), "intro": [], "words": [], "tips": [], "examples": [], "try": []}
+            L["sections"].append(sec)
+            sub = None
+        elif sec is None:
+            continue
+        elif st.startswith("### "):
+            sub = st[4:].strip()
+        elif st.startswith("words:"):
+            sec["words"] += [w.strip() for w in st[6:].split(",") if w.strip()]
+        elif st.startswith("- try:"):
+            parts = [x.strip() for x in st[6:].split("|")] + ["", ""]
+            sec["try"].append(parts[:3])
         elif st.startswith("- "):
             body = st[2:]
             m = re.match(r"^([A-Za-z][\w ]{0,11}):\s*(.+)$", body)
             if m and "|" in m.group(2):
-                g["blocks"].append(("dlg", m.group(1), [x.strip() for x in m.group(2).split("|")]))
+                sec["examples"].append((m.group(1), [x.strip() for x in m.group(2).split("|")] + ["", ""]))
             elif "|" in body:
-                g["blocks"].append(("phrase", [x.strip() for x in body.split("|")]))
+                sec["examples"].append((None, [x.strip() for x in body.split("|")] + ["", ""]))
             else:
-                g["blocks"].append(("li", body))
+                sec["tips"].append(body)
         else:
-            g["blocks"].append(("p", st))
-    return g
+            sec["intro"].append(st)
+    return L
 
 
-def render_guide(g):
-    out, in_list, in_ul = [], False, False
+def example_card(who, parts):
+    zh, py, en = parts[:3]
+    if who:
+        return (f'<div class="dlg peekable" tabindex="0"><span class="who" aria-label="Speaker {esc(who)}">{esc(who)}</span>'
+                f'<span><span class="zh" lang="zh-Hans">{esc(zh)}</span><span class="py">{esc(py)}</span>'
+                f'<span class="mean">{esc(en)}</span></span></div>')
+    return (f'<div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">{esc(zh)}</span>'
+            f'<span class="py">{esc(py)}</span><span class="mean">{esc(en)}</span></div>')
 
-    def close():
-        nonlocal in_list, in_ul
-        if in_list:
-            out.append("</div>")
-            in_list = False
-        if in_ul:
-            out.append("</ul>")
-            in_ul = False
 
-    for b in g["blocks"]:
-        kind = b[0]
-        if kind in ("phrase", "dlg"):
-            if in_ul:
-                out.append("</ul>"); in_ul = False
-            if not in_list:
-                out.append('<div class="list">'); in_list = True
-            if kind == "phrase":
-                zh, py, en, *rest = b[1] + ["", "", ""]
-                note = f'<span class="note">{inline(rest[0])}</span>' if rest and rest[0] else ""
-                out.append(f'<div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">{esc(zh)}</span>'
-                           f'<span class="py">{esc(py)}</span><span class="mean">{esc(en)}</span>{note}</div>')
-            else:
-                who, (zh, py, en, *_rest) = b[1], b[2] + ["", "", ""]
-                out.append(f'<div class="dlg peekable" tabindex="0"><span class="who" aria-label="Speaker {esc(who)}">{esc(who)}</span>'
-                           f'<span><span class="zh" lang="zh-Hans">{esc(zh)}</span><span class="py">{esc(py)}</span>'
-                           f'<span class="mean">{esc(en)}</span></span></div>')
-        elif kind == "li":
-            if in_list:
-                out.append("</div>"); in_list = False
-            if not in_ul:
-                out.append("<ul>"); in_ul = True
-            out.append(f"<li>{inline(b[1])}</li>")
-        else:
-            close()
-            out.append(f"<h2>{inline(b[1])}</h2>" if kind == "h2" else f"<p>{inline(b[1])}</p>")
-    close()
+def try_card(prompt, zh, py):
+    return (f'<div class="try peekable" tabindex="0" aria-label="Practice: {esc(prompt)}. Tap to show the answer.">'
+            f'<span class="q">{esc(prompt)}</span>'
+            f'<span class="ans"><span class="zh" lang="zh-Hans">{esc(zh)}</span><span class="pyx">{esc(py)}</span></span>'
+            f'<span class="hint">Say it, then tap to check</span></div>')
+
+
+def render_lesson(L, word_by_s):
+    out = [f"<h1>{esc(L['title'])}</h1>"]
+    if L["summary"]:
+        out.append(f'<p class="lead">{esc(L["summary"])}</p>')
+    out.append('<ul class="subnav">' + "".join(
+        f'<li><a href="#{slug(s["title"])}">{esc(s["title"])}</a></li>' for s in L["sections"]) + "</ul>")
+    for s in L["sections"]:
+        out.append(f'<section class="lesson" id="{slug(s["title"])}"><h2>{esc(s["title"])}</h2>')
+        out += [f"<p>{inline(p)}</p>" for p in s["intro"]]
+        if s["words"]:
+            out.append('<h3>Words</h3><div class="list">' + "".join(word_row(word_by_s[w]) for w in s["words"]) + "</div>")
+        if s["tips"]:
+            out.append('<div class="tips"><h3>How to use them</h3><ul>' + "".join(f"<li>{inline(t)}</li>" for t in s["tips"]) + "</ul></div>")
+        if s["examples"]:
+            out.append('<h3>Examples</h3><div class="list">' + "".join(example_card(w, p) for w, p in s["examples"]) + "</div>")
+        if s["try"]:
+            out.append('<h3>Try it</h3><div class="list">' + "".join(try_card(*t) for t in s["try"]) + "</div>")
+        out.append("</section>")
     return "\n".join(out)
 
 
 def main():
-    entries = bn.vocab_entries() + bn.grammar_entries()
-    words = [e for e in entries if e["kind"] == "word"]
-    secs = grammar_sections(entries)
+    vocab = bn.vocab_entries()
+    word_by_s = {}
+    for w in vocab:
+        word_by_s.setdefault(w["s"], w)
+        word_by_s[f'{w["s"]} [{w["type"]}]'] = w  # for words listed twice, e.g. 听 [measure word]
+    secs = grammar_sections(bn.grammar_entries())
     sec_by_name = {s["name"]: s for s in secs}
-    guides = [parse_guide(p) for p in sorted(GUIDES.glob("*.md"))] if GUIDES.exists() else []
+    lessons = [parse_lesson(p) for p in sorted(LESSONS.glob("*.md"), key=lambda p: int(re.match(r"\d+", p.stem).group()))]
+    lesson_by_title = {L["title"]: L for L in lessons}
+
+    missing = sorted({w for L in lessons for s in L["sections"] for w in s["words"] if w not in word_by_s})
+    if missing:
+        raise SystemExit(f"Lessons name words that aren't in vocab.csv: {missing}")
+    used = {id(word_by_s[w]) for L in lessons for s in L["sections"] for w in s["words"]}
+    unused = [w["s"] for w in vocab if id(w) not in used]
+
     OUT.mkdir(exist_ok=True)
     for old in OUT.glob("*.html"):
         old.unlink()
 
-    def link_for(name):
-        if name.startswith("Grammar: ") and name[9:] in sec_by_name:
-            return sec_by_name[name[9:]]["file"], name[9:]
-        if any(g == name for g, _ in bn.GROUPS):
-            return group_page(name), name
-        return None, name
+    def related_cards(names):
+        cards = []
+        for n in names:
+            if n.startswith("Grammar: ") and n[9:] in sec_by_name:
+                s = sec_by_name[n[9:]]
+                cards.append(f'<a class="card" href="{s["file"]}"><b>Grammar: {esc(s["name"])}</b><span>{len(s["patterns"])} patterns</span></a>')
+            elif n in lesson_by_title:
+                L = lesson_by_title[n]
+                cards.append(f'<a class="card" href="{L["file"]}"><b>Lesson: {esc(L["title"])}</b><span>{esc(L["summary"])}</span></a>')
+            else:
+                raise SystemExit(f"Unknown related link: {n}")
+        return '<h2>Related</h2><div class="cards">' + "".join(cards) + "</div>" if cards else ""
 
-    # Situation group pages
-    group_counts = {}
-    for gname, subs in bn.GROUPS:
-        parts, nav = [], []
-        seen = set()
-        for u in subs:
-            ws = [w for w in words if u in w["uses"]]
-            if not ws:
-                continue
-            anchor = slug(u)
-            nav.append(f'<li><a href="#{anchor}">{esc(u)}</a></li>')
-            parts.append(f'<h2 id="{anchor}">{esc(u)}<small>{len(ws)}</small></h2><div class="list">'
-                         + "".join(word_row(w) for w in ws) + "</div>")
-            seen.update(id(w) for w in ws)
-        group_counts[gname] = len(seen)
-        related = [s for s in secs if set(s["uses"]) & set(subs)]
-        rel_guides = [g for g in guides if gname in g["related"]]
-        extra = ""
-        if rel_guides or related:
-            links = [f'<a class="card" href="{g["file"]}"><b>Study guide: {esc(g["title"])}</b><span>{esc(g["summary"])}</span></a>' for g in rel_guides]
-            links += [f'<a class="card" href="{s["file"]}"><b>Grammar: {esc(s["name"])}</b><span>{len(s["patterns"])} patterns</span></a>' for s in related]
-            extra = '<h2>Related</h2><div class="cards">' + "".join(links) + "</div>"
-        body = (f"<h1>{esc(gname)}</h1><p class=\"lead\">{len(seen)} words and phrases, by situation. "
-                f"Tap a row to peek at anything hidden.</p><ul class=\"subnav\">{''.join(nav)}</ul>"
-                + "".join(parts) + extra)
-        (OUT / group_page(gname)).write_text(page(f"{gname} · Mandarin topics", CRUMB_HOME, body), encoding="utf8")
+    for i, L in enumerate(lessons):
+        prev = f'<a href="{lessons[i-1]["file"]}">← {esc(lessons[i-1]["title"])}</a>' if i else "<span></span>"
+        nxt = f'<a href="{lessons[i+1]["file"]}">{esc(lessons[i+1]["title"])} →</a>' if i + 1 < len(lessons) else "<span></span>"
+        body = render_lesson(L, word_by_s) + related_cards(L["related"]) + f'<nav class="pager">{prev}{nxt}</nav>'
+        (OUT / L["file"]).write_text(page(f"{L['title']} · Mandarin lesson", CRUMB_HOME, body), encoding="utf8")
 
-    # Grammar section pages
     for i, s in enumerate(secs):
         prev = f'<a href="{secs[i-1]["file"]}">← {esc(secs[i-1]["name"])}</a>' if i else "<span></span>"
         nxt = f'<a href="{secs[i+1]["file"]}">{esc(secs[i+1]["name"])} →</a>' if i + 1 < len(secs) else "<span></span>"
@@ -363,30 +387,17 @@ def main():
                 + f'<nav class="pager">{prev}{nxt}</nav>')
         (OUT / s["file"]).write_text(page(f"{s['name']} · Mandarin grammar", CRUMB_HOME, body, toggles=False), encoding="utf8")
 
-    # Study guides
-    for g in guides:
-        rel = []
-        for name in g["related"]:
-            f, label = link_for(name)
-            if f:
-                rel.append(f'<a class="card" href="{f}"><b>{esc(label)}</b><span>{"Grammar section" if f.startswith("grammar-") else "All words for this situation"}</span></a>')
-        rel_html = '<h2>See also</h2><div class="cards">' + "".join(rel) + "</div>" if rel else ""
-        body = f"<h1>{esc(g['title'])}</h1>" + render_guide(g) + rel_html
-        (OUT / g["file"]).write_text(page(f"{g['title']} · Mandarin study guide", CRUMB_HOME, body, skip="ztw"), encoding="utf8")
-
-    # Index
-    gl = "".join(f'<a class="card" href="{g["file"]}"><b>{esc(g["title"])}</b><span>{esc(g["summary"])}</span></a>' for g in guides)
-    sl = "".join(f'<a class="card" href="{group_page(n)}"><b>{esc(n)}</b><span>{group_counts[n]} words · {esc(", ".join(subs))}</span></a>'
-                 for n, subs in bn.GROUPS)
+    ll = "".join(f'<a class="card" href="{L["file"]}"><b>{i}. {esc(L["title"])}</b><span>{esc(L["summary"])}</span></a>'
+                 for i, L in enumerate(lessons, 1))
     rl = "".join(f'<a class="card" href="{s["file"]}"><b>{i}. {esc(s["name"])}</b><span>{len(s["patterns"])} patterns</span></a>'
                  for i, s in enumerate(secs, 1))
-    body = ("<h1>Topics</h1><p class=\"lead\">Read a topic top to bottom. To search or mix filters, use "
-            "<a href=\"../tools/mandarin-notes.html\">My Mandarin notes</a>.</p>"
-            + (f"<h2>Study guides</h2><div class=\"cards\">{gl}</div>" if gl else "")
-            + f"<h2>Situations</h2><div class=\"cards\">{sl}</div>"
-            + f"<h2>Grammar</h2><div class=\"cards\">{rl}</div>")
-    (OUT / "index.html").write_text(page("Mandarin topics", '<a href="../index.html">← All tools</a>', body, toggles=False), encoding="utf8")
-    print(f"Wrote {len(bn.GROUPS)} situation pages, {len(secs)} grammar pages, {len(guides)} guides and topics/index.html")
+    body = ("<h1>Lessons</h1><p class=\"lead\">Short lessons built from your notes: words, how to use them, examples, "
+            "and a quick practice. To look a word up, use <a href=\"../tools/mandarin-notes.html\">My Mandarin notes</a>.</p>"
+            f"<div class=\"cards\">{ll}</div><h2>Grammar</h2><div class=\"cards\">{rl}</div>")
+    (OUT / "index.html").write_text(page("Mandarin lessons", '<a href="../index.html">← All tools</a>', body, toggles=False), encoding="utf8")
+    print(f"Wrote {len(lessons)} lessons, {len(secs)} grammar pages and topics/index.html")
+    if unused:
+        print(f"Not in any lesson yet ({len(unused)}): {' '.join(unused)}")
 
 
 if __name__ == "__main__":

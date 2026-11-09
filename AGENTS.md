@@ -27,14 +27,14 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 ## Files
 | File | What it holds |
 |---|---|
-| `vocab.csv` | Every word and phrase (386 rows), grouped by the learner's notebook topics in notebook order. Columns are described below. |
+| `vocab.csv` | Every word and phrase (383 rows, including the zhuyin chart), grouped by the learner's notebook topics in notebook order. Columns are described below. |
 | `grammar.md` | Grammar grouped by the learner's notebook sections. Each pattern has an AllSet tag (`A1 #n` or `Beyond A1`). Ends with 13 practice sentences from the notes. |
 | `progress.md` | Everything personal: session log, exam results, mistakes to watch, the A1 grammar checklist with what's learned, corrections to the handwritten notes, and open questions. |
 | `study-plan.md` | Daily routine, weekly rhythm, four-week roadmap and checkpoints. |
-| `index.html`, `tools/` | The website: a home page and four pages (notes, recall quiz, vocabulary check, vocabulary exam). |
-| `topics/` | Generated topic pages: one per situation group, one per grammar section, one per study guide. Don't edit by hand. |
-| `guides/` | Study guides in Markdown (format described in `tools/build_topics.py`). Written by an AI unless noted; each says so at the top. |
-| `tools/build_notes.py` | Regenerates the notes page's data from `vocab.csv` and `grammar.md`, then the topic pages (via `tools/build_topics.py`). Also defines the situation groups. |
+| `lessons/` | Lessons in Markdown, one per situation group plus Pronunciation. Each section lists its words (pulled from `vocab.csv`), short tips, example sentences and a "Try it" practice. Format is described at the top of `tools/build_topics.py`. |
+| `index.html`, `tools/` | The website: a home page, the notes page (words and phrases only), recall quiz, vocabulary check and vocabulary exam. |
+| `topics/` | Generated lesson and grammar pages. Don't edit by hand. |
+| `tools/build_notes.py` | Regenerates the notes page's word list from `vocab.csv`, then the lesson and grammar pages (via `tools/build_topics.py`). Also defines the situation groups. |
 | `tools/fill_zhuyin.py` | Fills in zhuyin for new `vocab.csv` rows. |
 
 ### `vocab.csv` columns
@@ -52,8 +52,10 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 - **Keep the learner's organization.** Group by their notebook topics and sections. HSK 1 and AllSet A1 are tags and checklists, not the layout.
 - **Mark where things came from.** New words get `source` = `added` unless they come from the learner. Examples you write in `grammar.md` must not be marked *(your notes)*.
 - **Keep notes plain.** Notes in `vocab.csv` and `grammar.md` are general reference: no "your note says…", quiz results or past mistakes. Anything personal (corrections to the handwritten notes, exam and quiz results, mistakes, what's been learned, open questions) goes in `progress.md`. When a handwritten note is wrong, write the correct version plainly and log the correction in `progress.md`.
-- **Study guides:** phrases introduced in a guide should also be added to `vocab.csv` (`source` = `added`), so they appear on the notes page.
-- **Rebuild the site data** after editing `vocab.csv`, `grammar.md` or `guides/`: `python3 tools/fill_zhuyin.py` (for new words), then `python3 tools/build_notes.py`. The page can't parse other formats, so keep `grammar.md`'s heading structure (`## n. Section`, `#### Pattern` with its AllSet tag in backticks, `- **Label:** text` bullets).
+- **Vocabulary is words and phrases only.** Keep each `note` to one short line (about 60 characters). Longer explanations, patterns and examples belong in a lesson.
+- **Every word belongs in a lesson.** When adding a word to `vocab.csv`, add it to a lesson's `words:` line too; the build lists any word no lesson uses. Words a lesson introduces must be in `vocab.csv`.
+- **Lessons stay short:** a few one-line tips per section, not paragraphs. Example sentences should mostly use words already in `vocab.csv`.
+- **Rebuild the site data** after editing `vocab.csv`, `grammar.md` or `lessons/`: `python3 tools/fill_zhuyin.py` (for new words), then `python3 tools/build_notes.py`. The page can't parse other formats, so keep `grammar.md`'s heading structure (`## n. Section`, `#### Pattern` with its AllSet tag in backticks, `- **Label:** text` bullets).
 - **Publishing:** the site deploys from `main` with GitHub Pages, usually within a couple of minutes of a push. Pages must stay mobile-friendly and self-contained (no build step; Google Fonts is the only external resource).
 - **Log sessions:** add a dated line to the session log in `progress.md` at the end of each study session.
 - **The repo is public.** Don't add anything private about the learner or their friends.

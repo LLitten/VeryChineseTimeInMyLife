@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Food &amp; drink · Mandarin lesson</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #edf1f5; --surface: #ffffff; --ink: #16222e; --muted: #5a6978; --line: #cbd5df;
+  --accent: #1d6f8a; --accent-soft: #dcecf2; --accent-ink: #ffffff;
+  --serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --serif-tc: "Noto Serif TC", "Songti TC", "PMingLiU", "Noto Serif SC", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1820; --surface: #17232e; --ink: #e6edf3; --muted: #94a3b2; --line: #2b3b49;
+    --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1820; --surface: #17232e; --ink: #e6edf3; --muted: #94a3b2; --line: #2b3b49;
+  --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.45; -webkit-text-size-adjust: 100%; }
+main { max-width: 680px; margin: 0 auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px calc(40px + env(safe-area-inset-bottom, 0px)); }
+.crumbs { font-size: 14px; color: var(--muted); }
+.crumbs a { color: var(--muted); text-decoration: none; }
+.crumbs a:hover, .crumbs a:focus-visible { color: var(--accent); }
+h1 { font-size: 26px; line-height: 1.2; margin: 10px 0 6px; }
+.lead { margin: 0 0 14px; color: var(--muted); }
+h2 { font-size: 19px; margin: 28px 0 8px; }
+h2 small { font-size: 14px; font-weight: 400; color: var(--muted); margin-left: 6px; }
+h3 { font-size: 16px; margin: 0 0 4px; }
+p { margin: 8px 0; }
+a { color: var(--accent); }
+code { font-size: 0.9em; }
+.toggles { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; position: sticky; top: 0; z-index: 5; padding: 8px 0; background: var(--bg); }
+.tg { appearance: none; min-height: 36px; padding: 5px 12px; font: inherit; font-size: 14px; color: var(--muted); background: none; border: 1.5px dashed var(--line); border-radius: 18px; cursor: pointer; }
+.tg[aria-pressed="true"] { color: var(--ink); background: var(--surface); border-style: solid; border-color: var(--accent); }
+.tg:focus-visible, .row:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.list { display: grid; gap: 6px; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr); gap: 10px; align-items: center; padding: 10px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.no-tw .row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
+.no-tw .c-tw { display: none; }
+.zh { display: block; font-family: var(--serif); font-weight: 700; font-size: 24px; line-height: 1.2; overflow-wrap: anywhere; }
+.c-tw .zh { font-family: var(--serif-tc); }
+.zh.same { color: var(--muted); font-weight: 500; }
+.zh.m { font-size: 20px; } .zh.l { font-size: 17px; }
+.py, .zy { display: block; margin-top: 3px; font-size: 15px; color: var(--muted); overflow-wrap: anywhere; }
+.zy { font-family: var(--serif-tc); }
+.mean { font-size: 15px; }
+.note { display: block; margin-top: 4px; font-size: 13px; color: var(--muted); }
+.phrase { display: block; padding: 10px 12px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.phrase .zh { font-size: 21px; }
+.phrase .mean { display: block; margin-top: 3px; }
+.dlg { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 10px; padding: 10px 12px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.who { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 14px; }
+.dlg .zh { font-size: 19px; }
+.dlg .mean { display: block; margin-top: 3px; }
+.hide-p .row:not(.peek) .py, .hide-p .phrase:not(.peek) .py, .hide-p .dlg:not(.peek) .py,
+.hide-z .row:not(.peek) .zy,
+.hide-m .row:not(.peek) .mean, .hide-m .phrase:not(.peek) .mean, .hide-m .dlg:not(.peek) .mean { filter: blur(7px); }
+.peekable { cursor: pointer; }
+.pat { padding: 12px 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; margin-top: 8px; }
+.tag { display: inline-block; margin-left: 4px; padding: 1px 8px; font-size: 12px; font-weight: 400; color: var(--muted); border: 1px solid var(--line); border-radius: 9px; vertical-align: 2px; }
+.ex { font-family: var(--serif); font-size: 17px; }
+.pat ul { margin: 6px 0 0; padding-left: 18px; }
+.cards { display: grid; gap: 8px; }
+.card { display: block; padding: 12px 14px; color: var(--ink); text-decoration: none; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.card:hover { border-color: var(--accent); }
+.card b { display: block; }
+.card span { display: block; margin-top: 2px; font-size: 14px; color: var(--muted); }
+.subnav { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; padding: 0; list-style: none; }
+.subnav a { display: inline-block; padding: 4px 11px; font-size: 14px; text-decoration: none; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; font-size: 15px; }
+.foot { margin-top: 28px; font-size: 13px; color: var(--muted); }
+.lesson { margin-top: 30px; padding-top: 4px; border-top: 2px solid var(--line); scroll-margin-top: 60px; }
+.lesson h2 { margin-top: 14px; }
+.lesson h3 { margin: 18px 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.tips { margin-top: 14px; padding: 2px 14px 10px; background: var(--accent-soft); border-radius: 12px; }
+.tips ul { margin: 0; padding-left: 18px; }
+.tips li { margin-top: 5px; }
+.try { display: block; padding: 10px 12px; background: var(--surface); border: 1.5px dashed var(--accent); border-radius: 12px; cursor: pointer; }
+.try .q { display: block; font-weight: 600; }
+.try .ans { display: block; margin-top: 4px; filter: blur(8px); }
+.try.peek .ans { filter: none; }
+.try .zh { font-size: 20px; }
+.try .pyx { display: block; font-size: 15px; color: var(--muted); }
+.try .hint { display: block; margin-top: 4px; font-size: 12px; color: var(--muted); }
+.try.peek .hint { display: none; }
+.subnav li a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+<nav class="crumbs"><a href="../index.html">← All tools</a> · <a href="index.html">Lessons</a></nav>
+<div class="toggles" id="toggles" data-skip="" aria-label="Show or hide"></div>
+<h1>Food &amp; drink</h1>
+<p class="lead">Drinks, food and flavors, and ordering at a restaurant.</p>
+<ul class="subnav"><li><a href="#drinks">Drinks</a></li><li><a href="#food-and-flavors">Food and flavors</a></li><li><a href="#eating-out-and-ordering">Eating out and ordering</a></li></ul>
+<section class="lesson" id="drinks"><h2>Drinks</h2>
+<h3>Words</h3><div class="list"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">喝</span><span class="py">hē</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">喝</span><span class="zy">ㄏㄜ</span></span><span><span class="mean">to drink</span><span class="note">Also read hè (to shout), as in 吆喝.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">水</span><span class="py">shuǐ</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">水</span><span class="zy">ㄕㄨㄟˇ</span></span><span><span class="mean">water</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">茶</span><span class="py">chá</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">茶</span><span class="zy">ㄔㄚˊ</span></span><span><span class="mean">tea</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">咖啡</span><span class="py">kāfēi</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">咖啡</span><span class="zy">ㄎㄚ ㄈㄟ</span></span><span><span class="mean">coffee</span><span class="note">Sound-based word.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">牛奶</span><span class="py">niúnǎi</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">牛奶</span><span class="zy">ㄋㄧㄡˊ ㄋㄞˇ</span></span><span><span class="mean">milk</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">果汁</span><span class="py">guǒzhī</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">果汁</span><span class="zy">ㄍㄨㄛˇ ㄓ</span></span><span><span class="mean">juice</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">可乐</span><span class="py">kělè</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">可樂</span><span class="zy">ㄎㄜˇ ㄌㄜˋ</span></span><span><span class="mean">cola</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">啤酒</span><span class="py">píjiǔ</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">啤酒</span><span class="zy">ㄆㄧˊ ㄐㄧㄡˇ</span></span><span><span class="mean">beer</span><span class="note">Look-alike: 脾 (spleen). 啤 has the mouth radical 口.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">好喝</span><span class="py">hǎohē</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">好喝</span><span class="zy">ㄏㄠˇ ㄏㄜ</span></span><span><span class="mean">delicious (drink)</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">杯</span><span class="py">bēi</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">杯</span><span class="zy">ㄅㄟ</span></span><span><span class="mean">cup, glass</span><span class="note">Alone, 杯 is the measure word; the noun is 杯子.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">瓶</span><span class="py">píng</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">瓶</span><span class="zy">ㄆㄧㄥˊ</span></span><span><span class="mean">bottle</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">听</span><span class="py">tīng</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">聽</span><span class="zy">ㄊㄧㄥ</span></span><span><span class="mean">can (container)</span><span class="note">Same character as “to listen.”</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">罐</span><span class="py">guàn</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">罐</span><span class="zy">ㄍㄨㄢˋ</span></span><span><span class="mean">jar, tin</span><span class="note">a jar of honey.</span></span></div></div>
+<div class="tips"><h3>How to use them</h3><ul><li>杯 = a cup or glass of. 瓶 = a bottle of: 一杯茶, 两瓶水.</li><li>杯子 is the cup itself. 杯 counts what&#x27;s in it.</li><li>好喝 is for drinks. 好吃 is for food.</li></ul></div>
+<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我要一杯咖啡。</span><span class="py">wǒ yào yì bēi kāfēi.</span><span class="mean">A coffee, please.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">你喝茶还是咖啡？</span><span class="py">nǐ hē chá háishì kāfēi?</span><span class="mean">Tea or coffee?</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">这个果汁很好喝！</span><span class="py">zhège guǒzhī hěn hǎohē!</span><span class="mean">This juice is really good!</span></div></div>
+<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: Two bottles of water, please.. Tap to show the answer."><span class="q">Two bottles of water, please.</span><span class="ans"><span class="zh" lang="zh-Hans">我要两瓶水。</span><span class="pyx">wǒ yào liǎng píng shuǐ.</span></span><span class="hint">Say it, then tap to check</span></div><div class="try peekable" tabindex="0" aria-label="Practice: I don&#x27;t drink beer.. Tap to show the answer."><span class="q">I don&#x27;t drink beer.</span><span class="ans"><span class="zh" lang="zh-Hans">我不喝啤酒。</span><span class="pyx">wǒ bù hē píjiǔ.</span></span><span class="hint">Say it, then tap to check</span></div></div>
+</section>
+<section class="lesson" id="food-and-flavors"><h2>Food and flavors</h2>
+<h3>Words</h3><div class="list"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">吃</span><span class="py">chī</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">吃</span><span class="zy">ㄔ</span></span><span><span class="mean">to eat</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">菜</span><span class="py">cài</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">菜</span><span class="zy">ㄘㄞˋ</span></span><span><span class="mean">dish, course; vegetables</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">米饭</span><span class="py">mǐfàn</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">米飯</span><span class="zy">ㄇㄧˇ ㄈㄢˋ</span></span><span><span class="mean">cooked rice</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">面包</span><span class="py">miànbāo</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">麵包</span><span class="zy">ㄇㄧㄢˋ ㄅㄠ</span></span><span><span class="mean">bread</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">鸡蛋</span><span class="py">jīdàn</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">雞蛋</span><span class="zy">ㄐㄧ ㄉㄢˋ</span></span><span><span class="mean">egg</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">饼干</span><span class="py">bǐnggān</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">餅乾</span><span class="zy">ㄅㄧㄥˇ ㄍㄢ</span></span><span><span class="mean">cookie, biscuit</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">水果</span><span class="py">shuǐguǒ</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">水果</span><span class="zy">ㄕㄨㄟˇ ㄍㄨㄛˇ</span></span><span><span class="mean">fruit</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">苹果</span><span class="py">píngguǒ</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">蘋果</span><span class="zy">ㄆㄧㄥˊ ㄍㄨㄛˇ</span></span><span><span class="mean">apple</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">西瓜</span><span class="py">xīguā</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">西瓜</span><span class="zy">ㄒㄧ ㄍㄨㄚ</span></span><span><span class="mean">watermelon</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">芒果</span><span class="py">mángguǒ</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">芒果</span><span class="zy">ㄇㄤˊ ㄍㄨㄛˇ</span></span><span><span class="mean">mango</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">凤梨</span><span class="py">fènglí</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">鳳梨</span><span class="zy">ㄈㄥˋ ㄌㄧˊ</span></span><span><span class="mean">pineapple (Taiwan word)</span><span class="note">Mainland says 菠萝.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">菠萝</span><span class="py">bōluó</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">菠蘿</span><span class="zy">ㄅㄛ ㄌㄨㄛˊ</span></span><span><span class="mean">pineapple</span><span class="note">Taiwan usually says 鳳梨 (fènglí).</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">柠檬</span><span class="py">níngméng</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">檸檬</span><span class="zy">ㄋㄧㄥˊ ㄇㄥˊ</span></span><span><span class="mean">lemon</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">好吃</span><span class="py">hǎochī</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">好吃</span><span class="zy">ㄏㄠˇ ㄔ</span></span><span><span class="mean">delicious (food)</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">酸</span><span class="py">suān</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">酸</span><span class="zy">ㄙㄨㄢ</span></span><span><span class="mean">sour</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">甜</span><span class="py">tián</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">甜</span><span class="zy">ㄊㄧㄢˊ</span></span><span><span class="mean">sweet</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">辣</span><span class="py">là</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">辣</span><span class="zy">ㄌㄚˋ</span></span><span><span class="mean">spicy</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">苦</span><span class="py">kǔ</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">苦</span><span class="zy">ㄎㄨˇ</span></span><span><span class="mean">bitter</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">咸</span><span class="py">xián</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">鹹</span><span class="zy">ㄒㄧㄢˊ</span></span><span><span class="mean">salty</span></span></div></div>
+<div class="tips"><h3>How to use them</h3><ul><li>菜 is a dish, or vegetables. 米饭 is cooked rice.</li><li>Pineapple is 凤梨 in Taiwan and 菠萝 on the mainland.</li><li>Flavors take 很 or 太…了: 很辣, 太甜了.</li></ul></div>
+<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">这个菜很辣！</span><span class="py">zhège cài hěn là!</span><span class="mean">This dish is really spicy!</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我不吃辣。</span><span class="py">wǒ bù chī là.</span><span class="mean">I don&#x27;t eat spicy food.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">西瓜很甜。</span><span class="py">xīguā hěn tián.</span><span class="mean">The watermelon is sweet.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">太咸了！</span><span class="py">tài xián le!</span><span class="mean">Too salty!</span></div></div>
+<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: This is delicious!. Tap to show the answer."><span class="q">This is delicious!</span><span class="ans"><span class="zh" lang="zh-Hans">这个很好吃！</span><span class="pyx">zhège hěn hǎochī!</span></span><span class="hint">Say it, then tap to check</span></div><div class="try peekable" tabindex="0" aria-label="Practice: Too spicy!. Tap to show the answer."><span class="q">Too spicy!</span><span class="ans"><span class="zh" lang="zh-Hans">太辣了！</span><span class="pyx">tài là le!</span></span><span class="hint">Say it, then tap to check</span></div></div>
+</section>
+<section class="lesson" id="eating-out-and-ordering"><h2>Eating out and ordering</h2>
+<h3>Words</h3><div class="list"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">饭馆</span><span class="py">fànguǎn</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">飯館</span><span class="zy">ㄈㄢˋ ㄍㄨㄢˇ</span></span><span><span class="mean">restaurant</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">饭店</span><span class="py">fàndiàn</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">飯店</span><span class="zy">ㄈㄢˋ ㄉㄧㄢˋ</span></span><span><span class="mean">restaurant, hotel</span><span class="note">In Taiwan, usually a hotel.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">吃饭</span><span class="py">chīfàn</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">吃飯</span><span class="zy">ㄔ ㄈㄢˋ</span></span><span><span class="mean">to eat a meal</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh l" lang="zh-Hans">你要吃什么？</span><span class="py">nǐ yào chī shénme?</span></span><span class="c-tw"><span class="zh l" lang="zh-Hant-TW">你要吃什麼？</span><span class="zy">ㄋㄧˇ ㄧㄠˋ ㄔ ㄕㄣˊ ˙ㄇㄜ？</span></span><span><span class="mean">what do you want to eat?</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">我请你</span><span class="py">wǒ qǐng nǐ</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">我請你</span><span class="zy">ㄨㄛˇ ㄑㄧㄥˇ ㄋㄧˇ</span></span><span><span class="mean">my treat</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">请</span><span class="py">qǐng</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">請</span><span class="zy">ㄑㄧㄥˇ</span></span><span><span class="mean">please, to invite</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">碗</span><span class="py">wǎn</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">碗</span><span class="zy">ㄨㄢˇ</span></span><span><span class="mean">food in a bowl</span><span class="note">a bowl of noodles.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">盘</span><span class="py">pán</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">盤</span><span class="zy">ㄆㄢˊ</span></span><span><span class="mean">a plate or dish of food</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">份</span><span class="py">fèn</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">份</span><span class="zy">ㄈㄣˋ</span></span><span><span class="mean">a set meal, an order</span><span class="note">an order of rice.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">串</span><span class="py">chuàn</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">串</span><span class="zy">ㄔㄨㄢˋ</span></span><span><span class="mean">skewer</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">锅</span><span class="py">guō</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">鍋</span><span class="zy">ㄍㄨㄛ</span></span><span><span class="mean">pot, pan</span><span class="note">a pot of soup.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">笼</span><span class="py">lóng</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">籠</span><span class="zy">ㄌㄨㄥˊ</span></span><span><span class="mean">steamer basket</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">碟</span><span class="py">dié</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">碟</span><span class="zy">ㄉㄧㄝˊ</span></span><span><span class="mean">small plate or dish</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">片</span><span class="py">piàn</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">片</span><span class="zy">ㄆㄧㄢˋ</span></span><span><span class="mean">thin slice</span><span class="note">a slice of bread.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">顿</span><span class="py">dùn</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">頓</span><span class="zy">ㄉㄨㄣˋ</span></span><span><span class="mean">a meal</span></span></div></div>
+<div class="tips"><h3>How to use them</h3><ul><li>Order with 我要 + number + measure word + food.</li><li>碗 bowl · 盘 plate · 份 an order · 串 skewer · 笼 steamer basket · 锅 pot.</li><li>顿 counts meals: 一顿饭.</li><li>我请你 = my treat.</li><li>In Taiwan, 饭店 usually means a hotel. A restaurant is 餐厅 or 饭馆.</li></ul></div>
+<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我要一碗米饭。</span><span class="py">wǒ yào yì wǎn mǐfàn.</span><span class="mean">A bowl of rice, please.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我们要一笼小笼包。</span><span class="py">wǒmen yào yì lóng xiǎolóngbāo.</span><span class="mean">A basket of soup dumplings, please.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我们去饭馆吃饭吧。</span><span class="py">wǒmen qù fànguǎn chīfàn ba.</span><span class="mean">Let&#x27;s go eat at a restaurant.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">今天我请你！</span><span class="py">jīntiān wǒ qǐng nǐ!</span><span class="mean">Today&#x27;s my treat!</span></div></div>
+<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: A bowl of rice, please.. Tap to show the answer."><span class="q">A bowl of rice, please.</span><span class="ans"><span class="zh" lang="zh-Hans">我要一碗米饭。</span><span class="pyx">wǒ yào yì wǎn mǐfàn.</span></span><span class="hint">Say it, then tap to check</span></div><div class="try peekable" tabindex="0" aria-label="Practice: What do you want to eat?. Tap to show the answer."><span class="q">What do you want to eat?</span><span class="ans"><span class="zh" lang="zh-Hans">你要吃什么？</span><span class="pyx">nǐ yào chī shénme?</span></span><span class="hint">Say it, then tap to check</span></div></div>
+</section><h2>Related</h2><div class="cards"><a class="card" href="grammar-9-numbers-measure-words-dates-and-time.html"><b>Grammar: Numbers, measure words, dates and time</b><span>7 patterns</span></a><a class="card" href="grammar-4-adverbs-and-describing.html"><b>Grammar: Adverbs and describing</b><span>7 patterns</span></a></div><nav class="pager"><a href="lesson-conversation.html">← Conversation</a><a href="lesson-out-and-about.html">Out &amp; about →</a></nav>
+<p class="foot">Built from handwritten notes. Lesson tips and examples, and grammar examples, were written by Claude unless marked (your notes). Native-speaker friends have the last word on usage.</p>
+</main>
+<script>
+(function () {
+  var KEY = "topic-view";
+  var view = { p: true, z: true, m: true, tw: true };
+  try { var s = JSON.parse(localStorage.getItem(KEY) || "{}"); for (var k in view) if (k in s) view[k] = s[k]; } catch (e) {}
+  var main = document.querySelector("main");
+  function apply() {
+    main.classList.toggle("hide-p", !view.p);
+    main.classList.toggle("hide-z", !view.z);
+    main.classList.toggle("hide-m", !view.m);
+    main.classList.toggle("no-tw", !view.tw);
+  }
+  var box = document.getElementById("toggles");
+  if (box) {
+    [["p", "Pinyin"], ["z", "Zhuyin"], ["m", "Meaning"], ["tw", "TW column"]].forEach(function (t) {
+      if (box.dataset.skip && box.dataset.skip.indexOf(t[0]) !== -1) return;
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "tg"; b.textContent = t[1];
+      b.setAttribute("aria-pressed", String(view[t[0]]));
+      b.addEventListener("click", function () {
+        view[t[0]] = !view[t[0]];
+        b.setAttribute("aria-pressed", String(view[t[0]]));
+        try { localStorage.setItem(KEY, JSON.stringify(view)); } catch (e) {}
+        apply();
+      });
+      box.appendChild(b);
+    });
+  }
+  document.addEventListener("click", function (ev) {
+    var r = ev.target.closest(".peekable");
+    if (r) r.classList.toggle("peek");
+  });
+  document.addEventListener("keydown", function (ev) {
+    if ((ev.key === "Enter" || ev.key === " ") && ev.target.classList && ev.target.classList.contains("peekable")) {
+      ev.preventDefault(); ev.target.classList.toggle("peek");
+    }
+  });
+  apply();
+})();
+</script>
+</body>
+</html>

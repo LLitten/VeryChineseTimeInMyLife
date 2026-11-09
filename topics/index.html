@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mandarin topics</title>
+<title>Mandarin lessons</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
@@ -79,14 +79,29 @@ code { font-size: 0.9em; }
 .subnav a { display: inline-block; padding: 4px 11px; font-size: 14px; text-decoration: none; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); }
 .pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; font-size: 15px; }
 .foot { margin-top: 28px; font-size: 13px; color: var(--muted); }
+.lesson { margin-top: 30px; padding-top: 4px; border-top: 2px solid var(--line); scroll-margin-top: 60px; }
+.lesson h2 { margin-top: 14px; }
+.lesson h3 { margin: 18px 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.tips { margin-top: 14px; padding: 2px 14px 10px; background: var(--accent-soft); border-radius: 12px; }
+.tips ul { margin: 0; padding-left: 18px; }
+.tips li { margin-top: 5px; }
+.try { display: block; padding: 10px 12px; background: var(--surface); border: 1.5px dashed var(--accent); border-radius: 12px; cursor: pointer; }
+.try .q { display: block; font-weight: 600; }
+.try .ans { display: block; margin-top: 4px; filter: blur(8px); }
+.try.peek .ans { filter: none; }
+.try .zh { font-size: 20px; }
+.try .pyx { display: block; font-size: 15px; color: var(--muted); }
+.try .hint { display: block; margin-top: 4px; font-size: 12px; color: var(--muted); }
+.try.peek .hint { display: none; }
+.subnav li a { color: var(--accent); }
 </style>
 </head>
 <body>
 <main>
 <nav class="crumbs"><a href="../index.html">← All tools</a></nav>
 
-<h1>Topics</h1><p class="lead">Read a topic top to bottom. To search or mix filters, use <a href="../tools/mandarin-notes.html">My Mandarin notes</a>.</p><h2>Study guides</h2><div class="cards"><a class="card" href="guide-meeting-people.html"><b>Meeting people &amp; small talk</b><span>Saying hi, introducing yourself, and keeping a casual chat going with friends.</span></a></div><h2>Situations</h2><div class="cards"><a class="card" href="people.html"><b>People</b><span>51 words · Greetings &amp; goodbyes, Introducing yourself, Family &amp; friends</span></a><a class="card" href="conversation.html"><b>Conversation</b><span>76 words · Reacting &amp; agreeing, Feelings &amp; opinions, Asking questions, When you&#x27;re stuck, Polite words, On the phone</span></a><a class="card" href="food-and-drink.html"><b>Food &amp; drink</b><span>48 words · Drinks, Food &amp; flavors, Eating out &amp; ordering</span></a><a class="card" href="out-and-about.html"><b>Out &amp; about</b><span>69 words · Transport, Directions, Places in town, Shopping &amp; money</span></a><a class="card" href="time.html"><b>Time</b><span>43 words · Clock &amp; calendar, Making plans, Weather</span></a><a class="card" href="home-and-life.html"><b>Home &amp; life</b><span>51 words · Daily routine, Around the house, School &amp; work, Animals &amp; plants</span></a><a class="card" href="building-blocks.html"><b>Building blocks</b><span>107 words · Describing things, Numbers &amp; counting, Grammar glue</span></a><a class="card" href="other.html"><b>Other</b><span>40 words · Strong language, Pronunciation</span></a></div><h2>Grammar</h2><div class="cards"><a class="card" href="grammar-1-sentence-structure.html"><b>1. Sentence structure</b><span>9 patterns</span></a><a class="card" href="grammar-2-yes-no-and-other-questions.html"><b>2. Yes / no and other questions</b><span>10 patterns</span></a><a class="card" href="grammar-3-negation.html"><b>3. Negation</b><span>6 patterns</span></a><a class="card" href="grammar-4-adverbs-and-describing.html"><b>4. Adverbs and describing</b><span>7 patterns</span></a><a class="card" href="grammar-5-linking-words.html"><b>5. Linking words</b><span>5 patterns</span></a><a class="card" href="grammar-6-verbs-and-helping-verbs.html"><b>6. Verbs and helping verbs</b><span>13 patterns</span></a><a class="card" href="grammar-7-complements-what-happens-after-the-verb.html"><b>7. Complements (what happens after the verb)</b><span>2 patterns</span></a><a class="card" href="grammar-8-actions-in-progress.html"><b>8. Actions in progress</b><span>1 patterns</span></a><a class="card" href="grammar-9-numbers-measure-words-dates-and-time.html"><b>9. Numbers, measure words, dates and time</b><span>7 patterns</span></a><a class="card" href="grammar-10-location-and-there-is.html"><b>10. Location and &quot;there is&quot;</b><span>4 patterns</span></a></div>
-<p class="foot">Built from handwritten notes. Grammar examples and study guides were written by Claude unless marked (your notes). Native-speaker friends have the last word on usage.</p>
+<h1>Lessons</h1><p class="lead">Short lessons built from your notes: words, how to use them, examples, and a quick practice. To look a word up, use <a href="../tools/mandarin-notes.html">My Mandarin notes</a>.</p><div class="cards"><a class="card" href="lesson-people.html"><b>1. People</b><span>Saying hi and bye, introducing yourself, family and friends.</span></a><a class="card" href="lesson-conversation.html"><b>2. Conversation</b><span>Reacting, giving opinions, asking questions, polite words, and what to say when you&#x27;re stuck.</span></a><a class="card" href="lesson-food-and-drink.html"><b>3. Food &amp; drink</b><span>Drinks, food and flavors, and ordering at a restaurant.</span></a><a class="card" href="lesson-out-and-about.html"><b>4. Out &amp; about</b><span>Places in town, directions, getting around, and shopping.</span></a><a class="card" href="lesson-time.html"><b>5. Time</b><span>Days and dates, clock time, parts of the day, making plans, and the weather.</span></a><a class="card" href="lesson-home-and-life.html"><b>6. Home &amp; life</b><span>Your daily routine, things around the house, school and work, animals and plants.</span></a><a class="card" href="lesson-building-blocks.html"><b>7. Building blocks</b><span>Pronouns, numbers, measure words, describing words, and the small words that hold sentences together.</span></a><a class="card" href="lesson-pronunciation.html"><b>8. Pronunciation</b><span>Tones, tone changes, and the zhuyin chart used in Taiwan.</span></a></div><h2>Grammar</h2><div class="cards"><a class="card" href="grammar-1-sentence-structure.html"><b>1. Sentence structure</b><span>9 patterns</span></a><a class="card" href="grammar-2-yes-no-and-other-questions.html"><b>2. Yes / no and other questions</b><span>10 patterns</span></a><a class="card" href="grammar-3-negation.html"><b>3. Negation</b><span>6 patterns</span></a><a class="card" href="grammar-4-adverbs-and-describing.html"><b>4. Adverbs and describing</b><span>7 patterns</span></a><a class="card" href="grammar-5-linking-words.html"><b>5. Linking words</b><span>5 patterns</span></a><a class="card" href="grammar-6-verbs-and-helping-verbs.html"><b>6. Verbs and helping verbs</b><span>13 patterns</span></a><a class="card" href="grammar-7-complements-what-happens-after-the-verb.html"><b>7. Complements (what happens after the verb)</b><span>2 patterns</span></a><a class="card" href="grammar-8-actions-in-progress.html"><b>8. Actions in progress</b><span>1 patterns</span></a><a class="card" href="grammar-9-numbers-measure-words-dates-and-time.html"><b>9. Numbers, measure words, dates and time</b><span>7 patterns</span></a><a class="card" href="grammar-10-location-and-there-is.html"><b>10. Location and &quot;there is&quot;</b><span>4 patterns</span></a></div>
+<p class="foot">Built from handwritten notes. Lesson tips and examples, and grammar examples, were written by Claude unless marked (your notes). Native-speaker friends have the last word on usage.</p>
 </main>
 <script>
 (function () {

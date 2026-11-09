@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Rebuild the data inside tools/mandarin-notes.html from vocab.csv and grammar.md.
+"""Rebuild the word list inside tools/mandarin-notes.html from vocab.csv.
 
-Also rebuilds the topic pages in topics/ (see build_topics.py).
+The notes page holds words and phrases only (not grammar, and not the zhuyin
+chart, whose rows have type "sound"). This script also rebuilds the lesson and
+grammar pages in topics/ (see build_topics.py).
 
-Run from the repo root after editing vocab.csv, grammar.md or guides/:
+Run from the repo root after editing vocab.csv, grammar.md or lessons/:
 
     python3 tools/build_notes.py
 
@@ -22,14 +24,16 @@ PAGE = ROOT / "tools" / "mandarin-notes.html"
 GROUPS = [
     ("People", ["Greetings & goodbyes", "Introducing yourself", "Family & friends"]),
     ("Conversation", ["Reacting & agreeing", "Feelings & opinions", "Asking questions",
-                      "When you're stuck", "Polite words", "On the phone"]),
+                      "When you're stuck", "Polite words", "On the phone", "Strong language"]),
     ("Food & drink", ["Drinks", "Food & flavors", "Eating out & ordering"]),
     ("Out & about", ["Transport", "Directions", "Places in town", "Shopping & money"]),
     ("Time", ["Clock & calendar", "Making plans", "Weather"]),
     ("Home & life", ["Daily routine", "Around the house", "School & work", "Animals & plants"]),
     ("Building blocks", ["Describing things", "Numbers & counting", "Grammar glue"]),
-    ("Other", ["Strong language", "Pronunciation"]),
 ]
+# Zhuyin chart rows (type "sound") use this situation. They appear in the
+# Pronunciation lesson, not on the notes page.
+SOUND_USE = "Pronunciation"
 TYPE_ORDER = [
     "verb", "helping verb", "noun", "pronoun", "adjective", "adverb", "time word", "place",
     "direction word", "number", "measure word", "question word", "particle", "conjunction", "suffix",
@@ -137,7 +141,7 @@ def ordered(values, order):
 
 
 def main():
-    entries = vocab_entries() + grammar_entries()
+    entries = [e for e in vocab_entries() if e["type"] != "sound"]
     known = {u for _, subs in GROUPS for u in subs}
     unknown = sorted({u for e in entries for u in e["uses"]} - known)
     if unknown:
