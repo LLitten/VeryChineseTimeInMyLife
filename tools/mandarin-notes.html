@@ -79,6 +79,11 @@ h1 { font-size: 22px; line-height: 1.2; margin: 6px 4px 4px; }
 .chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 -12px; padding: 2px 12px; }
 .chips::-webkit-scrollbar { display: none; }
 .chip { flex: none; }
+/* With a mouse there's no swipe, so wrap the chips onto several lines instead. */
+@media (hover: hover) and (pointer: fine) {
+  .chips { flex-wrap: wrap; overflow-x: visible; margin: 0; padding: 2px 0; }
+  .subchips { padding: 8px; border-radius: 14px; }
+}
 .chip {
   appearance: none;
   min-height: 36px;
