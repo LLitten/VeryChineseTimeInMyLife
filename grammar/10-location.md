@@ -25,6 +25,7 @@ pattern: Place + 有 + thing
 ### Try it
 - try: There are people in the room. | 房间里有人。 | fángjiān lǐ yǒu rén.
 source: AllSet: Expressing existence with "you" | https://resources.allsetlearning.com/chinese/grammar/ASG04ZCI
+source: Yoyo Chinese: Grammar Series, Lesson 3 (Word Order 3) | https://yoyochinese.com/lesson/Chinese-word-order-Part-3/notes
 
 ## Have: subject + 有
 tag: A1 #19

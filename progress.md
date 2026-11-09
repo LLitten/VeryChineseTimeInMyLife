@@ -84,7 +84,7 @@ Several of these (医生, 商店, 电视, 衣服, 东西, 下雨, 时候, 呢, �
 - **学 vs 看.** 学 is for subjects and skills (学中文). 看 is for reading (看书). The learner wrote 学书 twice.
 - **都 and 也 placement.** After the subject and any time word, before the verb: 我们今天都在家.
 - **Measure words.** 书 takes 本, not 个. After 没有, the number and measure word usually drop out.
-- **Duration order.** Verb + duration + object: 学了两个小时数学.
+- **Duration order.** Two correct forms: 学了两个小时数学, or with the verb said twice, 学数学学了两个小时. Not ❌ 学了数学两个小时.
 
 ### Regional and script notes
 - **一点 vs 一点儿:** Taiwan usually says 一點 without 儿. Northern mainland speakers add 儿.
@@ -152,7 +152,7 @@ Which of the 40 AllSet A1 grammar points are in the notes. "Section" is the numb
 What the transcription changed, so the notebook can be updated to match.
 
 **Grammar**
-- **Duration:** the notes put the duration after the object. The usual order is verb + duration + object: 我学了两个小时数学.
+- **Duration:** the notes put the duration after the object. That's correct if the verb is said twice, as Yoyo's Grammar Series Lesson 2 teaches: 我学数学学了两个小时. Without repeating the verb, the duration goes before the object: 我学了两个小时数学. (An earlier version of this list called the notes wrong; they weren't.)
 - **会:** the notes list only "can (a learned skill)." It also means "will": 明天会很好.
 - **什么时候:** the notes label it "future." It works for the past too: 你什么时候吃的？
 - **Adverbs:** the notes say adverbs can't come before the subject, and also that some can open a sentence. Most can't; 也许 and 可能 can.

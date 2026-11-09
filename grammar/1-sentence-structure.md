@@ -15,6 +15,7 @@ pattern: Subject + verb (+ object)
 ### Try it
 - try: I eat. | 我吃饭。 | wǒ chīfàn.
 source: AllSet: Basic sentence order | https://resources.allsetlearning.com/chinese/grammar/ASGETNCO
+source: Yoyo Chinese: Grammar Series, Lesson 1 (Word Order 1) | https://yoyochinese.com/lesson/Chinese-word-order-Part-1/notes
 
 ## Time goes before the verb
 tag: A2
@@ -27,6 +28,7 @@ pattern: Subject + time + verb, or time + subject + verb
 ### Try it
 - try: I'm going tomorrow. | 我明天去。 | wǒ míngtiān qù.
 source: AllSet: Time words and word order | https://resources.allsetlearning.com/chinese/grammar/Time_words_and_word_order
+source: Yoyo Chinese: Grammar Series, Lesson 1 (Word Order 1) | https://yoyochinese.com/lesson/Chinese-word-order-Part-1/notes
 
 ## Place goes after time, before the verb
 tag: A1 #17
@@ -40,6 +42,7 @@ pattern: Subject + time + 在 + place + verb + object
 - try: I study at school. | 我在学校学习。 | wǒ zài xuéxiào xuéxí.
 source: AllSet: Expressing existence in a place with "zai" | https://resources.allsetlearning.com/chinese/grammar/ASGLRWT8
 source: Memory trick: your notes
+source: Yoyo Chinese: Grammar Series, Lesson 2 (Word Order 2) | https://yoyochinese.com/lesson/Chinese-word-order-Part-2/notes
 
 ## Verbs with 在 + place after them
 tag: A2
@@ -59,22 +62,28 @@ tag: A2
 pattern: Subject + verb + 了 + duration + object
 - The time span goes after the verb and before the object.
 - There's no word for "for" in "for two hours."
+- Or say the verb twice: verb + object + verb + 了 + duration: 我学数学学了两个小时.
 - 的 can go between the duration and the object: 学了两个小时的数学.
 ### Examples
 - 我学了两个小时数学。 | wǒ xué le liǎng ge xiǎoshí shùxué. | I studied math for two hours.
 - 他学了一年中文。 | tā xué le yì nián Zhōngwén. | He studied Chinese for a year. | AllSet
+- 我昨天学中文学了两个小时。 | wǒ zuótiān xué Zhōngwén xué le liǎng ge xiǎoshí. | I studied Chinese for two hours yesterday. | Yoyo
 ### Try it
 - try: I slept for eight hours. | 我睡了八个小时。 | wǒ shuì le bā ge xiǎoshí.
 source: AllSet: Expressing duration with "le" | https://resources.allsetlearning.com/chinese/grammar/Expressing_duration_with_%22le%22
+source: Yoyo Chinese: Grammar Series, Lesson 2 (Word Order 2) | https://yoyochinese.com/lesson/Chinese-word-order-Part-2/notes
 
 ## Putting it all together
 tag: Beyond A1
 pattern: Subject + time + manner + place + tool + with whom + verb + object
 - A guideline for long sentences. The middle pieces shift in real speech.
 - Start with who and when, end with the action.
+- Yoyo's version: subject + when + where + how + action.
 ### Examples
 - 我昨天在学校用电脑跟朋友学数学。 | wǒ zuótiān zài xuéxiào yòng diànnǎo gēn péngyou xué shùxué. | Yesterday I studied math at school on a computer with my friend.
-source: Your notes. AllSet has no article for the full order.
+- 我明天在图书馆和朋友一起学中文。 | wǒ míngtiān zài túshūguǎn hé péngyou yìqǐ xué Zhōngwén. | Tomorrow I'll study Chinese at the library with a friend. | Yoyo
+source: Yoyo Chinese: Grammar Series, Lesson 1 (Word Order 1) | https://yoyochinese.com/lesson/Chinese-word-order-Part-1/notes
+source: Manner and tool: your notes
 
 ## Order inside a noun phrase
 tag: Beyond A1
@@ -92,7 +101,8 @@ tag: Beyond A1
 - 现在五点。 | xiànzài wǔ diǎn. | It's 5 o'clock.
 - 下雨了。 | xià yǔ le. | It's raining.
 - 很好吃！ | hěn hǎochī! | It's delicious!
-source: Your notes
+- 学中文很难。 | xué Zhōngwén hěn nán. | It's hard to learn Chinese. | Yoyo
+source: Yoyo Chinese: Grammar Series, Lesson 3 (Word Order 3) | https://yoyochinese.com/lesson/Chinese-word-order-Part-3/notes
 
 ## 是 links two nouns
 tag: A1 #32

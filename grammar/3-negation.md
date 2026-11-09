@@ -16,6 +16,7 @@ pattern: Subject + 不 + verb / adjective
 ### Try it
 - try: I'm not going. | 我不去。 | wǒ bú qù.
 source: AllSet: Standard negation with "bu" | https://resources.allsetlearning.com/chinese/grammar/ASGIPYFV
+source: Yoyo Chinese: Grammar Series, Lesson 4 (不) | https://yoyochinese.com/lesson/Chinese-Negation-Word-bu/notes
 
 ## 没(有) + verb: didn't
 tag: A1 #29
@@ -29,6 +30,7 @@ pattern: Subject + 没(有) + verb
 ### Try it
 - try: I didn't go yesterday. | 我昨天没去。 | wǒ zuótiān méi qù.
 source: AllSet: Negation of past actions with "meiyou" | https://resources.allsetlearning.com/chinese/grammar/ASGAUCXK
+source: Yoyo Chinese: Grammar Series, Lesson 5 (没) | https://yoyochinese.com/lesson/Chinese-Negation-Word-mei/notes
 source: 没钱了 note: Claude
 
 ## 没有 + noun: don't have
@@ -43,6 +45,7 @@ pattern: 没(有) + noun
 ### Try it
 - try: I don't have money. | 我没有钱。 | wǒ méiyǒu qián.
 source: AllSet: Negation of "you" with "mei" | https://resources.allsetlearning.com/chinese/grammar/ASGPNV3Q
+source: Yoyo Chinese: Grammar Series, Lesson 5 (没) | https://yoyochinese.com/lesson/Chinese-Negation-Word-mei/notes
 
 ## Don't: 别 / 不要
 tag: A1 #30
@@ -58,6 +61,7 @@ pattern: 别 / 不要 + verb
 ### Try it
 - try: Stop crying! | 别哭了！ | bié kū le!
 source: AllSet: Negative commands with "buyao" | https://resources.allsetlearning.com/chinese/grammar/ASGIVZJU
+source: Yoyo Chinese: Grammar Series, Lesson 6 (别 and 不要) | https://yoyochinese.com/lesson/Chinese-Negation-words-bie-and-bu-yao/notes
 source: AllSet: Expressing "stop doing" with "bie… le" | https://resources.allsetlearning.com/chinese/grammar/Expressing_%22stop_doing%22_with_%22bie%E2%80%A6_le%22
 
 ## 不太 + adjective: not very

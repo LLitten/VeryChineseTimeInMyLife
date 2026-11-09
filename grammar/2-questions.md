@@ -9,19 +9,22 @@ pattern: Statement + 吗？
 - Add 吗 to the end of any statement. Word order stays the same.
 - Don't add 吗 if there's already a question word or 是不是.
 - Answer by repeating the verb (喝 / 不喝), or with 对 (right).
+- For the past: 你去了吗？ → 去了 (yes) / 没去 (no).
 ### Examples
 - 你喝水吗？ 喝。 / 不喝。 | nǐ hē shuǐ ma? hē. / bù hē. | Do you drink water? Yes. / No.
 - 他是老师吗？ | tā shì lǎoshī ma? | Is he a teacher?
 ### Try it
 - try: Are you a student? | 你是学生吗？ | nǐ shì xuésheng ma?
 source: AllSet: Yes-no questions with "ma" | https://resources.allsetlearning.com/chinese/grammar/ASGQ2AZA
+source: Yoyo Chinese: Grammar Series, Lesson 7 (吗) | https://yoyochinese.com/lesson/asking-a-yes-or-no-question-in-chinese-using-ma/notes
+source: Yoyo Chinese: Grammar Series, Lesson 9 (Yes and no) | https://yoyochinese.com/lesson/How-to-Say-Yes-and-No-in-Chinese/notes
 
 ## Verb + 不 + verb
 tag: A1 #35
 pattern: Verb + 不 + verb / adjective + 不 + adjective
 - Offers both choices: 去不去 = going or not?
 - Don't add 吗.
-- Two-syllable words can shorten: 喜不喜欢.
+- Two-syllable words can shorten: 喜欢不喜欢 or 喜不喜欢. Both are fine.
 - For 有, use 有没有: 你有没有书？
 ### Examples
 - 你是不是学生？ | nǐ shì bu shì xuésheng? | Are you a student?
@@ -30,6 +33,7 @@ pattern: Verb + 不 + verb / adjective + 不 + adjective
 ### Try it
 - try: Are you going? | 你去不去？ | nǐ qù bu qù?
 source: AllSet: Affirmative-negative question | https://resources.allsetlearning.com/chinese/grammar/ASGZH7K3
+source: Yoyo Chinese: Grammar Series, Lesson 8 (Verb-not-verb) | https://yoyochinese.com/lesson/Forming-a-Yes-or-No-Chinese-Question-With-the-Verb-Not-Verb-Structure/notes
 
 ## Tag questions: 好不好, 对不对
 tag: A1 #37
