@@ -12,6 +12,7 @@ One line per session: date, what happened, what to focus on next. Add a line at 
 | Nov 2026 | Digitized 48 handwritten pages into `vocab.csv` and `grammar.md`. Corrected notes on duration order, 会, 什么时候 and adverbs. | Practice corrected patterns |
 | Nov 2026 | Short practice on 不 vs 没, 要 vs 会, 也 and 都, reporting speech with 说 and 听…说. | Longer sentences with friends |
 | Nov 2026 | Reorganized notes by notebook topic with filters for word type, situation and HSK 1. Notes site published on GitHub Pages. | 6 A1 grammar points not yet learned (see the grammar checklist below) |
+| Nov 2026 | Added topic pages for each situation and grammar section, and a first study guide: Meeting people & small talk. | Try the guide's phrases with friends |
 
 ## Baseline exam (November 2026)
 

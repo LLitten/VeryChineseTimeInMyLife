@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Rebuild the data inside tools/mandarin-notes.html from vocab.csv and grammar.md.
 
-Run from the repo root after editing either file:
+Also rebuilds the topic pages in topics/ (see build_topics.py).
+
+Run from the repo root after editing vocab.csv, grammar.md or guides/:
 
     python3 tools/build_notes.py
 
@@ -156,6 +158,9 @@ def main():
     for e in entries:
         kinds[e["kind"]] = kinds.get(e["kind"], 0) + 1
     print(f"Wrote {len(entries)} entries {kinds} to {PAGE.relative_to(ROOT)}")
+
+    import build_topics  # topic pages share this data; build them too
+    build_topics.main()
 
 
 if __name__ == "__main__":
