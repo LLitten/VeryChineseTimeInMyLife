@@ -6,7 +6,7 @@ Paste this file at the start of a session with any AI model or tutor, along with
 Hold real conversations in Mandarin with friends, several of them from Taiwan. Speaking and listening with friends matters more than passing the HSK.
 
 ## Learner snapshot
-- **Standard:** HSK 2.0, using the 150-word HSK 1 list on hsk.academy. Grammar follows the AllSet Chinese Grammar Wiki's A1 list.
+- **Organization:** material is grouped by the learner's own topics, which make sense to them by usage. HSK 1 (the 150-word HSK 2.0 list on hsk.academy) and AllSet's A1 grammar list are used as tags and checklists, not as the layout. Keep it that way when adding material.
 - **Level:** about HSK 1. Baseline vocabulary exam: 96 of 150 words fully correct (64%). See `exam-results.md`.
 - **Scripts:** simplified first. Taiwan Traditional forms ("TW") are tagged in the notes. Traditional gets added to active study later.
 - **Pronunciation aid:** pinyin. Zhuyin is hard for the learner; a zhuyin chart is in `vocab.csv`.
@@ -27,8 +27,8 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 ## Files in this repo
 | File | What it holds |
 |---|---|
-| `vocab.csv` | 369 entries, sorted by `level` then `topic`. **HSK 1** (153 rows: all 150 HSK 1 words, plus weekday and month patterns), **Beyond HSK 1** (178), and **Pronunciation** (the zhuyin chart). The `source` column says where each entry came from: `notes` (the learner's handwritten notes), `hsk-list` (HSK 1 words not yet in the notes) or `added` (everyday phrases and Taiwan words added by Claude). Other columns: simplified, Taiwan form, pinyin, meaning, literal parts, notes, and a `check` flag for unclear readings. HSK 1 topics match the exam pages. |
-| `grammar.md` | Part 1: the 40 AllSet A1 grammar points in AllSet's order, each marked ✅ in the notes, ◐ partly, or ○ not learned yet. Part 2: patterns from the notes that go beyond A1. Then corrections and 13 practice sentences from the notes. |
+| `vocab.csv` | 369 entries grouped by the learner's own notebook topics, in notebook order. The `hsk1` column marks the 150 HSK 1 words (plus weekday and month patterns). The `source` column says where each entry came from: `notes` (the handwritten notes), `hsk-list` (HSK 1 words not yet in the notes, placed in the matching topic) or `added` (everyday phrases and Taiwan words added by Claude). Other columns: simplified, Taiwan form, pinyin, meaning, literal parts, notes, and a `check` flag for unclear readings. Includes the zhuyin chart. |
+| `grammar.md` | Patterns grouped by the learner's notebook sections (sentence structure, questions, negation and so on). Each is tagged with its AllSet A1 number or "Beyond A1" and a status. An A1 checklist at the end shows the gaps. Then corrections and 13 practice sentences from the notes. |
 | `error-patterns.md` | Mistakes the learner repeats, with fixes. Read this before writing practice material. |
 | `exam-results.md` | Baseline exam results, by topic, with every missed word. |
 | `study-plan.md` | Daily routine, weekly rhythm, a four-week roadmap and checkpoints. |
