@@ -47,7 +47,7 @@ simplified,traditional_tw,pinyin,zhuyin,meaning,topic,type,use,parts,note,hsk1,s
 百,,bǎi,ㄅㄞˇ,hundred (100),Numbers,number,Numbers & counting,,,,notes,
 今天,,jīntiān,ㄐㄧㄣ ㄊㄧㄢ,today,"Time, dates & weather",time word,Clock & calendar; Making plans,now + day,,yes,notes,
 明天,,míngtiān,ㄇㄧㄥˊ ㄊㄧㄢ,tomorrow,"Time, dates & weather",time word,Clock & calendar; Making plans,next + day,,yes,notes,
-昨天,,zuótiān,ㄗㄨㄛˊ ㄊㄧㄢ,yesterday,"Time, dates & weather",time word,Clock & calendar; Making plans,past + day,"Write 昨 (zuó), not 作. Your practice sentence about yesterday morning’s weather looked like it used 作.",yes,notes,check
+昨天,,zuótiān,ㄗㄨㄛˊ ㄊㄧㄢ,yesterday,"Time, dates & weather",time word,Clock & calendar; Making plans,past + day,"Look-alike: 作 (zuò, as in 工作). 昨 has the sun radical 日.",yes,notes,check
 星期,,xīngqī,ㄒㄧㄥ ㄑㄧˊ,"week, day of the week","Time, dates & weather",time word,Clock & calendar,,Weeks start on Monday and end on Sunday. Taiwan says xīngqí; the zhuyin shows that reading.,yes,notes,
 星期一 – 星期六,,xīngqī yī – liù,ㄒㄧㄥ ㄑㄧˊ ㄧ – ㄒㄧㄥ ㄑㄧˊ ㄌㄧㄡˋ,Monday – Saturday,"Time, dates & weather",time word,Clock & calendar,week + number,"一 Mon, 二 Tue, 三 Wed, 四 Thu, 五 Fri, 六 Sat. Taiwan says xīngqí; the zhuyin shows that reading.",yes,notes,
 星期天,,xīngqītiān,ㄒㄧㄥ ㄑㄧˊ ㄊㄧㄢ,Sunday,"Time, dates & weather",time word,Clock & calendar,week + sky,Also 星期日. Taiwan says xīngqí; the zhuyin shows that reading.,yes,notes,
@@ -320,9 +320,9 @@ simplified,traditional_tw,pinyin,zhuyin,meaning,topic,type,use,parts,note,hsk1,s
 晚安,,wǎn’ān,ㄨㄢˇ ㄢ,good night,Everyday phrases,phrase,Greetings & goodbyes,evening + peace,,,added,
 明天见,明天見,míngtiān jiàn,ㄇㄧㄥˊ ㄊㄧㄢ ㄐㄧㄢˋ,see you tomorrow,Everyday phrases,phrase,Greetings & goodbyes,tomorrow + see,,,added,
 拜拜,掰掰,bāibāi,ㄅㄞ ㄅㄞ,bye,Everyday phrases,phrase,Greetings & goodbyes,sound of English “bye-bye”,Mainland usually writes 拜拜; Taiwan often writes 掰掰. Very common.,,added,
-不客气,不客氣,bú kèqi,ㄅㄨˊ ㄎㄜˋ ˙ㄑㄧ,you’re welcome,Everyday phrases,phrase,Polite words,,The reply to 谢谢. You swapped it with 对不起 on the exam.,yes,hsk-list,
+不客气,不客氣,bú kèqi,ㄅㄨˊ ㄎㄜˋ ˙ㄑㄧ,you’re welcome,Everyday phrases,phrase,Polite words,,The reply to 谢谢.,yes,hsk-list,
 对不起,對不起,duìbuqǐ,ㄉㄨㄟˋ ˙ㄅㄨ ㄑㄧˇ,sorry,Everyday phrases,phrase,Polite words,,A real apology. 不好意思 is lighter (excuse me).,yes,hsk-list,
-没关系,沒關係,méi guānxi,ㄇㄟˊ ㄍㄨㄢ ˙ㄒㄧ,it doesn’t matter,Everyday phrases,phrase,Polite words,not have + connection,Reply to 对不起. An HSK 1 word you left blank on the exam.,yes,hsk-list,
+没关系,沒關係,méi guānxi,ㄇㄟˊ ㄍㄨㄢ ˙ㄒㄧ,it doesn’t matter,Everyday phrases,phrase,Polite words,not have + connection,Reply to 对不起.,yes,hsk-list,
 再见,再見,zàijiàn,ㄗㄞˋ ㄐㄧㄢˋ,goodbye,Everyday phrases,phrase,Greetings & goodbyes,again + see,Textbook goodbye. Friends in Taiwan often say 掰掰 instead.,yes,hsk-list,
 计程车,計程車,jìchéngchē,ㄐㄧˋ ㄔㄥˊ ㄔㄜ,taxi,Taiwan words,noun,Transport,count + distance + car,Taiwan word. The HSK word 出租车 is the mainland one.,,added,
 捷运,捷運,jiéyùn,ㄐㄧㄝˊ ㄩㄣˋ,"MRT, subway (Taiwan)",Taiwan words,noun,Transport,quick + transport,Mainland says 地铁 dìtiě.,,added,
