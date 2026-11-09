@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HSK 1 vocabulary exam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #edf1f5;
+  --surface: #ffffff;
+  --ink: #16222e;
+  --muted: #5a6978;
+  --line: #cbd5df;
+  --accent: #1d6f8a;
+  --accent-ink: #ffffff;
+  --good: #1b7f5c;
+  --good-bg: #ddf1e8;
+  --serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1820;
+    --surface: #17232e;
+    --ink: #e6edf3;
+    --muted: #94a3b2;
+    --line: #2b3b49;
+    --accent: #5bb3d0;
+    --accent-ink: #0b1620;
+    --good: #55c79a;
+    --good-bg: #12332a;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1820;
+  --surface: #17232e;
+  --ink: #e6edf3;
+  --muted: #94a3b2;
+  --line: #2b3b49;
+  --accent: #5bb3d0;
+  --accent-ink: #0b1620;
+  --good: #55c79a;
+  --good-bg: #12332a;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-text-size-adjust: 100%;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--bg);
+  z-index: 10;
+}
+main { max-width: 480px; margin: 0 auto; padding: 16px 16px 32px; }
+h1 { font-size: 24px; line-height: 1.2; margin: 6px 0 8px; }
+.lead { color: var(--muted); margin: 0 0 20px; }
+.top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.top .title { font-weight: 600; }
+.top .count { color: var(--muted); font-variant-numeric: tabular-nums; }
+.track { height: 6px; border-radius: 3px; background: var(--line); margin-bottom: 24px; overflow: hidden; }
+.track i { display: block; height: 100%; background: var(--accent); }
+.label { font-weight: 600; margin: 18px 0 8px; }
+.seg { display: grid; gap: 8px; }
+.seg.three { grid-template-columns: repeat(3, 1fr); }
+.seg.col { grid-template-columns: 1fr; }
+.seg button {
+  appearance: none;
+  min-height: 48px;
+  padding: 8px 10px;
+  font: inherit;
+  text-align: left;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.seg.three button { text-align: center; }
+.seg button[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1.5px var(--accent); font-weight: 600; }
+.seg button small { display: block; color: var(--muted); font-weight: 400; font-size: 13px; }
+.ask { color: var(--muted); margin: 0 0 8px; }
+.prompt { margin: 0 0 18px; font-size: 26px; line-height: 1.3; font-weight: 600; }
+.prompt.zh { font-family: var(--serif); font-weight: 700; font-size: 56px; line-height: 1.2; word-break: keep-all; overflow-wrap: anywhere; }
+.field {
+  display: block;
+  width: 100%;
+  min-height: 56px;
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 22px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+}
+.field.zhfield { font-family: var(--serif); font-weight: 500; }
+.field:focus { outline: 3px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.row { display: grid; gap: 10px; margin-top: 14px; }
+.row.two { grid-template-columns: 1fr 2fr; }
+.btn {
+  appearance: none;
+  width: 100%;
+  min-height: 52px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.btn.quiet { color: var(--ink); background: transparent; border: 1.5px solid var(--line); }
+.btn:disabled { opacity: 0.4; cursor: default; }
+.btn:focus-visible, .seg button:focus-visible, .link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.links { display: flex; justify-content: flex-end; margin-top: 8px; }
+.link { appearance: none; background: none; border: 0; padding: 8px 4px; font: inherit; color: var(--muted); text-decoration: underline; cursor: pointer; }
+.stack { display: grid; gap: 10px; margin-top: 14px; }
+.note { margin: 14px 0 0; padding: 12px 14px; border-radius: 12px; background: var(--surface); border: 1.5px dashed var(--line); color: var(--muted); font-size: 15px; }
+.status { min-height: 22px; margin: 10px 0 0; font-size: 15px; color: var(--good); }
+.out {
+  display: block;
+  width: 100%;
+  height: 200px;
+  margin-top: 14px;
+  padding: 10px 12px;
+  font-family: ui-monospace, Menlo, Consolas, "PingFang SC", monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  resize: vertical;
+}
+.big { font-family: var(--serif); font-weight: 700; font-size: 56px; line-height: 1.1; margin: 8px 0 4px; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<main id="app" aria-live="polite"></main>
+
+<script>
+var WORDS = [
+["爱","ài","to love","Verbs"],
+["八","bā","eight","Numbers"],
+["爸爸","bàba","dad","People"],
+["杯子","bēizi","cup, glass","Things"],
+["北京","Běijīng","Beijing","Places & directions"],
+["本","běn","measure word for books","Describing & grammar",1],
+["不客气","bú kèqi","you’re welcome","Polite phrases"],
+["不","bù","not, no","Describing & grammar"],
+["菜","cài","dish, vegetables","Food & drink"],
+["茶","chá","tea","Food & drink"],
+["吃","chī","to eat","Food & drink"],
+["出租车","chūzūchē","taxi","Places & directions"],
+["打电话","dǎ diànhuà","to make a phone call","Verbs"],
+["大","dà","big","Describing & grammar"],
+["的","de","’s / of (possessive particle)","Describing & grammar",1],
+["点","diǎn","o’clock, point","Time & weather"],
+["电脑","diànnǎo","computer","Things"],
+["电视","diànshì","TV","Things"],
+["电影","diànyǐng","movie","Things"],
+["东西","dōngxi","thing, stuff","Things"],
+["都","dōu","all, both","Describing & grammar"],
+["读","dú","to read (aloud)","Verbs"],
+["对不起","duìbuqǐ","sorry","Polite phrases"],
+["多","duō","many, a lot","Describing & grammar"],
+["多少","duōshao","how many, how much","Pronouns & questions"],
+["儿子","érzi","son","People"],
+["二","èr","two","Numbers"],
+["饭店","fàndiàn","restaurant, hotel","Places & directions"],
+["飞机","fēijī","airplane","Places & directions"],
+["分钟","fēnzhōng","minute","Time & weather"],
+["高兴","gāoxìng","happy","Describing & grammar"],
+["个","gè","general measure word","Describing & grammar",1],
+["工作","gōngzuò","work, job","Verbs"],
+["狗","gǒu","dog","Things"],
+["汉语","Hànyǔ","Chinese language","Things"],
+["好","hǎo","good","Describing & grammar"],
+["号","hào","day of the month","Time & weather"],
+["喝","hē","to drink","Food & drink"],
+["和","hé","and, with","Describing & grammar"],
+["很","hěn","very","Describing & grammar"],
+["后面","hòumiàn","behind","Places & directions"],
+["回","huí","to return, go back","Verbs"],
+["会","huì","can, will","Verbs"],
+["几","jǐ","how many (small number)","Pronouns & questions"],
+["家","jiā","home, family","Places & directions"],
+["叫","jiào","to be called","Verbs"],
+["今天","jīntiān","today","Time & weather"],
+["九","jiǔ","nine","Numbers"],
+["开","kāi","to open, to drive","Verbs"],
+["看","kàn","to look, to read","Verbs"],
+["看见","kànjiàn","to see","Verbs"],
+["块","kuài","yuan (money)","Things"],
+["来","lái","to come","Verbs"],
+["老师","lǎoshī","teacher","People"],
+["了","le","completion / change particle","Describing & grammar",1],
+["冷","lěng","cold","Time & weather"],
+["里","lǐ","inside","Places & directions"],
+["六","liù","six","Numbers"],
+["吗","ma","question particle","Pronouns & questions",1],
+["妈妈","māma","mom","People"],
+["买","mǎi","to buy","Verbs"],
+["猫","māo","cat","Things"],
+["没关系","méi guānxi","it doesn’t matter","Polite phrases"],
+["没有","méiyǒu","don’t have, didn’t","Verbs"],
+["米饭","mǐfàn","cooked rice","Food & drink"],
+["名字","míngzi","name","Things"],
+["明天","míngtiān","tomorrow","Time & weather"],
+["哪","nǎ","which","Pronouns & questions"],
+["哪儿","nǎr","where","Pronouns & questions"],
+["那","nà","that","Describing & grammar"],
+["呢","ne","and you? (particle)","Pronouns & questions",1],
+["能","néng","can, able to","Verbs"],
+["你","nǐ","you","Pronouns & questions"],
+["年","nián","year","Time & weather"],
+["女儿","nǚ’ér","daughter","People"],
+["朋友","péngyou","friend","People"],
+["漂亮","piàoliang","pretty","Describing & grammar"],
+["苹果","píngguǒ","apple","Food & drink"],
+["七","qī","seven","Numbers"],
+["前面","qiánmiàn","in front","Places & directions"],
+["钱","qián","money","Things"],
+["请","qǐng","please, to invite","Verbs"],
+["去","qù","to go","Verbs"],
+["热","rè","hot","Time & weather"],
+["人","rén","person","People"],
+["认识","rènshi","to know (someone)","Verbs"],
+["三","sān","three","Numbers"],
+["商店","shāngdiàn","shop, store","Places & directions"],
+["上","shàng","up, on","Places & directions"],
+["上午","shàngwǔ","morning","Time & weather"],
+["少","shǎo","few, little","Describing & grammar"],
+["谁","shéi","who","Pronouns & questions"],
+["什么","shénme","what","Pronouns & questions"],
+["十","shí","ten","Numbers"],
+["时候","shíhou","time, moment","Time & weather"],
+["是","shì","to be, yes","Verbs"],
+["书","shū","book","Things"],
+["水","shuǐ","water","Food & drink"],
+["水果","shuǐguǒ","fruit","Food & drink"],
+["睡觉","shuìjiào","to sleep","Verbs"],
+["说","shuō","to speak, say","Verbs"],
+["四","sì","four","Numbers"],
+["岁","suì","years old","Describing & grammar"],
+["他","tā","he","Pronouns & questions"],
+["她","tā","she","Pronouns & questions"],
+["太","tài","too, so","Describing & grammar"],
+["天气","tiānqì","weather","Time & weather"],
+["听","tīng","to listen","Verbs"],
+["同学","tóngxué","classmate","People"],
+["喂","wèi","hello (on the phone)","Polite phrases"],
+["我","wǒ","I, me","Pronouns & questions"],
+["我们","wǒmen","we","Pronouns & questions"],
+["五","wǔ","five","Numbers"],
+["喜欢","xǐhuan","to like","Verbs"],
+["下","xià","down, next","Places & directions"],
+["下午","xiàwǔ","afternoon","Time & weather"],
+["下雨","xià yǔ","to rain","Time & weather"],
+["先生","xiānsheng","Mr., sir","People"],
+["现在","xiànzài","now","Time & weather"],
+["想","xiǎng","to want, to think","Verbs"],
+["小","xiǎo","small","Describing & grammar"],
+["小姐","xiǎojie","Miss","People"],
+["些","xiē","some (measure word)","Describing & grammar",1],
+["写","xiě","to write","Verbs"],
+["谢谢","xièxie","thank you","Polite phrases"],
+["星期","xīngqī","week","Time & weather"],
+["学生","xuésheng","student","People"],
+["学习","xuéxí","to study","Verbs"],
+["学校","xuéxiào","school","Places & directions"],
+["一","yī","one","Numbers"],
+["一点儿","yìdiǎnr","a little","Describing & grammar"],
+["医生","yīshēng","doctor","People"],
+["医院","yīyuàn","hospital","Places & directions"],
+["衣服","yīfu","clothes","Things"],
+["椅子","yǐzi","chair","Things"],
+["有","yǒu","to have, there is","Verbs"],
+["月","yuè","month","Time & weather"],
+["再见","zàijiàn","goodbye","Polite phrases"],
+["在","zài","at, in the middle of doing","Verbs"],
+["怎么","zěnme","how, why","Pronouns & questions"],
+["怎么样","zěnmeyàng","how is it?","Pronouns & questions"],
+["这","zhè","this","Describing & grammar"],
+["中国","Zhōngguó","China","Places & directions"],
+["中午","zhōngwǔ","noon","Time & weather"],
+["住","zhù","to live (somewhere)","Verbs"],
+["桌子","zhuōzi","table, desk","Things"],
+["字","zì","character, word","Things"],
+["昨天","zuótiān","yesterday","Time & weather"],
+["做","zuò","to do, to make","Verbs"],
+["坐","zuò","to sit","Verbs"]
+];
+
+var app = document.getElementById("app");
+var settings = { mode: "c2m", size: 50 };
+var queue = [], pos = 0, answers = [];
+
+function shuffle(a) {
+  a = a.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+function el(tag, cls, text) {
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+
+function pick(group, key, label, sub, setter) {
+  var b = el("button", "", label);
+  b.type = "button";
+  if (sub) b.appendChild(el("small", "", sub));
+  b.setAttribute("aria-pressed", settings[key] === setter ? "true" : "false");
+  b.addEventListener("click", function () {
+    settings[key] = setter;
+    Array.prototype.forEach.call(group.children, function (c) { c.setAttribute("aria-pressed", "false"); });
+    b.setAttribute("aria-pressed", "true");
+  });
+  group.appendChild(b);
+}
+
+function home() {
+  app.innerHTML = "";
+  window.scrollTo(0, 0);
+  app.appendChild(el("h1", "", "HSK 1 vocabulary exam"));
+  app.appendChild(el("p", "lead", "Answer each word from memory. There’s no feedback while you take it. At the end you’ll save your answers as a text file (or copy them) and send them to Claude to grade."));
+
+  app.appendChild(el("p", "label", "What do you want to be tested on?"));
+  var modes = el("div", "seg col");
+  pick(modes, "mode", "Characters to meaning", "See 吃, type “to eat”", "c2m");
+  pick(modes, "mode", "Meaning to characters", "See “to eat”, type 吃", "m2c");
+  pick(modes, "mode", "Mixed", "Both directions", "mix");
+  app.appendChild(modes);
+
+  app.appendChild(el("p", "label", "How many words?"));
+  var sizes = el("div", "seg three");
+  pick(sizes, "size", "25", "", 25);
+  pick(sizes, "size", "50", "", 50);
+  pick(sizes, "size", "All 150", "", 150);
+  app.appendChild(sizes);
+
+  var go = el("button", "btn", "Start exam");
+  go.type = "button";
+  go.style.marginTop = "24px";
+  go.addEventListener("click", startExam);
+  app.appendChild(go);
+}
+
+function startExam() {
+  var pool = WORDS.filter(function (w) { return settings.mode !== "m2c" || !w[4]; });
+  var chosen = shuffle(pool).slice(0, settings.size);
+  queue = chosen.map(function (w) {
+    var dir = settings.mode === "c2m" ? "c2m" : settings.mode === "m2c" ? "m2c" : (w[4] ? "c2m" : (Math.random() < 0.5 ? "c2m" : "m2c"));
+    return { w: w, dir: dir };
+  });
+  answers = queue.map(function () { return ""; });
+  pos = 0;
+  render();
+}
+
+function render() {
+  app.innerHTML = "";
+  window.scrollTo(0, 0);
+  var item = queue[pos], w = item.w, c2m = item.dir === "c2m";
+
+  var top = el("div", "top");
+  top.appendChild(el("span", "title", "HSK 1 vocabulary exam"));
+  top.appendChild(el("span", "count", (pos + 1) + " of " + queue.length));
+  app.appendChild(top);
+  var track = el("div", "track");
+  var fill = el("i");
+  fill.style.width = Math.round((pos / queue.length) * 100) + "%";
+  track.appendChild(fill);
+  track.setAttribute("aria-hidden", "true");
+  app.appendChild(track);
+
+  app.appendChild(el("p", "ask", c2m ? "What does this mean?" : "Write this in Chinese"));
+  app.appendChild(el("p", "prompt" + (c2m ? " zh" : ""), c2m ? w[0] : w[2]));
+
+  var field = document.createElement("input");
+  field.type = "text";
+  field.className = "field" + (c2m ? "" : " zhfield");
+  field.value = answers[pos];
+  field.setAttribute("autocomplete", "off");
+  field.setAttribute("autocapitalize", "off");
+  field.setAttribute("autocorrect", "off");
+  field.setAttribute("spellcheck", "false");
+  field.setAttribute("lang", c2m ? "en" : "zh-Hans");
+  field.setAttribute("aria-label", c2m ? "Your meaning in English" : "Your Chinese answer");
+  field.placeholder = c2m ? "Type the meaning, or leave blank" : "Type in Chinese, or leave blank";
+  field.addEventListener("input", function () { answers[pos] = field.value; });
+  app.appendChild(field);
+
+  var last = pos === queue.length - 1;
+  var row = el("div", "row two");
+  var back = el("button", "btn quiet", "Back");
+  back.type = "button";
+  back.disabled = pos === 0;
+  back.addEventListener("click", function () { answers[pos] = field.value; pos--; render(); });
+  var next = el("button", "btn", last ? "Finish" : "Next");
+  next.type = "button";
+  next.addEventListener("click", function () {
+    answers[pos] = field.value;
+    if (last) finish(); else { pos++; render(); }
+  });
+  row.appendChild(back);
+  row.appendChild(next);
+  app.appendChild(row);
+
+  if (!last) {
+    var links = el("div", "links");
+    var early = el("button", "link", "Finish now");
+    early.type = "button";
+    early.addEventListener("click", function () { answers[pos] = field.value; finish(); });
+    links.appendChild(early);
+    app.appendChild(links);
+  }
+
+  field.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && !e.isComposing) { e.preventDefault(); next.click(); }
+  });
+  field.focus({ preventScroll: true });
+}
+
+function buildText() {
+  var modeName = settings.mode === "c2m" ? "Characters to meaning"
+    : settings.mode === "m2c" ? "Meaning to characters" : "Mixed";
+  var lines = [];
+  lines.push("HSK 1 vocabulary exam");
+  lines.push("Mode: " + modeName);
+  lines.push("Questions: " + queue.length);
+  lines.push("Format: [zh>en] means I saw the Chinese and typed the meaning. [en>zh] means I saw the English and typed the Chinese.");
+  lines.push("");
+  queue.forEach(function (item, i) {
+    var w = item.w, a = (answers[i] || "").trim();
+    var tag = item.dir === "c2m" ? "[zh>en] " : "[en>zh] ";
+    var prompt = item.dir === "c2m" ? w[0] : w[2];
+    lines.push((i + 1) + ". " + tag + prompt + " -> " + (a ? a : "(no answer)"));
+  });
+  return lines.join("\n");
+}
+
+function finish() {
+  app.innerHTML = "";
+  window.scrollTo(0, 0);
+  var answered = answers.filter(function (a) { return a.trim(); }).length;
+  var text = buildText();
+
+  app.appendChild(el("h1", "", "Exam finished"));
+  var s = el("div", "big", answered + " / " + queue.length);
+  app.appendChild(s);
+  app.appendChild(el("p", "lead", "answered. Blank answers count as unknown. Send your answers to Claude to get graded."));
+
+  var stack = el("div", "stack");
+  var saveSlot = el("div");
+  stack.appendChild(saveSlot);
+
+  var copyBtn = el("button", "btn", "Copy answers");
+  copyBtn.type = "button";
+  stack.appendChild(copyBtn);
+  app.appendChild(stack);
+
+  var status = el("p", "status");
+  status.setAttribute("role", "status");
+  app.appendChild(status);
+
+  var ta = document.createElement("textarea");
+  ta.className = "out";
+  ta.readOnly = true;
+  ta.value = text;
+  ta.setAttribute("aria-label", "Your answers as text");
+  app.appendChild(ta);
+
+  app.appendChild(el("p", "note", "Paste the copied text into the chat, or attach the saved .txt file. If Copy doesn’t work, tap inside the box above, select all, and copy it by hand."));
+
+  copyBtn.addEventListener("click", function () {
+    function manual() {
+      ta.focus();
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      status.textContent = ok ? "Copied. Paste it into the chat." : "Text selected. Copy it, then paste it into the chat.";
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          status.textContent = "Copied. Paste it into the chat.";
+        }, manual);
+        return;
+      }
+    } catch (e) {}
+    manual();
+  });
+
+  var restart = el("button", "btn quiet", "Start a new exam");
+  restart.type = "button";
+  restart.style.marginTop = "14px";
+  restart.addEventListener("click", home);
+  app.appendChild(restart);
+
+  if (window.claude && typeof window.claude.use === "function") {
+    window.claude.use("downloads").then(function (dl) {
+      if (!dl) return;
+      var b = el("button", "btn", "Save as .txt file");
+      b.type = "button";
+      b.addEventListener("click", function () {
+        dl.save({ filename: "hsk1-answers.txt", data: text }).then(function () {
+          status.textContent = "Saved. Attach the file in the chat.";
+        }, function (err) {
+          var code = err && err.code;
+          status.textContent = code === "declined"
+            ? "Not saved. You can still copy the answers."
+            : "Saving isn’t available here. Use Copy answers instead.";
+        });
+      });
+      saveSlot.appendChild(b);
+    }, function () {});
+  }
+}
+
+home();
+</script>
+</body>
+</html>

@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Mandarin notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #edf1f5;
+  --surface: #ffffff;
+  --ink: #16222e;
+  --muted: #5a6978;
+  --line: #cbd5df;
+  --accent: #1d6f8a;
+  --accent-ink: #ffffff;
+  --flag: #9a5b00;
+  --flag-bg: #fbeed3;
+  --serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1820;
+    --surface: #17232e;
+    --ink: #e6edf3;
+    --muted: #94a3b2;
+    --line: #2b3b49;
+    --accent: #5bb3d0;
+    --accent-ink: #0b1620;
+    --flag: #f0b45a;
+    --flag-bg: #3a2c12;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1820;
+  --surface: #17232e;
+  --ink: #e6edf3;
+  --muted: #94a3b2;
+  --line: #2b3b49;
+  --accent: #5bb3d0;
+  --accent-ink: #0b1620;
+  --flag: #f0b45a;
+  --flag-bg: #3a2c12;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.4;
+  -webkit-text-size-adjust: 100%;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--bg);
+  z-index: 10;
+}
+main { max-width: 640px; margin: 0 auto; padding: 14px 12px 32px; }
+h1 { font-size: 22px; line-height: 1.2; margin: 4px 4px 4px; }
+.sub { margin: 0 4px 12px; color: var(--muted); font-size: 14px; }
+.search {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 17px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+}
+.search:focus, .sel:focus { outline: 3px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.sel {
+  display: block;
+  width: 100%;
+  min-height: 46px;
+  margin-top: 8px;
+  padding: 8px 12px;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+}
+.pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 4px; }
+.pill {
+  appearance: none;
+  min-height: 40px;
+  padding: 6px 13px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 20px;
+  cursor: pointer;
+}
+.pill[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1.5px var(--accent); font-weight: 600; }
+.pill:focus-visible, .main:focus-visible, .hd button:focus-visible, .btn:focus-visible, .lnk:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.count { margin: 8px 4px 6px; color: var(--muted); font-size: 14px; }
+.hd {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr 1.2fr;
+  gap: 8px;
+  padding: 0 10px;
+  margin-top: 6px;
+}
+.hd button {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 8px 0;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-align: left;
+  color: var(--muted);
+  cursor: pointer;
+}
+.rows { display: grid; gap: 6px; }
+.row { background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; }
+.main {
+  appearance: none;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr 1.2fr;
+  gap: 8px;
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  font: inherit;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  align-items: center;
+}
+.zs { font-family: var(--serif); font-weight: 700; font-size: 24px; line-height: 1.2; display: block; word-break: keep-all; overflow-wrap: anywhere; }
+.tw { display: block; font-family: var(--serif); font-size: 15px; color: var(--muted); margin-top: 2px; }
+.cell.p { font-size: 17px; }
+.cell.m { font-size: 15px; }
+.fl { color: var(--flag); font-size: 14px; margin-left: 4px; }
+.row.wide .main { display: block; }
+.row.wide .zs { font-size: 20px; }
+.row.wide .cell.p { display: block; color: var(--muted); font-size: 15px; margin-top: 4px; }
+.row.wide .cell.m { display: block; margin-top: 4px; }
+.row.wide .ex { display: block; margin-top: 6px; font-family: var(--serif); font-size: 17px; color: var(--ink); }
+.hide-p .row:not(.open) .cell.p { filter: blur(7px); }
+.hide-m .row:not(.open) .cell.m { filter: blur(7px); }
+.hide-m .row:not(.open) .ex { filter: blur(7px); }
+.det { padding: 2px 12px 12px; border-top: 1px dashed var(--line); font-size: 15px; }
+.det p { margin: 8px 0 0; }
+.det b { font-weight: 600; }
+.det .tp { display: inline-block; margin-top: 8px; padding: 2px 9px; font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 10px; }
+.det .chk { margin-top: 8px; padding: 8px 10px; color: var(--flag); background: var(--flag-bg); border-radius: 8px; font-size: 14px; }
+.det .links { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.det .links small { color: var(--muted); font-size: 12px; margin-right: 2px; }
+.lnk {
+  display: inline-block;
+  min-width: 38px;
+  padding: 5px 9px;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+}
+.empty { margin: 24px 4px; color: var(--muted); }
+.foot { margin: 22px 4px 0; color: var(--muted); font-size: 13px; }
+.btn {
+  appearance: none;
+  width: 100%;
+  min-height: 48px;
+  margin-top: 16px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.status { margin: 8px 4px 0; color: var(--muted); font-size: 14px; min-height: 20px; }
+</style>
+</head>
+<body>
+<main>
+<h1>My Mandarin notes</h1>
+<p class="sub">From your handwritten pages. Tap a row for details.</p>
+<input id="q" class="search" type="search" placeholder="Search characters, pinyin or English" aria-label="Search notes" autocomplete="off" autocapitalize="off" spellcheck="false">
+<select id="topic" class="sel" aria-label="Filter by topic"></select>
+<div class="pills" id="pills"></div>
+<div class="count" id="count" aria-live="polite"></div>
+<div class="hd" id="hd"></div>
+<div class="rows" id="rows"></div>
+<div id="foot"></div>
+</main>
+
+<script>
+var P = "People & pronouns", Q = "Question words", N = "Numbers", T = "Time, dates & weather",
+    V = "Verbs", D = "Describing words", F = "Function words", M = "Measure words",
+    PL = "Places", DR = "Directions & location", FD = "Food & drink", TH = "Things",
+    L = "Language & countries", PH = "Phrases & friend-taught", G = "Grammar patterns",
+    S = "Practice sentences", Z = "Zhuyin chart";
+var TOPICS = [P, Q, N, T, V, D, F, M, PL, DR, FD, TH, L, PH, G, S, Z];
+
+/* [simplified, traditional (TW), pinyin, meaning, topic, parts, note, check-flag] */
+var DATA = [
+/* People */
+["我","","wǒ","I, me",P,"first-person pronoun","",0],
+["你","","nǐ","you",P,"second-person pronoun","",0],
+["他","","tā","he",P,"third person, male","",0],
+["她","","tā","she",P,"third person, female","Sounds the same as 他; only the written character differs.",0],
+["们","們","men","plural marker for people",P,"","Goes after a noun or pronoun: 我们 (we), 你们 (you, plural), 他们 / 她们 (they).",0],
+["我们","我們","wǒmen","we",P,"I + plural","",0],
+["她们","她們","tāmen","they (female)",P,"she + plural","",0],
+["人","","rén","person, people",P,"","Add after a country name for a person from there: 美国人 (American).",0],
+["医生","醫生","yīshēng","doctor",P,"medicine + life","",0],
+["同学","同學","tóngxué","classmate",P,"similar + student","",0],
+["爸爸","","bàba","dad",P,"","",0],
+["女儿","女兒","nǚ’ér","daughter",P,"female + child","",0],
+/* Question words */
+["什么","什麼","shénme","what",Q,"","The question word replaces the missing information; the word order doesn’t change.",0],
+["哪里 / 哪儿","哪裡 / 哪兒","nǎlǐ / nǎr","where",Q,"","",0],
+["哪个","哪個","nǎge","which",Q,"which + measure word","",0],
+["谁","誰","shéi","who",Q,"","",0],
+["什么时候","什麼時候","shénme shíhou","when",Q,"what + time","Your note says “future,” but it works for the past too (你什么时候吃的？).",1],
+["为什么","為什麼","wèishénme","why",Q,"for + what","",0],
+["怎么","怎麼","zěnme","how",Q,"","",0],
+["怎么样","怎麼樣","zěnmeyàng","how is it? what kind?",Q,"","Seen in 天气怎么样？ (how’s the weather?)",0],
+["多少","","duōshao","how much, how many",Q,"many + few","",0],
+["几","幾","jǐ","how many (small numbers)",Q,"","Often used for weekdays, dates and times.",0],
+["多","","duō","how (degree); many, much",Q,"","Subject + 多 + adjective asks about degree: 你多高？ (how tall are you?)",0],
+["吗","嗎","ma","yes/no question particle",Q,"","Goes at the end of a statement; the word order stays the same.",0],
+["呢","","ne","sentence-final particle",Q,"","Seen at the end of 她们在买衣服呢 and 爸爸什么时候来北京呢.",0],
+/* Numbers */
+["零","","líng","zero (0)",N,"","",0],
+["一","","yī","one (1)",N,"","",0],
+["二","","èr","two (2)",N,"","Used in 20, 22 and “2nd.”",0],
+["两","兩","liǎng","two (counting things)",N,"a pair","Used before measure words and for money amounts: 两个人.",0],
+["三","","sān","three (3)",N,"","",0],
+["四","","sì","four (4)",N,"","",0],
+["五","","wǔ","five (5)",N,"","",0],
+["六","","liù","six (6)",N,"","",0],
+["七","","qī","seven (7)",N,"","",0],
+["八","","bā","eight (8)",N,"","",0],
+["九","","jiǔ","nine (9)",N,"","",0],
+["十","","shí","ten (10)",N,"","",0],
+["百","","bǎi","hundred (100)",N,"","",0],
+/* Time, dates & weather */
+["今天","","jīntiān","today",T,"now + day","",0],
+["明天","","míngtiān","tomorrow",T,"next + day","",0],
+["昨天","","zuótiān","yesterday",T,"past + day","Write 昨 (zuó), not 作. Your practice sentence about yesterday morning’s weather looked like it used 作.",1],
+["星期","","xīngqī","week, day of the week",T,"","Weeks start on Monday and end on Sunday.",0],
+["星期一 – 星期六","","xīngqī yī – liù","Monday – Saturday",T,"week + number","一 Mon, 二 Tue, 三 Wed, 四 Thu, 五 Fri, 六 Sat.",0],
+["星期天","","xīngqītiān","Sunday",T,"week + sky","Also 星期日.",0],
+["月","","yuè","month, moon",T,"","",0],
+["一月 – 十二月","","yīyuè – shí’èryuè","January – December",T,"number + month","Just the number + 月.",0],
+["号","號","hào","day of the month",T,"number + day","今天几月几号？ asks the date.",0],
+["年","","nián","year",T,"","",0],
+["日","","rì","day, sun",T,"","From 年月日 (year, month, day).",0],
+["生日","","shēngrì","birthday",T,"born + day","",0],
+["点","點","diǎn","o’clock, point",T,"","2 o’clock uses 两点.",0],
+["分","","fēn","minute",T,"","",0],
+["时","時","shí","hour",T,"","From 时分秒 (hour, minute, second).",0],
+["秒","","miǎo","second (time)",T,"","",0],
+["现在","現在","xiànzài","now",T,"","",0],
+["早上","","zǎoshang","early morning",T,"","",0],
+["早安","","zǎo’ān","good morning",T,"morning + safe","",0],
+["晚上","","wǎnshang","evening, night",T,"","",0],
+["中午","","zhōngwǔ","noon (about 11 am – 1 pm)",T,"","",0],
+["上午","","shàngwǔ","morning",T,"","Your note says “late morning.”",0],
+["下午","","xiàwǔ","afternoon",T,"","",0],
+["下个月","下個月","xià ge yuè","next month",T,"down + measure + month","",0],
+["岁","歲","suì","years old",T,"","他女儿七岁。",0],
+["天气","天氣","tiānqì","weather",T,"sky + air","",0],
+["下雨","","xià yǔ","to rain",T,"fall + rain","",0],
+["热","熱","rè","hot (weather)",T,"","",0],
+/* Verbs */
+["起床","","qǐchuáng","get out of bed",V,"rise + bed","",0],
+["睡觉","睡覺","shuìjiào","to sleep, go to bed",V,"sleep + a sleep","",0],
+["吃饭","吃飯","chīfàn","to eat a meal",V,"eat + meal","",0],
+["洗澡","","xǐzǎo","to take a shower",V,"wash + bath","",0],
+["买","買","mǎi","to buy",V,"","",0],
+["想","","xiǎng","to want to",V,"","",0],
+["学","學","xué","to learn, study",V,"","",0],
+["写","寫","xiě","to write",V,"","",0],
+["说","說","shuō","to speak, say",V,"","",0],
+["听","聽","tīng","to listen",V,"","",0],
+["看","","kàn","to look, read",V,"","",0],
+["找","","zhǎo","to look for",V,"","",0],
+["找到","","zhǎodào","to find",V,"look for + obtain","",0],
+["听到","聽到","tīngdào","to hear",V,"listen + obtain","",0],
+["看到","","kàndào","to see",V,"look + obtain","",0],
+["买到","買到","mǎidào","to manage to buy",V,"buy + obtain","",0],
+["来","來","lái","to come (toward the speaker)",V,"","",0],
+["去","","qù","to go (away from the speaker)",V,"","",0],
+["在","","zài","to be at, be in; doing",V,"","",0],
+["有","","yǒu","to have; there is/are",V,"","",0],
+["是","","shì","to be",V,"","One word for is, was, am, are.",0],
+["喜欢","喜歡","xǐhuan","to like",V,"","Can shorten: 喜不喜欢？",0],
+["认识","認識","rènshi","to know (a person)",V,"","",0],
+["知道","","zhīdào","to know (a fact)",V,"","",0],
+["住","","zhù","to live; to stop",V,"","",0],
+["走","","zǒu","to walk, go, move",V,"","",0],
+["坐","","zuò","to sit; to take (a bus, plane)",V,"","",0],
+["回","","huí","to return, turn back",V,"","Also a measure word for matters and actions.",0],
+["觉得","覺得","juéde","to think, feel",V,"","",0],
+["让","讓","ràng","to let, allow, make, ask",V,"","",0],
+["能","","néng","can, be able to",V,"","",0],
+["工作","","gōngzuò","to work; job",V,"","",0],
+/* Describing words */
+["很","","hěn","very",D,"","Links a subject to an adjective in place of 是; often just smooths the sentence.",0],
+["非常","","fēicháng","extremely",D,"","",0],
+["太","","tài","too, so",D,"","太…了 needs 了.",0],
+["不太","","bú tài","not very",D,"not + too","Pronounced bú tài (the 4th-tone change). No 了.",1],
+["大","","dà","big; old (in age questions)",D,"","",0],
+["小","","xiǎo","small",D,"","",0],
+["好","","hǎo","good",D,"","",0],
+["高","","gāo","tall",D,"","",0],
+["清楚","","qīngchu","clear",D,"","",0],
+["可能","","kěnéng","maybe, possible",D,"(emphasis) + can","",0],
+["也许","也許","yěxǔ","maybe",D,"","",0],
+["一点儿","一點兒","yìdiǎnr","a little bit",D,"one + point + diminutive","Taiwan usually says 一點 without 儿.",0],
+/* Function words */
+["的","","de","’s; links a description to a noun",F,"","",0],
+["地","","de","adverb marker (like -ly)",F,"","Not super common. 清楚地 = clearly.",0],
+["和","","hé","and (nouns only)",F,"","Doesn’t join verbs or sentences.",0],
+["也","","yě","also, too",F,"","Always after the subject; never at the end.",0],
+["都","","dōu","all, both",F,"","",0],
+["也都","","yědōu","also all / everyone",F,"also + all","Your note is cut off at the edge of the page; re-check what it says.",1],
+["会","會","huì","can (a learned skill)",F,"","Also means “will”: 明天会很好. Your note covers only “can.”",1],
+["还是","還是","háishì","or (in questions)",F,"also + to be","",0],
+["或者","","huòzhě","or (in statements)",F,"possibility + -ist","",0],
+["没","沒","méi","not; didn’t",F,"","Past or not-yet actions, and the negative of 有. Never add 了.",0],
+["没有","沒有","méiyǒu","don’t have; didn’t",F,"","有 is optional in some phrases: 我没办法.",0],
+["不","","bù","not",F,"","Becomes bú before a 4th tone: 不是 bú shì.",0],
+["别","別","bié","don’t",F,"","",0],
+["不要","","búyào","don’t",F,"not + want","别 and 不要 are mostly interchangeable.",0],
+["不用","","búyòng","don’t need to",F,"not + use","",0],
+["得","","děi","have to, must",F,"","Not for “don’t have to”: use 不用.",0],
+["用","","yòng","to use; with (a tool)",F,"","",0],
+["到","","dào","to arrive; result marker",F,"","",0],
+["好的","","hǎo de","okay",F,"","",0],
+/* Measure words */
+["个","個","gè","general measure word",M,"","People and objects in general.",0],
+["本","","běn","books",M,"","这本书.",0],
+["位","","wèi","people (respectful)",M,"","e.g. a teacher.",0],
+["名","","míng","people with a status or job",M,"","e.g. a doctor.",0],
+["口","","kǒu","family members, households",M,"","Rarely spoken: a family of four.",0],
+["只","","zhī","most animals and birds",M,"","",0],
+["头","頭","tóu","large animals; bulb vegetables",M,"","pigs, onions.",0],
+["匹","","pǐ","horses, mules",M,"","",0],
+["条","條","tiáo","long, thin animals",M,"","fish, snakes, dragons.",0],
+["棵","","kē","trees, grass, cabbage",M,"","",0],
+["株","","zhū","smaller trees and plants",M,"","flowers still in the ground.",0],
+["朵","","duǒ","flowers; clouds",M,"","",0],
+["根","","gēn","long, thin objects",M,"","a carrot, thin strands.",0],
+["颗","顆","kē","small round objects",M,"","a cherry.",0],
+["粒","","lì","grains, small round things",M,"","rice.",0],
+["瓣","","bàn","segments, cloves",M,"","a clove of garlic.",0],
+["把","","bǎ","things held in one hand",M,"","",0],
+["碗","","wǎn","food in a bowl",M,"","a bowl of noodles.",0],
+["份","","fèn","a set meal, an order",M,"","an order of rice.",0],
+["串","","chuàn","skewer",M,"","",0],
+["盘","盤","pán","a plate or dish of food",M,"","",0],
+["锅","鍋","guō","pot, pan",M,"","a pot of soup.",0],
+["笼","籠","lóng","steamer basket",M,"","",0],
+["碟","","dié","small plate or dish",M,"","",0],
+["顿","頓","dùn","a meal",M,"","",0],
+["片","","piàn","thin slice",M,"","a slice of bread.",0],
+["块","塊","kuài","piece, chunk; yuan",M,"","a piece of cake. Spoken word for yuan (money).",0],
+["包","","bāo","pack, bag",M,"","a bag of chips.",0],
+["盒","","hé","box, carton",M,"","",0],
+["瓶","","píng","bottle",M,"","",0],
+["杯","","bēi","cup, glass",M,"","Alone, 杯 is the measure word; the noun is 杯子.",0],
+["听","聽","tīng","can (container)",M,"","Same character as “to listen.”",0],
+["罐","","guàn","jar, tin",M,"","a jar of honey.",0],
+["些","","xiē","some, a few",M,"","多吃些水果.",0],
+/* Places */
+["北京","","Běijīng","Beijing",PL,"","",0],
+["饭馆","飯館","fànguǎn","restaurant",PL,"food + shop","",0],
+["超市","","chāoshì","supermarket",PL,"super + market","",0],
+["学校","學校","xuéxiào","school",PL,"study + school","",0],
+["公司","","gōngsī","company",PL,"public + department","",0],
+["商店","","shāngdiàn","shop, store",PL,"commerce + inn","",0],
+["机场","機場","jīchǎng","airport",PL,"machine + field","",0],
+["医院","醫院","yīyuàn","hospital",PL,"medical + courtyard","",0],
+["公园","公園","gōngyuán","park",PL,"public + garden","",0],
+["酒店","","jiǔdiàn","hotel",PL,"liquor + inn","",0],
+["银行","銀行","yínháng","bank",PL,"silver + professional","",0],
+["厕所","廁所","cèsuǒ","bathroom, toilet",PL,"","",0],
+/* Directions */
+["北","","běi","north",DR,"","",0],
+["南","","nán","south",DR,"","",0],
+["东","東","dōng","east",DR,"","",0],
+["西","","xī","west",DR,"","",0],
+["向上","","xiàng shàng","up",DR,"direction + above","",0],
+["向下","","xiàng xià","down",DR,"direction + below","",0],
+["左边","左邊","zuǒbiān","left",DR,"left + side","",0],
+["右边","右邊","yòubiān","right",DR,"right + side","",0],
+["里面","裡面","lǐmiàn","inside",DR,"interior + side","",0],
+["外面","","wàimiàn","outside",DR,"external + side","",0],
+["上面","","shàngmiàn","above, on top",DR,"up + side","",0],
+["下面","","xiàmiàn","below, underneath",DR,"down + side","",0],
+["旁边","旁邊","pángbiān","beside, next to",DR,"beside + side","",0],
+["对面","對面","duìmiàn","opposite, across from",DR,"opposing + side","",0],
+["中间","中間","zhōngjiān","in the middle",DR,"middle + space","",0],
+["周围","周圍","zhōuwéi","around, surrounding",DR,"cycle + to surround","",0],
+["前边","前邊","qiánbiān","front side",DR,"front + side","",0],
+["后边","後邊","hòubiān","back side",DR,"back + side","",0],
+["尽头","盡頭","jìntóu","end (of a road)",DR,"to finish + noun suffix","",0],
+["附近","","fùjìn","nearby",DR,"close to + near","",0],
+["角落","","jiǎoluò","corner",DR,"angle + to drop behind","",0],
+["对角线","對角線","duìjiǎoxiàn","diagonally",DR,"opposite + angle + line","You can sometimes omit the third character.",0],
+["入","","rù","to enter",DR,"","",0],
+/* Food & drink */
+["咖啡","","kāfēi","coffee",FD,"","Sound-based word.",0],
+["茶","","chá","tea",FD,"","",0],
+["果汁","","guǒzhī","juice",FD,"fruit + juice","",0],
+["水","","shuǐ","water",FD,"","",0],
+["牛奶","","niúnǎi","milk",FD,"cow + milk","",0],
+["啤酒","","píjiǔ","beer",FD,"","Check the first character: it has a mouth radical (啤), not the spleen character 脾.",1],
+["可乐","可樂","kělè","cola",FD,"","",0],
+["柠檬","檸檬","níngméng","lemon",FD,"","",0],
+["吃","","chī","to eat",FD,"","",0],
+["喝","","hē","to drink",FD,"","Also read hè (to shout), as in 吆喝.",0],
+["酸","","suān","sour",FD,"","",0],
+["甜","","tián","sweet",FD,"","",0],
+["辣","","là","spicy",FD,"","",0],
+["苦","","kǔ","bitter",FD,"","",0],
+["咸","鹹","xián","salty",FD,"","",0],
+["好吃","","hǎochī","delicious (food)",FD,"good + eat","",0],
+["好喝","","hǎohē","delicious (drink)",FD,"good + drink","",0],
+["菜","","cài","dish, course; vegetables",FD,"","",0],
+["苹果","蘋果","píngguǒ","apple",FD,"","",0],
+["西瓜","","xīguā","watermelon",FD,"west + melon","",0],
+["芒果","","mángguǒ","mango",FD,"","",0],
+["菠萝","菠蘿","bōluó","pineapple",FD,"","The “spinach plant + radish plant” parts are for sound, not meaning.",0],
+["面包","麵包","miànbāo","bread",FD,"flour + bag","",0],
+["鸡蛋","雞蛋","jīdàn","egg",FD,"chicken + egg","",0],
+["饼干","餅乾","bǐnggān","cookie, biscuit",FD,"","Your pinyin note reads “bǐng qiān”; I believe it’s bǐnggān. Confirm with a friend.",1],
+["水果","","shuǐguǒ","fruit",FD,"water + fruit","",0],
+/* Things */
+["电视","電視","diànshì","TV",TH,"electric + look at","",0],
+["飞机","飛機","fēijī","airplane",TH,"fly + machine","",0],
+["狗","","gǒu","dog",TH,"","",0],
+["书","書","shū","book",TH,"","",0],
+["衣服","","yīfu","clothes",TH,"","",0],
+["东西","東西","dōngxi","thing, stuff",TH,"east + west","",0],
+["钱","錢","qián","money",TH,"","",0],
+/* Language */
+["中国","中國","Zhōngguó","China",L,"middle + country","",0],
+["美国","美國","Měiguó","America, USA",L,"beautiful + country","",0],
+["英语","英語","Yīngyǔ","English",L,"","",0],
+["汉语","漢語","Hànyǔ","Chinese language",L,"","",0],
+["汉字","漢字","Hànzì","Chinese character",L,"","",0],
+["中文","","zhōngwén","Chinese language (common word)",L,"China + writing","",0],
+["文","","wén","language, writing",L,"","Your note says it’s a more common way to say someone speaks a language. Unclear what you meant; ask a friend.",1],
+/* Phrases */
+["谢谢","謝謝","xièxie","thank you",PH,"","",0],
+["喂","","wèi","hello (on the phone)",PH,"","",0],
+["找不到","","zhǎo bu dào","can’t find…",PH,"look for + not + obtain","",0],
+["确实","確實","quèshí","that’s right, indeed",PH,"real + true","Used to agree with what someone just said.",0],
+["不错","不錯","búcuò","not bad, pretty good",PH,"not + wrong","Milder than 好.",0],
+["你觉得…？","你覺得…？","nǐ juéde…?","what do you think? / do you think…?",PH,"you + think","",0],
+["操他妈的","操他媽的","cào tā mā de","very vulgar expletive",PH,"","Far stronger than English “damn it.” Ask friends who it’s okay around. The first character was hard to read.",1],
+/* Grammar patterns: [pattern, "", "", rule, G, "", example, flag] */
+["Subject + Time + Place + Verb + Object","","","Basic order. Time words go before the verb.",G,"","我明天在家吃饭。 I’ll eat at home tomorrow.",0],
+["Time can open the sentence","","","Time words can come first or right after the subject.",G,"","明天我吃饭。 / 我明天吃饭。",0],
+["… Manner + Place + Tool + With whom + Verb + Object","","","Your long-sentence guideline. The middle pieces can shift in real speech.",G,"","Think: time, then place, then tool, then the action.",1],
+["Verb + Duration + Object","","","How long: duration goes right after the verb, before the object. Your notes put it after the object.",G,"","我学了两个小时数学。 I studied math for two hours.",1],
+["Verbs that take a place after them","","","住, 走, 坐 and a few others.",G,"","我住在北京。 I live in Beijing. (坐 takes a vehicle: 坐飞机.)",0],
+["Statement + 吗？","","","Yes/no question; word order stays.",G,"","你喝水吗？ Do you drink water?",0],
+["Verb + 不 + Verb","","","A-not-A question. Can’t be combined with 吗.",G,"","你是不是学生？ 你喜不喜欢？",0],
+["有没有","","","Have or don’t have. Use 有没有, not 有不有.",G,"","你有没有书？ Do you have a book?",0],
+["…，好不好？","","","Tag question seeking agreement (“okay?”). Can’t use 没.",G,"","我们明天吃饭，好不好？",0],
+["Answering yes/no questions","","","Yes: repeat the verb. No: negate the verb.",G,"","你喝水吗？ 喝。 / 不喝。",0],
+["不 + Verb / Adjective","","","Not: present, future, habits, unwillingness.",G,"","我不吃鱼。 I don’t eat fish.",0],
+["没(有) + Verb","","","Didn’t / haven’t yet. Never add 了.",G,"","我昨天没吃饭。 I didn’t eat yesterday.",0],
+["别 / 不要 + Verb (+ 了)","","","Don’t…; add 了 to mean “stop doing it.”",G,"","别说了。 Stop talking.",0],
+["不太 + Adjective","","","Not very. No 了 at the end.",G,"","我不太高兴。 I’m not very happy.",0],
+["太 + Adjective + 了","","","Too / so …! 了 is required.",G,"","太好了！ Great!",0],
+["A + 没有 + B + Adjective","","","A is not as … as B.",G,"","你没有我高。 You’re not as tall as me.",0],
+["很 + Adjective","","","Adjectives already include “to be,” so skip 是.",G,"","他很高。 He is tall.",0],
+["A 和 B","","","Joins nouns only.",G,"","我和朋友 (my friend and I)",0],
+["Subject + 也 + Verb","","","Also. After the subject, never at the end.",G,"","我也吃饭。 I also eat.",0],
+["Subject + 都 + Verb","","","All / both. Before the verb or adjective.",G,"","我们都说英语。 We all speak English.",0],
+["Subject + 会 + Verb","","","Can (a learned skill). Also “will.”",G,"","我会说中文。 I can speak Chinese. 明天会很好。 Tomorrow will be good.",1],
+["Subject + 喜欢 + Verb","","","Like doing something.",G,"","我喜欢吃饭。",0],
+["Subject + 想 + Verb","","","Want to.",G,"","我想买水。 I want to buy water.",0],
+["Subject + 让 + Person + Verb","","","Let, allow, make or ask someone to.",G,"","他让我睡觉。 He lets me sleep.",0],
+["Subject + 想让 + Person + Verb","","","Want someone to.",G,"","我想让你学习。 I want you to study.",0],
+["得 + Verb / 不用 + Verb","","","Have to / don’t need to. Not 不得.",G,"","我得吃饭。 / 我不用吃饭。",0],
+["还是 (questions) / 或者 (statements)","","","Or.",G,"","你想喝咖啡还是茶？ 我想喝咖啡或者茶。",0],
+["在 + Verb (+ 呢)","","","In progress, “is doing.” 正在 stresses “right now.”",G,"","她们在买衣服呢。 They’re buying clothes.",0],
+["Place + 有 + Noun","","","There is / there are.",G,"","桌子上有一个杯子。 On the table there is a cup.",0],
+["Verb + 到","","","Result complement: you succeeded (找到, 听到, 看到, 买到).",G,"","我找不到。 I can’t find it.",0],
+["Verb + 来 / 去","","","Toward (来) or away from (去) the speaker.",G,"","下来 come down / 下去 go down",0],
+["Question word stays in place","","","The question word replaces the missing info; the sentence order is unchanged.",G,"","你喜欢什么菜？ What food do you like?",0],
+["Dates and times: big to small","","","Year, month, day. Hour, minute. Addresses too.",G,"","今天几月几号？ 十点 / 两点",0],
+["Noun order","","","Possessive, then this/that/number/measure, then adjective, then noun.",G,"","我的两本书 (my two books)",0],
+["Description + 的 + Noun","","","Drop the noun to mean “the … one.”",G,"","我的书 / 好的",0],
+["Adjective + 地 + Verb","","","Makes an adverb (like -ly). Not super common; plain adverbs don’t need it.",G,"","清楚地说 / 清清楚楚地说",0],
+["“It” is often dropped","","","Say what “it” is directly.",G,"","现在五点。 It’s 5 o’clock.",0],
+["Adverbs go before the verb","","","They can’t stand alone, except 不, 没有, 也许, 可能. A few (也许, 可能) can open a sentence.",G,"","我很喜欢这本书。",1],
+/* Practice sentences: [sentence, TW, pinyin, English, S, "", note, flag] */
+["来我们看看里面是什么东西。","","lái wǒmen kànkan lǐmiàn shì shénme dōngxi.","Come on, let’s see what’s inside.",S,"","",0],
+["喂，你睡觉了吗？","","wèi, nǐ shuìjiào le ma?","Hello, have you gone to sleep?",S,"","Your note says “are you sleeping?”",0],
+["天气太热了，多吃些水果。","","tiānqì tài rè le, duō chī xiē shuǐguǒ.","It’s too hot; eat more fruit.",S,"","多吃些 means “eat more,” not “eat many.”",1],
+["你好，我能吃一块儿吗？","你好，我能吃一塊嗎？","nǐ hǎo, wǒ néng chī yíkuàir ma?","Hello, can I eat one?",S,"","一块儿 is a northern form; Taiwan likely says 一塊.",1],
+["我很喜欢这本书。","","wǒ hěn xǐhuan zhè běn shū.","I really like this book.",S,"","",0],
+["她们在买衣服呢。","她們在買衣服呢。","tāmen zài mǎi yīfu ne.","They’re buying clothes.",S,"","",0],
+["那个人是谁？","那個人是誰？","nàge rén shì shéi?","Who is that person?",S,"","",0],
+["我不认识她。","我不認識她。","wǒ bú rènshi tā.","I don’t know her.",S,"","",0],
+["你喝水吗？好的，谢谢。","","nǐ hē shuǐ ma? hǎo de, xièxie.","Do you drink water? Okay, thanks.",S,"","",0],
+["他女儿多大了？七岁。","","tā nǚ’ér duō dà le? qī suì.","How old is his daughter? Seven.",S,"","",0],
+["你的同学在哪儿工作？医院。","","nǐ de tóngxué zài nǎr gōngzuò? yīyuàn.","Where do your classmates work? At a hospital.",S,"","",0],
+["昨天上午天气怎么样？下雨了。","","zuótiān shàngwǔ tiānqì zěnmeyàng? xià yǔ le.","What was the weather like yesterday morning? It rained.",S,"","Check the first character: 昨, not 作.",1],
+["爸爸什么时候来北京呢？下个月。","","bàba shénme shíhou lái Běijīng ne? xià ge yuè.","When will Dad come to Beijing? Next month.",S,"","",0],
+/* Zhuyin */
+["ㄅ","","b","initial",Z,"","",0],
+["ㄆ","","p","initial",Z,"","",0],
+["ㄇ","","m","initial",Z,"","",0],
+["ㄈ","","f","initial",Z,"","",0],
+["ㄉ","","d","initial",Z,"","",0],
+["ㄊ","","t","initial",Z,"","",0],
+["ㄋ","","n","initial",Z,"","",0],
+["ㄌ","","l","initial",Z,"","",0],
+["ㄍ","","g","initial",Z,"","",0],
+["ㄎ","","k","initial",Z,"","",0],
+["ㄏ","","h","initial",Z,"","",0],
+["ㄐ","","j","initial",Z,"","Marked NE in your notes (probably “no English equivalent”).",0],
+["ㄑ","","q","initial",Z,"","Marked NE in your notes.",0],
+["ㄒ","","x","initial",Z,"","Marked NE in your notes.",0],
+["ㄓ","","zh","initial",Z,"","Marked NE in your notes.",0],
+["ㄔ","","ch","initial",Z,"","Marked NE in your notes.",0],
+["ㄕ","","sh","initial",Z,"","Marked NE in your notes.",0],
+["ㄖ","","r","initial",Z,"","Marked NE in your notes.",0],
+["ㄗ","","z","initial",Z,"","Marked NE in your notes.",0],
+["ㄘ","","c","initial",Z,"","",0],
+["ㄙ","","s","initial",Z,"","",0],
+["ㄚ","","a","final",Z,"","",0],
+["ㄛ","","o","final",Z,"","",0],
+["ㄜ","","e","final",Z,"","Marked NE in your notes.",0],
+["ㄝ","","ê (e)","final",Z,"","",0],
+["ㄞ","","ai","final",Z,"","",0],
+["ㄟ","","ei","final",Z,"","",0],
+["ㄠ","","ao","final",Z,"","",0],
+["ㄡ","","ou","final",Z,"","",0],
+["ㄢ","","an","final",Z,"","",0],
+["ㄣ","","en","final",Z,"","",0],
+["ㄤ","","ang","final",Z,"","",0],
+["ㄥ","","eng","final",Z,"","Marked NE in your notes.",0],
+["ㄦ","","er","final",Z,"","",0],
+["ㄧ","","i","final",Z,"","",0],
+["ㄨ","","u","final",Z,"","",0],
+["ㄩ","","ü","final",Z,"","Marked NE in your notes.",0]
+];
+
+var app = { q: "", topic: "All", sortKey: null, sortDir: 1, hideP: false, hideM: false, tw: true, onlyFlag: false, shuffled: null };
+var ENTRIES = DATA.map(function (r, i) { return { i: i, s: r[0], t: r[1], p: r[2], m: r[3], c: r[4], b: r[5], n: r[6], f: r[7] }; });
+
+function el(tag, cls, text) {
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+function plain(s) { return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }
+function isWide(e) { return e.c === G || e.c === S; }
+
+var elQ = document.getElementById("q");
+var elTopic = document.getElementById("topic");
+var elPills = document.getElementById("pills");
+var elCount = document.getElementById("count");
+var elHd = document.getElementById("hd");
+var elRows = document.getElementById("rows");
+var elFoot = document.getElementById("foot");
+
+function buildTopic() {
+  var counts = {};
+  ENTRIES.forEach(function (e) { counts[e.c] = (counts[e.c] || 0) + 1; });
+  elTopic.innerHTML = "";
+  var all = el("option", "", "All topics (" + ENTRIES.length + ")");
+  all.value = "All";
+  elTopic.appendChild(all);
+  TOPICS.forEach(function (t) {
+    var o = el("option", "", t + " (" + counts[t] + ")");
+    o.value = t;
+    elTopic.appendChild(o);
+  });
+  elTopic.addEventListener("change", function () { app.topic = elTopic.value; render(); });
+}
+
+function pill(label, key, after) {
+  var b = el("button", "pill", label);
+  b.type = "button";
+  b.setAttribute("aria-pressed", String(!!app[key]));
+  b.addEventListener("click", function () {
+    app[key] = !app[key];
+    b.setAttribute("aria-pressed", String(!!app[key]));
+    if (after) after();
+  });
+  elPills.appendChild(b);
+  return b;
+}
+function applyHide() {
+  elRows.classList.toggle("hide-p", app.hideP);
+  elRows.classList.toggle("hide-m", app.hideM);
+}
+function buildPills() {
+  pill("Hide pinyin", "hideP", applyHide);
+  pill("Hide meaning", "hideM", applyHide);
+  pill("Show TW forms", "tw", render);
+  pill("Check these ⚑", "onlyFlag", render);
+  var sh = el("button", "pill", "Shuffle");
+  sh.type = "button";
+  sh.addEventListener("click", function () {
+    var idx = ENTRIES.map(function (e) { return e.i; });
+    for (var i = idx.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = idx[i]; idx[i] = idx[j]; idx[j] = t;
+    }
+    app.shuffled = idx;
+    app.sortKey = null;
+    render();
+  });
+  elPills.appendChild(sh);
+  var rs = el("button", "pill", "Reset order");
+  rs.type = "button";
+  rs.addEventListener("click", function () { app.shuffled = null; app.sortKey = null; render(); });
+  elPills.appendChild(rs);
+}
+
+function buildHeader() {
+  elHd.innerHTML = "";
+  [["s", "Word"], ["p", "Pinyin"], ["m", "Meaning"]].forEach(function (c) {
+    var b = el("button", "", c[1] + (app.sortKey === c[0] ? (app.sortDir > 0 ? " ▲" : " ▼") : ""));
+    b.type = "button";
+    b.setAttribute("aria-label", "Sort by " + c[1]);
+    b.addEventListener("click", function () {
+      if (app.sortKey === c[0]) app.sortDir = -app.sortDir; else { app.sortKey = c[0]; app.sortDir = 1; }
+      app.shuffled = null;
+      render();
+    });
+    elHd.appendChild(b);
+  });
+}
+
+function matches(e) {
+  if (app.topic !== "All" && e.c !== app.topic) return false;
+  if (app.onlyFlag && !e.f) return false;
+  var q = app.q.trim();
+  if (!q) return true;
+  var ql = q.toLowerCase(), qp = plain(q);
+  var hay = [e.s, e.t, e.m, e.c, e.n, e.b].join(" ").toLowerCase();
+  if (hay.indexOf(ql) !== -1) return true;
+  return plain(e.p).indexOf(qp) !== -1 || plain(e.m).indexOf(qp) !== -1;
+}
+
+function linksFor(e) {
+  var seen = {}, chars = [];
+  (e.s + e.t).split("").forEach(function (ch) {
+    if (/[\u4e00-\u9fff]/.test(ch) && !seen[ch]) { seen[ch] = 1; chars.push(ch); }
+  });
+  return chars.slice(0, 8);
+}
+
+function rowEl(e) {
+  var wide = isWide(e);
+  var row = el("div", "row" + (wide ? " wide" : ""));
+  var btn = el("button", "main");
+  btn.type = "button";
+  btn.setAttribute("aria-expanded", "false");
+
+  var w = el("span", "cell w");
+  var zs = el("span", "zs", e.s);
+  if (e.f) zs.appendChild(el("span", "fl", "⚑"));
+  w.appendChild(zs);
+  if (e.t && app.tw && !wide) w.appendChild(el("span", "tw", "TW " + e.t));
+  var p = el("span", "cell p", e.p);
+  var m = el("span", "cell m", e.m);
+  btn.appendChild(w);
+  btn.appendChild(p);
+  btn.appendChild(m);
+  if (e.c === G && e.n) btn.appendChild(el("span", "ex", e.n));
+  row.appendChild(btn);
+
+  var det = el("div", "det");
+  det.hidden = true;
+  if (e.t) det.appendChild(el("p", "", "Traditional (TW): " + e.t));
+  if (e.b) det.appendChild(el("p", "", "Parts: " + e.b));
+  if (e.n && e.c !== G) det.appendChild(el("p", "", e.n));
+  det.appendChild(el("span", "tp", e.c));
+  if (e.f) det.appendChild(el("div", "chk", "⚑ Worth double-checking: a reading was unclear or the note may need a correction."));
+  if (e.c !== S && e.c !== G && e.c !== Z) {
+    var chars = linksFor(e);
+    if (chars.length) {
+      var box = el("div", "links");
+      box.appendChild(el("small", "", "Stroke order:"));
+      chars.forEach(function (ch) {
+        var a = el("a", "lnk", ch);
+        a.href = "https://www.strokeorder.com/chinese/" + encodeURIComponent(ch);
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.setAttribute("aria-label", "Stroke order for " + ch);
+        box.appendChild(a);
+      });
+      det.appendChild(box);
+    }
+  }
+  row.appendChild(det);
+
+  btn.addEventListener("click", function () {
+    var open = det.hidden;
+    det.hidden = !open;
+    row.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", String(open));
+  });
+  return row;
+}
+
+function render() {
+  buildHeader();
+  var list = ENTRIES.filter(matches);
+  if (app.shuffled) {
+    var pos = {};
+    app.shuffled.forEach(function (id, k) { pos[id] = k; });
+    list.sort(function (a, b) { return pos[a.i] - pos[b.i]; });
+  } else if (app.sortKey) {
+    var k = app.sortKey;
+    list.sort(function (a, b) {
+      var x = k === "p" ? plain(a.p) : (k === "m" ? a.m.toLowerCase() : a.s);
+      var y = k === "p" ? plain(b.p) : (k === "m" ? b.m.toLowerCase() : b.s);
+      if (!x && y) return 1;
+      if (x && !y) return -1;
+      return (x < y ? -1 : x > y ? 1 : 0) * app.sortDir;
+    });
+  }
+  elRows.innerHTML = "";
+  list.forEach(function (e) { elRows.appendChild(rowEl(e)); });
+  if (!list.length) elRows.appendChild(el("p", "empty", "Nothing matches. Try fewer letters, or switch the topic to All."));
+  elCount.textContent = "Showing " + list.length + " of " + ENTRIES.length;
+  applyHide();
+}
+
+function csvText() {
+  function q(s) { return '"' + String(s).replace(/"/g, '""') + '"'; }
+  var rows = [["Simplified", "Traditional (TW)", "Pinyin", "Meaning", "Topic", "Parts", "Note", "Check"]];
+  ENTRIES.forEach(function (e) { rows.push([e.s, e.t, e.p, e.m, e.c, e.b, e.n, e.f ? "check" : ""]); });
+  return "\ufeff" + rows.map(function (r) { return r.map(q).join(","); }).join("\n");
+}
+
+function buildFoot() {
+  var note = el("p", "foot", "Built from your handwritten notes. ⚑ means a reading was unclear or your note may need a correction. Traditional (TW) forms are shown where they differ. Example sentences in Grammar patterns were written by Claude. Stroke-order links go to strokeorder.com.");
+  elFoot.appendChild(note);
+  var status = el("p", "status");
+  status.setAttribute("role", "status");
+  if (window.claude && typeof window.claude.use === "function") {
+    window.claude.use("downloads").then(function (dl) {
+      if (!dl) return;
+      var b = el("button", "btn", "Save everything as a spreadsheet file (CSV)");
+      b.type = "button";
+      b.addEventListener("click", function () {
+        dl.save({ filename: "mandarin-notes.csv", data: csvText() }).then(function () {
+          status.textContent = "Saved. Open it in Sheets or Excel.";
+        }, function (err) {
+          status.textContent = err && err.code === "declined" ? "Not saved." : "Saving isn’t available here.";
+        });
+      });
+      elFoot.insertBefore(b, note);
+    }, function () {});
+  }
+  elFoot.appendChild(status);
+}
+
+elQ.addEventListener("input", function () { app.q = elQ.value; render(); });
+buildTopic();
+buildPills();
+buildFoot();
+render();
+</script>
+</body>
+</html>

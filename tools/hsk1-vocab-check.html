@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HSK 1 vocabulary check</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #edf1f5;
+  --surface: #ffffff;
+  --ink: #16222e;
+  --muted: #5a6978;
+  --line: #cbd5df;
+  --accent: #1d6f8a;
+  --accent-ink: #ffffff;
+  --good: #1b7f5c;
+  --good-bg: #ddf1e8;
+  --bad: #b0372e;
+  --bad-bg: #f8e1de;
+  --serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1820;
+    --surface: #17232e;
+    --ink: #e6edf3;
+    --muted: #94a3b2;
+    --line: #2b3b49;
+    --accent: #5bb3d0;
+    --accent-ink: #0b1620;
+    --good: #55c79a;
+    --good-bg: #12332a;
+    --bad: #f08a80;
+    --bad-bg: #3a1a18;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1820;
+  --surface: #17232e;
+  --ink: #e6edf3;
+  --muted: #94a3b2;
+  --line: #2b3b49;
+  --accent: #5bb3d0;
+  --accent-ink: #0b1620;
+  --good: #55c79a;
+  --good-bg: #12332a;
+  --bad: #f08a80;
+  --bad-bg: #3a1a18;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-text-size-adjust: 100%;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--bg);
+  z-index: 10;
+}
+main { max-width: 480px; margin: 0 auto; padding: 16px 16px 32px; }
+h1 { font-size: 24px; line-height: 1.2; margin: 6px 0 8px; }
+.lead { color: var(--muted); margin: 0 0 20px; }
+.top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.top .title { font-weight: 600; }
+.top .count { color: var(--muted); font-variant-numeric: tabular-nums; }
+.track { height: 6px; border-radius: 3px; background: var(--line); margin-bottom: 24px; overflow: hidden; }
+.track i { display: block; height: 100%; background: var(--accent); }
+.label { font-weight: 600; margin: 18px 0 8px; }
+.seg { display: grid; gap: 8px; }
+.seg.three { grid-template-columns: repeat(3, 1fr); }
+.seg.col { grid-template-columns: 1fr; }
+.seg button {
+  appearance: none;
+  min-height: 48px;
+  padding: 8px 10px;
+  font: inherit;
+  text-align: left;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.seg.three button { text-align: center; }
+.seg button[aria-pressed="true"] { border-color: var(--accent); background: var(--surface); box-shadow: inset 0 0 0 1.5px var(--accent); font-weight: 600; }
+.seg button small { display: block; color: var(--muted); font-weight: 400; font-size: 13px; }
+.ask { color: var(--muted); margin: 0 0 8px; }
+.prompt { margin: 0 0 18px; font-size: 26px; line-height: 1.3; font-weight: 600; }
+.prompt.zh { font-family: var(--serif); font-weight: 700; font-size: 56px; line-height: 1.2; word-break: keep-all; overflow-wrap: anywhere; }
+.field {
+  display: block;
+  width: 100%;
+  min-height: 56px;
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 22px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+}
+.field.zhfield { font-family: var(--serif); font-weight: 500; }
+.field:focus { outline: 3px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.field[readonly] { color: var(--muted); }
+.row { display: grid; gap: 10px; margin-top: 14px; }
+.row.two { grid-template-columns: 1fr 1fr; }
+.btn {
+  appearance: none;
+  width: 100%;
+  min-height: 52px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.btn.quiet { color: var(--ink); background: transparent; border: 1.5px solid var(--line); }
+.btn:focus-visible, .seg button:focus-visible, .link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.links { display: flex; justify-content: flex-end; margin-top: 8px; }
+.link { appearance: none; background: none; border: 0; padding: 8px 4px; font: inherit; color: var(--muted); text-decoration: underline; cursor: pointer; }
+.reveal { margin-top: 16px; padding: 14px 16px; border-radius: 12px; border-left: 5px solid var(--line); background: var(--surface); }
+.reveal.good { background: var(--good-bg); border-color: var(--good); }
+.reveal .verdict { font-weight: 600; margin: 0 0 6px; }
+.reveal .big { font-size: 22px; font-weight: 600; margin: 0; line-height: 1.3; }
+.reveal .big.zh { font-family: var(--serif); font-size: 40px; font-weight: 700; line-height: 1.2; }
+.reveal .sub { margin: 2px 0 0; font-size: 18px; }
+.reveal .tag { margin: 10px 0 0; color: var(--muted); font-size: 13px; }
+.reveal .you { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
+.score { font-family: var(--serif); font-weight: 700; font-size: 64px; line-height: 1.1; margin: 8px 0 4px; font-variant-numeric: tabular-nums; }
+.verdictline { color: var(--muted); margin: 0 0 20px; }
+.cats { display: grid; gap: 10px; margin: 0 0 24px; padding: 0; list-style: none; }
+.cats li { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; }
+.cats .nm { font-size: 15px; }
+.cats .fr { font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.cats .bar { grid-column: 1 / -1; height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; }
+.cats .bar i { display: block; height: 100%; background: var(--good); }
+.cats .bar i.lo { background: var(--bad); }
+.cats .bar i.mid { background: var(--accent); }
+h2 { font-size: 18px; margin: 0 0 10px; }
+.missed { margin: 0 0 22px; padding: 0; list-style: none; display: grid; gap: 8px; }
+.missed li { background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 14px; display: grid; grid-template-columns: auto 1fr; gap: 0 14px; align-items: center; }
+.missed .z { font-family: var(--serif); font-size: 28px; font-weight: 700; grid-row: span 2; }
+.missed .py { font-weight: 600; }
+.missed .en { color: var(--muted); font-size: 15px; }
+.stack { display: grid; gap: 10px; }
+</style>
+</head>
+<body>
+<main id="app" aria-live="polite"></main>
+
+<script>
+var WORDS = [
+["爱","ài","to love","Verbs"],
+["八","bā","eight","Numbers"],
+["爸爸","bàba","dad","People"],
+["杯子","bēizi","cup, glass","Things"],
+["北京","Běijīng","Beijing","Places & directions"],
+["本","běn","measure word for books","Describing & grammar",1],
+["不客气","bú kèqi","you’re welcome","Polite phrases"],
+["不","bù","not, no","Describing & grammar"],
+["菜","cài","dish, vegetables","Food & drink"],
+["茶","chá","tea","Food & drink"],
+["吃","chī","to eat","Food & drink"],
+["出租车","chūzūchē","taxi","Places & directions"],
+["打电话","dǎ diànhuà","to make a phone call","Verbs"],
+["大","dà","big","Describing & grammar"],
+["的","de","’s / of (possessive particle)","Describing & grammar",1],
+["点","diǎn","o’clock, point","Time & weather"],
+["电脑","diànnǎo","computer","Things"],
+["电视","diànshì","TV","Things"],
+["电影","diànyǐng","movie","Things"],
+["东西","dōngxi","thing, stuff","Things"],
+["都","dōu","all, both","Describing & grammar"],
+["读","dú","to read (aloud)","Verbs"],
+["对不起","duìbuqǐ","sorry","Polite phrases"],
+["多","duō","many, a lot","Describing & grammar"],
+["多少","duōshao","how many, how much","Pronouns & questions"],
+["儿子","érzi","son","People"],
+["二","èr","two","Numbers"],
+["饭店","fàndiàn","restaurant, hotel","Places & directions"],
+["飞机","fēijī","airplane","Places & directions"],
+["分钟","fēnzhōng","minute","Time & weather"],
+["高兴","gāoxìng","happy","Describing & grammar"],
+["个","gè","general measure word","Describing & grammar",1],
+["工作","gōngzuò","work, job","Verbs"],
+["狗","gǒu","dog","Things"],
+["汉语","Hànyǔ","Chinese language","Things"],
+["好","hǎo","good","Describing & grammar"],
+["号","hào","day of the month","Time & weather"],
+["喝","hē","to drink","Food & drink"],
+["和","hé","and, with","Describing & grammar"],
+["很","hěn","very","Describing & grammar"],
+["后面","hòumiàn","behind","Places & directions"],
+["回","huí","to return, go back","Verbs"],
+["会","huì","can, will","Verbs"],
+["几","jǐ","how many (small number)","Pronouns & questions"],
+["家","jiā","home, family","Places & directions"],
+["叫","jiào","to be called","Verbs"],
+["今天","jīntiān","today","Time & weather"],
+["九","jiǔ","nine","Numbers"],
+["开","kāi","to open, to drive","Verbs"],
+["看","kàn","to look, to read","Verbs"],
+["看见","kànjiàn","to see","Verbs"],
+["块","kuài","yuan (money)","Things"],
+["来","lái","to come","Verbs"],
+["老师","lǎoshī","teacher","People"],
+["了","le","completion / change particle","Describing & grammar",1],
+["冷","lěng","cold","Time & weather"],
+["里","lǐ","inside","Places & directions"],
+["六","liù","six","Numbers"],
+["吗","ma","question particle","Pronouns & questions",1],
+["妈妈","māma","mom","People"],
+["买","mǎi","to buy","Verbs"],
+["猫","māo","cat","Things"],
+["没关系","méi guānxi","it doesn’t matter","Polite phrases"],
+["没有","méiyǒu","don’t have, didn’t","Verbs"],
+["米饭","mǐfàn","cooked rice","Food & drink"],
+["名字","míngzi","name","Things"],
+["明天","míngtiān","tomorrow","Time & weather"],
+["哪","nǎ","which","Pronouns & questions"],
+["哪儿","nǎr","where","Pronouns & questions"],
+["那","nà","that","Describing & grammar"],
+["呢","ne","and you? (particle)","Pronouns & questions",1],
+["能","néng","can, able to","Verbs"],
+["你","nǐ","you","Pronouns & questions"],
+["年","nián","year","Time & weather"],
+["女儿","nǚ’ér","daughter","People"],
+["朋友","péngyou","friend","People"],
+["漂亮","piàoliang","pretty","Describing & grammar"],
+["苹果","píngguǒ","apple","Food & drink"],
+["七","qī","seven","Numbers"],
+["前面","qiánmiàn","in front","Places & directions"],
+["钱","qián","money","Things"],
+["请","qǐng","please, to invite","Verbs"],
+["去","qù","to go","Verbs"],
+["热","rè","hot","Time & weather"],
+["人","rén","person","People"],
+["认识","rènshi","to know (someone)","Verbs"],
+["三","sān","three","Numbers"],
+["商店","shāngdiàn","shop, store","Places & directions"],
+["上","shàng","up, on","Places & directions"],
+["上午","shàngwǔ","morning","Time & weather"],
+["少","shǎo","few, little","Describing & grammar"],
+["谁","shéi","who","Pronouns & questions"],
+["什么","shénme","what","Pronouns & questions"],
+["十","shí","ten","Numbers"],
+["时候","shíhou","time, moment","Time & weather"],
+["是","shì","to be, yes","Verbs"],
+["书","shū","book","Things"],
+["水","shuǐ","water","Food & drink"],
+["水果","shuǐguǒ","fruit","Food & drink"],
+["睡觉","shuìjiào","to sleep","Verbs"],
+["说","shuō","to speak, say","Verbs"],
+["四","sì","four","Numbers"],
+["岁","suì","years old","Describing & grammar"],
+["他","tā","he","Pronouns & questions"],
+["她","tā","she","Pronouns & questions"],
+["太","tài","too, so","Describing & grammar"],
+["天气","tiānqì","weather","Time & weather"],
+["听","tīng","to listen","Verbs"],
+["同学","tóngxué","classmate","People"],
+["喂","wèi","hello (on the phone)","Polite phrases"],
+["我","wǒ","I, me","Pronouns & questions"],
+["我们","wǒmen","we","Pronouns & questions"],
+["五","wǔ","five","Numbers"],
+["喜欢","xǐhuan","to like","Verbs"],
+["下","xià","down, next","Places & directions"],
+["下午","xiàwǔ","afternoon","Time & weather"],
+["下雨","xià yǔ","to rain","Time & weather"],
+["先生","xiānsheng","Mr., sir","People"],
+["现在","xiànzài","now","Time & weather"],
+["想","xiǎng","to want, to think","Verbs"],
+["小","xiǎo","small","Describing & grammar"],
+["小姐","xiǎojie","Miss","People"],
+["些","xiē","some (measure word)","Describing & grammar",1],
+["写","xiě","to write","Verbs"],
+["谢谢","xièxie","thank you","Polite phrases"],
+["星期","xīngqī","week","Time & weather"],
+["学生","xuésheng","student","People"],
+["学习","xuéxí","to study","Verbs"],
+["学校","xuéxiào","school","Places & directions"],
+["一","yī","one","Numbers"],
+["一点儿","yìdiǎnr","a little","Describing & grammar"],
+["医生","yīshēng","doctor","People"],
+["医院","yīyuàn","hospital","Places & directions"],
+["衣服","yīfu","clothes","Things"],
+["椅子","yǐzi","chair","Things"],
+["有","yǒu","to have, there is","Verbs"],
+["月","yuè","month","Time & weather"],
+["再见","zàijiàn","goodbye","Polite phrases"],
+["在","zài","at, in the middle of doing","Verbs"],
+["怎么","zěnme","how, why","Pronouns & questions"],
+["怎么样","zěnmeyàng","how is it?","Pronouns & questions"],
+["这","zhè","this","Describing & grammar"],
+["中国","Zhōngguó","China","Places & directions"],
+["中午","zhōngwǔ","noon","Time & weather"],
+["住","zhù","to live (somewhere)","Verbs"],
+["桌子","zhuōzi","table, desk","Things"],
+["字","zì","character, word","Things"],
+["昨天","zuótiān","yesterday","Time & weather"],
+["做","zuò","to do, to make","Verbs"],
+["坐","zuò","to sit","Verbs"]
+];
+
+var CAT_ORDER = ["Numbers","Pronouns & questions","People","Food & drink","Time & weather","Places & directions","Things","Verbs","Describing & grammar","Polite phrases"];
+
+var app = document.getElementById("app");
+var settings = { mode: "c2m", size: 25 };
+var queue = [], pos = 0, results = [], phase = "answer";
+
+function shuffle(a) {
+  a = a.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+function el(tag, cls, text) {
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+function norm(s) { return s.replace(/[\s。，、！？,.!?]/g, ""); }
+
+function pick(group, key, label, sub, setter) {
+  var b = el("button", "", label);
+  b.type = "button";
+  if (sub) b.appendChild(el("small", "", sub));
+  b.setAttribute("aria-pressed", settings[key] === setter ? "true" : "false");
+  b.addEventListener("click", function () {
+    settings[key] = setter;
+    Array.prototype.forEach.call(group.children, function (c) { c.setAttribute("aria-pressed", "false"); });
+    b.setAttribute("aria-pressed", "true");
+  });
+  group.appendChild(b);
+}
+
+function home() {
+  app.innerHTML = "";
+  window.scrollTo(0, 0);
+  app.appendChild(el("h1", "", "HSK 1 vocabulary check"));
+  app.appendChild(el("p", "lead", "All 150 words from the HSK 1 list, in random order. Try to recall each one before you reveal it, then mark yourself honestly. Your results show which topics are strongest."));
+
+  app.appendChild(el("p", "label", "What do you want to practice?"));
+  var modes = el("div", "seg col");
+  pick(modes, "mode", "Characters to meaning", "See 吃, say “to eat”", "c2m");
+  pick(modes, "mode", "Meaning to characters", "See “to eat”, type 吃", "m2c");
+  pick(modes, "mode", "Mixed", "Both directions", "mix");
+  app.appendChild(modes);
+
+  app.appendChild(el("p", "label", "How many words?"));
+  var sizes = el("div", "seg three");
+  pick(sizes, "size", "25", "", 25);
+  pick(sizes, "size", "50", "", 50);
+  pick(sizes, "size", "All 150", "", 150);
+  app.appendChild(sizes);
+
+  var go = el("button", "btn", "Start");
+  go.type = "button";
+  go.style.marginTop = "24px";
+  go.addEventListener("click", function () { startRound(); });
+  app.appendChild(go);
+}
+
+function startRound() {
+  var pool = WORDS.filter(function (w) { return settings.mode !== "m2c" || !w[4]; });
+  var chosen = shuffle(pool).slice(0, settings.size);
+  queue = chosen.map(function (w) {
+    var dir = settings.mode === "c2m" ? "c2m" : settings.mode === "m2c" ? "m2c" : (w[4] ? "c2m" : (Math.random() < 0.5 ? "c2m" : "m2c"));
+    return { w: w, dir: dir };
+  });
+  pos = 0;
+  results = [];
+  render();
+}
+
+function render() {
+  app.innerHTML = "";
+  if (pos >= queue.length) return showResults();
+  phase = "answer";
+  var item = queue[pos], w = item.w, c2m = item.dir === "c2m";
+
+  var top = el("div", "top");
+  top.appendChild(el("span", "title", "HSK 1 vocabulary check"));
+  top.appendChild(el("span", "count", (pos + 1) + " of " + queue.length));
+  app.appendChild(top);
+  var track = el("div", "track");
+  var fill = el("i");
+  fill.style.width = Math.round((pos / queue.length) * 100) + "%";
+  track.appendChild(fill);
+  track.setAttribute("aria-hidden", "true");
+  app.appendChild(track);
+
+  app.appendChild(el("p", "ask", c2m ? "What does this mean?" : "Write this in Chinese"));
+  app.appendChild(el("p", "prompt" + (c2m ? " zh" : ""), c2m ? w[0] : w[2]));
+
+  var field = document.createElement("input");
+  field.type = "text";
+  field.className = "field" + (c2m ? "" : " zhfield");
+  field.setAttribute("autocomplete", "off");
+  field.setAttribute("autocapitalize", "off");
+  field.setAttribute("autocorrect", "off");
+  field.setAttribute("spellcheck", "false");
+  field.setAttribute("lang", c2m ? "en" : "zh-Hans");
+  field.setAttribute("aria-label", c2m ? "Your meaning in English" : "Your Chinese answer");
+  field.placeholder = c2m ? "Type the meaning (optional)" : "Type in Chinese";
+  app.appendChild(field);
+
+  var row = el("div", "row");
+  var check = el("button", "btn", "Show answer");
+  check.type = "button";
+  row.appendChild(check);
+  app.appendChild(row);
+
+  function reveal() {
+    if (phase !== "answer") return;
+    phase = "reveal";
+    var given = field.value.trim();
+    field.readOnly = true;
+    row.remove();
+
+    var auto = null;
+    if (!c2m && given) auto = norm(given) === norm(w[0]);
+    var box = el("div", "reveal" + (auto === true ? " good" : ""));
+    if (auto === true) box.appendChild(el("p", "verdict", "Matches"));
+    else if (!c2m && given) box.appendChild(el("p", "verdict", "Not an exact match. Compare, then judge."));
+    else box.appendChild(el("p", "verdict", "Compare with your answer, then judge."));
+
+    if (c2m) {
+      box.appendChild(el("p", "big", w[2]));
+      box.appendChild(el("p", "sub", w[1]));
+    } else {
+      box.appendChild(el("p", "big zh", w[0]));
+      box.appendChild(el("p", "sub", w[1]));
+    }
+    box.appendChild(el("p", "tag", w[3]));
+    if (given) box.appendChild(el("p", "you", "You wrote: " + given));
+
+    var marks = el("div", "row two");
+    var missed = el("button", "btn quiet", "Missed it");
+    missed.type = "button";
+    var got = el("button", "btn", "Got it");
+    got.type = "button";
+    function mark(ok) {
+      results[pos] = { item: item, ok: ok };
+      pos++;
+      render();
+      window.scrollTo(0, 0);
+    }
+    missed.addEventListener("click", function () { mark(false); });
+    got.addEventListener("click", function () { mark(true); });
+    marks.appendChild(missed);
+    marks.appendChild(got);
+    box.appendChild(marks);
+    app.appendChild(box);
+    got.focus({ preventScroll: true });
+    box.scrollIntoView({ block: "nearest", behavior: "auto" });
+  }
+
+  check.addEventListener("click", reveal);
+  field.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && !e.isComposing) { e.preventDefault(); reveal(); }
+  });
+  field.focus({ preventScroll: true });
+}
+
+function showResults() {
+  var total = results.length;
+  var right = results.filter(function (r) { return r.ok; }).length;
+  var missed = results.filter(function (r) { return !r.ok; });
+  var pct = total ? Math.round((right / total) * 100) : 0;
+
+  app.appendChild(el("h1", "", "Your results"));
+  app.appendChild(el("div", "score", right + " / " + total));
+  var v = pct === 100 ? "Everything came back to you."
+    : pct >= 80 ? "Strong recall. Your earlier study stuck."
+    : pct >= 50 ? "A solid base. A good chunk is still there, and the gaps below are where to focus."
+    : pct >= 25 ? "Some of it stuck. The topics below show where to start."
+    : "Most of it needs relearning, which is normal after a break. Start with the strongest topic and build out.";
+  app.appendChild(el("p", "verdictline", v));
+
+  var byCat = {};
+  results.forEach(function (r) {
+    var c = r.item.w[3];
+    if (!byCat[c]) byCat[c] = { t: 0, r: 0 };
+    byCat[c].t++;
+    if (r.ok) byCat[c].r++;
+  });
+  var cats = CAT_ORDER.filter(function (c) { return byCat[c]; });
+  cats.sort(function (a, b) { return (byCat[a].r / byCat[a].t) - (byCat[b].r / byCat[b].t); });
+
+  app.appendChild(el("h2", "", "By topic (weakest first)"));
+  var list = el("ul", "cats");
+  cats.forEach(function (c) {
+    var d = byCat[c];
+    var p = d.r / d.t;
+    var li = el("li");
+    li.appendChild(el("span", "nm", c));
+    li.appendChild(el("span", "fr", d.r + " / " + d.t));
+    var bar = el("div", "bar");
+    var i = el("i", p < 0.4 ? "lo" : p < 0.75 ? "mid" : "");
+    i.style.width = Math.round(p * 100) + "%";
+    bar.appendChild(i);
+    li.appendChild(bar);
+    list.appendChild(li);
+  });
+  app.appendChild(list);
+
+  if (missed.length) {
+    app.appendChild(el("h2", "", "Words to review (" + missed.length + ")"));
+    var ml = el("ul", "missed");
+    missed.forEach(function (r) {
+      var w = r.item.w;
+      var li = el("li");
+      li.appendChild(el("span", "z", w[0]));
+      li.appendChild(el("span", "py", w[1]));
+      li.appendChild(el("span", "en", w[2]));
+      ml.appendChild(li);
+    });
+    app.appendChild(ml);
+  }
+
+  var stack = el("div", "stack");
+  if (missed.length) {
+    var retry = el("button", "btn", "Retry the " + missed.length + " I missed");
+    retry.type = "button";
+    retry.addEventListener("click", function () {
+      queue = shuffle(missed.map(function (r) { return r.item; }));
+      pos = 0;
+      results = [];
+      render();
+      window.scrollTo(0, 0);
+    });
+    stack.appendChild(retry);
+  }
+  var again = el("button", "btn quiet", "New round");
+  again.type = "button";
+  again.addEventListener("click", home);
+  stack.appendChild(again);
+  app.appendChild(stack);
+  window.scrollTo(0, 0);
+}
+
+home();
+</script>
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HSK 1 recall quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #edf1f5;
+  --surface: #ffffff;
+  --ink: #16222e;
+  --muted: #5a6978;
+  --line: #cbd5df;
+  --accent: #1d6f8a;
+  --accent-ink: #ffffff;
+  --good: #1b7f5c;
+  --good-bg: #ddf1e8;
+  --bad: #b0372e;
+  --bad-bg: #f8e1de;
+  --serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1820;
+    --surface: #17232e;
+    --ink: #e6edf3;
+    --muted: #94a3b2;
+    --line: #2b3b49;
+    --accent: #5bb3d0;
+    --accent-ink: #0b1620;
+    --good: #55c79a;
+    --good-bg: #12332a;
+    --bad: #f08a80;
+    --bad-bg: #3a1a18;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1820;
+  --surface: #17232e;
+  --ink: #e6edf3;
+  --muted: #94a3b2;
+  --line: #2b3b49;
+  --accent: #5bb3d0;
+  --accent-ink: #0b1620;
+  --good: #55c79a;
+  --good-bg: #12332a;
+  --bad: #f08a80;
+  --bad-bg: #3a1a18;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-text-size-adjust: 100%;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--bg);
+  z-index: 10;
+}
+main { max-width: 480px; margin: 0 auto; padding: 16px 16px 32px; }
+.top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.top .title { font-weight: 600; }
+.top .count { color: var(--muted); font-variant-numeric: tabular-nums; }
+.bar { display: flex; gap: 3px; margin-bottom: 22px; }
+.bar span { flex: 1; height: 6px; border-radius: 2px; background: var(--line); }
+.bar span.cur { background: var(--accent); }
+.bar span.ok { background: var(--good); }
+.bar span.no { background: var(--bad); }
+.ask { color: var(--muted); margin: 0 0 8px; }
+.prompt { margin: 0 0 18px; font-size: 24px; line-height: 1.3; font-weight: 600; }
+.prompt.zh { font-family: var(--serif); font-weight: 700; font-size: 34px; word-break: keep-all; overflow-wrap: anywhere; }
+.field {
+  display: block;
+  width: 100%;
+  min-height: 76px;
+  padding: 12px 14px;
+  font: inherit;
+  font-size: 22px;
+  line-height: 1.35;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  resize: none;
+}
+.field.zhfield { font-family: var(--serif); font-weight: 500; }
+.field:focus { outline: 3px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.field[readonly] { color: var(--muted); }
+.hint {
+  margin: 10px 0 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1.5px dashed var(--line);
+  font-family: var(--serif);
+  font-size: 20px;
+}
+.hint small { display: block; font-family: var(--sans); font-size: 13px; color: var(--muted); margin-bottom: 2px; }
+.row { display: grid; gap: 10px; margin-top: 14px; }
+.row.two { grid-template-columns: 1fr 1fr; }
+.btn {
+  appearance: none;
+  width: 100%;
+  min-height: 52px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.btn.quiet { color: var(--ink); background: transparent; border: 1.5px solid var(--line); }
+.btn:focus-visible, .link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.btn:disabled { opacity: 0.4; cursor: default; }
+.links { display: flex; justify-content: space-between; margin-top: 12px; }
+.link {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 8px 4px;
+  font: inherit;
+  color: var(--muted);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.reveal { margin-top: 16px; padding: 14px 16px; border-radius: 12px; border-left: 5px solid var(--line); background: var(--surface); }
+.reveal.good { background: var(--good-bg); border-color: var(--good); }
+.reveal.bad { background: var(--bad-bg); border-color: var(--bad); }
+.reveal .lab { font-size: 13px; color: var(--muted); margin: 0; }
+.reveal .model { font-family: var(--serif); font-size: 24px; font-weight: 700; line-height: 1.3; margin: 2px 0 10px; }
+.reveal .model.en { font-family: var(--sans); font-size: 20px; font-weight: 600; }
+.reveal .verdict { font-weight: 600; margin: 0 0 6px; }
+.reveal p.why { margin: 8px 0 0; }
+.score { font-family: var(--serif); font-weight: 700; font-size: 64px; line-height: 1.1; margin: 8px 0 4px; font-variant-numeric: tabular-nums; }
+.verdictline { color: var(--muted); margin: 0 0 22px; }
+.missed { margin: 0 0 22px; padding: 0; list-style: none; display: grid; gap: 10px; }
+.missed li { background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+.missed .p { color: var(--muted); font-size: 14px; }
+.missed .m { font-family: var(--serif); font-size: 20px; font-weight: 500; color: var(--good); margin: 2px 0; }
+.missed .m.en { font-family: var(--sans); font-size: 17px; }
+.missed .y { font-size: 14px; }
+.missed .w { color: var(--bad); }
+.stack { display: grid; gap: 10px; }
+</style>
+</head>
+<body>
+<main id="app" aria-live="polite"></main>
+
+<script>
+/* dir "en2zh": prompt in English, type Chinese. dir "zh2en": prompt in Chinese, type the meaning. */
+var QUESTIONS = [
+  { dir: "en2zh", p: "I have three friends.", accept: ["我有三个朋友"], hint: "有 · 三 · 个 · 朋友",
+    why: "有 = have. Number + 个 + noun." },
+  { dir: "zh2en", p: "我明天不去学校。", model: "I’m not going to school tomorrow.",
+    why: "Time word before the verb, and 不 right before 去. 去 already carries the place." },
+  { dir: "en2zh", p: "I didn’t drink tea yesterday.", accept: ["我昨天没喝茶", "昨天我没喝茶"], hint: "没 · 喝 · 昨天 · 茶",
+    why: "Past negation uses 没, right before the verb." },
+  { dir: "en2zh", p: "Tomorrow is Saturday.", accept: ["明天星期六", "明天是星期六"], hint: "明天 · 星期 · 六",
+    why: "星期 + number. 是 is optional with days of the week." },
+  { dir: "zh2en", p: "现在九点。", model: "It’s 9 o’clock now.",
+    why: "现在 = now, 九 = 9, 点 = o’clock." },
+  { dir: "en2zh", p: "My teacher also drinks tea at home.", accept: ["我的老师也在家喝茶", "我老师也在家喝茶"], hint: "也 · 在家 · 喝 · 老师 · 的",
+    why: "也 goes right before the verb phrase, after the subject. 在家 (place) comes before the verb." },
+  { dir: "zh2en", p: "他就要来了。", model: "He’s about to arrive.",
+    why: "就要…了 means “about to.” The 了 marks a change: it’s about to happen." },
+  { dir: "en2zh", p: "I’m not very happy today.", accept: ["我今天不太高兴", "今天我不太高兴"], hint: "不太 · 高兴 · 今天",
+    why: "不太 + adjective = not very. 高兴 gāoxìng = happy." },
+  { dir: "en2zh", p: "I’m going to read a book at home tomorrow.",
+    accept: ["我明天要在家看书", "我明天在家看书", "明天我要在家看书", "明天我在家看书"], hint: "明天 · 要 · 在家 · 看 · 书",
+    why: "Subject + time + 要 + place + verb + object. 看 is for reading; 学 is for subjects." },
+  { dir: "zh2en", p: "学校有很多学生。", model: "There are many students at the school.",
+    why: "Place + 有 + thing = “there is / there are.”" },
+  { dir: "en2zh", p: "We’re all at home today.", accept: ["我们今天都在家", "今天我们都在家"], hint: "都 · 在家 · 今天 · 我们",
+    why: "都 sits after the time word, before the verb phrase." },
+  { dir: "zh2en", p: "太好了！明天星期六！", model: "Great! Tomorrow is Saturday!",
+    why: "太 + adjective + 了 is an exclamation." },
+  { dir: "en2zh", p: "I don’t have a book.", accept: ["我没有书"], hint: "没有 · 书",
+    why: "没有 negates 有, and the number and measure word drop out." },
+  { dir: "en2zh", p: "My friend is a student.", accept: ["我的朋友是学生", "我朋友是学生"], hint: "是 · 学生 · 朋友",
+    why: "是 connects two nouns. 我朋友 (no 的) is also natural for close relationships." },
+  { dir: "zh2en", p: "我的朋友昨天没去学校。", model: "My friend didn’t go to school yesterday.",
+    why: "没 + 去 for past negation. 去 already carries the place, so there’s no 在." },
+  { dir: "en2zh", p: "I’m drinking tea right now.", accept: ["我现在在喝茶", "我在喝茶"], hint: "现在 · 在 · 喝 · 茶",
+    why: "在 + verb means the action is happening right now." },
+  { dir: "zh2en", p: "明天会很好。", model: "Tomorrow will be good.",
+    why: "会 predicts what will happen." },
+  { dir: "en2zh", p: "I’m not a teacher.", accept: ["我不是老师"], hint: "不 · 是 · 老师",
+    why: "不是 is the negative of 是." },
+  { dir: "zh2en", p: "我们都想喝茶。", model: "We all want to drink tea.",
+    why: "都 = all, 想 = want to." },
+  { dir: "en2zh", p: "Did you go to school yesterday?",
+    accept: ["你昨天去学校了吗", "昨天你去学校了吗", "你昨天去学校吗", "昨天你去学校吗"], hint: "你 · 昨天 · 去 · 学校 · 了 · 吗",
+    why: "For a past event, 了 plus 吗 is the natural question. 去学校吗 alone is understandable too." }
+];
+
+var app = document.getElementById("app");
+var queue = [], pos = 0, results = [], phase = "answer";
+
+function norm(s) {
+  return s.replace(/[\s。，、！？．，,.!?？！；;：:“”"'’‘（）()]/g, "");
+}
+function el(tag, cls, text) {
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+function modelOf(q) { return q.dir === "en2zh" ? q.accept[0] : q.model; }
+
+function start(list) {
+  queue = list.slice();
+  pos = 0;
+  results = [];
+  render();
+  window.scrollTo(0, 0);
+}
+
+function header() {
+  var frag = document.createDocumentFragment();
+  var top = el("div", "top");
+  top.appendChild(el("span", "title", "HSK 1 recall quiz"));
+  top.appendChild(el("span", "count", (pos + 1) + " of " + queue.length));
+  frag.appendChild(top);
+  var bar = el("div", "bar");
+  bar.setAttribute("aria-hidden", "true");
+  for (var i = 0; i < queue.length; i++) {
+    var c = "";
+    if (i < pos) c = results[i].ok ? "ok" : "no";
+    else if (i === pos) c = "cur";
+    bar.appendChild(el("span", c));
+  }
+  frag.appendChild(bar);
+  return frag;
+}
+
+function render() {
+  app.innerHTML = "";
+  if (pos >= queue.length) return showResults();
+  phase = "answer";
+  var q = queue[pos];
+  var zhPrompt = q.dir === "zh2en";
+  app.appendChild(header());
+  app.appendChild(el("p", "ask", zhPrompt ? "What does this mean?" : "Write it in Chinese"));
+  app.appendChild(el("p", "prompt" + (zhPrompt ? " zh" : ""), q.p));
+
+  var field = document.createElement("textarea");
+  field.className = "field" + (zhPrompt ? "" : " zhfield");
+  field.rows = 2;
+  field.setAttribute("autocomplete", "off");
+  field.setAttribute("autocapitalize", "off");
+  field.setAttribute("autocorrect", "off");
+  field.setAttribute("spellcheck", "false");
+  field.setAttribute("lang", zhPrompt ? "en" : "zh-Hans");
+  field.setAttribute("aria-label", zhPrompt ? "Your English meaning" : "Your Chinese answer");
+  field.placeholder = zhPrompt ? "Type the meaning in English" : "Type in Chinese";
+  app.appendChild(field);
+
+  var hintBox = el("div");
+  app.appendChild(hintBox);
+
+  var row = el("div", "row");
+  var check = el("button", "btn", "Check");
+  check.type = "button";
+  row.appendChild(check);
+  app.appendChild(row);
+
+  var links = el("div", "links");
+  var hintBtn = null;
+  if (!zhPrompt && q.hint) {
+    hintBtn = el("button", "link", "Show hint");
+    hintBtn.type = "button";
+    hintBtn.addEventListener("click", function () {
+      hintBox.innerHTML = "";
+      var h = el("div", "hint");
+      h.appendChild(el("small", "", "Words to use"));
+      h.appendChild(document.createTextNode(q.hint));
+      hintBox.appendChild(h);
+      hintBtn.style.display = "none";
+    });
+    links.appendChild(hintBtn);
+  } else {
+    links.appendChild(el("span"));
+  }
+  var skip = el("button", "link", "I don’t know");
+  skip.type = "button";
+  links.appendChild(skip);
+  app.appendChild(links);
+
+  function reveal(skipped) {
+    if (phase !== "answer") return;
+    phase = "reveal";
+    var given = field.value.trim();
+    field.readOnly = true;
+    row.remove();
+    links.remove();
+    hintBox.innerHTML = "";
+
+    var auto = null;
+    if (q.dir === "en2zh" && !skipped && given) {
+      var n = norm(given);
+      auto = q.accept.some(function (a) { return norm(a) === n; });
+    }
+    var cls = "reveal" + (auto === true ? " good" : "");
+    var box = el("div", cls);
+    if (auto === true) box.appendChild(el("p", "verdict", "Matches a correct answer"));
+    else if (q.dir === "en2zh" && !skipped) box.appendChild(el("p", "verdict", "Not an exact match. Compare, then judge."));
+    else if (skipped) box.appendChild(el("p", "verdict", "Skipped. Here’s the answer."));
+    else box.appendChild(el("p", "verdict", "Compare with the answer, then judge."));
+
+    box.appendChild(el("p", "lab", q.dir === "en2zh" && q.accept.length > 1 ? "Model answer (other word orders also work)" : "Model answer"));
+    box.appendChild(el("p", "model" + (zhPrompt ? " en" : ""), modelOf(q)));
+    box.appendChild(el("p", "why", q.why));
+
+    var marks = el("div", "row two");
+    var missed = el("button", "btn quiet", "Missed it");
+    missed.type = "button";
+    var got = el("button", "btn", "Got it");
+    got.type = "button";
+    if (skipped) { got.disabled = true; }
+    function mark(ok) {
+      results[pos] = { q: q, ok: ok, given: given || "(blank)" };
+      pos++;
+      render();
+      window.scrollTo(0, 0);
+    }
+    missed.addEventListener("click", function () { mark(false); });
+    got.addEventListener("click", function () { mark(true); });
+    marks.appendChild(missed);
+    marks.appendChild(got);
+    box.appendChild(marks);
+    app.appendChild(box);
+    (skipped ? missed : got).focus({ preventScroll: true });
+    box.scrollIntoView({ block: "nearest", behavior: "auto" });
+  }
+
+  check.addEventListener("click", function () { reveal(false); });
+  skip.addEventListener("click", function () { reveal(true); });
+  field.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && !e.shiftKey && !e.isComposing) {
+      e.preventDefault();
+      if (field.value.trim()) reveal(false);
+    }
+  });
+  field.focus({ preventScroll: true });
+}
+
+function showResults() {
+  var total = results.length;
+  var right = results.filter(function (r) { return r.ok; }).length;
+  var missed = results.filter(function (r) { return !r.ok; });
+
+  var top = el("div", "top");
+  top.appendChild(el("span", "title", "HSK 1 recall quiz"));
+  app.appendChild(top);
+  app.appendChild(el("div", "score", right + " / " + total));
+  var v = right === total ? "Perfect round."
+    : right >= total * 0.8 ? "Strong. Review the misses below and you’re set."
+    : right >= total * 0.6 ? "Solid base. The misses below show where to focus."
+    : "Good practice. Work through the misses below, then try again.";
+  app.appendChild(el("p", "verdictline", v));
+
+  if (missed.length) {
+    var list = el("ul", "missed");
+    missed.forEach(function (r) {
+      var li = el("li");
+      li.appendChild(el("div", "p", r.q.p));
+      li.appendChild(el("div", "m" + (r.q.dir === "zh2en" ? " en" : ""), modelOf(r.q)));
+      var y = el("div", "y");
+      y.appendChild(el("span", "w", "You: " + r.given + ".  "));
+      y.appendChild(document.createTextNode(r.q.why));
+      li.appendChild(y);
+      list.appendChild(li);
+    });
+    app.appendChild(list);
+  }
+
+  var stack = el("div", "stack");
+  if (missed.length) {
+    var retry = el("button", "btn", "Retry the " + missed.length + " I missed");
+    retry.type = "button";
+    retry.addEventListener("click", function () {
+      start(missed.map(function (r) { return r.q; }));
+    });
+    stack.appendChild(retry);
+  }
+  var again = el("button", "btn quiet", "Restart all 20");
+  again.type = "button";
+  again.addEventListener("click", function () { start(QUESTIONS); });
+  stack.appendChild(again);
+  app.appendChild(stack);
+  window.scrollTo(0, 0);
+}
+
+start(QUESTIONS);
+</script>
+</body>
+</html>
