@@ -14,6 +14,7 @@ Lesson format (lessons/ and grammar/ use the same one). Keep it short: no long p
   # Title
   summary: one line for the index and the top of the page
   related: Lesson title; Grammar: <grammar lesson title>   (links, separated by semicolons)
+  see: Yoyo course, Unit n: Title | URL; ...   "Also covered in Yoyo Chinese" links (videos; content not checked)
   ## Section heading
   tag: A1 #2                      level badge (grammar)
   pattern: Subject + 不 + verb     the structure, shown in a box (grammar)
@@ -252,7 +253,7 @@ SOURCE_LABEL = {"notes": "your notes", "hsk-list": "HSK 1 list", "added": "added
 
 def parse_lesson(path, prefix):
     name = re.sub(r"^\d+-", "", path.stem)
-    L = {"title": name, "summary": "", "related": [], "file": f"{prefix}-{name}.html", "sections": [], "kind": prefix}
+    L = {"title": name, "summary": "", "related": [], "see": [], "file": f"{prefix}-{name}.html", "sections": [], "kind": prefix}
     sec = None
     for raw in path.read_text(encoding="utf8").splitlines():
         st = raw.strip()
@@ -264,6 +265,11 @@ def parse_lesson(path, prefix):
             L["summary"] = st[8:].strip()
         elif st.startswith("related:") and sec is None:
             L["related"] = [x.strip() for x in st[8:].split(";") if x.strip()]
+        elif st.startswith("see:") and sec is None:
+            for item in st[4:].split(";"):
+                label, _, url = item.partition("|")
+                if label.strip():
+                    L["see"].append((label.strip(), url.strip()))
         elif st.startswith("## "):
             sec = {"title": st[3:].strip(), "tag": "", "pattern": "", "intro": [], "words": [], "tips": [],
                    "examples": [], "try": [], "sources": []}
@@ -334,6 +340,9 @@ def render_lesson(L, word_by_s):
     out = [f"<h1>{esc(L['title'])}</h1>"]
     if L["summary"]:
         out.append(f'<p class="lead">{esc(L["summary"])}</p>')
+    if L["see"]:
+        links = " · ".join(f'<a href="{esc(u)}" target="_blank" rel="noopener">{esc(l)}</a>' if u else esc(l) for l, u in L["see"])
+        out.append(f'<p class="src"><span>Also covered in Yoyo Chinese:</span> {links}</p>')
     out.append('<ul class="subnav">' + "".join(
         f'<li><a href="#{slug(s["title"])}">{esc(s["title"])}</a></li>' for s in L["sections"]) + "</ul>")
     for s in L["sections"]:

@@ -1,6 +1,7 @@
 # Verbs and helping verbs
 summary: Want, can, may, have to, let, and verbs for names and going places.
 related: Conversation; Out & about
+see: Beginner Conversational, Unit 12: Wants and Desires | https://yoyochinese.com/courses/beginner-conversational-chinese
 
 ## Want: 要, 想, 喜欢
 tag: A1 #27

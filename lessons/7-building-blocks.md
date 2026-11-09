@@ -1,6 +1,7 @@
 # Building blocks
 summary: Pronouns, numbers, measure words, describing words, and the small words that hold sentences together.
 related: Grammar: Negation; Grammar: Adverbs and describing; Grammar: Linking words
+see: Beginner Conversational, Unit 2: Numbers (0-99) | https://yoyochinese.com/courses/beginner-conversational-chinese
 
 ## People words
 words: 我, 你, 他, 她, 们, 我们, 她们, 这, 那

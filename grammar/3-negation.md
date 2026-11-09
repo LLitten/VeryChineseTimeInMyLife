@@ -1,6 +1,7 @@
 # Negation
 summary: 不, 没, 别, 不太 and "not as … as."
 related: Building blocks; Conversation
+see: Grammar Series, Unit 2: Negation | https://yoyochinese.com/courses/chinese-grammar-series; Beginner Conversational, Unit 10: Expressing "No" and "Know" | https://yoyochinese.com/courses/beginner-conversational-chinese
 
 ## 不 + verb / adjective
 tag: A1 #2

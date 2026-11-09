@@ -1,6 +1,7 @@
 # Numbers, measure words, dates and time
 summary: Building numbers, 二 vs 两, measure words, age, dates, weekdays and clock time.
 related: Time; Building blocks; Food & drink
+see: Beginner Conversational, Unit 2: Numbers (0-99) | https://yoyochinese.com/courses/beginner-conversational-chinese
 
 ## Building numbers
 tag: A1 #11

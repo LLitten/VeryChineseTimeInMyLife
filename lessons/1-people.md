@@ -1,6 +1,7 @@
 # People
 summary: Saying hi and bye, introducing yourself, family and friends.
 related: Conversation; Grammar: Yes / no and other questions; Grammar: Linking words
+see: Beginner Conversational, Unit 4: Introducing Yourself | https://yoyochinese.com/courses/beginner-conversational-chinese
 
 ## Saying hi
 words: 嗨, 早安, 好久不见, 最近怎么样？, 还好, 吃饭了吗？

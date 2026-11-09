@@ -1,6 +1,7 @@
 # Sentence structure
 summary: The order words go in: subject, time, place, verb, object.
 related: Time; Out & about
+see: Grammar Series, Unit 1: Word Order | https://yoyochinese.com/courses/chinese-grammar-series
 
 ## Basic order
 tag: A1 #31

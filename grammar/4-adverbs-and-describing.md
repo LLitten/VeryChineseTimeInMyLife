@@ -1,6 +1,7 @@
 # Adverbs and describing
 summary: 很, 太…了, 都, 也, where adverbs go, 地 and 多 + adjective.
 related: Building blocks; Food & drink
+see: Grammar Series, Unit 6: Adjectives | https://yoyochinese.com/courses/chinese-grammar-series
 
 ## Noun + 很 + adjective
 tag: A1 #34

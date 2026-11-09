@@ -1,6 +1,7 @@
 # Pronunciation
 summary: Tones, tone changes, and the zhuyin chart used in Taiwan.
 related: People
+see: Beginner Conversational, Unit 3: Practicing Tone Pairs | https://yoyochinese.com/courses/beginner-conversational-chinese; Units 5, 7 and 9: Pinyin Finals and Initials | https://yoyochinese.com/courses/beginner-conversational-chinese
 
 ## Tones
 - Mandarin has four tones plus a light neutral tone.

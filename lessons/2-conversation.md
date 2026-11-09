@@ -1,6 +1,7 @@
 # Conversation
 summary: Reacting, giving opinions, asking questions, polite words, and what to say when you're stuck.
 related: People; Grammar: Yes / no and other questions
+see: Beginner Conversational, Unit 6: Languages | https://yoyochinese.com/courses/beginner-conversational-chinese
 
 ## Reacting
 words: 对啊, 是吗？, 真的吗？, 真的假的？, 然后呢？, 我也是, 你呢？, 当然, 确实, 不错, 好厉害！, 没有啦, 好的, 好啊, 可以, 随便

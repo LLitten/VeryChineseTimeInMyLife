@@ -1,6 +1,7 @@
 # Complements (what happens after the verb)
 summary: Verb + 到 for results, and verb + 来 / 去 for direction.
 related: Home & life; Out & about
+see: Grammar Series, Unit 8: Complements of Result | https://yoyochinese.com/courses/chinese-grammar-series; Unit 9: Complements of Direction | https://yoyochinese.com/courses/chinese-grammar-series
 
 ## Verb + 到: you got the result
 tag: A2
