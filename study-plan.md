@@ -1,6 +1,6 @@
 # Study plan
 
-About 30 minutes a day, mostly in the evening, plus a short daytime review. The plan is built around the exam gaps in `exam-results.md` and the habits in `START-HERE.md`.
+About 30 minutes a day, mostly in the evening, plus a short daytime review. The plan is built around the exam gaps in `progress.md` and the habits in `AGENTS.md`.
 
 ## Principles
 - Fill gaps; don't restart. Most misses were words not yet learned, not words mixed up.
@@ -33,7 +33,7 @@ Review yesterday's words, or answer 5 questions.
 
 ## Checkpoints
 - End of Week 2 and end of Week 4: retake the vocabulary exam and compare the topic table.
-- Update `progress-log.md` after each session.
+- Add a line to the session log in `progress.md` after each session.
 
 ## Who does what
 - **Friends:** tones, listening, natural phrasing, regional differences.
