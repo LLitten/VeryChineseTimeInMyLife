@@ -220,7 +220,7 @@ Organized the way the learner's notebook is: by what each pattern is used for. E
 #### 能 + verb ◐ `A1 #23`
 - **Use:** able to, when circumstances allow.
 - **Example:** 我能吃一块吗？ Can I have a piece?
-- **Note:** 可能 = maybe. You answered "possible" for 能 on the exam.
+- **Note:** 可能 = maybe.
 
 #### 可以 + verb ○ `A1 #26`
 - **Use:** may, be allowed to.
@@ -397,5 +397,5 @@ Where each A1 point is in this file, so you can see the gaps at a glance.
 | 你喝水吗？好的，谢谢。 | nǐ hē shuǐ ma? hǎo de, xièxie. | Do you drink water? Okay, thanks. |  |
 | 他女儿多大了？七岁。 | tā nǚ'ér duō dà le? qī suì. | How old is his daughter? Seven. |  |
 | 你的同学在哪儿工作？医院。 | nǐ de tóngxué zài nǎr gōngzuò? yīyuàn. | Where do your classmates work? At a hospital. |  |
-| 昨天上午天气怎么样？下雨了。 | zuótiān shàngwǔ tiānqì zěnmeyàng? xià yǔ le. | What was the weather like yesterday morning? It rained. | Check the first character: 昨, not 作. |
+| 昨天上午天气怎么样？下雨了。 | zuótiān shàngwǔ tiānqì zěnmeyàng? xià yǔ le. | What was the weather like yesterday morning? It rained. |  |
 | 爸爸什么时候来北京呢？下个月。 | bàba shénme shíhou lái Běijīng ne? xià ge yuè. | When will Dad come to Beijing? Next month. |  |
