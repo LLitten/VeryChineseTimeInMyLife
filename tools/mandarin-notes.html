@@ -216,8 +216,9 @@ var P = "People & pronouns", Q = "Question words", N = "Numbers", T = "Time, dat
     V = "Verbs", D = "Describing words", F = "Function words", M = "Measure words",
     PL = "Places", DR = "Directions & location", FD = "Food & drink", TH = "Things",
     L = "Language & countries", PH = "Phrases & friend-taught", G = "Grammar patterns",
-    S = "Practice sentences", Z = "Zhuyin chart";
-var TOPICS = [P, Q, N, T, V, D, F, M, PL, DR, FD, TH, L, PH, G, S, Z];
+    S = "Practice sentences", Z = "Zhuyin chart",
+    E = "Everyday phrases (added)", W = "Taiwan everyday words (added)";
+var TOPICS = [P, Q, N, T, V, D, F, M, PL, DR, FD, TH, L, PH, E, W, G, S, Z];
 
 /* [simplified, traditional (TW), pinyin, meaning, topic, parts, note, check-flag] */
 var DATA = [
@@ -451,7 +452,7 @@ var DATA = [
 ["苹果","蘋果","píngguǒ","apple",FD,"","",0],
 ["西瓜","","xīguā","watermelon",FD,"west + melon","",0],
 ["芒果","","mángguǒ","mango",FD,"","",0],
-["菠萝","菠蘿","bōluó","pineapple",FD,"","The “spinach plant + radish plant” parts are for sound, not meaning.",0],
+["菠萝","菠蘿","bōluó","pineapple",FD,"","The “spinach plant + radish plant” parts are for sound, not meaning. Taiwan usually says 鳳梨 (fènglí).",0],
 ["面包","麵包","miànbāo","bread",FD,"flour + bag","",0],
 ["鸡蛋","雞蛋","jīdàn","egg",FD,"chicken + egg","",0],
 ["饼干","餅乾","bǐnggān","cookie, biscuit",FD,"","Your pinyin note reads “bǐng qiān”; I believe it’s bǐnggān. Confirm with a friend.",1],
@@ -533,6 +534,47 @@ var DATA = [
 ["你的同学在哪儿工作？医院。","","nǐ de tóngxué zài nǎr gōngzuò? yīyuàn.","Where do your classmates work? At a hospital.",S,"","",0],
 ["昨天上午天气怎么样？下雨了。","","zuótiān shàngwǔ tiānqì zěnmeyàng? xià yǔ le.","What was the weather like yesterday morning? It rained.",S,"","Check the first character: 昨, not 作.",1],
 ["爸爸什么时候来北京呢？下个月。","","bàba shénme shíhou lái Běijīng ne? xià ge yuè.","When will Dad come to Beijing? Next month.",S,"","",0],
+/* Everyday phrases and Taiwan words: added by Claude from web phrase lists, not from the handwritten notes */
+["好久不见","好久不見","hǎojiǔ bújiàn","long time no see",E,"good + long + not + see","",0],
+["最近怎么样？","最近怎麼樣？","zuìjìn zěnmeyàng?","how have you been lately?",E,"recently + how is it","",0],
+["还好","還好","hái hǎo","okay, not bad",E,"still + good","A common, modest answer to 最近怎么样？",0],
+["怎么了？","怎麼了？","zěnme le?","what's wrong? what happened?",E,"how + change","Asks a friend who seems upset; shows you care. 怎么回事？ is a more serious “what's going on?”",0],
+["没事","沒事","méi shì","it's nothing, I'm fine, no problem",E,"not have + matter","Also a casual reply to 对不起 or 谢谢.",0],
+["没关系","沒關係","méi guānxi","it doesn't matter, it's okay",E,"not have + connection","Reply to 对不起. An HSK 1 word you left blank on the exam.",0],
+["不好意思","","bù hǎoyìsi","excuse me; sorry (light)",E,"not + good + meaning","For small things: bumping someone, getting attention. 对不起 is for real apologies.",0],
+["对啊","對啊","duì a","yeah, right",E,"correct + (softener)","啊 softens it. Very common in everyday speech.",0],
+["真的吗？","真的嗎？","zhēn de ma?","really?",E,"real + 的 + 吗","",0],
+["真的假的？","","zhēn de jiǎ de?","no way! seriously?",E,"real + fake","Casual and a little dramatic. Common in Taiwan.",0],
+["我也是","","wǒ yě shì","me too",E,"I + also + am","",0],
+["当然","當然","dāngrán","of course",E,"","",0],
+["好啊","","hǎo a","sure, sounds good",E,"good + (softener)","A friendly yes to an invitation.",0],
+["可以","","kěyǐ","okay, that works; can (allowed)",E,"","",0],
+["随便","隨便","suíbiàn","whatever, up to you",E,"follow + convenient","Fine with friends, but it can sound like you don't care.",0],
+["等一下","","děng yíxià","wait a moment",E,"wait + one time","一下 softens a verb: “a bit.”",0],
+["走吧","","zǒu ba","let's go",E,"walk + (suggestion)","吧 turns a sentence into a suggestion.",0],
+["一起去吧","","yìqǐ qù ba","let's go together",E,"together + go + (suggestion)","一起 is in Week 4 of the study plan.",0],
+["吃饭了吗？","吃飯了嗎？","chīfàn le ma?","have you eaten?",E,"eat a meal + 了 + 吗","Often a friendly greeting, not an invitation.",0],
+["你要吃什么？","你要吃什麼？","nǐ yào chī shénme?","what do you want to eat?",E,"you + want + eat + what","",0],
+["我请你","我請你","wǒ qǐng nǐ","my treat",E,"I + invite + you","",0],
+["听不懂","聽不懂","tīng bu dǒng","I don't understand (what I heard)",E,"listen + not + understand","Same frame as 找不到.",0],
+["请再说一次","請再說一次","qǐng zài shuō yí cì","please say it again",E,"please + again + say + one time","",0],
+["请说慢一点","請說慢一點","qǐng shuō màn yìdiǎn","please speak more slowly",E,"please + speak + slow + a little","Taiwan says 一點 without 儿.",0],
+["这个怎么说？","這個怎麼說？","zhège zěnme shuō?","how do you say this?",E,"this + how + say","Point at something and ask friends.",0],
+["什么意思？","什麼意思？","shénme yìsi?","what does it mean?",E,"what + meaning","",0],
+["我不知道","","wǒ bù zhīdào","I don't know",E,"I + not + know","",0],
+["加油","","jiāyóu","you can do it! go for it!",E,"add + oil","",0],
+["辛苦了","","xīnkǔ le","thanks for your hard work",E,"hard + bitter + 了","Said to someone who just did a lot of work.",0],
+["小心","","xiǎoxīn","be careful",E,"small + heart","",0],
+["晚安","","wǎn’ān","good night",E,"evening + peace","",0],
+["明天见","明天見","míngtiān jiàn","see you tomorrow",E,"tomorrow + see","",0],
+["再见","再見","zàijiàn","goodbye",E,"again + see","Textbook goodbye. Friends in Taiwan often say 掰掰 instead.",0],
+["拜拜","掰掰","bāibāi","bye",E,"sound of English “bye-bye”","Mainland usually writes 拜拜; Taiwan often writes 掰掰. Very common.",0],
+["计程车","計程車","jìchéngchē","taxi",W,"count + distance + car","Taiwan word. The HSK word 出租车 is the mainland one.",0],
+["捷运","捷運","jiéyùn","MRT, subway (Taiwan)",W,"quick + transport","Mainland says 地铁 dìtiě.",0],
+["公车","公車","gōngchē","bus",W,"public + car","Mainland says 公交车.",0],
+["机车","機車","jīchē","scooter, motorbike",W,"machine + car","Also slang in Taiwan for an annoying person (“so 机车!”).",0],
+["脚踏车","腳踏車","jiǎotàchē","bicycle",W,"foot + step + car","Mainland says 自行车.",0],
+["凤梨","鳳梨","fènglí","pineapple (Taiwan word)",W,"phoenix + pear","Mainland says 菠萝.",0],
 /* Zhuyin */
 ["ㄅ","","b","initial",Z,"","",0],
 ["ㄆ","","p","initial",Z,"","",0],
@@ -768,7 +810,7 @@ function csvText() {
 }
 
 function buildFoot() {
-  var note = el("p", "foot", "Built from your handwritten notes. ⚑ means a reading was unclear or your note may need a correction. Traditional (TW) forms are shown where they differ. Example sentences in Grammar patterns were written by Claude. Stroke-order links go to strokeorder.com.");
+  var note = el("p", "foot", "Built from your handwritten notes. ⚑ means a reading was unclear or your note may need a correction. Traditional (TW) forms are shown where they differ. Example sentences in Grammar patterns were written by Claude. Topics marked “(added)” were added by Claude from web phrase lists, not from your notes; check them with friends. Stroke-order links go to strokeorder.com.");
   elFoot.appendChild(note);
   var status = el("p", "status");
   status.setAttribute("role", "status");

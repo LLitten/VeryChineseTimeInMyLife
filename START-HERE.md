@@ -26,7 +26,7 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 ## Files in this repo
 | File | What it holds |
 |---|---|
-| `vocab.csv` | 282 entries from the learner's handwritten notes: simplified, Taiwan form, pinyin, meaning, topic, literal parts, notes, and a `check` flag for unclear readings. Includes the zhuyin chart. |
+| `vocab.csv` | 322 entries: 282 from the learner's handwritten notes, plus 40 everyday phrases and Taiwan words added by Claude (topics marked "(added)"). Columns: simplified, Taiwan form, pinyin, meaning, topic, literal parts, notes, and a `check` flag for unclear readings. Includes the zhuyin chart. |
 | `grammar.md` | 38 grammar patterns with corrections, plus 13 practice sentences from the notes. |
 | `error-patterns.md` | Mistakes the learner repeats, with fixes. Read this before writing practice material. |
 | `exam-results.md` | Baseline exam results, by topic, with every missed word. |
