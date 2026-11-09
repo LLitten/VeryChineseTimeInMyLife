@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mandarin study tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #edf1f5;
+  --surface: #ffffff;
+  --ink: #16222e;
+  --muted: #5a6978;
+  --line: #cbd5df;
+  --accent: #1d6f8a;
+  --serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1820;
+    --surface: #17232e;
+    --ink: #e6edf3;
+    --muted: #94a3b2;
+    --line: #2b3b49;
+    --accent: #5bb3d0;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1820;
+  --surface: #17232e;
+  --ink: #e6edf3;
+  --muted: #94a3b2;
+  --line: #2b3b49;
+  --accent: #5bb3d0;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-text-size-adjust: 100%;
+}
+main {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: calc(20px + env(safe-area-inset-top, 0px)) 16px calc(32px + env(safe-area-inset-bottom, 0px));
+}
+.mark { font-family: var(--serif); font-size: 34px; line-height: 1; color: var(--accent); margin: 0 0 6px; }
+h1 { font-size: 24px; line-height: 1.2; margin: 0 0 4px; }
+.sub { margin: 0 0 20px; color: var(--muted); font-size: 15px; }
+h2 { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); margin: 24px 4px 8px; }
+.cards { display: grid; gap: 10px; }
+a.card {
+  display: block;
+  padding: 14px 16px;
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+}
+a.card:hover { border-color: var(--accent); }
+a.card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.card b { display: block; font-size: 17px; }
+.card span { display: block; margin-top: 3px; color: var(--muted); font-size: 14px; }
+.foot { margin: 28px 4px 0; color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+<p class="mark" aria-hidden="true">中文</p>
+<h1>Mandarin study tools</h1>
+<p class="sub">Notes, quizzes and checks built from my handwritten notes. Works on a phone.</p>
+
+<h2>Look things up</h2>
+<div class="cards">
+  <a class="card" href="tools/mandarin-notes.html">
+    <b>My Mandarin notes</b>
+    <span>All words, grammar and practice sentences. Filter by topic, word type, situation or HSK 1.</span>
+  </a>
+</div>
+
+<h2>Practice</h2>
+<div class="cards">
+  <a class="card" href="tools/hsk1-recall-quiz.html">
+    <b>Recall quiz</b>
+    <span>Write short sentences in Chinese or English, then check yourself.</span>
+  </a>
+  <a class="card" href="tools/hsk1-vocab-check.html">
+    <b>HSK 1 vocabulary check</b>
+    <span>Flashcard-style self-check of the 150 HSK 1 words, with results by topic.</span>
+  </a>
+  <a class="card" href="tools/hsk1-vocab-exam.html">
+    <b>HSK 1 vocabulary exam</b>
+    <span>No feedback while you answer. Copy your answers at the end to get them graded.</span>
+  </a>
+</div>
+
+<p class="foot">Transcribed from handwritten notes, so some readings are marked ⚑ to double-check. Native-speaker friends have the last word on usage.</p>
+</main>
+</body>
+</html>

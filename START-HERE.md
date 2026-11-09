@@ -42,7 +42,7 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 4. At the end, add a dated line to `progress-log.md`.
 
 ## About `tools/`
-The HTML pages are static and open in any browser. They were built in Claude, so some buttons (such as "Save as .txt" or "Save as CSV") depend on Claude's page features and may not appear elsewhere; copy-and-paste fallbacks exist where noted. If you host them on GitHub Pages, treat that as untested.
+The HTML pages are static and open in any browser. They were built in Claude, so some buttons (such as "Save as .txt" or "Save as CSV") depend on Claude's page features and may not appear elsewhere; copy-and-paste fallbacks exist where noted. The repo is set up for GitHub Pages: `index.html` at the root links to all four pages, and each page links back. Outside Claude, the save buttons are hidden and the copy-and-paste options still work.
 
 ## Caution about this repo
 It was transcribed from handwritten pencil notes. Items marked `check` in `vocab.csv` and ⚑ in `grammar.md` are uncertain. Treat everything here as a study aid, and let native-speaker friends have the last word on usage.
