@@ -16,6 +16,8 @@ words: 今天, 明天, 昨天, 下个月, 星期, 星期天, 月, 号, 日, 年,
 ### Try it
 - try: Tomorrow is Saturday. | 明天星期六。 | míngtiān xīngqīliù.
 - try: What's the date today? | 今天几月几号？ | jīntiān jǐ yuè jǐ hào?
+source: AllSet: Structure of dates | https://resources.allsetlearning.com/chinese/grammar/ASGT3KF6
+source: AllSet: Structure of days of the week | https://resources.allsetlearning.com/chinese/grammar/ASGVH4Q5
 
 ## Clock time
 words: 现在, 点, 分, 分钟, 时, 秒, 时候
@@ -29,6 +31,8 @@ words: 现在, 点, 分, 分钟, 时, 秒, 时候
 - 等我五分钟。 | děng wǒ wǔ fēnzhōng. | Give me five minutes.
 ### Try it
 - try: It's two o'clock. | 现在两点。 | xiànzài liǎng diǎn.
+source: AllSet: Structure of times (basic) | https://resources.allsetlearning.com/chinese/grammar/ASGN6BBU
+source: AllSet: Comparing "er" and "liang" | https://resources.allsetlearning.com/chinese/grammar/ASGJ46H1
 
 ## Parts of the day
 words: 早上, 上午, 中午, 下午, 晚上
@@ -39,6 +43,7 @@ words: 早上, 上午, 中午, 下午, 晚上
 - 我们下午见。 | wǒmen xiàwǔ jiàn. | See you this afternoon.
 ### Try it
 - try: I eat at noon. | 我中午吃饭。 | wǒ zhōngwǔ chīfàn.
+source: AllSet: Time words and word order | https://resources.allsetlearning.com/chinese/grammar/Time_words_and_word_order
 
 ## Making plans
 words: 走吧, 一起去吧, 好啊, 可以, 等一下, 电影
@@ -52,6 +57,7 @@ words: 走吧, 一起去吧, 好啊, 可以, 等一下, 电影
 ### Try it
 - try: Let's go! | 走吧！ | zǒu ba!
 - try: Let's go together. | 一起去吧。 | yìqǐ qù ba.
+source: AllSet: Suggestions with "ba" | https://resources.allsetlearning.com/chinese/grammar/ASGMPZ6D
 
 ## Weather
 words: 天气, 下雨, 热, 冷
@@ -63,3 +69,4 @@ words: 天气, 下雨, 热, 冷
 - 太冷了！ | tài lěng le! | It's so cold!
 ### Try it
 - try: It's very cold today. | 今天很冷。 | jīntiān hěn lěng.
+source: AllSet: Simple "noun + adjective" sentences | https://resources.allsetlearning.com/chinese/grammar/ASG17BLH

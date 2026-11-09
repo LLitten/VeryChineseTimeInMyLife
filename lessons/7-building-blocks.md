@@ -25,6 +25,8 @@ words: 零, 一, 二, 两, 三, 四, 五, 六, 七, 八, 九, 十, 百
 ### Try it
 - try: 99 | 九十九 | jiǔshíjiǔ
 - try: two books | 两本书 | liǎng běn shū
+source: AllSet: Structure of numbers | https://resources.allsetlearning.com/chinese/grammar/ASGCRH6P
+source: AllSet: Comparing "er" and "liang" | https://resources.allsetlearning.com/chinese/grammar/ASGJ46H1
 
 ## Measure words
 words: 个, 些, 位, 名, 口
@@ -36,6 +38,8 @@ words: 个, 些, 位, 名, 口
 ### Examples
 - 一位老师 | yí wèi lǎoshī | a teacher (polite)
 - 我要一些水果。 | wǒ yào yìxiē shuǐguǒ. | I'd like some fruit.
+source: AllSet: Measure word "ge" | https://resources.allsetlearning.com/chinese/grammar/ASGI0T9S
+source: AllSet: Measure words for counting | https://resources.allsetlearning.com/chinese/grammar/Measure_words_for_counting
 
 ## Describing things
 words: 很, 非常, 太, 不太, 大, 小, 高, 好, 少, 多, 漂亮, 高兴, 清楚, 一点儿
@@ -49,6 +53,9 @@ words: 很, 非常, 太, 不太, 大, 小, 高, 好, 少, 多, 漂亮, 高兴, �
 - 我不太高兴。 | wǒ bú tài gāoxìng. | I'm not very happy.
 ### Try it
 - try: It's very small. | 很小。 | hěn xiǎo.
+source: AllSet: Simple "noun + adjective" sentences | https://resources.allsetlearning.com/chinese/grammar/ASG17BLH
+source: AllSet: Expressing "excessively" with "tai" | https://resources.allsetlearning.com/chinese/grammar/ASG8HVFN
+source: AllSet: Expressing "not very" with "bu tai" | https://resources.allsetlearning.com/chinese/grammar/Expressing_%22not_very%22_with_%22bu_tai%22
 
 ## Grammar glue
 words: 是, 有, 在, 的, 了, 地, 和, 也, 都, 也都, 还是, 或者, 不, 没, 没有, 别, 不要, 不用, 得, 会, 能, 让, 用, 到
@@ -59,3 +66,6 @@ words: 是, 有, 在, 的, 了, 地, 和, 也, 都, 也都, 还是, 或者, 不,
 - 我也喜欢。 | wǒ yě xǐhuan. | I like it too.
 - 我昨天没去。 | wǒ zuótiān méi qù. | I didn't go yesterday.
 - 我们都会说英语。 | wǒmen dōu huì shuō Yīngyǔ. | We can all speak English.
+source: AllSet: Standard negation with "bu" | https://resources.allsetlearning.com/chinese/grammar/ASGIPYFV
+source: AllSet: The "also" adverb "ye" | https://resources.allsetlearning.com/chinese/grammar/ASGG25MD
+source: AllSet: The "all" adverb "dou" | https://resources.allsetlearning.com/chinese/grammar/ASG9YK09

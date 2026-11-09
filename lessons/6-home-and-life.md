@@ -14,6 +14,7 @@ words: 起床, 洗澡, 吃饭, 睡觉, 看, 看到, 看见, 听到, 做
 ### Try it
 - try: I get up at eight. | 我八点起床。 | wǒ bā diǎn qǐchuáng.
 - try: I didn't hear it. | 我没听到。 | wǒ méi tīngdào.
+source: AllSet: Result complements "-dao" and "-jian" | https://resources.allsetlearning.com/chinese/grammar/Result_complements_%22-dao%22_and_%22-jian%22
 
 ## Around the house
 words: 家, 桌子, 椅子, 电视, 电脑, 书, 衣服, 东西, 杯子, 把
@@ -26,6 +27,7 @@ words: 家, 桌子, 椅子, 电视, 电脑, 书, 衣服, 东西, 杯子, 把
 - 你住在哪里？ | nǐ zhù zài nǎlǐ? | Where do you live?
 ### Try it
 - try: There are two chairs. | 有两把椅子。 | yǒu liǎng bǎ yǐzi.
+source: AllSet: Expressing existence with "you" | https://resources.allsetlearning.com/chinese/grammar/ASG04ZCI
 
 ## School and work
 words: 学校, 公司, 老师, 学生, 同学, 学, 学习, 读, 写, 字, 汉字, 本
@@ -50,3 +52,4 @@ words: 狗, 猫, 只, 条, 头, 匹, 棵, 株, 朵, 根, 颗, 粒, 瓣
 - 一条鱼 | yì tiáo yú | a fish
 ### Try it
 - try: two cats | 两只猫 | liǎng zhī māo
+source: AllSet: Measure words for counting | https://resources.allsetlearning.com/chinese/grammar/Measure_words_for_counting

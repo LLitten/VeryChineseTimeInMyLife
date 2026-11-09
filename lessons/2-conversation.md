@@ -46,6 +46,7 @@ words: 喜欢, 爱, 想, 觉得, 你觉得…？, 知道, 高兴, 可能, 也许
 ### Try it
 - try: I'd like to drink coffee. | 我想喝咖啡。 | wǒ xiǎng hē kāfēi.
 - try: I don't know. | 我不知道。 | wǒ bù zhīdào.
+source: AllSet: Expressing "would like to" with "xiang" | https://resources.allsetlearning.com/chinese/grammar/Expressing_%22would_like_to%22_with_%22xiang%22
 
 ## Asking questions
 words: 什么, 谁, 哪里 / 哪儿, 哪, 哪个, 什么时候, 为什么, 怎么, 多少, 几, 多, 吗, 呢, 你喜欢做什么？
@@ -61,6 +62,8 @@ words: 什么, 谁, 哪里 / 哪儿, 哪, 哪个, 什么时候, 为什么, 怎�
 ### Try it
 - try: Where are you? | 你在哪儿？ | nǐ zài nǎr?
 - try: Which one do you like? | 你喜欢哪个？ | nǐ xǐhuan nǎge?
+source: AllSet: Placement of question words | https://resources.allsetlearning.com/chinese/grammar/ASGJQPSC
+source: AllSet: Yes-no questions with "ma" | https://resources.allsetlearning.com/chinese/grammar/ASGQ2AZA
 
 ## When you're stuck
 words: 听不懂, 我不知道, 什么意思？, 这个怎么说？, 请再说一次, 请说慢一点, 我在学中文, 我的中文不太好, 说, 听, 中文, 汉语, 英语, 文
@@ -87,6 +90,7 @@ words: 谢谢, 不客气, 对不起, 没关系, 不好意思, 请, 等一下
 - 请坐。 | qǐng zuò. | Please, sit.
 ### Try it
 - try: Sorry! (answer: It's okay.) | 对不起！ 没关系。 | duìbuqǐ! méi guānxi.
+source: AllSet: Negative commands with "buyao" | https://resources.allsetlearning.com/chinese/grammar/ASGIVZJU
 
 ## On the phone
 words: 喂, 打电话

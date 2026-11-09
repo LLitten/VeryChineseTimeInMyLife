@@ -11,6 +11,7 @@ related: Sentence structure; Yes / no and other questions
 - 你的同学在哪儿工作？ 医院。 | nǐ de tóngxué zài nǎr gōngzuò? yīyuàn. | Where does your classmate work? At a hospital. | your notes
 - 昨天上午天气怎么样？ 下雨了。 | zuótiān shàngwǔ tiānqì zěnmeyàng? xià yǔ le. | What was the weather like yesterday morning? It rained. | your notes
 - 爸爸什么时候来北京呢？ 下个月。 | bàba shénme shíhou lái Běijīng ne? xià ge yuè. | When is Dad coming to Beijing? Next month. | your notes
+source: Your notes
 
 ## Everyday sentences
 - 睡觉了 means "gone to sleep" (a change), not "sleeping."

@@ -237,6 +237,8 @@ def word_row(e):
     tw = e["t"] or e["s"]
     same = "" if e["t"] else " same"
     note = f'<span class="note">{esc(e["n"])}</span>' if e["n"] else ""
+    if e.get("by"):
+        note += f'<span class="from">taught by {esc(e["by"])}</span>'
     if e["type"] == "sound":
         tw_cell = '<span class="c-tw"></span>'
     else:
@@ -326,12 +328,13 @@ def sources_line(s, words):
     if words:
         counts = {}
         for w in words:
-            counts[w["src"]] = counts.get(w["src"], 0) + 1
-        bits.append("Words: " + ", ".join(f"{SOURCE_LABEL.get(k, k)} ({n})" for k, n in counts.items()))
+            k = f'taught by {w["by"]}' if w.get("by") else SOURCE_LABEL.get(w["src"], w["src"])
+            counts[k] = counts.get(k, 0) + 1
+        bits.append("Words: " + ", ".join(f"{k} ({n})" for k, n in counts.items()))
     for label, url in s["sources"]:
         bits.append(f'<a href="{esc(url)}" target="_blank" rel="noopener">{esc(label)}</a>' if url else esc(label))
     if s["tips"] or s["examples"] or s["try"]:
-        bits.append("Wording and unmarked examples: Claude")
+        bits.append("Wording and unmarked examples: Claude" if s["sources"] else "Tips and unmarked examples: Claude")
     return f'<p class="src"><span>Sources:</span> {" · ".join(bits)}</p>' if bits else ""
 
 

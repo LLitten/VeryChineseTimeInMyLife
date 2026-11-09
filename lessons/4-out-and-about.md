@@ -14,6 +14,8 @@ words: 商店, 超市, 学校, 公司, 医院, 银行, 公园, 酒店, 机场, �
 ### Try it
 - try: Where's the bank? | 银行在哪里？ | yínháng zài nǎlǐ?
 - try: I'm going to school. | 我去学校。 | wǒ qù xuéxiào.
+source: AllSet: Expressing existence in a place with "zai" | https://resources.allsetlearning.com/chinese/grammar/ASGLRWT8
+source: AllSet: Using the verb "qu" | https://resources.allsetlearning.com/chinese/grammar/ASGFYNCL
 
 ## Directions
 words: 左边, 右边, 前面, 后面, 前边, 后边, 上, 下, 上面, 下面, 里, 里面, 外面, 旁边, 对面, 中间, 附近, 周围, 角落, 尽头, 对角线, 北, 南, 东, 西, 向上, 向下, 找, 找到, 找不到
@@ -29,6 +31,7 @@ words: 左边, 右边, 前面, 后面, 前边, 后边, 上, 下, 上面, 下面,
 ### Try it
 - try: The school is behind the hospital. | 学校在医院后面。 | xuéxiào zài yīyuàn hòumiàn.
 - try: I can't find it. | 我找不到。 | wǒ zhǎo bu dào.
+source: AllSet: Expressing existence with "you" | https://resources.allsetlearning.com/chinese/grammar/ASG04ZCI
 
 ## Getting around
 words: 来, 去, 走, 回, 到, 坐, 开, 飞机, 出租车, 计程车, 捷运, 公车, 机车, 脚踏车
@@ -45,6 +48,7 @@ words: 来, 去, 走, 回, 到, 坐, 开, 飞机, 出租车, 计程车, 捷运, 
 ### Try it
 - try: I take the bus to school. | 我坐公车去学校。 | wǒ zuò gōngchē qù xuéxiào.
 - try: Let's go home. | 我们回家吧。 | wǒmen huí jiā ba.
+source: AllSet: Using the verb "qu" | https://resources.allsetlearning.com/chinese/grammar/ASGFYNCL
 
 ## Shopping and money
 words: 买, 买到, 钱, 块, 多少, 东西, 衣服, 包, 盒

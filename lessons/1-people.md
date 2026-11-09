@@ -47,6 +47,8 @@ words: 我叫…, 你叫什么名字？, 名字, 叫, 你是哪里人？, 人, �
 - try: Where are you from? | 你是哪里人？ | nǐ shì nǎlǐ rén?
 - try: I'm American. | 我是美国人。 | wǒ shì Měiguó rén.
 - try: What do you do for work? | 你做什么工作？ | nǐ zuò shénme gōngzuò?
+source: AllSet: Using the verb "jiao" | https://resources.allsetlearning.com/chinese/grammar/ASGUGWVZ
+source: AllSet: Age with "sui" | https://resources.allsetlearning.com/chinese/grammar/ASGQUKJF
 
 ## Family and friends
 words: 爸爸, 妈妈, 儿子, 女儿, 朋友, 同学, 家, 口, 生日, 爱
@@ -60,6 +62,7 @@ words: 爸爸, 妈妈, 儿子, 女儿, 朋友, 同学, 家, 口, 生日, 爱
 ### Try it
 - try: There are three people in my family. | 我家有三口人。 | wǒ jiā yǒu sān kǒu rén.
 - try: This is my friend. | 这是我朋友。 | zhè shì wǒ péngyou.
+source: AllSet: Expressing close possession without "de" | https://resources.allsetlearning.com/chinese/grammar/ASGCI0KG
 
 ## Example dialogue
 Two friends run into each other. B brings a friend, C, who is from Taipei.

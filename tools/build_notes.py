@@ -49,7 +49,7 @@ def vocab_entries():
                 "kind": "word", "s": r["simplified"], "t": r["traditional_tw"], "p": r["pinyin"], "z": r["zhuyin"],
                 "m": r["meaning"], "topic": r["topic"], "type": r["type"],
                 "uses": [u.strip() for u in r["use"].split(";") if u.strip()],
-                "b": r["parts"], "n": r["note"], "hsk": r["hsk1"] == "yes", "src": r["source"],
+                "b": r["parts"], "n": r["note"], "hsk": r["hsk1"] == "yes", "src": r["source"], "by": r.get("taught_by", ""),
                 "flag": bool(r["check"]),
             })
     return out

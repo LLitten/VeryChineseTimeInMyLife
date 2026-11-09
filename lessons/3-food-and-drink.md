@@ -14,6 +14,7 @@ words: 喝, 水, 茶, 咖啡, 牛奶, 果汁, 可乐, 啤酒, 好喝, 杯, 瓶, 
 ### Try it
 - try: Two bottles of water, please. | 我要两瓶水。 | wǒ yào liǎng píng shuǐ.
 - try: I don't drink beer. | 我不喝啤酒。 | wǒ bù hē píjiǔ.
+source: AllSet: Measure words for counting | https://resources.allsetlearning.com/chinese/grammar/Measure_words_for_counting
 
 ## Food and flavors
 words: 吃, 菜, 米饭, 面包, 鸡蛋, 饼干, 水果, 苹果, 西瓜, 芒果, 凤梨, 菠萝, 柠檬, 好吃, 酸, 甜, 辣, 苦, 咸
@@ -44,3 +45,4 @@ words: 饭馆, 饭店, 吃饭, 你要吃什么？, 我请你, 请, 碗, 盘, 份
 ### Try it
 - try: A bowl of rice, please. | 我要一碗米饭。 | wǒ yào yì wǎn mǐfàn.
 - try: What do you want to eat? | 你要吃什么？ | nǐ yào chī shénme?
+source: AllSet: Measure words for counting | https://resources.allsetlearning.com/chinese/grammar/Measure_words_for_counting

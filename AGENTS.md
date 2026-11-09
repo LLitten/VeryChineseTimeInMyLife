@@ -46,11 +46,12 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 - `parts`: literal meaning of each character. `note`: usage notes.
 - `hsk1`: `yes` if the word is on the 150-word HSK 1 list (HSK 2.0, hsk.academy). Reference only: the learner isn't studying for the HSK exam, so the site doesn't filter by it.
 - `source`: `notes` (handwritten notes), `hsk-list` (HSK 1 word not yet in the notes), or `added` (added by an AI; check with friends).
+- `taught_by`: who taught the learner this word, for words learned from friends. "a friend" is a placeholder for the learner to fill in. The repo is public, so use a first name or nickname only. Shown on lesson word cards, in lesson source lines, and in the notes page's word details.
 - `check`: `check` only if a fact itself is uncertain. Currently none are set.
 
 ## Rules for changing the repo
 - **Keep the learner's organization.** Group by their notebook topics and sections. HSK 1 and AllSet A1 are tags and checklists, not the layout.
-- **Mark where things came from.** New words get `source` = `added` unless they come from the learner. Every lesson section needs `source:` lines: the AllSet article (with its URL) or other reputable source it was checked against, or "Your notes" when nothing else covers it. Mark examples taken from a source in their 4th field (`your notes`, `AllSet`); unmarked examples are understood to be written by the AI.
+- **Mark where things came from.** New words get `source` = `added` unless they come from the learner. Every lesson section should have `source:` lines where a source exists: the AllSet article (with its URL) or other reputable source it was checked against, or "Your notes" when nothing else covers it. Mark examples taken from a source in their 4th field (`your notes`, `AllSet`); unmarked examples are understood to be written by the AI.
 - **Keep notes plain.** Notes in `vocab.csv`, `lessons/` and `grammar/` are general reference: no "your note says…", quiz results or past mistakes. Anything personal (corrections to the handwritten notes, exam and quiz results, mistakes, what's been learned, open questions) goes in `progress.md`. When a handwritten note is wrong, write the correct version plainly and log the correction in `progress.md`.
 - **Vocabulary is words and phrases only.** Keep each `note` to one short line (about 60 characters). Longer explanations, patterns and examples belong in a lesson.
 - **Every word belongs in a lesson.** When adding a word to `vocab.csv`, add it to a lesson's `words:` line too; the build lists any word no lesson uses. Words a lesson introduces must be in `vocab.csv`.
