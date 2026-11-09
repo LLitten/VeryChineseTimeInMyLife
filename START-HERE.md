@@ -27,13 +27,13 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 ## Files in this repo
 | File | What it holds |
 |---|---|
-| `vocab.csv` | 369 entries grouped by the learner's own notebook topics, in notebook order. The `hsk1` column marks the 150 HSK 1 words (plus weekday and month patterns). The `source` column says where each entry came from: `notes` (the handwritten notes), `hsk-list` (HSK 1 words not yet in the notes, placed in the matching topic) or `added` (everyday phrases and Taiwan words added by Claude). Other columns: simplified, Taiwan form, pinyin, meaning, literal parts, notes, and a `check` flag for unclear readings. Includes the zhuyin chart. |
+| `vocab.csv` | 369 entries grouped by the learner's own notebook topics, in notebook order. The `hsk1` column marks the 150 HSK 1 words (plus weekday and month patterns). The `source` column says where each entry came from: `notes` (the handwritten notes), `hsk-list` (HSK 1 words not yet in the notes, placed in the matching topic) or `added` (everyday phrases and Taiwan words added by Claude). Two filter columns give other ways in: `type` (verb, noun, measure word and so on) and `use` (situations such as Food & drink, Getting around, Time & plans; a word can have several, separated by semicolons). Other columns: simplified, Taiwan form, pinyin, meaning, literal parts, notes, and a `check` flag for unclear readings. Includes the zhuyin chart. |
 | `grammar.md` | Patterns grouped by the learner's notebook sections (sentence structure, questions, negation and so on). Each is tagged with its AllSet A1 number or "Beyond A1" and a status. An A1 checklist at the end shows the gaps. Then corrections and 13 practice sentences from the notes. |
 | `error-patterns.md` | Mistakes the learner repeats, with fixes. Read this before writing practice material. |
 | `exam-results.md` | Baseline exam results, by topic, with every missed word. |
 | `study-plan.md` | Daily routine, weekly rhythm, a four-week roadmap and checkpoints. |
 | `progress-log.md` | One line per session. Add a line at the end of each one. |
-| `tools/` | Four self-contained HTML pages (notes table, recall quiz, vocabulary check, vocabulary exam). See the note in that folder's section below. The notes table still uses the older topic grouping and hasn't been updated to the new `vocab.csv` layout yet. |
+| `tools/` | Four self-contained HTML pages (notes table, recall quiz, vocabulary check, vocabulary exam). See the note in that folder's section below. The notes table (`mandarin-notes.html`) filters by topic, word type, situation and HSK 1. Its data is generated from `vocab.csv` and `grammar.md`: after editing either, run `python3 tools/build_notes.py`. |
 
 ## Session ritual
 1. Paste this file plus the one or two files relevant to today's topic.
