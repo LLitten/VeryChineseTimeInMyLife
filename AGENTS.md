@@ -28,8 +28,8 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 | File | What it holds |
 |---|---|
 | `vocab.csv` | Every word and phrase (369 rows), grouped by the learner's notebook topics in notebook order. Columns are described below. |
-| `grammar.md` | Grammar grouped by the learner's notebook sections. Each pattern has a status (✅ in notes, ◐ partly, ○ not learned) and an AllSet tag (`A1 #n` or `Beyond A1`). Ends with an A1 checklist, corrections to the notes, and 13 practice sentences from the notes. |
-| `progress.md` | Session log, baseline exam results, and the mistakes to watch for. |
+| `grammar.md` | Grammar grouped by the learner's notebook sections. Each pattern has an AllSet tag (`A1 #n` or `Beyond A1`). Ends with 13 practice sentences from the notes. |
+| `progress.md` | Everything personal: session log, exam results, mistakes to watch, the A1 grammar checklist with what's learned, corrections to the handwritten notes, and open questions. |
 | `study-plan.md` | Daily routine, weekly rhythm, four-week roadmap and checkpoints. |
 | `index.html`, `tools/` | The website: a home page and four pages (notes, recall quiz, vocabulary check, vocabulary exam). |
 | `tools/build_notes.py` | Regenerates the notes page's data from `vocab.csv` and `grammar.md`. Also defines the situation groups. |
@@ -44,13 +44,13 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 - `parts`: literal meaning of each character. `note`: usage notes.
 - `hsk1`: `yes` if the word is on the 150-word HSK 1 list (HSK 2.0, hsk.academy). Reference only: the learner isn't studying for the HSK exam, so the site doesn't filter by it.
 - `source`: `notes` (handwritten notes), `hsk-list` (HSK 1 word not yet in the notes), or `added` (added by an AI; check with friends).
-- `check`: `check` if a reading was unclear or the note may be wrong.
+- `check`: `check` only if a fact itself is uncertain. Currently none are set.
 
 ## Rules for changing the repo
 - **Keep the learner's organization.** Group by their notebook topics and sections. HSK 1 and AllSet A1 are tags and checklists, not the layout.
 - **Mark where things came from.** New words get `source` = `added` unless they come from the learner. Examples you write in `grammar.md` must not be marked *(your notes)*.
-- **Flag, don't silently fix.** When a note from the learner is wrong, keep it recognizable, state the correction, and mark it (⚑ in `grammar.md`, or `check` / a note in `vocab.csv`).
-- **Rebuild the site data** after editing `vocab.csv` or `grammar.md`: `python3 tools/fill_zhuyin.py` (for new words), then `python3 tools/build_notes.py`. The page can't parse other formats, so keep `grammar.md`'s heading structure (`## n. Section`, `#### Pattern` with status and tag, `- **Label:** text` bullets).
+- **Keep notes plain.** Notes in `vocab.csv` and `grammar.md` are general reference: no "your note says…", quiz results or past mistakes. Anything personal (corrections to the handwritten notes, exam and quiz results, mistakes, what's been learned, open questions) goes in `progress.md`. When a handwritten note is wrong, write the correct version plainly and log the correction in `progress.md`.
+- **Rebuild the site data** after editing `vocab.csv` or `grammar.md`: `python3 tools/fill_zhuyin.py` (for new words), then `python3 tools/build_notes.py`. The page can't parse other formats, so keep `grammar.md`'s heading structure (`## n. Section`, `#### Pattern` with its AllSet tag in backticks, `- **Label:** text` bullets).
 - **Publishing:** the site deploys from `main` with GitHub Pages, usually within a couple of minutes of a push. Pages must stay mobile-friendly and self-contained (no build step; Google Fonts is the only external resource).
 - **Log sessions:** add a dated line to the session log in `progress.md` at the end of each study session.
 - **The repo is public.** Don't add anything private about the learner or their friends.
@@ -62,4 +62,4 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 4. At the end, add a line to the session log in `progress.md`.
 
 ## Caution
-Transcribed from handwritten pencil notes. Items marked `check` in `vocab.csv` and ⚑ in `grammar.md` are uncertain. Treat everything as a study aid; native-speaker friends have the last word on usage.
+Transcribed from handwritten pencil notes. Open questions about the notes are listed in `progress.md`. Treat everything as a study aid; native-speaker friends have the last word on usage.

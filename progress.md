@@ -1,6 +1,6 @@
 # Progress
 
-Everything about how the learner is doing: the session log, the baseline exam, and the mistakes to watch for. Read the mistakes section before writing practice material.
+Everything personal about how the learner is doing: the session log, the baseline exam, mistakes to watch for, the grammar checklist, corrections to the handwritten notes, and open questions. The other files hold plain, general notes. Read the mistakes section before writing practice material.
 
 ## Session log
 
@@ -11,7 +11,7 @@ One line per session: date, what happened, what to focus on next. Add a line at 
 | Nov 2026 | Baseline vocabulary exam: 96/150 (64%). Weakest topics: polite phrases, things, places and directions. | Week 1 verbs; fix 不客气 / 对不起 swap |
 | Nov 2026 | Digitized 48 handwritten pages into `vocab.csv` and `grammar.md`. Corrected notes on duration order, 会, 什么时候 and adverbs. | Practice corrected patterns |
 | Nov 2026 | Short practice on 不 vs 没, 要 vs 会, 也 and 都, reporting speech with 说 and 听…说. | Longer sentences with friends |
-| Nov 2026 | Reorganized notes by notebook topic with filters for word type, situation and HSK 1. Notes site published on GitHub Pages. | 6 A1 grammar points not yet learned (see `grammar.md` checklist) |
+| Nov 2026 | Reorganized notes by notebook topic with filters for word type, situation and HSK 1. Notes site published on GitHub Pages. | 6 A1 grammar points not yet learned (see the grammar checklist below) |
 
 ## Baseline exam (November 2026)
 
@@ -95,3 +95,82 @@ Several of these (医生, 商店, 电视, 衣服, 东西, 下雨, 时候, 呢, �
 - Choosing 不 vs 没 and 要 vs 会 in short sentences.
 - Quoting and reporting speech with 说 and 听…说.
 - Leaving a word blank when unsure, which keeps wrong guesses from sticking.
+
+## Grammar checklist (AllSet A1)
+
+Which of the 40 AllSet A1 grammar points are in the notes. "Section" is the section of `grammar.md`. ✅ in the notes · ◐ partly (the words are known, but the pattern isn't written up) · ○ not learned yet.
+
+| A1 # | Point | Section | Status |
+|---|---|---|---|
+| 1 | 没 + 有 | 3 | ✅ |
+| 2 | 不 + verb / adjective | 3 | ✅ |
+| 3 | 都 | 4 | ✅ |
+| 4 | 也 | 4 | ✅ |
+| 5 | 和 | 5 | ✅ |
+| 6 | 还是 | 5 | ✅ |
+| 7 | Age with 岁 | 9 | ◐ |
+| 8 | Measure word 个 | 9 | ✅ |
+| 9 | Dates | 9 | ✅ |
+| 10 | Days of the week | 9 | ✅ |
+| 11 | Numbers | 9 | ✅ |
+| 12 | Clock time | 9 | ✅ |
+| 13 | Possession without 的 | 5 | ○ |
+| 14 | Possession with 的 | 5 | ✅ |
+| 15 | Questions with 呢 | 2 | ◐ |
+| 16 | Suggestions with 吧 | 2 | ○ |
+| 17 | 在 + place | 1, 10 | ✅ |
+| 18 | Place + 有 | 10 | ✅ |
+| 19 | Subject + 有 | 10 | ✅ |
+| 20 | 叫 + name | 6 | ○ |
+| 21 | 去 + place | 6 | ◐ |
+| 22 | 姓 + surname | 6 | ○ |
+| 23 | 能 | 6 | ◐ |
+| 24 | 会 | 6 | ✅ |
+| 25 | 要: going to | 6 | ◐ |
+| 26 | 可以 | 6 | ○ |
+| 27 | 要: want | 6 | ◐ |
+| 28 | 怎么 + verb | 2 | ◐ |
+| 29 | 没(有) + verb | 3 | ✅ |
+| 30 | 不要 / 别 + verb | 3 | ✅ |
+| 31 | Basic order | 1 | ✅ |
+| 32 | A 是 B | 1 | ✅ |
+| 33 | 太…了 | 4 | ✅ |
+| 34 | Noun + 很 + adjective | 4 | ✅ |
+| 35 | Verb 不 verb | 2 | ✅ |
+| 36 | Question word placement | 2 | ✅ |
+| 37 | Tag questions with 不 | 2 | ✅ |
+| 38 | Tag questions with 吗 | 2 | ○ |
+| 39 | Questions with 吗 | 2 | ✅ |
+| 40 | 二 vs 两 | 9 | ✅ |
+
+**Totals:** 27 ✅ · 7 ◐ · 6 ○
+
+## Corrections to the handwritten notes
+
+What the transcription changed, so the notebook can be updated to match.
+
+**Grammar**
+- **Duration:** the notes put the duration after the object. The usual order is verb + duration + object: 我学了两个小时数学.
+- **会:** the notes list only "can (a learned skill)." It also means "will": 明天会很好.
+- **什么时候:** the notes label it "future." It works for the past too: 你什么时候吃的？
+- **Adverbs:** the notes say adverbs can't come before the subject, and also that some can open a sentence. Most can't; 也许 and 可能 can.
+- **不太:** the notes write bù tài. It's pronounced bú tài, and it takes no 了.
+- **Long-sentence order:** a guideline, not a fixed rule.
+- **没 and 了:** the notes say "never use 了 with 没." That holds for 没 + verb; 没钱了 ("out of money") is fine.
+
+**Vocabulary**
+- **上午:** the notes say "late morning." It covers the whole time before noon.
+- **啤酒:** the first character was written like 脾 (spleen). It's 啤, with the mouth radical.
+- **昨天:** a practice sentence used 作 instead of 昨.
+- **饼干:** the pinyin note reads "bǐng qiān." It's bǐnggān.
+- **别气我:** glossed as "don't piss me off." It's milder: "don't make me mad."
+- **喂，你睡觉了吗？** glossed as "are you sleeping?" It means "have you gone to sleep?"
+- **Zhuyin:** several sounds are marked "NE" in the notes, probably "no English equivalent."
+
+## Open questions from the notes
+
+Things the notes don't make clear. Ask a friend, or check the notebook.
+- **文:** the note says it's "a more common way to say someone speaks a language." Unclear what was meant.
+- **也都:** the note is cut off at the edge of the page.
+- **ē / è:** the note says ē is a long "ee" and è a short "eh." In pinyin they're the same vowel in different tones, so the note may mean something else.
+- **操他妈的:** the first character was hard to read in the notes.
