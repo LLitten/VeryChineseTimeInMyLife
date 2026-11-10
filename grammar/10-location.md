@@ -1,5 +1,6 @@
 # Location and "there is"
 summary: 在 for where things are, 有 for "there is" and "have", and direction words.
+intro: Two verbs handle most sentences about location: 在 (to be somewhere) and 有 (there is, to have). This page covers both, plus direction words for saying exactly where something is.
 related: Out & about; Home & life
 
 ## Be somewhere: 在

@@ -1,5 +1,6 @@
 # Pronunciation
 summary: Tones, tone changes, and the zhuyin chart used in Taiwan.
+intro: Tones change the meaning of a word, so they're worth getting right early. This page covers the four tones, the common tone changes, and zhuyin, the pronunciation system used in Taiwan.
 related: People
 see: Beginner Conversational, Unit 3: Practicing Tone Pairs | https://yoyochinese.com/courses/beginner-conversational-chinese; Units 5, 7 and 9: Pinyin Finals and Initials | https://yoyochinese.com/courses/beginner-conversational-chinese
 

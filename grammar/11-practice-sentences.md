@@ -1,5 +1,6 @@
 # Practice sentences
 summary: Sentences from your notes that mix several patterns.
+intro: These sentences come from your notes and combine several patterns at once. Use them to review, or try to say each one before you read it.
 related: Sentence structure; Yes / no and other questions
 
 ## Questions and answers

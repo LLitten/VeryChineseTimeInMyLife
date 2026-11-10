@@ -1,16 +1,17 @@
 # Food & drink
 summary: Drinks, food, fruit and vegetables, describing flavors, and ordering at a restaurant.
+intro: Food is one of the easiest ways into a conversation, especially in Taiwan. This page covers drinks, everyday foods, fruit and vegetables, how to describe flavors, and how to order at a restaurant.
 related: Out & about; Building blocks; Grammar: Numbers, measure words, dates and time; Grammar: Adverbs and describing
 
 ## Drinks
 Ordering a drink needs the drink and a measure word for its container.
 ### Everyday drinks
-The verb for drinks is 喝, not 吃. 好喝 means a drink tastes good.
+Drinks use 喝, not 吃.
 words: 喝, 水, 茶, 咖啡, 牛奶, 果汁, 可乐, 啤酒, 好喝
 - 你喝茶还是咖啡？ | nǐ hē chá háishì kāfēi? | Tea or coffee?
 - 这个果汁很好喝！ | zhège guǒzhī hěn hǎohē! | This juice is really good!
 ### Cups, bottles and cans
-杯 is a cup or glass of, 瓶 a bottle of, 罐 or 听 a can of. 杯子 is the cup itself.
+杯子 is the cup itself; 杯 counts what's in it.
 words: 杯, 瓶, 听 [measure word], 罐, 杯子
 - 我要一杯咖啡。 | wǒ yào yì bēi kāfēi. | A coffee, please.
 - 我要两瓶水。 | wǒ yào liǎng píng shuǐ. | Two bottles of water, please.
@@ -22,21 +23,21 @@ source: AllSet: Measure words for counting | https://resources.allsetlearning.co
 ## Food
 Most food words are easy to break into parts: 牛肉 is "cow + meat."
 ### Staples
-米饭 is cooked rice; 面 is noodles (Taiwan writes 麵). 菜 can mean a dish or vegetables.
+Taiwan writes noodles as 麵. 菜 can mean a dish or vegetables.
 words: 吃, 米饭, 面, 面包, 鸡蛋, 菜
 - 我要一碗米饭。 | wǒ yào yì wǎn mǐfàn. | A bowl of rice, please.
 - 牛肉面很好吃。 | niúròu miàn hěn hǎochī. | Beef noodles are delicious.
 ### Meat and fish
-Animal + 肉 = that meat: 牛肉 beef, 猪肉 pork, 鸡肉 chicken. Fish is just 鱼.
+Animal + 肉 = that meat.
 words: 肉, 牛肉, 猪肉, 鸡肉, 鱼
 - 我不吃猪肉。 | wǒ bù chī zhūròu. | I don't eat pork.
 ### Fruit
-Many fruit names end in 果 (fruit) or 子. Pineapple is 凤梨 in Taiwan and 菠萝 on the mainland.
+Pineapple is 凤梨 in Taiwan and 菠萝 on the mainland.
 words: 水果, 苹果, 香蕉, 葡萄, 草莓, 橘子, 西瓜, 芒果, 凤梨, 菠萝, 柠檬
 - 我最喜欢芒果。 | wǒ zuì xǐhuan mángguǒ. | Mango is my favorite.
 - 台湾的凤梨很甜。 | Táiwān de fènglí hěn tián. | Taiwan's pineapples are sweet.
 ### Vegetables
-蔬菜 is "vegetables" in general. 青菜 (leafy greens) is a common side dish in Taiwan. Careful: 土豆 is a potato on the mainland but a peanut in Taiwan.
+Careful: 土豆 is a potato on the mainland but a peanut in Taiwan.
 words: 蔬菜, 青菜, 番茄, 洋葱, 土豆
 - 我要一盘青菜。 | wǒ yào yì pán qīngcài. | A plate of greens, please.
 ### Snacks
@@ -51,12 +52,11 @@ source: LTL: Vegetables in Chinese | https://ltl-beihai.com/vegetables-in-chines
 ## Describing flavors
 Flavors work like other adjectives: 很 + flavor, or 太 + flavor + 了 for "too."
 ### The five flavors
-酸 sour, 甜 sweet, 苦 bitter, 辣 spicy, 咸 salty.
 words: 酸, 甜, 苦, 辣, 咸
 - 这个菜很辣！ | zhège cài hěn là! | This dish is really spicy!
 - 太咸了！ | tài xián le! | Too salty!
 ### Tasty or not
-好吃 is for food, 好喝 for drinks. Add 不 for "not good."
+Add 不 for “not good”: 不好吃.
 words: 好吃, 好喝
 - 不好吃。 | bù hǎochī. | It's not good.
 ### Try it
@@ -66,16 +66,15 @@ words: 好吃, 好喝
 ## Eating out and ordering
 Order with 我要 + number + measure word + food.
 ### Places to eat
-饭馆 is a restaurant. In Taiwan, 饭店 usually means a hotel; a restaurant is 餐厅 or 饭馆.
+In Taiwan, 饭店 usually means a hotel.
 words: 饭馆, 饭店, 服务员
 - 我们去饭馆吃饭吧。 | wǒmen qù fànguǎn chīfàn ba. | Let's go eat at a restaurant.
 ### Ordering
-The measure word shows how the food comes: 碗 bowl, 盘 plate, 份 an order, 串 skewer, 笼 steamer basket, 锅 pot, 碟 small dish, 片 slice.
+The measure word shows how the food comes.
 words: 你要吃什么？, 碗, 盘, 份, 串, 笼, 锅, 碟, 片, 顿
 - 我们要一笼小笼包。 | wǒmen yào yì lóng xiǎolóngbāo. | A basket of soup dumplings, please.
 - 你要吃什么？ | nǐ yào chī shénme? | What do you want to eat?
 ### Paying
-我请你 means "my treat." 请 also means "please" and "to invite."
 words: 我请你, 请, 吃饭
 - 今天我请你！ | jīntiān wǒ qǐng nǐ! | Today's my treat!
 ### Try it

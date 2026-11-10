@@ -1,5 +1,6 @@
 # Linking words
 summary: 和, 还是 and 或者, and the two jobs of 的.
+intro: These small words join ideas together. 和 links nouns, 还是 and 或者 both mean "or" in different situations, and 的 shows possession and links descriptions to nouns.
 related: Building blocks; People
 
 ## 和: and, with

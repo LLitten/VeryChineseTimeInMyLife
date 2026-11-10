@@ -1,5 +1,6 @@
 # Sentence structure
 summary: The order words go in: subject, time, place, verb, object.
+intro: Chinese word order starts like English (subject, verb, object) but differs once you add time, place or other details. This page shows where each piece goes, from short sentences to long ones.
 related: Time; Out & about
 see: Grammar Series, Unit 1: Word Order | https://yoyochinese.com/courses/chinese-grammar-series
 

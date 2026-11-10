@@ -1,5 +1,6 @@
 # Adverbs and describing
 summary: 很, 太…了, 都, 也, where adverbs go, 地 and 多 + adjective.
+intro: Describing things in Chinese doesn't use "to be": adjectives work on their own, usually with 很. This page also covers 太, 都, 也, where adverbs go, and asking "how …?" with 多.
 related: Building blocks; Food & drink
 see: Grammar Series, Unit 6: Adjectives | https://yoyochinese.com/courses/chinese-grammar-series
 

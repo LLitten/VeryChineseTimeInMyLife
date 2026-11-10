@@ -1,5 +1,6 @@
 # Colors & clothes
 summary: Colors, what you're wearing, and describing how things look.
+intro: Colors and clothes come up when shopping, describing people, and choosing between things. This page covers the basic colors, what colors mean, the two verbs for "wear," and everyday clothes.
 related: Out & about; Building blocks; Grammar: Linking words
 
 ## Colors
@@ -9,11 +10,11 @@ words: 颜色, 红色, 黑色, 白色, 蓝色, 绿色, 黄色
 - 你喜欢什么颜色？ | nǐ xǐhuan shénme yánsè? | What color do you like?
 - 我喜欢蓝色。 | wǒ xǐhuan lánsè. | I like blue.
 ### More colors
-Brown is 咖啡色, "coffee color." Orange is 橙色 on the mainland but usually 橘色 (júsè) in Taiwan.
+Taiwan usually says 橘色 (júsè) for orange.
 words: 粉红色, 橙色, 紫色, 灰色, 咖啡色
 - 这个是咖啡色的。 | zhège shì kāfēisè de. | This one is brown.
 ### Light and dark
-深 (dark, deep) and 浅 (light) go in front: 深蓝色 navy, 浅绿色 light green.
+They go in front of the color: 深蓝色 navy.
 words: 深, 浅
 - 我要浅蓝色的。 | wǒ yào qiǎnlánsè de. | I want the light blue one.
 ### Colors and meanings
@@ -30,11 +31,10 @@ words: 穿, 戴
 - 他穿白色的衬衫。 | tā chuān báisè de chènshān. | He's wearing a white shirt.
 - 她戴帽子。 | tā dài màozi. | She's wearing a hat.
 ### Tops and jackets
-衣服 means "clothes" in general. 外套 is any jacket or coat.
 words: 衣服, 衬衫, T恤, 外套
 - 今天很冷，穿外套吧。 | jīntiān hěn lěng, chuān wàitào ba. | It's cold today, wear a jacket.
 ### Pants, skirts and shoes
-Pants words end in 裤: 牛仔裤 jeans, 短裤 shorts.
+Pants words end in 裤.
 words: 裤子, 牛仔裤, 短裤, 裙子, 鞋子, 帽子
 - 我想买一双鞋子。 | wǒ xiǎng mǎi yì shuāng xiézi. | I want to buy a pair of shoes.
 - 双 (shuāng) is the measure word for a pair.

@@ -14,7 +14,8 @@ Pages built:
 
 Lesson format (lessons/ and grammar/ use the same one). Keep it short: no long paragraphs.
   # Title
-  summary: one line for the chapter list and the top of the chapter page
+  summary: one line for the Lessons index
+  intro: a short introduction (2-3 sentences) shown at the top of the page; repeat the line for a 2nd paragraph
   related: Lesson title; Grammar: <grammar lesson title>   (links, separated by semicolons)
   see: Yoyo course, Unit n: Title | URL; ...   "Also covered in Yoyo Chinese" links
   ## Section heading                a section of the topic page (linkable: <topic>.html#<slug>)
@@ -105,7 +106,7 @@ def highlight(zh, keys):
 # ---------------------------------------------------------------- parsing
 def parse_lesson(path, prefix):
     name = re.sub(r"^\d+-", "", path.stem)
-    L = {"title": name, "summary": "", "related": [], "see": [], "file": f"{prefix}-{name}.html",
+    L = {"title": name, "summary": "", "intro": [], "related": [], "see": [], "file": f"{prefix}-{name}.html",
          "base": f"{prefix}-{name}", "sections": [], "kind": prefix}
     sec = cur = None
     for raw in path.read_text(encoding="utf8").splitlines():
@@ -116,6 +117,8 @@ def parse_lesson(path, prefix):
             L["title"] = st[2:].strip()
         elif st.startswith("summary:") and sec is None:
             L["summary"] = st[8:].strip()
+        elif st.startswith("intro:") and sec is None:
+            L["intro"].append(st[6:].strip())
         elif st.startswith("related:") and sec is None:
             L["related"] = [x.strip() for x in st[8:].split(";") if x.strip()]
         elif st.startswith("see:") and sec is None:
@@ -536,8 +539,9 @@ def render_section(a):
 
 def render_chapter(ch, arts, by_title, i, group, label):
     out = [f"<h1>{esc(ch['title'])}</h1>"]
-    if ch["summary"]:
-        out.append(f'<p class="intro">{esc(ch["summary"])}</p>')
+    for para in ch["intro"] or [ch["summary"]]:
+        if para:
+            out.append(f'<p class="intro">{inline(para)}</p>')
     out.append(f'<p class="lead">{label} {i + 1} of {len(group)}. Jump to a section, or read top to bottom.</p>')
     out.append('<nav id="contents" class="contents" aria-label="Contents"><b>Contents</b><ol>' + "".join(
         f'<li><a href="#{a["anchor"]}">{esc(a["title"])}</a>'

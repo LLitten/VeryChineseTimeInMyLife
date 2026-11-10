@@ -1,5 +1,6 @@
 # Negation
 summary: 不, 没, 别, 不太 and "not as … as."
+intro: Chinese has two main words for "not": 不 and 没. Choosing between them depends on time and on the verb. This page also covers 别 for "don't," 不太 for "not very," and comparisons with 没有.
 related: Building blocks; Conversation
 see: Grammar Series, Unit 2: Negation | https://yoyochinese.com/courses/chinese-grammar-series; Beginner Conversational, Unit 10: Expressing "No" and "Know" | https://yoyochinese.com/courses/beginner-conversational-chinese
 

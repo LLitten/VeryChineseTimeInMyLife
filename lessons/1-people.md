@@ -1,23 +1,24 @@
 # People
 summary: Saying hi and bye, introducing yourself, and talking about family and friends.
+intro: Meeting people is where most conversations start. This page covers greeting friends, saying goodbye, introducing yourself, and talking about the people in your life. Most of it is short, fixed phrases you can use right away.
 related: Conversation; Feelings; Jobs & free time; Grammar: Yes / no and other questions; Grammar: Linking words
 see: Beginner Conversational, Unit 4: Introducing Yourself | https://yoyochinese.com/courses/beginner-conversational-chinese
 
 ## Saying hi
 Greetings depend on how well you know someone. With friends, keep it short and casual.
 ### Everyday greetings
-Between friends, 嗨 or 你好 is enough. In the morning, 早安 (or just 早) works too.
+Between friends, 嗨 or 你好 is enough. In the morning, just 早 works too.
 words: 嗨, 早安
 - 嗨！ | hāi! | Hi!
 - 早安！ | zǎo'ān! | Good morning!
 ### Catching up
-After some time apart, ask how things have been. 你好吗？ is correct, but it sounds like a textbook; friends ask 最近怎么样？ instead.
+你好吗？ sounds like a textbook. Friends ask 最近怎么样？ instead.
 words: 好久不见, 最近怎么样？, 还好
 - 还好 is a modest "okay." 不错 means "pretty good."
 - 嗨！好久不见！ | hāi! hǎojiǔ bújiàn! | Hi! Long time no see!
 - 最近怎么样？ 还好，你呢？ | zuìjìn zěnmeyàng? hái hǎo, nǐ ne? | How have you been? Okay, and you?
 ### "Have you eaten?"
-吃饭了吗？ is a friendly check-in, especially around mealtimes. It isn't always an invitation: 吃了 (I have) or 还没 (not yet) are both fine answers.
+A friendly check-in, not always an invitation. Answer 吃了 (yes) or 还没 (not yet).
 words: 吃饭了吗？
 - 吃饭了吗？ 吃了，你呢？ | chīfàn le ma? chī le, nǐ ne? | Have you eaten? Yes, and you?
 ### Try it
@@ -27,7 +28,7 @@ words: 吃饭了吗？
 ## Saying bye
 Goodbyes are short. Most use 见 ("see"): see you tomorrow, see you next time.
 ### Bye for now
-拜拜 is the everyday "bye" (often written 掰掰 in Taiwan). 再见 is correct but more textbook. 晚安 is "good night."
+再见 is correct but textbook. Friends say 拜拜, often written 掰掰 in Taiwan.
 words: 拜拜, 再见, 晚安
 - 拜拜！ | bāibāi! | Bye!
 - 晚安！ | wǎn'ān! | Good night!
@@ -37,7 +38,7 @@ words: 明天见, 下次见
 - 明天见！ | míngtiān jiàn! | See you tomorrow!
 - 拜拜，下次见！ | bāibāi, xià cì jiàn! | Bye, see you next time!
 ### Leaving a group
-我先走了 ("I'll go first") is the polite way to leave before others. In Taiwan, people often swap LINE contacts before leaving.
+Polite when you leave before the others.
 words: 我先走了, 我们加LINE吧
 - 我先走了，明天见！ | wǒ xiān zǒu le, míngtiān jiàn! | I'm heading out, see you tomorrow!
 - 我们加LINE吧！ | wǒmen jiā LINE ba! | Let's add each other on LINE!
@@ -48,7 +49,7 @@ words: 我先走了, 我们加LINE吧
 ## Introducing yourself
 Introductions follow a simple pattern: your name, where you're from, and what you do.
 ### Your name
-叫 means "to be called." Use it for your full name or a nickname.
+Works for full names and nicknames.
 words: 我叫…, 你叫什么名字？, 名字, 叫
 - 你好，我叫安娜。你叫什么名字？ | nǐ hǎo, wǒ jiào Ānnà. nǐ jiào shénme míngzi? | Hi, I'm Anna. What's your name?
 ### Where you're from
@@ -57,11 +58,11 @@ words: 你是哪里人？, 人, 中国, 美国, 北京, 住
 - 我是美国人。你是哪里人？ | wǒ shì Měiguó rén. nǐ shì nǎlǐ rén? | I'm American. Where are you from?
 - 我住在台北。 | wǒ zhù zài Táiběi. | I live in Taipei.
 ### What you do
-For jobs, use 是 + job, or 做 + 工作 in a question. More jobs are in the Jobs & free time lesson.
+More jobs are in the Jobs & free time lesson.
 words: 你做什么工作？, 工作, 医生
 - 你做什么工作？ 我是医生。 | nǐ zuò shénme gōngzuò? wǒ shì yīshēng. | What do you do? I'm a doctor.
 ### Age, titles and meeting people
-Age is number + 岁, with no 是. 先生 and 小姐 (Mr., Miss) go after a surname. 很高兴认识你 ("nice to meet you") is a little formal between young friends.
+Age takes no 是: 我二十岁. Titles go after the surname: 王先生.
 words: 岁, 先生, 小姐, 很高兴认识你, 认识
 - 他三十岁。 | tā sānshí suì. | He's thirty.
 - 王先生，很高兴认识你。 | Wáng xiānsheng, hěn gāoxìng rènshi nǐ. | Mr. Wang, nice to meet you.
@@ -75,16 +76,15 @@ source: AllSet: Age with "sui" | https://resources.allsetlearning.com/chinese/gr
 ## Family and friends
 Talking about the people close to you uses a few simple patterns.
 ### Family
-For close people, 的 is usually dropped: 我妈妈, not 我的妈妈. 家 means both "home" and "family."
+Close family usually drops 的: 我妈妈, not 我的妈妈.
 words: 爸爸, 妈妈, 儿子, 女儿, 家, 爱
 - 我爱我妈妈。 | wǒ ài wǒ māma. | I love my mom.
 - 今天是我女儿的生日。 | jīntiān shì wǒ nǚ'ér de shēngrì. | Today is my daughter's birthday.
 ### How many in your family
-口 counts the people in a family. It's the usual way to answer "how many people are in your family?"
+The usual way to say how many people are in your family.
 words: 口
 - 你家有几口人？ 我家有四口人。 | nǐ jiā yǒu jǐ kǒu rén? wǒ jiā yǒu sì kǒu rén. | How many people are in your family? Four.
 ### Friends and classmates
-朋友 is a friend, 同学 a classmate. 生日 (birthday) is a common reason to get together.
 words: 朋友, 同学, 生日
 - 这是我朋友，她是我的同学。 | zhè shì wǒ péngyou, tā shì wǒ de tóngxué. | This is my friend. She's my classmate.
 ### Try it

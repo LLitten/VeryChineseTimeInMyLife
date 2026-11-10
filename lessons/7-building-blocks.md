@@ -1,14 +1,15 @@
 # Building blocks
 summary: Pronouns, numbers, measure words, describing words and opposites, and the small words that hold sentences together.
+intro: These are the words that appear in almost every sentence: pronouns, numbers, measure words, describing words and the small grammar words. Learn them well and every other topic gets easier.
 related: Food & drink; Colors & clothes; Grammar: Negation; Grammar: Adverbs and describing; Grammar: Linking words
 
 ## People words
 ### I, you, he, she
-他 and 她 sound the same (tā); only the writing differs. Add 们 for more than one person.
+他 and 她 sound the same; only the writing differs.
 words: 我, 你, 他, 她, 们, 我们, 她们
 - 我们是朋友。 | wǒmen shì péngyou. | We're friends.
 ### This and that
-这 is this, 那 is that. Before a noun they need a measure word: 这个, 那本.
+Before a noun they need a measure word: 这个, 那本.
 words: 这, 那
 - 这是我的，那是你的。 | zhè shì wǒ de, nà shì nǐ de. | This is mine; that's yours.
 ### Try it
@@ -17,7 +18,7 @@ words: 这, 那
 ## Numbers
 Chinese numbers build up very regularly.
 ### One to ten, and beyond
-十一 is "ten-one" (11), 二十 "two-ten" (20), 二十二 (22). 百 is a hundred.
+Numbers build up regularly: 十一 (11), 二十 (20), 二十二 (22).
 words: 零, 一, 二, 三, 四, 五, 六, 七, 八, 九, 十, 百
 - 三十五 | sānshíwǔ | 35
 ### 二 or 两
@@ -35,11 +36,11 @@ source: AllSet: Comparing "er" and "liang" | https://resources.allsetlearning.co
 ## Measure words
 Every counted noun needs a measure word: number + measure word + noun.
 ### The everyday ones
-个 works for most things when you're not sure. 些 means "some."
+个 works for most things when you're not sure.
 words: 个, 些
 - 我要一些水果。 | wǒ yào yìxiē shuǐguǒ. | I'd like some fruit.
 ### For people
-位 is the polite one: 一位老师. 名 is used for people in a role, and 口 for family members.
+位 is the polite one.
 words: 位, 名, 口
 - 一位老师 | yí wèi lǎoshī | a teacher (polite)
 ### More measure words
@@ -52,7 +53,7 @@ source: AllSet: Measure words for counting | https://resources.allsetlearning.co
 ## Describing things
 Describing words (adjectives) don't need 是. Use 很 instead: 他很高.
 ### Very, too and not very
-很 very · 非常 extremely · 太…了 too / so · 不太 not very (no 了).
+不太 (not very) takes no 了.
 words: 很, 非常, 太, 不太, 一点儿
 - 这个太大了。 | zhège tài dà le. | This is too big.
 - 我不太高兴。 | wǒ bú tài gāoxìng. | I'm not very happy.
@@ -74,7 +75,6 @@ source: LTL: Opposites in Chinese | https://ltl-singapore.com/opposites-in-chine
 ## Grammar glue
 These small words appear everywhere. Each has a grammar lesson; see the links at the end.
 ### Linking words
-的 (possession, description) · 和 (and, for nouns) · 还是 / 或者 (or).
 words: 的, 地, 和, 还是, 或者
 - 我和朋友 | wǒ hé péngyou | my friend and I
 ### Saying no

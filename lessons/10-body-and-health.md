@@ -1,5 +1,6 @@
 # Body & health
 summary: Parts of the body, saying what hurts, and getting sick.
+intro: These words help when you need to say you're not feeling well. This page covers parts of the body, how to say something hurts, and what to say when you're sick or seeing a doctor.
 related: Feelings; Home & life; Grammar: Adverbs and describing
 
 ## The body
@@ -22,7 +23,6 @@ words: 疼
 - 我头疼。 | wǒ tóu téng. | I have a headache.
 - 我肚子疼。 | wǒ dùzi téng. | My stomach hurts.
 ### Feeling unwell
-舒服 is "comfortable." 不舒服 is the usual way to say you feel unwell. 累 is "tired."
 words: 舒服, 累
 - 我不舒服。 | wǒ bù shūfu. | I don't feel well.
 - 我今天很累。 | wǒ jīntiān hěn lèi. | I'm really tired today.
@@ -32,17 +32,16 @@ words: 舒服, 累
 
 ## Getting sick
 ### Being sick
-生病 is "get sick." 感冒 is a cold; 我感冒了 means "I've caught a cold."
+我感冒了 means “I've caught a cold.”
 words: 生病, 感冒
 - 我感冒了。 | wǒ gǎnmào le. | I've got a cold.
 - 他生病了。 | tā shēngbìng le. | He's sick.
 ### Getting better
-You 吃药 (eat medicine) to take medicine, and 看医生 to see a doctor.
+You “eat” medicine: 吃药.
 words: 药, 看医生, 医生, 医院
 - 你要吃药。 | nǐ yào chī yào. | You need to take some medicine.
 - 我明天去看医生。 | wǒ míngtiān qù kàn yīshēng. | I'm seeing a doctor tomorrow.
 ### Staying healthy
-运动 is "exercise" or "sports."
 words: 运动
 - 我每天运动。 | wǒ měi tiān yùndòng. | I exercise every day.
 ### Try it

@@ -1,5 +1,6 @@
 # Complements (what happens after the verb)
 summary: Verb + 到 for results, and verb + 来 / 去 for direction.
+intro: A complement is a word added after a verb to show the result or direction of the action. 到 shows that you succeeded, and 来 and 去 show which way something moves.
 related: Home & life; Out & about
 see: Grammar Series, Unit 8: Complements of Result | https://yoyochinese.com/courses/chinese-grammar-series; Unit 9: Complements of Direction | https://yoyochinese.com/courses/chinese-grammar-series
 

@@ -1,5 +1,6 @@
 # Yes / no and other questions
 summary: 吗, verb-not-verb, tag questions, question words, 呢 and 吧.
+intro: There are several ways to ask a question in Chinese, and none of them change the word order. This page covers 吗, verb-not-verb questions, tag questions, question words, 呢 and suggestions with 吧.
 related: Conversation; People
 see: Grammar Series, Unit 3: Yes/No Questions | https://yoyochinese.com/courses/chinese-grammar-series; Unit 4: Content Questions | https://yoyochinese.com/courses/chinese-grammar-series; Beginner Conversational, Unit 8: Asking Yes and No Questions | https://yoyochinese.com/courses/beginner-conversational-chinese
 

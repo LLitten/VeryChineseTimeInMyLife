@@ -1,5 +1,6 @@
 # Verbs and helping verbs
 summary: Want, can, may, have to, let, and verbs for names and going places.
+intro: Helping verbs go before the main verb to add meaning: want, can, may, have to. This page also covers 让 (let, make), 去 for going places, and 叫 and 姓 for names.
 related: Conversation; Out & about
 see: Beginner Conversational, Unit 12: Wants and Desires | https://yoyochinese.com/courses/beginner-conversational-chinese
 

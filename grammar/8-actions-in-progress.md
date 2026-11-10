@@ -1,5 +1,6 @@
 # Actions in progress
 summary: Saying something is happening right now with 在 and 正在.
+intro: To say something is happening right now, put 在 before the verb. This page shows how, and when to add 正在 or 呢.
 related: Home & life
 
 ## (正)在 + verb: is doing

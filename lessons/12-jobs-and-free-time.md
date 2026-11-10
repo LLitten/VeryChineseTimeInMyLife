@@ -1,5 +1,6 @@
 # Jobs & free time
 summary: Talking about jobs, hobbies, sports and what you like to do.
+intro: "What do you do?" and "What do you like to do?" are two of the most common questions when getting to know someone. This page covers jobs, hobbies and sports so you can answer both.
 related: People; Time; Body & health
 
 ## Jobs

@@ -1,5 +1,6 @@
 # Numbers, measure words, dates and time
 summary: Building numbers, 二 vs 两, measure words, age, dates, weekdays and clock time.
+intro: Numbers in Chinese are very regular, but using them needs a few rules: 二 vs 两, measure words, and the order of dates and times. This page covers them all.
 related: Time; Building blocks; Food & drink
 see: Beginner Conversational, Unit 2: Numbers (0-99) | https://yoyochinese.com/courses/beginner-conversational-chinese
 
