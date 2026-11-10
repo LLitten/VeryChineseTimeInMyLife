@@ -114,18 +114,43 @@ code { font-size: 0.9em; }
 .sel { min-height: 34px; padding: 4px 10px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 17px; }
 .count { margin: 12px 0 6px; font-size: 14px; color: var(--muted); }
 .chapter-list { margin: 4px 0 0; padding-left: 20px; font-size: 14px; }
+.contents { margin: 8px 0; padding: 10px 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.contents ol { margin: 4px 0 0; padding-left: 22px; }
+.contents li { margin: 3px 0; }
+.lvl { margin-left: 4px; padding: 0 7px; font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 9px; }
+.sect { margin-top: 34px; scroll-margin-top: 56px; }
+.sect h2 { font-size: 22px; border-bottom: 3px solid var(--accent); }
+.sect h3 { scroll-margin-top: 56px; margin: 18px 0 6px; padding-bottom: 2px; font-size: 15px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); }
+.jump { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 8px 0 0; font-size: 14px; }
+.totop { margin: 14px 0 0; font-size: 14px; text-align: right; }
+.card .ttl { font-weight: 700; text-decoration: none; }
+.card .secs { display: block; margin-top: 6px; font-size: 14px; line-height: 1.7; }
+#contents { scroll-margin-top: 56px; }
 </style>
 </head>
 <body>
 <main>
 <div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">All tools</a> › <a href="index.html">Lessons</a></nav><form class="mini" action="index.html" role="search"><input type="search" name="q" placeholder="Search lessons" aria-label="Search lessons"></form></div>
-
+<div class="toggles" id="toggles" data-skip="ztw" aria-label="Show or hide"></div>
 <h1>Practice sentences</h1>
 <p class="intro">Sentences from your notes that mix several patterns.</p>
-<p class="lead">Grammar chapter 11 of 11 · 2 short articles. Read them in order, or jump to one.</p>
-<div class="cards"><a class="card" href="grammar-practice-sentences-1-questions-and-answers.html"><b>1. Questions and answers</b><span class="sub">Each pair mixes a few patterns from the other grammar lessons.</span></a><a class="card" href="grammar-practice-sentences-2-everyday-sentences.html"><b>2. Everyday sentences</b><span class="sub">睡觉了 means &quot;gone to sleep&quot; (a change), not &quot;sleeping.&quot;</span></a></div>
-<h2>Related chapters</h2><div class="cards"><a class="card" href="grammar-sentence-structure.html"><b>Grammar: Sentence structure</b><span class="sub">The order words go in: subject, time, place, verb, object.</span></a><a class="card" href="grammar-questions.html"><b>Grammar: Yes / no and other questions</b><span class="sub">吗, verb-not-verb, tag questions, question words, 呢 and 吧.</span></a></div>
-<nav class="pager"><a href="grammar-location.html">← Location and &quot;there is&quot;</a><span></span></nav>
+<p class="lead">Grammar topic 11 of 11. Jump to a section, or read top to bottom.</p>
+<nav id="contents" class="contents" aria-label="Contents"><b>Contents</b><ol><li><a href="#questions-and-answers">Questions and answers</a></li><li><a href="#everyday-sentences">Everyday sentences</a></li></ol></nav>
+<section class="sect" id="questions-and-answers"><h2>1. Questions and answers</h2>
+<p class="intro">Each pair mixes a few patterns from the other grammar lessons.</p>
+<nav class="jump" aria-label="In this section"><a href="#questions-and-answers-examples">Examples</a> <a href="#questions-and-answers-sources">Sources</a></nav>
+<h3 id="questions-and-answers-examples">Examples</h3><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">那个人是谁？ 我不认识她。</span><span class="py">nàge rén shì shéi? wǒ bú rènshi tā.</span><span class="mean">Who is that person? I don&#x27;t know her.</span><span class="from">your notes</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">你喝水吗？ 好的，谢谢。</span><span class="py">nǐ hē shuǐ ma? hǎo de, xièxie.</span><span class="mean">Would you like water? Okay, thanks.</span><span class="from">your notes</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">他女儿多大了？ 七岁。</span><span class="py">tā nǚ&#x27;ér duō dà le? qī suì.</span><span class="mean">How old is his daughter? Seven.</span><span class="from">your notes</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">你的同学在哪儿工作？ 医院。</span><span class="py">nǐ de tóngxué zài nǎr gōngzuò? yīyuàn.</span><span class="mean">Where does your classmate work? At a hospital.</span><span class="from">your notes</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">昨天上午天气怎么样？ 下雨了。</span><span class="py">zuótiān shàngwǔ tiānqì zěnmeyàng? xià yǔ le.</span><span class="mean">What was the weather like yesterday morning? It rained.</span><span class="from">your notes</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">爸爸什么时候来北京呢？ 下个月。</span><span class="py">bàba shénme shíhou lái Běijīng ne? xià ge yuè.</span><span class="mean">When is Dad coming to Beijing? Next month.</span><span class="from">your notes</span></li></ul>
+<h3 id="questions-and-answers-sources">Sources</h3><ul class="refs"><li>Your notes</li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="everyday-sentences"><h2>2. Everyday sentences</h2>
+<p class="intro">睡觉了 means &quot;gone to sleep&quot; (a change), not &quot;sleeping.&quot;</p>
+<nav class="jump" aria-label="In this section"><a href="#everyday-sentences-examples">Examples</a> <a href="#everyday-sentences-notes">Notes</a> <a href="#everyday-sentences-sources">Sources</a></nav>
+<h3 id="everyday-sentences-examples">Examples</h3><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">来，我们看看里面是什么东西。</span><span class="py">lái, wǒmen kànkan lǐmiàn shì shénme dōngxi.</span><span class="mean">Come on, let&#x27;s see what&#x27;s inside.</span><span class="from">your notes</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">喂，你睡觉了吗？</span><span class="py">wèi, nǐ shuìjiào le ma?</span><span class="mean">Hello? Have you gone to sleep?</span><span class="from">your notes</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">天气太热了，多吃些水果。</span><span class="py">tiānqì tài rè le, duō chī xiē shuǐguǒ.</span><span class="mean">It&#x27;s so hot. Eat more fruit.</span><span class="from">your notes</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">你好，我能吃一块吗？</span><span class="py">nǐ hǎo, wǒ néng chī yí kuài ma?</span><span class="mean">Hi, can I have a piece?</span><span class="from">your notes, edited</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我很喜欢这本书。</span><span class="py">wǒ hěn xǐhuan zhè běn shū.</span><span class="mean">I really like this book.</span><span class="from">your notes</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">她们在买衣服呢。</span><span class="py">tāmen zài mǎi yīfu ne.</span><span class="mean">They&#x27;re buying clothes.</span><span class="from">your notes</span></li></ul>
+<h3 id="everyday-sentences-notes">Notes</h3><ul class="notes"><li>多吃些 means &quot;eat more,&quot; not &quot;eat many.&quot;</li><li>一块儿 usually means &quot;together.&quot; For &quot;a piece,&quot; say 一块.</li></ul>
+<h3 id="everyday-sentences-sources">Sources</h3><ul class="refs"><li>Your notes</li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="see-also"><h2>See also</h2><h3>Related topics</h3><ul class="refs"><li><a href="grammar-sentence-structure.html">Grammar: Sentence structure</a> <span class="note" style="display:inline">The order words go in: subject, time, place, verb, object.</span></li><li><a href="grammar-questions.html">Grammar: Yes / no and other questions</a> <span class="note" style="display:inline">吗, verb-not-verb, tag questions, question words, 呢 and 吧.</span></li></ul></section>
+<nav class="pager"><a href="grammar-location.html">← Location and &quot;there is&quot;</a><a href="index.html">All topics →</a></nav>
 <p class="foot">Built from handwritten notes. Tips and unmarked examples were written by Claude; each article lists its sources. Native-speaker friends have the last word on usage.</p>
 </main>
 <script>

@@ -5,23 +5,24 @@ Normally run through tools/build_notes.py, which calls this at the end:
 
     python3 tools/build_notes.py
 
-Pages built (laid out like AllSet Chinese Grammar Wiki articles):
-  topics/index.html                    search, plus every chapter and article
-  topics/<chapter>.html                one per lesson file: intro and its list of articles
-                                       (lesson-<name>.html for lessons/, grammar-<name>.html for grammar/)
-  topics/<chapter>-<n>-<slug>.html     one short article per "## Section" of a lesson file
+Pages built:
+  topics/index.html        search, plus every topic with direct links to its sections
+  topics/<topic>.html      one page per lesson file (lesson-<name>.html for lessons/,
+                           grammar-<name>.html for grammar/). Contents at the top; each
+                           "## Section" is a section of the page, laid out like an AllSet
+                           Chinese Grammar Wiki article, with jump links to its parts.
 
 Lesson format (lessons/ and grammar/ use the same one). Keep it short: no long paragraphs.
   # Title
   summary: one line for the chapter list and the top of the chapter page
   related: Lesson title; Grammar: <grammar lesson title>   (links, separated by semicolons)
   see: Yoyo course, Unit n: Title | URL; ...   "Also covered in Yoyo Chinese" links
-  ## Section heading                becomes its own article page
+  ## Section heading                a section of the topic page (linkable: <topic>.html#<slug>)
   tag: A1 #2                        level (grammar)
   pattern: Subject + 不 + verb       the structure, shown in a box (grammar)
   words: 早上, 晚上, 中午            key words, pulled from vocab.csv by exact `simplified`
                                     (for a word listed twice, add its type: 听 [measure word])
-  - A short tip                     the first tip is the article's intro; the rest are notes.
+  - A short tip                     the first tip is the section's intro; the rest are notes.
                                     Tips containing ❌ go under "Watch out". (**bold**, `code` work)
   ### Examples
   - 中文 | pinyin | English | from    an example; the optional 4th part says where it's from
@@ -264,6 +265,18 @@ code { font-size: 0.9em; }
 .sel { min-height: 34px; padding: 4px 10px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 17px; }
 .count { margin: 12px 0 6px; font-size: 14px; color: var(--muted); }
 .chapter-list { margin: 4px 0 0; padding-left: 20px; font-size: 14px; }
+.contents { margin: 8px 0; padding: 10px 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.contents ol { margin: 4px 0 0; padding-left: 22px; }
+.contents li { margin: 3px 0; }
+.lvl { margin-left: 4px; padding: 0 7px; font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 9px; }
+.sect { margin-top: 34px; scroll-margin-top: 56px; }
+.sect h2 { font-size: 22px; border-bottom: 3px solid var(--accent); }
+.sect h3 { scroll-margin-top: 56px; margin: 18px 0 6px; padding-bottom: 2px; font-size: 15px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); }
+.jump { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 8px 0 0; font-size: 14px; }
+.totop { margin: 14px 0 0; font-size: 14px; text-align: right; }
+.card .ttl { font-weight: 700; text-decoration: none; }
+.card .secs { display: block; margin-top: 6px; font-size: 14px; line-height: 1.7; }
+#contents { scroll-margin-top: 56px; }
 """
 
 TOGGLE_JS = """
@@ -373,9 +386,10 @@ def structure_html(pattern):
     return re.sub(r"(%s+)" % CJK, r'<span class="zhi">\1</span>', inline(pattern))
 
 
-# ---------------------------------------------------------------- articles
+# ---------------------------------------------------------------- sections
 def make_articles(chapter, word_by_s):
-    arts = []
+    """One entry per "## Section"; each is a section of its chapter's page."""
+    arts, seen = [], set()
     for i, s in enumerate(chapter["sections"], 1):
         words = [word_by_s[w] for w in s["words"]]
         watch = [t for t in s["tips"] if "❌" in t]
@@ -404,10 +418,14 @@ def make_articles(chapter, word_by_s):
                 keys.add(k)
         keywords = sorted(keys, key=lambda k: (len(k), k))[:8]
         tags = (["Grammar"] if chapter["kind"] == "grammar" else ["Vocabulary"]) + ([level] if level else []) + uses[:4]
+        anchor = slug(s["title"])
+        if anchor in seen:
+            anchor = f"{anchor}-{i}"
+        seen.add(anchor)
         text = " ".join([s["title"], chapter["title"], s["pattern"], intro, " ".join(s["tips"]), " ".join(tags)]
                         + [" ".join([w["s"], w["t"], w["p"], w["m"], w["n"]]) for w in words]
                         + [" ".join(p[:3]) for _, p in s["examples"]])
-        arts.append({"sec": s, "n": i, "title": s["title"], "file": f'{chapter["base"]}-{i}-{slug(s["title"])}.html',
+        arts.append({"sec": s, "n": i, "title": s["title"], "anchor": anchor, "file": f'{chapter["file"]}#{anchor}',
                      "chapter": chapter, "words": words, "intro": intro, "notes": notes, "watch": watch,
                      "level": level, "uses": uses, "keys": keys, "keywords": keywords, "tags": tags,
                      "search": plain(text)})
@@ -430,109 +448,85 @@ def sources_items(a):
     return items
 
 
-def render_article(a, chapter_arts, by_title, nxt_chapter):
-    s, ch = a["sec"], a["chapter"]
-    out = [f"<h1>{esc(a['title'])}</h1>"]
-    # fact box
+def render_section(a):
+    """One topic section, laid out like an AllSet article, on its chapter's page."""
+    s, an = a["sec"], a["anchor"]
+    out = [f'<section class="sect" id="{an}"><h2>{a["n"]}. {esc(a["title"])}</h2>']
     facts = []
     if a["level"]:
         facts.append(f'<dt>Level</dt><dd><span class="chip lv">{esc(s["tag"])}</span></dd>')
-    facts.append(f'<dt>Chapter</dt><dd><a href="{ch["file"]}">{esc(ch["title"])}</a>, part {a["n"]} of {len(chapter_arts)}</dd>')
     if a["uses"]:
         facts.append("<dt>Used for</dt><dd>" + "".join(
             f'<a class="chip" href="index.html?tag={esc(u)}">{esc(u)}</a>' for u in a["uses"]) + "</dd>")
     if a["keywords"]:
         facts.append('<dt>Keywords</dt><dd><span class="zhi">' + "、".join(esc(k) for k in a["keywords"]) + "</span></dd>")
-    out.append('<dl class="facts">' + "".join(facts) + "</dl>")
+    if facts:
+        out.append('<dl class="facts">' + "".join(facts) + "</dl>")
     if a["intro"]:
         out.append(f'<p class="intro">{inline(a["intro"])}</p>')
-    # contents
     parts = []
     if s["pattern"]:
         parts.append(("structure", "Structure"))
     if a["words"]:
         parts.append(("words", "Key words"))
     if s["examples"]:
-        parts.append(("examples", "Examples" if not any(w for w, _ in s["examples"]) else "Dialogue"))
+        parts.append(("examples", "Dialogue" if any(w for w, _ in s["examples"]) else "Examples"))
     if a["notes"]:
         parts.append(("notes", "Notes"))
     if a["watch"]:
         parts.append(("watch", "Watch out"))
     if s["try"]:
         parts.append(("practice", "Practice"))
-    parts += [("see-also", "See also"), ("sources", "Sources and further reading")]
-    if len(parts) > 3:
-        out.append('<ol class="toc">' + "".join(f'<li><a href="#{k}">{esc(t)}</a></li>' for k, t in parts) + "</ol>")
+    parts.append(("sources", "Sources"))
+    out.append('<nav class="jump" aria-label="In this section">' + " ".join(
+        f'<a href="#{an}-{k}">{esc(t)}</a>' for k, t in parts) + "</nav>")
+    titles = dict(parts)
     if s["pattern"]:
-        out.append(f'<h2 id="structure">Structure</h2><div class="structure">{structure_html(s["pattern"])}</div>')
+        out.append(f'<h3 id="{an}-structure">Structure</h3><div class="structure">{structure_html(s["pattern"])}</div>')
     if a["words"]:
-        out.append('<h2 id="words">Key words</h2><div class="words">' + "".join(word_row(w) for w in a["words"]) + "</div>")
+        out.append(f'<h3 id="{an}-words">Key words</h3><div class="words">' + "".join(word_row(w) for w in a["words"]) + "</div>")
     if s["examples"]:
-        title = dict(parts)["examples"]
-        out.append(f'<h2 id="examples">{title}</h2><ul class="examples">'
+        out.append(f'<h3 id="{an}-examples">{titles["examples"]}</h3><ul class="examples">'
                    + "".join(example_li(w, p, a["keys"]) for w, p in s["examples"]) + "</ul>")
     if a["notes"]:
-        out.append('<h2 id="notes">Notes</h2><ul class="notes">' + "".join(f"<li>{inline(t)}</li>" for t in a["notes"]) + "</ul>")
+        out.append(f'<h3 id="{an}-notes">Notes</h3><ul class="notes">' + "".join(f"<li>{inline(t)}</li>" for t in a["notes"]) + "</ul>")
     if a["watch"]:
-        out.append('<h2 id="watch">Watch out</h2><ul class="watch">' + "".join(f"<li>{inline(t)}</li>" for t in a["watch"]) + "</ul>")
+        out.append(f'<h3 id="{an}-watch">Watch out</h3><ul class="watch">' + "".join(f"<li>{inline(t)}</li>" for t in a["watch"]) + "</ul>")
     if s["try"]:
-        out.append('<h2 id="practice">Practice</h2>' + "".join(try_card(*t) for t in s["try"]))
-    # see also
-    see = [f'<li><a href="{b["file"]}">{esc(b["title"])}</a> <span class="note" style="display:inline">({esc(ch["title"])})</span></li>'
-           for b in chapter_arts if b is not a]
-    for n in ch["related"]:
-        key = n[9:] if n.startswith("Grammar: ") else n
-        if key in by_title:
-            r = by_title[key]
-            see.append(f'<li><a href="{r["file"]}">{"Grammar" if r["kind"] == "grammar" else "Lesson"}: {esc(r["title"])}</a></li>')
-    out.append('<h2 id="see-also">See also</h2><ul class="refs">' + "".join(see) + "</ul>")
-    refs = [f"<li>{x}</li>" for x in sources_items(a)]
-    refs += [f'<li>Also covered in Yoyo Chinese: <a href="{esc(u)}" target="_blank" rel="noopener">{esc(l)}</a></li>' if u
-             else f"<li>Also covered in Yoyo Chinese: {esc(l)}</li>" for l, u in ch["see"]]
-    out.append('<h2 id="sources">Sources and further reading</h2><ul class="refs">' + "".join(refs) + "</ul>")
-    # pager
-    i = a["n"] - 1
-    prev = (f'<a href="{chapter_arts[i-1]["file"]}">← {esc(chapter_arts[i-1]["title"])}</a>' if i
-            else f'<a href="{ch["file"]}">← {esc(ch["title"])}</a>')
-    if i + 1 < len(chapter_arts):
-        nxt = f'<a href="{chapter_arts[i+1]["file"]}">{esc(chapter_arts[i+1]["title"])} →</a>'
-    elif nxt_chapter:
-        nxt = f'<a href="{nxt_chapter["file"]}">Next chapter: {esc(nxt_chapter["title"])} →</a>'
-    else:
-        nxt = '<a href="index.html">All lessons →</a>'
-    out.append(f'<nav class="pager">{prev}{nxt}</nav>')
+        out.append(f'<h3 id="{an}-practice">Practice</h3>' + "".join(try_card(*t) for t in s["try"]))
+    out.append(f'<h3 id="{an}-sources">Sources</h3><ul class="refs">' + "".join(f"<li>{x}</li>" for x in sources_items(a)) + "</ul>")
+    out.append('<p class="totop"><a href="#contents">↑ Contents</a></p></section>')
     return "\n".join(out)
-
-
-def article_card(a, show_chapter=False):
-    sub = (f'{esc(a["chapter"]["title"])} · ' if show_chapter else "") + inline(a["intro"])
-    tags = "".join(f"<span>{esc(t)}</span>" for t in a["tags"][1:])
-    return (f'<a class="card" href="{a["file"]}"><b>{a["n"]}. {esc(a["title"])}</b>'
-            f'<span class="sub">{sub}</span>' + (f'<span class="tags">{tags}</span>' if tags else "") + "</a>")
 
 
 def render_chapter(ch, arts, by_title, i, group, label):
     out = [f"<h1>{esc(ch['title'])}</h1>"]
     if ch["summary"]:
         out.append(f'<p class="intro">{esc(ch["summary"])}</p>')
-    out.append(f'<p class="lead">{label} {i + 1} of {len(group)} · {len(arts)} short articles. Read them in order, or jump to one.</p>')
-    out.append('<div class="cards">' + "".join(article_card(a) for a in arts) + "</div>")
+    out.append(f'<p class="lead">{label} {i + 1} of {len(group)}. Jump to a section, or read top to bottom.</p>')
+    out.append('<nav id="contents" class="contents" aria-label="Contents"><b>Contents</b><ol>' + "".join(
+        f'<li><a href="#{a["anchor"]}">{esc(a["title"])}</a>'
+        + (f' <span class="lvl">{esc(a["level"])}</span>' if a["level"] else "") + "</li>" for a in arts)
+        + "</ol></nav>")
+    out += [render_section(a) for a in arts]
     rel = []
     for n in ch["related"]:
         key = n[9:] if n.startswith("Grammar: ") else n
         if key not in by_title:
             raise SystemExit(f"Unknown related link in {ch['title']}: {n}")
         r = by_title[key]
-        rel.append(f'<a class="card" href="{r["file"]}"><b>{"Grammar" if r["kind"] == "grammar" else "Lesson"}: '
-                   f'{esc(r["title"])}</b><span class="sub">{esc(r["summary"])}</span></a>')
+        rel.append(f'<li><a href="{r["file"]}">{"Grammar" if r["kind"] == "grammar" else "Lesson"}: {esc(r["title"])}</a>'
+                   f' <span class="note" style="display:inline">{esc(r["summary"])}</span></li>')
+    tail = []
     if rel:
-        out.append('<h2>Related chapters</h2><div class="cards">' + "".join(rel) + "</div>")
+        tail.append('<h3>Related topics</h3><ul class="refs">' + "".join(rel) + "</ul>")
     if ch["see"]:
-        out.append('<h2>Further reading</h2><ul class="refs">' + "".join(
-            f'<li>Also covered in Yoyo Chinese: <a href="{esc(u)}" target="_blank" rel="noopener">{esc(l)}</a></li>'
-            for l, u in ch["see"]) + "</ul>")
-    prev = f'<a href="{group[i-1]["file"]}">← {esc(group[i-1]["title"])}</a>' if i else "<span></span>"
-    nxt = f'<a href="{group[i+1]["file"]}">{esc(group[i+1]["title"])} →</a>' if i + 1 < len(group) else "<span></span>"
+        tail.append('<h3>Also covered in Yoyo Chinese</h3><ul class="refs">' + "".join(
+            f'<li><a href="{esc(u)}" target="_blank" rel="noopener">{esc(l)}</a></li>' for l, u in ch["see"]) + "</ul>")
+    if tail:
+        out.append('<section class="sect" id="see-also"><h2>See also</h2>' + "".join(tail) + "</section>")
+    prev = f'<a href="{group[i-1]["file"]}">← {esc(group[i-1]["title"])}</a>' if i else '<a href="index.html">← All topics</a>'
+    nxt = f'<a href="{group[i+1]["file"]}">{esc(group[i+1]["title"])} →</a>' if i + 1 < len(group) else '<a href="index.html">All topics →</a>'
     out.append(f'<nav class="pager">{prev}{nxt}</nav>')
     return "\n".join(out)
 
@@ -610,13 +604,15 @@ def render_index(lessons, grammar, arts_by_chapter, all_arts):
             "kind": "Grammar" if a["chapter"]["kind"] == "grammar" else "Vocabulary", "level": a["level"],
             "tags": a["tags"], "x": a["search"]} for a in all_arts]
 
-    def chapters(group):
+    def topics(group):
         return "".join(
-            f'<a class="card" href="{ch["file"]}"><b>{i}. {esc(ch["title"])}</b><span class="sub">{esc(ch["summary"])}</span>'
-            f'<span class="sub">{" · ".join(esc(a["title"]) for a in arts_by_chapter[ch["file"]])}</span></a>'
+            f'<div class="card"><a class="ttl" href="{ch["file"]}">{i}. {esc(ch["title"])}</a>'
+            f'<span class="sub">{esc(ch["summary"])}</span><span class="secs">'
+            + " · ".join(f'<a href="{a["file"]}">{esc(a["title"])}</a>' for a in arts_by_chapter[ch["file"]])
+            + "</span></div>"
             for i, ch in enumerate(group, 1))
-    body = ('<h1>Lessons</h1><p class="lead">A small textbook built from your notes. Each chapter is split into short articles, '
-            'laid out like the AllSet Chinese Grammar Wiki: structure, key words, examples, notes and practice.</p>'
+    body = ('<h1>Lessons</h1><p class="lead">A small textbook built from your notes. Each topic is one page, '
+            'with sections laid out like the AllSet Chinese Grammar Wiki. Tap a section to go straight to it.</p>'
             '<input id="q" class="search" type="search" placeholder="Search: a topic, tag, word, pinyin or English" '
             'aria-label="Search lessons" autocomplete="off" autocapitalize="off" spellcheck="false">'
             '<div class="filters" role="group" aria-label="Filters">'
@@ -627,10 +623,10 @@ def render_index(lessons, grammar, arts_by_chapter, all_arts):
             + "".join(f'<option value="{esc(u)}">{esc(u)}</option>' for u in uses) + "</select></div>"
             '<p id="count" class="count" aria-live="polite" hidden></p><div id="results" class="cards" hidden></div>'
             '<div id="browse">'
-            f'<h2>Vocabulary</h2><div class="cards">{chapters(lessons)}</div>'
+            f'<h2>Vocabulary</h2><div class="cards">{topics(lessons)}</div>'
             '<h2>Grammar</h2><p class="lead">Checked against the <a href="https://resources.allsetlearning.com/chinese/grammar/Main_Page" '
             'target="_blank" rel="noopener">AllSet Chinese Grammar Wiki</a>. Levels are AllSet\'s.</p>'
-            f'<div class="cards">{chapters(grammar)}</div></div>')
+            f'<div class="cards">{topics(grammar)}</div></div>')
     script = SEARCH_JS % json.dumps(idx, ensure_ascii=False, separators=(",", ":"))
     return page("Mandarin lessons", '<a href="../index.html">← All tools</a>', body, toggles=False, script=script, search=False)
 
@@ -663,22 +659,16 @@ def main():
         all_arts += arts_by_chapter[L["file"]]
 
     crumbs = '<a href="../index.html">All tools</a> › <a href="index.html">Lessons</a>'
-    for group, label in ((lessons, "Vocabulary chapter"), (grammar, "Grammar chapter")):
+    for group, label in ((lessons, "Vocabulary topic"), (grammar, "Grammar topic")):
         for i, ch in enumerate(group):
             arts = arts_by_chapter[ch["file"]]
+            has_words = any(a["words"] for a in arts)
             (OUT / ch["file"]).write_text(page(f"{ch['title']} · Mandarin lessons", crumbs,
                                                render_chapter(ch, arts, by_title, i, group, label),
-                                               toggles=False), encoding="utf8")
-            nxt_ch = group[i + 1] if i + 1 < len(group) else None
-            for a in arts:
-                c2 = crumbs + f' › <a href="{ch["file"]}">{esc(ch["title"])}</a>'
-                has_words = bool(a["words"])
-                (OUT / a["file"]).write_text(page(f"{a['title']} · {ch['title']}", c2,
-                                                  render_article(a, arts, by_title, nxt_ch),
-                                                  skip="" if has_words else "ztw"), encoding="utf8")
+                                               skip="" if has_words else "ztw"), encoding="utf8")
 
     (OUT / "index.html").write_text(render_index(lessons, grammar, arts_by_chapter, all_arts), encoding="utf8")
-    print(f"Wrote {len(lessons)} vocabulary and {len(grammar)} grammar chapters, {len(all_arts)} articles, and topics/index.html")
+    print(f"Wrote {len(lessons)} vocabulary and {len(grammar)} grammar topic pages ({len(all_arts)} sections), and topics/index.html")
     if unused:
         print(f"Not in any lesson yet ({len(unused)}): {' '.join(unused)}")
 

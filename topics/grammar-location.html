@@ -114,17 +114,68 @@ code { font-size: 0.9em; }
 .sel { min-height: 34px; padding: 4px 10px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 17px; }
 .count { margin: 12px 0 6px; font-size: 14px; color: var(--muted); }
 .chapter-list { margin: 4px 0 0; padding-left: 20px; font-size: 14px; }
+.contents { margin: 8px 0; padding: 10px 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.contents ol { margin: 4px 0 0; padding-left: 22px; }
+.contents li { margin: 3px 0; }
+.lvl { margin-left: 4px; padding: 0 7px; font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 9px; }
+.sect { margin-top: 34px; scroll-margin-top: 56px; }
+.sect h2 { font-size: 22px; border-bottom: 3px solid var(--accent); }
+.sect h3 { scroll-margin-top: 56px; margin: 18px 0 6px; padding-bottom: 2px; font-size: 15px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); }
+.jump { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 8px 0 0; font-size: 14px; }
+.totop { margin: 14px 0 0; font-size: 14px; text-align: right; }
+.card .ttl { font-weight: 700; text-decoration: none; }
+.card .secs { display: block; margin-top: 6px; font-size: 14px; line-height: 1.7; }
+#contents { scroll-margin-top: 56px; }
 </style>
 </head>
 <body>
 <main>
 <div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">All tools</a> › <a href="index.html">Lessons</a></nav><form class="mini" action="index.html" role="search"><input type="search" name="q" placeholder="Search lessons" aria-label="Search lessons"></form></div>
-
+<div class="toggles" id="toggles" data-skip="ztw" aria-label="Show or hide"></div>
 <h1>Location and &quot;there is&quot;</h1>
 <p class="intro">在 for where things are, 有 for &quot;there is&quot; and &quot;have&quot;, and direction words.</p>
-<p class="lead">Grammar chapter 10 of 11 · 4 short articles. Read them in order, or jump to one.</p>
-<div class="cards"><a class="card" href="grammar-location-1-be-somewhere.html"><b>1. Be somewhere: 在</b><span class="sub">Negate with 不: 他不在学校.</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-location-2-there-is-place.html"><b>2. There is: place + 有</b><span class="sub">The place goes first: &quot;the table has a cup&quot; = there&#x27;s a cup on the table.</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-location-3-have-subject.html"><b>3. Have: subject + 有</b><span class="sub">&quot;Have.&quot; Negative: 没有, never 不有.</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-location-4-exactly-where-direction-words.html"><b>4. Exactly where: direction words</b><span class="sub">The direction word goes after the place: 学校后边 (behind the school).</span><span class="tags"><span>A2</span></span></a></div>
-<h2>Related chapters</h2><div class="cards"><a class="card" href="lesson-out-and-about.html"><b>Lesson: Out &amp; about</b><span class="sub">Places in town, directions, getting around, and shopping.</span></a><a class="card" href="lesson-home-and-life.html"><b>Lesson: Home &amp; life</b><span class="sub">Your daily routine, things around the house, school and work, animals and plants.</span></a></div>
+<p class="lead">Grammar topic 10 of 11. Jump to a section, or read top to bottom.</p>
+<nav id="contents" class="contents" aria-label="Contents"><b>Contents</b><ol><li><a href="#be-somewhere">Be somewhere: 在</a> <span class="lvl">A1</span></li><li><a href="#there-is-place">There is: place + 有</a> <span class="lvl">A1</span></li><li><a href="#have-subject">Have: subject + 有</a> <span class="lvl">A1</span></li><li><a href="#exactly-where-direction-words">Exactly where: direction words</a> <span class="lvl">A2</span></li></ol></nav>
+<section class="sect" id="be-somewhere"><h2>1. Be somewhere: 在</h2>
+<dl class="facts"><dt>Level</dt><dd><span class="chip lv">A1 #17</span></dd><dt>Keywords</dt><dd><span class="zhi">在</span></dd></dl>
+<p class="intro">Negate with 不: 他不在学校.</p>
+<nav class="jump" aria-label="In this section"><a href="#be-somewhere-structure">Structure</a> <a href="#be-somewhere-examples">Examples</a> <a href="#be-somewhere-watch">Watch out</a> <a href="#be-somewhere-practice">Practice</a> <a href="#be-somewhere-sources">Sources</a></nav>
+<h3 id="be-somewhere-structure">Structure</h3><div class="structure">Subject + <span class="zhi">在</span> + place</div>
+<h3 id="be-somewhere-examples">Examples</h3><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我<b class="kw">在</b>家。</span><span class="py">wǒ zài jiā.</span><span class="mean">I&#x27;m at home.</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">你<b class="kw">在</b>哪儿？</span><span class="py">nǐ zài nǎr?</span><span class="mean">Where are you?</span></li></ul>
+<h3 id="be-somewhere-watch">Watch out</h3><ul class="watch"><li>在 is the verb here. Don&#x27;t add 是: <span class="bad" aria-label="wrong">✗</span> 我是在家.</li></ul>
+<h3 id="be-somewhere-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: He isn&#x27;t at school.. Tap to show the answer."><span class="q">He isn&#x27;t at school.</span><span class="ans"><span class="zhi" lang="zh-Hans">他不在学校。</span><span class="pyx">tā bú zài xuéxiào.</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="be-somewhere-sources">Sources</h3><ul class="refs"><li><a href="https://resources.allsetlearning.com/chinese/grammar/ASGLRWT8" target="_blank" rel="noopener">AllSet: Expressing existence in a place with &quot;zai&quot;</a></li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="there-is-place"><h2>2. There is: place + 有</h2>
+<dl class="facts"><dt>Level</dt><dd><span class="chip lv">A1 #18</span></dd><dt>Keywords</dt><dd><span class="zhi">有</span></dd></dl>
+<p class="intro">The place goes first: &quot;the table has a cup&quot; = there&#x27;s a cup on the table.</p>
+<nav class="jump" aria-label="In this section"><a href="#there-is-place-structure">Structure</a> <a href="#there-is-place-examples">Examples</a> <a href="#there-is-place-notes">Notes</a> <a href="#there-is-place-practice">Practice</a> <a href="#there-is-place-sources">Sources</a></nav>
+<h3 id="there-is-place-structure">Structure</h3><div class="structure">Place + <span class="zhi">有</span> + thing</div>
+<h3 id="there-is-place-examples">Examples</h3><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">桌子上<b class="kw">有</b>一个杯子。</span><span class="py">zhuōzi shàng yǒu yí ge bēizi.</span><span class="mean">There&#x27;s a cup on the table.</span><span class="from">your notes</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">附近<b class="kw">有</b>公园吗？</span><span class="py">fùjìn yǒu gōngyuán ma?</span><span class="mean">Is there a park nearby?</span></li></ul>
+<h3 id="there-is-place-notes">Notes</h3><ul class="notes"><li>Negative: 没有.</li></ul>
+<h3 id="there-is-place-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: There are people in the room.. Tap to show the answer."><span class="q">There are people in the room.</span><span class="ans"><span class="zhi" lang="zh-Hans">房间里有人。</span><span class="pyx">fángjiān lǐ yǒu rén.</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="there-is-place-sources">Sources</h3><ul class="refs"><li><a href="https://resources.allsetlearning.com/chinese/grammar/ASG04ZCI" target="_blank" rel="noopener">AllSet: Expressing existence with &quot;you&quot;</a></li><li><a href="https://yoyochinese.com/lesson/Chinese-word-order-Part-3/notes" target="_blank" rel="noopener">Yoyo Chinese: Grammar Series, Lesson 3 (Word Order 3)</a></li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="have-subject"><h2>3. Have: subject + 有</h2>
+<dl class="facts"><dt>Level</dt><dd><span class="chip lv">A1 #19</span></dd><dt>Keywords</dt><dd><span class="zhi">有</span></dd></dl>
+<p class="intro">&quot;Have.&quot; Negative: 没有, never 不有.</p>
+<nav class="jump" aria-label="In this section"><a href="#have-subject-structure">Structure</a> <a href="#have-subject-examples">Examples</a> <a href="#have-subject-practice">Practice</a> <a href="#have-subject-sources">Sources</a></nav>
+<h3 id="have-subject-structure">Structure</h3><div class="structure">Subject + <span class="zhi">有</span> + thing</div>
+<h3 id="have-subject-examples">Examples</h3><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我<b class="kw">有</b>三个朋友。</span><span class="py">wǒ yǒu sān ge péngyou.</span><span class="mean">I have three friends.</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我<b class="kw">有</b>钱。</span><span class="py">wǒ yǒu qián.</span><span class="mean">I have money.</span><span class="from">AllSet</span></li></ul>
+<h3 id="have-subject-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: I have a dog.. Tap to show the answer."><span class="q">I have a dog.</span><span class="ans"><span class="zhi" lang="zh-Hans">我有一只狗。</span><span class="pyx">wǒ yǒu yì zhī gǒu.</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="have-subject-sources">Sources</h3><ul class="refs"><li><a href="https://resources.allsetlearning.com/chinese/grammar/ASGOOCVO" target="_blank" rel="noopener">AllSet: Expressing possession with &quot;you&quot;</a></li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="exactly-where-direction-words"><h2>4. Exactly where: direction words</h2>
+<dl class="facts"><dt>Level</dt><dd><span class="chip lv">A2</span></dd><dt>Keywords</dt><dd><span class="zhi">在</span></dd></dl>
+<p class="intro">The direction word goes after the place: 学校后边 (behind the school).</p>
+<nav class="jump" aria-label="In this section"><a href="#exactly-where-direction-words-structure">Structure</a> <a href="#exactly-where-direction-words-examples">Examples</a> <a href="#exactly-where-direction-words-notes">Notes</a> <a href="#exactly-where-direction-words-practice">Practice</a> <a href="#exactly-where-direction-words-sources">Sources</a></nav>
+<h3 id="exactly-where-direction-words-structure">Structure</h3><div class="structure">Subject + <span class="zhi">在</span> + place + direction word</div>
+<h3 id="exactly-where-direction-words-examples">Examples</h3><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">猫<b class="kw">在</b>桌子上面。</span><span class="py">māo zài zhuōzi shàngmiàn.</span><span class="mean">The cat is on the table.</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">商店<b class="kw">在</b>学校后边。</span><span class="py">shāngdiàn zài xuéxiào hòubiān.</span><span class="mean">The shop is behind the school.</span></li></ul>
+<h3 id="exactly-where-direction-words-notes">Notes</h3><ul class="notes"><li>Short 上 and 里 attach straight to the noun: 桌子上, 房间里.</li></ul>
+<h3 id="exactly-where-direction-words-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: The bank is next to the school.. Tap to show the answer."><span class="q">The bank is next to the school.</span><span class="ans"><span class="zhi" lang="zh-Hans">银行在学校旁边。</span><span class="pyx">yínháng zài xuéxiào pángbiān.</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="exactly-where-direction-words-sources">Sources</h3><ul class="refs"><li>Your notes. AllSet covers 上 / 下 / 里 at A2.</li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="see-also"><h2>See also</h2><h3>Related topics</h3><ul class="refs"><li><a href="lesson-out-and-about.html">Lesson: Out &amp; about</a> <span class="note" style="display:inline">Places in town, directions, getting around, and shopping.</span></li><li><a href="lesson-home-and-life.html">Lesson: Home &amp; life</a> <span class="note" style="display:inline">Your daily routine, things around the house, school and work, animals and plants.</span></li></ul></section>
 <nav class="pager"><a href="grammar-numbers-and-time.html">← Numbers, measure words, dates and time</a><a href="grammar-practice-sentences.html">Practice sentences →</a></nav>
 <p class="foot">Built from handwritten notes. Tips and unmarked examples were written by Claude; each article lists its sources. Native-speaker friends have the last word on usage.</p>
 </main>

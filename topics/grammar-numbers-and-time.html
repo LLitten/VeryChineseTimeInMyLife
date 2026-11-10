@@ -114,18 +114,99 @@ code { font-size: 0.9em; }
 .sel { min-height: 34px; padding: 4px 10px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 17px; }
 .count { margin: 12px 0 6px; font-size: 14px; color: var(--muted); }
 .chapter-list { margin: 4px 0 0; padding-left: 20px; font-size: 14px; }
+.contents { margin: 8px 0; padding: 10px 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.contents ol { margin: 4px 0 0; padding-left: 22px; }
+.contents li { margin: 3px 0; }
+.lvl { margin-left: 4px; padding: 0 7px; font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 9px; }
+.sect { margin-top: 34px; scroll-margin-top: 56px; }
+.sect h2 { font-size: 22px; border-bottom: 3px solid var(--accent); }
+.sect h3 { scroll-margin-top: 56px; margin: 18px 0 6px; padding-bottom: 2px; font-size: 15px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); }
+.jump { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 8px 0 0; font-size: 14px; }
+.totop { margin: 14px 0 0; font-size: 14px; text-align: right; }
+.card .ttl { font-weight: 700; text-decoration: none; }
+.card .secs { display: block; margin-top: 6px; font-size: 14px; line-height: 1.7; }
+#contents { scroll-margin-top: 56px; }
 </style>
 </head>
 <body>
 <main>
 <div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">All tools</a> › <a href="index.html">Lessons</a></nav><form class="mini" action="index.html" role="search"><input type="search" name="q" placeholder="Search lessons" aria-label="Search lessons"></form></div>
-
+<div class="toggles" id="toggles" data-skip="ztw" aria-label="Show or hide"></div>
 <h1>Numbers, measure words, dates and time</h1>
 <p class="intro">Building numbers, 二 vs 两, measure words, age, dates, weekdays and clock time.</p>
-<p class="lead">Grammar chapter 9 of 11 · 7 short articles. Read them in order, or jump to one.</p>
-<div class="cards"><a class="card" href="grammar-numbers-and-time-1-building-numbers.html"><b>1. Building numbers</b><span class="sub">11–19: 十 + number. Tens: number + 十.</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-numbers-and-time-2-vs.html"><b>2. 二 vs 两</b><span class="sub">二 is the plain number: counting, 十二, 第二 (2nd), 二号 (the 2nd).</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-numbers-and-time-3-measure-words.html"><b>3. Measure words</b><span class="sub">Every counted noun needs a measure word.</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-numbers-and-time-4-age-with.html"><b>4. Age with 岁</b><span class="sub">No 是 and no 个: 我二十五岁.</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-numbers-and-time-5-dates.html"><b>5. Dates</b><span class="sub">Big to small, like addresses.</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-numbers-and-time-6-days-of-the-week.html"><b>6. Days of the week</b><span class="sub">星期一 Monday … 星期六 Saturday. The week starts on Monday.</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-numbers-and-time-7-clock-time.html"><b>7. Clock time</b><span class="sub">两点 for 2 o&#x27;clock, not 二点.</span><span class="tags"><span>A1</span></span></a></div>
-<h2>Related chapters</h2><div class="cards"><a class="card" href="lesson-time.html"><b>Lesson: Time</b><span class="sub">Days and dates, clock time, parts of the day, making plans, and the weather.</span></a><a class="card" href="lesson-building-blocks.html"><b>Lesson: Building blocks</b><span class="sub">Pronouns, numbers, measure words, describing words, and the small words that hold sentences together.</span></a><a class="card" href="lesson-food-and-drink.html"><b>Lesson: Food &amp; drink</b><span class="sub">Drinks, food and flavors, and ordering at a restaurant.</span></a></div>
-<h2>Further reading</h2><ul class="refs"><li>Also covered in Yoyo Chinese: <a href="https://yoyochinese.com/courses/beginner-conversational-chinese" target="_blank" rel="noopener">Beginner Conversational, Unit 2: Numbers (0-99)</a></li></ul>
+<p class="lead">Grammar topic 9 of 11. Jump to a section, or read top to bottom.</p>
+<nav id="contents" class="contents" aria-label="Contents"><b>Contents</b><ol><li><a href="#building-numbers">Building numbers</a> <span class="lvl">A1</span></li><li><a href="#vs">二 vs 两</a> <span class="lvl">A1</span></li><li><a href="#measure-words">Measure words</a> <span class="lvl">A1</span></li><li><a href="#age-with">Age with 岁</a> <span class="lvl">A1</span></li><li><a href="#dates">Dates</a> <span class="lvl">A1</span></li><li><a href="#days-of-the-week">Days of the week</a> <span class="lvl">A1</span></li><li><a href="#clock-time">Clock time</a> <span class="lvl">A1</span></li></ol></nav>
+<section class="sect" id="building-numbers"><h2>1. Building numbers</h2>
+<dl class="facts"><dt>Level</dt><dd><span class="chip lv">A1 #11</span></dd><dt>Keywords</dt><dd><span class="zhi">二十二、一百零五</span></dd></dl>
+<p class="intro">11–19: 十 + number. Tens: number + 十.</p>
+<nav class="jump" aria-label="In this section"><a href="#building-numbers-structure">Structure</a> <a href="#building-numbers-examples">Examples</a> <a href="#building-numbers-notes">Notes</a> <a href="#building-numbers-practice">Practice</a> <a href="#building-numbers-sources">Sources</a></nav>
+<h3 id="building-numbers-structure">Structure</h3><div class="structure">Big to small: <span class="zhi">二十二</span>, <span class="zhi">一百零五</span></div>
+<h3 id="building-numbers-examples">Examples</h3><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans"><b class="kw">二十二</b></span><span class="py">èrshí&#x27;èr</span><span class="mean">22</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">三百零五</span><span class="py">sānbǎi líng wǔ</span><span class="mean">305</span><span class="from">AllSet</span></li></ul>
+<h3 id="building-numbers-notes">Notes</h3><ul class="notes"><li>A zero in the middle is said once as 零: 一百零一 (101).</li><li>In phone numbers, 1 is often yāo.</li></ul>
+<h3 id="building-numbers-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: 99. Tap to show the answer."><span class="q">99</span><span class="ans"><span class="zhi" lang="zh-Hans">九十九</span><span class="pyx">jiǔshíjiǔ</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="building-numbers-sources">Sources</h3><ul class="refs"><li><a href="https://resources.allsetlearning.com/chinese/grammar/ASGCRH6P" target="_blank" rel="noopener">AllSet: Structure of numbers</a></li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="vs"><h2>2. 二 vs 两</h2>
+<dl class="facts"><dt>Level</dt><dd><span class="chip lv">A1 #40</span></dd><dt>Keywords</dt><dd><span class="zhi">两、二</span></dd></dl>
+<p class="intro">二 is the plain number: counting, 十二, 第二 (2nd), 二号 (the 2nd).</p>
+<nav class="jump" aria-label="In this section"><a href="#vs-structure">Structure</a> <a href="#vs-examples">Examples</a> <a href="#vs-notes">Notes</a> <a href="#vs-practice">Practice</a> <a href="#vs-sources">Sources</a></nav>
+<h3 id="vs-structure">Structure</h3><div class="structure"><span class="zhi">二</span> for numbers · <span class="zhi">两</span> + measure word</div>
+<h3 id="vs-examples">Examples</h3><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans"><b class="kw">两</b>个小时</span><span class="py">liǎng ge xiǎoshí</span><span class="mean">two hours</span><span class="from">AllSet</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">十<b class="kw">二</b></span><span class="py">shí&#x27;èr</span><span class="mean">12</span></li></ul>
+<h3 id="vs-notes">Notes</h3><ul class="notes"><li>两 goes before a measure word: 两个人, 两本书.</li><li>2 o&#x27;clock is 两点.</li></ul>
+<h3 id="vs-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: two people. Tap to show the answer."><span class="q">two people</span><span class="ans"><span class="zhi" lang="zh-Hans">两个人</span><span class="pyx">liǎng ge rén</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="vs-sources">Sources</h3><ul class="refs"><li><a href="https://resources.allsetlearning.com/chinese/grammar/ASGJ46H1" target="_blank" rel="noopener">AllSet: Comparing &quot;er&quot; and &quot;liang&quot;</a></li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="measure-words"><h2>3. Measure words</h2>
+<dl class="facts"><dt>Level</dt><dd><span class="chip lv">A1 #8</span></dd></dl>
+<p class="intro">Every counted noun needs a measure word.</p>
+<nav class="jump" aria-label="In this section"><a href="#measure-words-structure">Structure</a> <a href="#measure-words-examples">Examples</a> <a href="#measure-words-notes">Notes</a> <a href="#measure-words-practice">Practice</a> <a href="#measure-words-sources">Sources</a></nav>
+<h3 id="measure-words-structure">Structure</h3><div class="structure">Number + measure word + noun</div>
+<h3 id="measure-words-examples">Examples</h3><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">一个人</span><span class="py">yí ge rén</span><span class="mean">one person</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">四杯牛奶</span><span class="py">sì bēi niúnǎi</span><span class="mean">four glasses of milk</span><span class="from">AllSet</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">三本书</span><span class="py">sān běn shū</span><span class="mean">three books</span></li></ul>
+<h3 id="measure-words-notes">Notes</h3><ul class="notes"><li>个 is the most common, and works when you&#x27;re unsure.</li><li>With &quot;one,&quot; 一 can drop: 我要个苹果.</li><li>Common ones: 本 books · 杯 cups · 只 animals · 条 long things.</li></ul>
+<h3 id="measure-words-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: two cups of tea. Tap to show the answer."><span class="q">two cups of tea</span><span class="ans"><span class="zhi" lang="zh-Hans">两杯茶</span><span class="pyx">liǎng bēi chá</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="measure-words-sources">Sources</h3><ul class="refs"><li><a href="https://resources.allsetlearning.com/chinese/grammar/ASGI0T9S" target="_blank" rel="noopener">AllSet: Measure word &quot;ge&quot;</a></li><li><a href="https://resources.allsetlearning.com/chinese/grammar/Measure_words_for_counting" target="_blank" rel="noopener">AllSet: Measure words for counting</a></li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="age-with"><h2>4. Age with 岁</h2>
+<dl class="facts"><dt>Level</dt><dd><span class="chip lv">A1 #7</span></dd><dt>Keywords</dt><dd><span class="zhi">岁</span></dd></dl>
+<p class="intro">No 是 and no 个: 我二十五岁.</p>
+<nav class="jump" aria-label="In this section"><a href="#age-with-structure">Structure</a> <a href="#age-with-examples">Examples</a> <a href="#age-with-notes">Notes</a> <a href="#age-with-practice">Practice</a> <a href="#age-with-sources">Sources</a></nav>
+<h3 id="age-with-structure">Structure</h3><div class="structure">Subject + number + <span class="zhi">岁</span></div>
+<h3 id="age-with-examples">Examples</h3><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">他女儿七<b class="kw">岁</b>。</span><span class="py">tā nǚ&#x27;ér qī suì.</span><span class="mean">His daughter is seven.</span><span class="from">your notes</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我儿子一<b class="kw">岁</b>半。</span><span class="py">wǒ érzi yí suì bàn.</span><span class="mean">My son is one and a half.</span></li></ul>
+<h3 id="age-with-notes">Notes</h3><ul class="notes"><li>岁半 = and a half.</li></ul>
+<h3 id="age-with-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: I&#x27;m thirty.. Tap to show the answer."><span class="q">I&#x27;m thirty.</span><span class="ans"><span class="zhi" lang="zh-Hans">我三十岁。</span><span class="pyx">wǒ sānshí suì.</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="age-with-sources">Sources</h3><ul class="refs"><li><a href="https://resources.allsetlearning.com/chinese/grammar/ASGQUKJF" target="_blank" rel="noopener">AllSet: Age with &quot;sui&quot;</a></li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="dates"><h2>5. Dates</h2>
+<dl class="facts"><dt>Level</dt><dd><span class="chip lv">A1 #9</span></dd><dt>Keywords</dt><dd><span class="zhi">号、年、日、月</span></dd></dl>
+<p class="intro">Big to small, like addresses.</p>
+<nav class="jump" aria-label="In this section"><a href="#dates-structure">Structure</a> <a href="#dates-examples">Examples</a> <a href="#dates-notes">Notes</a> <a href="#dates-practice">Practice</a> <a href="#dates-sources">Sources</a></nav>
+<h3 id="dates-structure">Structure</h3><div class="structure">Year + <span class="zhi">年</span> + month + <span class="zhi">月</span> + day + <span class="zhi">号</span> / <span class="zhi">日</span></div>
+<h3 id="dates-examples">Examples</h3><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">今天几<b class="kw">月</b>几<b class="kw">号</b>？</span><span class="py">jīntiān jǐ yuè jǐ hào?</span><span class="mean">What&#x27;s the date today?</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">一<b class="kw">月</b>一<b class="kw">日</b>是新<b class="kw">年</b>。</span><span class="py">yī yuè yī rì shì Xīnnián.</span><span class="mean">January 1st is New Year&#x27;s Day.</span><span class="from">AllSet</span></li></ul>
+<h3 id="dates-notes">Notes</h3><ul class="notes"><li>号 is spoken. 日 is written.</li></ul>
+<h3 id="dates-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: My birthday is May 3rd.. Tap to show the answer."><span class="q">My birthday is May 3rd.</span><span class="ans"><span class="zhi" lang="zh-Hans">我的生日是五月三号。</span><span class="pyx">wǒ de shēngrì shì wǔ yuè sān hào.</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="dates-sources">Sources</h3><ul class="refs"><li><a href="https://resources.allsetlearning.com/chinese/grammar/ASGT3KF6" target="_blank" rel="noopener">AllSet: Structure of dates</a></li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="days-of-the-week"><h2>6. Days of the week</h2>
+<dl class="facts"><dt>Level</dt><dd><span class="chip lv">A1 #10</span></dd><dt>Keywords</dt><dd><span class="zhi">星期</span></dd></dl>
+<p class="intro">星期一 Monday … 星期六 Saturday. The week starts on Monday.</p>
+<nav class="jump" aria-label="In this section"><a href="#days-of-the-week-structure">Structure</a> <a href="#days-of-the-week-examples">Examples</a> <a href="#days-of-the-week-notes">Notes</a> <a href="#days-of-the-week-practice">Practice</a> <a href="#days-of-the-week-sources">Sources</a></nav>
+<h3 id="days-of-the-week-structure">Structure</h3><div class="structure"><span class="zhi">星期</span> + number</div>
+<h3 id="days-of-the-week-examples">Examples</h3><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">今天<b class="kw">星期</b>几？</span><span class="py">jīntiān xīngqī jǐ?</span><span class="mean">What day is it today?</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">今天是<b class="kw">星期</b>一吗？</span><span class="py">jīntiān shì xīngqīyī ma?</span><span class="mean">Is today Monday?</span><span class="from">AllSet</span></li></ul>
+<h3 id="days-of-the-week-notes">Notes</h3><ul class="notes"><li>Sunday is 星期天 or 星期日.</li><li>是 is optional: 今天星期五.</li></ul>
+<h3 id="days-of-the-week-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: Tomorrow is Sunday.. Tap to show the answer."><span class="q">Tomorrow is Sunday.</span><span class="ans"><span class="zhi" lang="zh-Hans">明天星期天。</span><span class="pyx">míngtiān xīngqītiān.</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="days-of-the-week-sources">Sources</h3><ul class="refs"><li><a href="https://resources.allsetlearning.com/chinese/grammar/ASGVH4Q5" target="_blank" rel="noopener">AllSet: Structure of days of the week</a></li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="clock-time"><h2>7. Clock time</h2>
+<dl class="facts"><dt>Level</dt><dd><span class="chip lv">A1 #12</span></dd><dt>Keywords</dt><dd><span class="zhi">分、点、点半</span></dd></dl>
+<p class="intro">两点 for 2 o&#x27;clock, not 二点.</p>
+<nav class="jump" aria-label="In this section"><a href="#clock-time-structure">Structure</a> <a href="#clock-time-examples">Examples</a> <a href="#clock-time-notes">Notes</a> <a href="#clock-time-practice">Practice</a> <a href="#clock-time-sources">Sources</a></nav>
+<h3 id="clock-time-structure">Structure</h3><div class="structure">Number + <span class="zhi">点</span> (+ number + <span class="zhi">分</span>) · number + <span class="zhi">点半</span></div>
+<h3 id="clock-time-examples">Examples</h3><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">现在十<b class="kw">点</b>。</span><span class="py">xiànzài shí diǎn.</span><span class="mean">It&#x27;s 10 o&#x27;clock.</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">下午两<b class="kw">点半</b></span><span class="py">xiàwǔ liǎng diǎn bàn</span><span class="mean">2:30 p.m.</span><span class="from">AllSet</span></li></ul>
+<h3 id="clock-time-notes">Notes</h3><ul class="notes"><li>半 = half past: 两点半.</li><li>上午 a.m., 下午 p.m.: 下午三点.</li></ul>
+<h3 id="clock-time-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: It&#x27;s 3:20.. Tap to show the answer."><span class="q">It&#x27;s 3:20.</span><span class="ans"><span class="zhi" lang="zh-Hans">现在三点二十分。</span><span class="pyx">xiànzài sān diǎn èrshí fēn.</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="clock-time-sources">Sources</h3><ul class="refs"><li><a href="https://resources.allsetlearning.com/chinese/grammar/ASGN6BBU" target="_blank" rel="noopener">AllSet: Structure of times (basic)</a></li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="see-also"><h2>See also</h2><h3>Related topics</h3><ul class="refs"><li><a href="lesson-time.html">Lesson: Time</a> <span class="note" style="display:inline">Days and dates, clock time, parts of the day, making plans, and the weather.</span></li><li><a href="lesson-building-blocks.html">Lesson: Building blocks</a> <span class="note" style="display:inline">Pronouns, numbers, measure words, describing words, and the small words that hold sentences together.</span></li><li><a href="lesson-food-and-drink.html">Lesson: Food &amp; drink</a> <span class="note" style="display:inline">Drinks, food and flavors, and ordering at a restaurant.</span></li></ul><h3>Also covered in Yoyo Chinese</h3><ul class="refs"><li><a href="https://yoyochinese.com/courses/beginner-conversational-chinese" target="_blank" rel="noopener">Beginner Conversational, Unit 2: Numbers (0-99)</a></li></ul></section>
 <nav class="pager"><a href="grammar-actions-in-progress.html">← Actions in progress</a><a href="grammar-location.html">Location and &quot;there is&quot; →</a></nav>
 <p class="foot">Built from handwritten notes. Tips and unmarked examples were written by Claude; each article lists its sources. Native-speaker friends have the last word on usage.</p>
 </main>
