@@ -1,5 +1,5 @@
 # Game development
-summary: The game team, making and launching a game, words inside a game, and game art.
+summary: The game team, making and launching a game, technical basics, words inside a game, and game art.
 intro: These words help you talk about making games: who does what on a team, how a game gets built and released, and the art that goes into it. Taiwan and the mainland use different words for several roles, so both are shown.
 related: Art & drawing; Jobs & free time; Building blocks
 
@@ -36,6 +36,38 @@ words: 测试, 上线, 更新
 - try: We launch next month. | 我们下个月上线。 | wǒmen xià ge yuè shàngxiàn.
 source: Tencent Cloud: game development roles and stages | https://cloud.tencent.com/developer/news/47394
 source: Juejin: game development terms | https://juejin.cn/post/6963173130713956382
+
+## Technical basics
+Everyday tech words come up a lot when people talk about making games. Taiwan and the mainland often use different words here, so both are shown.
+### Code and programming
+Taiwan says 寫程式 (write code) and 程式碼 (code); the mainland says 编程 and 代码. Many people just say "bug" in English.
+words: 写程式, 程式码, 编程, 代码, 脚本
+- 我每天写程式。 | wǒ měi tiān xiě chéngshì. | I write code every day.
+- 这个程式码有问题。 | zhège chéngshìmǎ yǒu wèntí. | There's a problem with this code.
+### Servers, data and the internet
+Taiwan: 伺服器 (server), 資料 (data), 網路 (internet). Mainland: 服务器, 数据, 网络.
+words: 伺服器, 服务器, 资料, 数据, 网路, 网络
+- 伺服器有问题。 | sìfúqì yǒu wèntí. | Something's wrong with the server.
+### Graphics
+Taiwan says 解析度 for resolution; the mainland says 分辨率.
+words: 像素, 多边形, 渲染, 解析度, 分辨率, 资源
+- 这个游戏是像素风格。 | zhège yóuxì shì xiàngsù fēnggé. | This game has a pixel-art style.
+### Platforms and versions
+手游 (mobile game) is short for 手机游戏.
+words: 平台, 版本, 下载, 安装, 手游
+- 新版本可以下载了。 | xīn bǎnběn kěyǐ xiàzài le. | The new version is ready to download.
+- 你玩什么手游？ | nǐ wán shénme shǒuyóu? | What mobile games do you play?
+### When things go wrong
+很卡 means it's lagging. Taiwan says 斷線 for "disconnect"; the mainland says 掉线.
+words: 卡, 断线, 掉线, 闪退
+- 好卡！ | hǎo kǎ! | It's so laggy!
+- 游戏一直闪退。 | yóuxì yìzhí shǎntuì. | The game keeps crashing.
+### Try it
+- try: It's so laggy! | 好卡！ | hǎo kǎ!
+- try: I write code every day. | 我每天写程式。 | wǒ měi tiān xiě chéngshì.
+- try: Something's wrong with the server. | 伺服器有问题。 | sìfúqì yǒu wèntí.
+source: Juejin: game development terms | https://juejin.cn/post/6963173130713956382
+source: Tencent Cloud: game engine and development terms | https://cloud.tencent.com/developer/techpedia/1899
 
 ## Inside a game
 Useful for talking about any game you're playing, not just making one.
