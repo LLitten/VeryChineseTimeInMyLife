@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Topic quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #edf1f5; --surface: #ffffff; --ink: #16222e; --muted: #5a6978; --line: #cbd5df;
+  --accent: #1d6f8a; --accent-soft: #dcecf2; --accent-ink: #ffffff;
+  --good: #2e7d32; --good-bg: #e6f4e7; --close: #8a5a00; --close-bg: #fbeed3; --bad: #b3261e; --bad-bg: #fbe4e2;
+  --serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1820; --surface: #17232e; --ink: #e6edf3; --muted: #94a3b2; --line: #2b3b49;
+    --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620;
+    --good: #81c784; --good-bg: #1d3320; --close: #f0b45a; --close-bg: #3a2c12; --bad: #ff8a80; --bad-bg: #3d1d1b;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1820; --surface: #17232e; --ink: #e6edf3; --muted: #94a3b2; --line: #2b3b49;
+  --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620;
+  --good: #81c784; --good-bg: #1d3320; --close: #f0b45a; --close-bg: #3a2c12; --bad: #ff8a80; --bad-bg: #3d1d1b;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.5; -webkit-text-size-adjust: 100%; }
+main { max-width: 600px; margin: 0 auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px calc(40px + env(safe-area-inset-bottom, 0px)); }
+a { color: var(--accent); }
+.crumbs { font-size: 14px; color: var(--muted); }
+.crumbs a { color: var(--muted); text-decoration: none; }
+h1 { font-size: 26px; margin: 12px 0 4px; }
+.lead { margin: 0 0 12px; color: var(--muted); }
+label.lab { display: block; margin: 14px 0 6px; font-size: 13px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted); }
+select, input[type=text] { display: block; width: 100%; min-height: 46px; padding: 8px 12px; font: inherit; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+input.answer { font-size: 20px; min-height: 54px; }
+input.answer.zh { font-family: var(--serif); font-size: 24px; }
+select:focus-visible, input:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.opt { appearance: none; min-height: 40px; padding: 6px 13px; font: inherit; font-size: 15px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 20px; cursor: pointer; }
+.opt[aria-pressed="true"] { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); font-weight: 600; }
+.opt:disabled { opacity: 0.4; cursor: not-allowed; }
+.check { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 15px; }
+.check input { width: 20px; height: 20px; }
+.btn { appearance: none; display: block; width: 100%; min-height: 50px; margin-top: 14px; font: inherit; font-weight: 700; color: var(--accent-ink); background: var(--accent); border: 0; border-radius: 12px; cursor: pointer; }
+.btn.quiet { color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); font-weight: 600; }
+.btn:disabled { opacity: 0.5; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.row2 .btn { margin-top: 10px; }
+.link { appearance: none; background: none; border: 0; padding: 8px 0; font: inherit; font-size: 15px; color: var(--accent); text-decoration: underline; cursor: pointer; }
+.top { display: flex; justify-content: space-between; align-items: center; margin: 8px 0; font-size: 14px; color: var(--muted); }
+.bar { display: flex; gap: 4px; margin-bottom: 14px; }
+.bar span { flex: 1; height: 6px; border-radius: 3px; background: var(--line); }
+.bar span.ok { background: var(--good); } .bar span.close { background: var(--close); } .bar span.no { background: var(--bad); } .bar span.cur { background: var(--accent); }
+.card { padding: 16px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 14px; }
+.ask { margin: 0 0 6px; font-size: 14px; color: var(--muted); }
+.prompt { margin: 0 0 14px; font-size: 22px; font-weight: 700; line-height: 1.3; }
+.prompt.zh { font-family: var(--serif); font-size: 34px; }
+.hint { margin: -8px 0 12px; font-size: 14px; color: var(--muted); }
+.fb { margin-top: 14px; padding: 12px 14px; border-radius: 12px; }
+.fb.ok { background: var(--good-bg); } .fb.close { background: var(--close-bg); } .fb.no { background: var(--bad-bg); }
+.fb .v { font-weight: 700; }
+.fb.ok .v { color: var(--good); } .fb.close .v { color: var(--close); } .fb.no .v { color: var(--bad); }
+.fb .ans { display: block; margin-top: 6px; font-family: var(--serif); font-size: 22px; }
+.fb .sub { display: block; font-size: 15px; color: var(--muted); }
+.fb .you { display: block; margin-top: 4px; font-size: 14px; }
+.score { font-size: 44px; font-weight: 800; margin: 10px 0 0; }
+.missed { margin: 10px 0 0; padding: 0; list-style: none; }
+.missed li { padding: 10px 0; border-top: 1px solid var(--line); }
+.missed .zh { font-family: var(--serif); font-size: 20px; }
+.missed .sub { display: block; font-size: 14px; color: var(--muted); }
+.note { margin-top: 18px; font-size: 13px; color: var(--muted); }
+.count { font-size: 14px; color: var(--muted); margin-top: 6px; }
+</style>
+</head>
+<body>
+<main>
+<nav class="crumbs"><a href="../index.html">All tools</a> › <a href="index.html">Lessons</a> › Quiz</nav>
+<div id="app"></div>
+</main>
+<script>
+/* QUIZ DATA START: generated by tools/build_topics.py from lessons/, grammar/, quizzes/ and vocab.csv. */
+var QUIZ = null;
+/* QUIZ DATA END */
+
+(function () {
+  var app = document.getElementById("app");
+  var STATS_KEY = "quiz-stats-v1", PREFS_KEY = "quiz-prefs-v1";
+  var stats = {}, prefs = { mode: "", size: 5, weak: false, zhuyin: false };
+  try { stats = JSON.parse(localStorage.getItem(STATS_KEY) || "{}"); } catch (e) {}
+  try { Object.assign(prefs, JSON.parse(localStorage.getItem(PREFS_KEY) || "{}")); } catch (e) {}
+  function saveStats() { try { localStorage.setItem(STATS_KEY, JSON.stringify(stats)); } catch (e) {} }
+  function savePrefs() { try { localStorage.setItem(PREFS_KEY, JSON.stringify(prefs)); } catch (e) {} }
+
+  var ITEMS = QUIZ.items, SETS = QUIZ.sets;
+  var SET_BY_ID = {}; SETS.forEach(function (s) { SET_BY_ID[s.id] = s; });
+
+  var MODES = [
+    { id: "en2zh", label: "English → Chinese", kinds: ["w"], ask: "Write it in Chinese" },
+    { id: "zh2en", label: "Chinese → English", kinds: ["w", "r"], ask: "What does it mean?" },
+    { id: "zh2py", label: "Chinese → pinyin", kinds: ["w"], ask: "Write the pinyin" },
+    { id: "sent", label: "Sentences", kinds: ["s"], ask: "Say it, then write it in Chinese" },
+    { id: "mix", label: "Mixed", kinds: ["w", "s", "r"], ask: "" }
+  ];
+
+  /* ---------- helpers ---------- */
+  function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x !== undefined) e.textContent = x; return e; }
+  function btn(label, cls, fn) { var b = el("button", cls || "btn", label); b.type = "button"; b.addEventListener("click", fn); return b; }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* ---------- answer checking ---------- */
+  var ZH_PUNCT = /[\s。，、！？!?,.…：:；;“”"'‘’（）()「」《》·~～\-—]/g;
+  function normZh(s) { return (s || "").replace(ZH_PUNCT, ""); }
+  function plain(s) { return (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase(); }
+  function normEn(s) {
+    s = plain(s).replace(/\(.*?\)/g, " ").replace(/[^a-z0-9' ]+/g, " ").replace(/\s+/g, " ").trim();
+    return s.replace(/^(to|a|an|the) /, "");
+  }
+  function enVariants(list) {
+    var out = [];
+    list.forEach(function (m) {
+      m.split(/[;,/]| or /).forEach(function (part) {
+        var a = normEn(part), b = normEn(part.replace(/[()]/g, " "));
+        [a, b].forEach(function (x) { if (x && out.indexOf(x) === -1) out.push(x); });
+      });
+    });
+    return out;
+  }
+  var STOP = { i: 1, me: 1, you: 1, it: 1, is: 1, am: 1, are: 1, be: 1, of: 1, a: 1, an: 1, the: 1, to: 1, im: 1, its: 1, s: 1 };
+  function words(s) { return s.split(" ").filter(function (w) { return w && !STOP[w]; }); }
+  function checkEn(ans, accepted) {
+    var a = normEn(ans); if (!a) return "no";
+    var vars = enVariants(accepted);
+    if (vars.indexOf(a) !== -1) return "ok";
+    var aw = words(a);
+    for (var i = 0; i < vars.length; i++) {
+      var vw = words(vars[i]);
+      if (!vw.length || !aw.length) continue;
+      var hit = aw.filter(function (w) { return vw.indexOf(w) !== -1 || vw.indexOf(w.replace(/s$/, "")) !== -1; }).length;
+      if (hit === vw.length && hit === aw.length) return "ok";
+      if (hit / Math.max(vw.length, aw.length) >= 0.5) return "close";
+    }
+    return "no";
+  }
+  // pinyin: split into letters (tone-free) and the tone of each syllable
+  var TONE = { "̄": "1", "́": "2", "̌": "3", "̀": "4" };
+  function pySyllables(s) {
+    s = (s || "").normalize("NFD").toLowerCase().replace(/ü|v/g, "ü");
+    var bare = "", tones = [], pending = "";
+    for (var i = 0; i < s.length; i++) {
+      var c = s[i];
+      if (TONE[c]) { if (pending) tones.push(pending); pending = TONE[c]; continue; }
+      if (/[1-5]/.test(c)) { tones.push(c === "5" ? "0" : c); pending = ""; continue; }
+      if (/[a-zü]/.test(c)) { bare += c; continue; }
+      if (pending) { tones.push(pending); pending = ""; }
+    }
+    if (pending) tones.push(pending);
+    return { bare: bare.replace(/ü/g, "v"), tones: tones.join("") };
+  }
+  function marksOf(py) {
+    // tones for a marked pinyin word, by syllable boundaries in the original spacing
+    var out = [], syl = (py || "").normalize("NFD").toLowerCase().split(/[\s'’]+/);
+    syl.forEach(function (w) { var t = ""; for (var i = 0; i < w.length; i++) if (TONE[w[i]]) t += TONE[w[i]]; out.push(t); });
+    return out.join("");
+  }
+  function checkPy(ans, correct) {
+    var a = pySyllables(ans), c = pySyllables(correct);
+    if (!a.bare) return "no";
+    if (a.bare !== c.bare) return a.bare.replace(/v/g, "u") === c.bare.replace(/v/g, "u") ? "close" : "no";
+    var want = c.tones.replace(/0/g, ""), got = a.tones.replace(/0/g, "");
+    if (!got) return "close";
+    return got === want || got === marksOf(correct) ? "ok" : "close";
+  }
+  function lcs(a, b) {
+    var m = a.length, n = b.length, prev = new Array(n + 1).fill(0);
+    for (var i = 1; i <= m; i++) { var cur = [0]; for (var j = 1; j <= n; j++) cur[j] = a[i - 1] === b[j - 1] ? prev[j - 1] + 1 : Math.max(prev[j], cur[j - 1]); prev = cur; }
+    return prev[n];
+  }
+  function checkZh(ans, accepted) {
+    var a = normZh(ans); if (!a) return "no";
+    var best = 0;
+    for (var i = 0; i < accepted.length; i++) {
+      var c = normZh(accepted[i]);
+      if (a === c) return "ok";
+      best = Math.max(best, lcs(a, c) / Math.max(a.length, c.length));
+    }
+    return best >= 0.75 ? "close" : "no";
+  }
+
+  /* ---------- building a round ---------- */
+  function modeFits(mode, item) { return mode.kinds.indexOf(item.k) !== -1; }
+  function questionsFor(set, mode) {
+    var qs = [];
+    set.items.forEach(function (id) {
+      var it = ITEMS[id]; if (!it) return;
+      if (mode.id === "mix") {
+        var opts = MODES.filter(function (m) { return m.id !== "mix" && m.kinds.indexOf(it.k) !== -1; });
+        if (opts.length) qs.push({ id: id, it: it, mode: opts[Math.floor(Math.random() * opts.length)] });
+      } else if (modeFits(mode, it)) qs.push({ id: id, it: it, mode: mode });
+    });
+    return qs;
+  }
+  function key(q) { return q.id + "|" + q.mode.id; }
+  function weakness(q) { var s = stats[key(q)]; return s ? (s.miss + 1) / (s.seen + 2) : 0.5; }
+
+  /* ---------- screens ---------- */
+  var round = null;
+
+  function setup() {
+    app.innerHTML = "";
+    app.appendChild(el("h1", "", "Topic quiz"));
+    app.appendChild(el("p", "lead", "Pick a topic, then type your answers. Answers are checked for you; you can always overrule the checker."));
+    var params = new URLSearchParams(location.search);
+    var chosen = params.get("set") || prefs.set || SETS[0].id;
+    if (!SET_BY_ID[chosen]) chosen = SETS[0].id;
+
+    app.appendChild(el("label", "lab", "Topic"));
+    var sel = el("select"); sel.setAttribute("aria-label", "Topic");
+    var groups = {};
+    SETS.forEach(function (s) {
+      if (!groups[s.group]) { groups[s.group] = el("optgroup"); groups[s.group].label = s.group; sel.appendChild(groups[s.group]); }
+      var o = el("option", "", (s.depth ? " " : "") + s.label + " (" + s.items.length + ")"); o.value = s.id; groups[s.group].appendChild(o);
+    });
+    sel.value = chosen;
+    app.appendChild(sel);
+
+    app.appendChild(el("label", "lab", "Question type"));
+    var seg = el("div", "seg"); app.appendChild(seg);
+    var count = el("p", "count"); app.appendChild(count);
+
+    app.appendChild(el("label", "lab", "Questions per round"));
+    var seg2 = el("div", "seg"); app.appendChild(seg2);
+    [5, 10, 20, 0].forEach(function (n) {
+      var b = btn(n ? String(n) : "All", "opt", function () { prefs.size = n; savePrefs(); paint(); });
+      b.dataset.n = n; seg2.appendChild(b);
+    });
+    var weakLab = el("label", "check"); var weak = el("input"); weak.type = "checkbox"; weak.checked = prefs.weak;
+    weak.addEventListener("change", function () { prefs.weak = weak.checked; savePrefs(); });
+    weakLab.appendChild(weak); weakLab.appendChild(document.createTextNode("Focus on my misses first"));
+    app.appendChild(weakLab);
+
+    var start = btn("Start", "btn", function () {
+      var set = SET_BY_ID[sel.value], mode = MODES.filter(function (m) { return m.id === prefs.mode; })[0];
+      var qs = questionsFor(set, mode);
+      qs = prefs.weak ? shuffle(qs).sort(function (a, b) { return weakness(b) - weakness(a); }) : shuffle(qs);
+      if (prefs.size) qs = qs.slice(0, prefs.size);
+      round = { set: set, qs: qs, pos: 0, results: [] };
+      ask();
+    });
+    app.appendChild(start);
+    app.appendChild(el("p", "note", "Chinese answers accept simplified or Taiwan characters. Pinyin accepts tone marks or numbers (ni3 hao3). Your misses are remembered on this device only."));
+
+    function paint() {
+      var set = SET_BY_ID[sel.value];
+      seg.innerHTML = "";
+      var any = null;
+      MODES.forEach(function (m) {
+        var n = questionsFor(set, m).length;
+        var b = btn(m.label, "opt", function () { prefs.mode = m.id; savePrefs(); paint(); });
+        b.disabled = n === 0;
+        if (n && !any) any = m.id;
+        b.setAttribute("aria-pressed", String(prefs.mode === m.id));
+        seg.appendChild(b);
+      });
+      var cur = MODES.filter(function (m) { return m.id === prefs.mode; })[0];
+      if (!cur || !questionsFor(set, cur).length) { prefs.mode = any || "mix"; return paint(); }
+      count.textContent = questionsFor(set, cur).length + " questions available" + (set.about ? " · " + set.about : "");
+      Array.prototype.forEach.call(seg2.children, function (b) { b.setAttribute("aria-pressed", String(Number(b.dataset.n) === prefs.size)); });
+      start.disabled = !questionsFor(set, cur).length;
+    }
+    sel.addEventListener("change", function () { prefs.set = sel.value; savePrefs(); paint(); });
+    paint();
+  }
+
+  function header() {
+    var f = document.createDocumentFragment();
+    var top = el("div", "top");
+    top.appendChild(el("span", "", round.set.label));
+    top.appendChild(el("span", "", (round.pos + 1) + " / " + round.qs.length));
+    f.appendChild(top);
+    var bar = el("div", "bar"); bar.setAttribute("aria-hidden", "true");
+    round.qs.forEach(function (_, i) { var r = round.results[i]; bar.appendChild(el("span", r ? r.v : (i === round.pos ? "cur" : ""))); });
+    f.appendChild(bar);
+    return f;
+  }
+
+  function prompt(q) {
+    var it = q.it, m = q.mode.id;
+    if (it.k === "w") {
+      if (m === "en2zh") return { ask: "Write it in Chinese", text: it.m, zh: false, input: "zh", hint: it.n || "" };
+      if (m === "zh2en") return { ask: "What does it mean?", text: it.s, zh: true, input: "en", hint: it.t ? "TW " + it.t : "" };
+      return { ask: "Write the pinyin", text: it.s, zh: true, input: "py", hint: it.t ? "TW " + it.t : "" };
+    }
+    if (it.k === "r") return { ask: "What does it mean?", text: it.zh, zh: true, input: "en", hint: "" };
+    return { ask: "Say it, then write it in Chinese", text: it.en, zh: false, input: "zh", hint: "" };
+  }
+
+  function judge(q, given) {
+    var it = q.it, m = q.mode.id;
+    if (it.k === "w") {
+      if (m === "en2zh") return checkZh(given, [it.s, it.t].concat(it.alt || []).filter(Boolean).reduce(function (a, s) { return a.concat(s.split(" / ")); }, []));
+      if (m === "zh2en") return checkEn(given, [it.m]);
+      return checkPy(given, it.p);
+    }
+    if (it.k === "r") return checkEn(given, it.en);
+    return checkZh(given, it.zh);
+  }
+
+  function answerView(q) {
+    var it = q.it, box = document.createDocumentFragment();
+    if (it.k === "w") {
+      box.appendChild(el("span", "ans", it.s + (it.t ? "  ·  " + it.t : "")));
+      box.appendChild(el("span", "sub", it.p + " — " + it.m));
+    } else if (it.k === "r") {
+      box.appendChild(el("span", "ans", it.en[0]));
+      box.appendChild(el("span", "sub", it.zh + (it.py ? " — " + it.py : "")));
+    } else {
+      box.appendChild(el("span", "ans", it.zh[0]));
+      box.appendChild(el("span", "sub", (it.py ? it.py + " — " : "") + it.en));
+    }
+    return box;
+  }
+
+  function ask() {
+    app.innerHTML = "";
+    if (round.pos >= round.qs.length) return results();
+    var q = round.qs[round.pos], p = prompt(q);
+    app.appendChild(header());
+    var card = el("div", "card");
+    card.appendChild(el("p", "ask", p.ask));
+    card.appendChild(el("p", "prompt" + (p.zh ? " zh" : ""), p.text));
+    if (p.hint) card.appendChild(el("p", "hint", p.hint));
+    var input = el("input", "answer" + (p.input === "zh" ? " zh" : "")); input.type = "text";
+    input.setAttribute("autocomplete", "off"); input.setAttribute("autocapitalize", "off"); input.setAttribute("spellcheck", "false");
+    input.setAttribute("lang", p.input === "zh" ? "zh" : "en");
+    input.setAttribute("aria-label", p.ask);
+    input.placeholder = p.input === "zh" ? "中文" : p.input === "py" ? "e.g. ni3 hao3 or nǐ hǎo" : "Meaning in English";
+    card.appendChild(input);
+    var actions = el("div");
+    var checkBtn = btn("Check", "btn", function () { done(false); });
+    actions.appendChild(checkBtn);
+    actions.appendChild(btn("I don't know", "link", function () { done(true); }));
+    card.appendChild(actions);
+    app.appendChild(card);
+    input.focus({ preventScroll: true });
+    input.addEventListener("keydown", function (e) { if (e.key === "Enter" && !e.isComposing) { e.preventDefault(); if (input.value.trim()) done(false); } });
+
+    var answered = false;
+    function done(skip) {
+      if (answered) return; answered = true;
+      var given = input.value.trim();
+      input.readOnly = true; actions.remove();
+      var v = skip || !given ? "no" : judge(q, given);
+      var fb = el("div", "fb " + v);
+      var label = { ok: "Correct", close: q.mode.id === "zh2py" ? "Right sounds — check the tones" : "Close", no: skip ? "Here's the answer" : "Not quite" }[v];
+      fb.appendChild(el("span", "v", label));
+      fb.appendChild(answerView(q));
+      if (given && v !== "ok") fb.appendChild(el("span", "you", "You wrote: " + given));
+      card.appendChild(fb);
+      var row = el("div", "row2");
+      function record(final) {
+        round.results[round.pos] = { q: q, v: final, given: given };
+        var k = key(q); var s = stats[k] || { seen: 0, miss: 0 };
+        s.seen++; if (final !== "ok") s.miss++; stats[k] = s; saveStats();
+        round.pos++; ask(); window.scrollTo(0, 0);
+      }
+      if (v === "ok") {
+        row.appendChild(btn("Actually, I missed it", "btn quiet", function () { record("no"); }));
+        row.appendChild(btn("Next", "btn", function () { record("ok"); }));
+      } else {
+        row.appendChild(btn(v === "close" ? "Count as missed" : "Next", "btn quiet", function () { record(v === "close" ? "close" : "no"); }));
+        row.appendChild(btn("I was right", "btn", function () { record("ok"); }));
+      }
+      card.appendChild(row);
+      row.lastChild.focus({ preventScroll: true });
+    }
+  }
+
+  function results() {
+    var n = round.results.length, ok = round.results.filter(function (r) { return r.v === "ok"; }).length;
+    app.appendChild(el("h1", "", "Results"));
+    app.appendChild(el("p", "lead", round.set.label));
+    app.appendChild(el("p", "score", ok + " / " + n));
+    var missed = round.results.filter(function (r) { return r.v !== "ok"; });
+    app.appendChild(el("p", "", ok === n ? "Perfect round." : ok >= n * 0.8 ? "Strong. Review the misses below." : ok >= n * 0.5 ? "Good practice. The misses below are worth another look." : "Keep going: retry the misses, then come back to this topic."));
+    if (missed.length) {
+      var ul = el("ul", "missed");
+      missed.forEach(function (r) {
+        var li = el("li"), it = r.q.it;
+        li.appendChild(el("span", "zh", it.k === "w" ? it.s : it.k === "r" ? it.zh : it.zh[0]));
+        li.appendChild(el("span", "sub", it.k === "w" ? it.p + " — " + it.m : it.k === "r" ? it.en[0] : (it.py ? it.py + " — " : "") + it.en));
+        li.appendChild(el("span", "sub", "You: " + (r.given || "(skipped)")));
+        ul.appendChild(li);
+      });
+      app.appendChild(ul);
+      app.appendChild(btn("Retry the " + missed.length + " I missed", "btn", function () {
+        round = { set: round.set, qs: shuffle(missed.map(function (r) { return r.q; })), pos: 0, results: [] }; ask();
+      }));
+    }
+    app.appendChild(btn("New round", "btn quiet", setup));
+    if (round.set.link) { var a = el("a", "", "Back to the lesson"); a.href = round.set.link; var p = el("p", "note"); p.appendChild(a); app.appendChild(p); }
+  }
+
+  setup();
+})();
+</script>
+</body>
+</html>

@@ -290,6 +290,8 @@ code { font-size: 0.9em; }
 .card .ttl { font-weight: 700; text-decoration: none; }
 .card .secs { display: block; margin-top: 6px; font-size: 14px; line-height: 1.7; }
 #contents { scroll-margin-top: 56px; }
+.quizme { font-weight: 700; }
+.quizbtn { display: inline-block; padding: 8px 16px; font-weight: 700; text-decoration: none; color: var(--accent-ink); background: var(--accent); border-radius: 20px; }
 .subsec { margin: 22px 0 0; padding: 4px 0 0 14px; border-left: 3px solid var(--accent-soft); }
 .sect h3.subh { margin: 0 0 6px; padding: 0; font-size: 18px; letter-spacing: 0; text-transform: none; color: var(--ink); border: 0; }
 .explain { margin: 4px 0 10px; }
@@ -515,7 +517,8 @@ def render_section(a):
         parts.append(("practice", "Practice"))
     parts.append(("sources", "Sources"))
     out.append('<nav class="jump" aria-label="In this section">' + " ".join(
-        f'<a href="#{an}-{k}">{esc(t)}</a>' for k, t in parts) + "</nav>")
+        f'<a href="#{an}-{k}">{esc(t)}</a>' for k, t in parts)
+        + f' <a class="quizme" href="{quiz_link(a["chapter"]["base"] + "#" + an)}">Quiz me</a></nav>')
     titles = dict(parts)
     if s["pattern"]:
         out.append(f'<h3 id="{an}-structure">Structure</h3><div class="structure">{structure_html(s["pattern"])}</div>')
@@ -543,6 +546,7 @@ def render_chapter(ch, arts, by_title, i, group, label):
         if para:
             out.append(f'<p class="intro">{inline(para)}</p>')
     out.append(f'<p class="lead">{label} {i + 1} of {len(group)}. Jump to a section, or read top to bottom.</p>')
+    out.append(f'<p><a class="quizbtn" href="{quiz_link(ch["base"])}">Quiz yourself on {esc(ch["title"])}</a></p>')
     out.append('<nav id="contents" class="contents" aria-label="Contents"><b>Contents</b><ol>' + "".join(
         f'<li><a href="#{a["anchor"]}">{esc(a["title"])}</a>'
         + (f' <span class="lvl">{esc(a["level"])}</span>' if a["level"] else "") + "</li>" for a in arts)
@@ -652,6 +656,7 @@ def render_index(lessons, grammar, arts_by_chapter, all_arts):
             for i, ch in enumerate(group, 1))
     body = ('<h1>Lessons</h1><p class="lead">A small textbook built from your notes. Each topic is one page, '
             'with sections laid out like the AllSet Chinese Grammar Wiki. Tap a section to go straight to it.</p>'
+            '<p><a class="quizbtn" href="quiz.html">Quiz yourself on any topic</a></p>'
             '<input id="q" class="search" type="search" placeholder="Search: a topic, tag, word, pinyin or English" '
             'aria-label="Search lessons" autocomplete="off" autocapitalize="off" spellcheck="false">'
             '<div class="filters" role="group" aria-label="Filters">'
@@ -669,6 +674,132 @@ def render_index(lessons, grammar, arts_by_chapter, all_arts):
     script = SEARCH_JS % json.dumps(idx, ensure_ascii=False, separators=(",", ":"))
     return page("Mandarin lessons", '<a href="../index.html">← All tools</a>', body, toggles=False, script=script, search=False)
 
+
+
+# ---------------------------------------------------------------- quizzes
+QUIZZES = ROOT / "quizzes"
+QUIZ_TEMPLATE = ROOT / "tools" / "quiz-template.html"
+
+
+def parse_quiz(path):
+    """A hand-written quiz in quizzes/. Format:
+      # Title
+      about: one line shown on the quiz page
+      words: 咖啡, 茶                       word questions, pulled from vocab.csv
+      - en>zh: English | 中文 / 中文 | pinyin  English prompt, Chinese answer (alternatives with " / ")
+      - zh>en: 中文 | English / English | pinyin  Chinese prompt, English answer
+    """
+    q = {"title": path.stem, "about": "", "words": [], "en2zh": [], "zh2en": []}
+    for raw in path.read_text(encoding="utf8").splitlines():
+        st = raw.strip()
+        if st.startswith("# "):
+            q["title"] = st[2:].strip()
+        elif st.startswith("about:"):
+            q["about"] = st[6:].strip()
+        elif st.startswith("words:"):
+            q["words"] += [w.strip() for w in st[6:].split(",") if w.strip()]
+        elif st.startswith("- en>zh:"):
+            q["en2zh"].append([x.strip() for x in st[8:].split("|")] + ["", ""])
+        elif st.startswith("- zh>en:"):
+            q["zh2en"].append([x.strip() for x in st[8:].split("|")] + ["", ""])
+    return q
+
+
+def build_quiz(lessons, grammar, word_by_s, arts_by_chapter):
+    items, sets = {}, []
+
+    def word_item(w):
+        if w["type"] == "sound":
+            return None
+        wid = f'w:{w["s"]}:{w["type"]}'
+        items[wid] = {"k": "w", "s": w["s"], "t": w["t"], "p": w["p"], "m": w["m"], "n": w["n"]}
+        return wid
+
+    def sent_item(en, zh, py):
+        zh_list = [z.strip() for z in zh.split(" / ") if z.strip()]
+        if not en or not zh_list:
+            return None
+        sid = "s:" + re.sub(r"\W", "", zh_list[0])
+        items[sid] = {"k": "s", "en": en, "zh": zh_list, "py": py}
+        return sid
+
+    def read_item(zh, en, py):
+        en_list = [e.strip() for e in en.split(" / ") if e.strip()]
+        rid = "r:" + re.sub(r"\W", "", zh)
+        items[rid] = {"k": "r", "zh": zh, "en": en_list, "py": py}
+        return rid
+
+    def section_items(sec):
+        ids = []
+        names = sec["words"] + [w for sub in sec["subs"] for w in sub["words"]]
+        for n in names:
+            i = word_item(word_by_s[n])
+            if i and i not in ids:
+                ids.append(i)
+        for prompt, zh, py in sec["try"]:
+            i = sent_item(prompt, zh, py)
+            if i and i not in ids:
+                ids.append(i)
+        examples = sec["examples"] + [e for sub in sec["subs"] for e in sub["examples"]]
+        for who, p in examples:
+            zh, py, en = p[:3]
+            # short, single sentences only: long Q-and-A pairs are hard to type
+            if len(re.findall(CJK, zh)) <= 12 and zh.count("？") + zh.count("。") <= 1 and "/" not in py:
+                i = sent_item(en, zh, py)
+                if i and i not in ids:
+                    ids.append(i)
+        return ids
+
+    for group, label in ((lessons, "Vocabulary"), (grammar, "Grammar")):
+        for L in group:
+            page_ids = []
+            secs = []
+            for a in arts_by_chapter[L["file"]]:
+                ids = section_items(a["sec"])
+                page_ids += [i for i in ids if i not in page_ids]
+                if ids:
+                    secs.append({"id": f'{L["base"]}#{a["anchor"]}', "label": f'{L["title"]} › {a["title"]}', "group": label, "depth": 1,
+                                 "items": ids, "link": a["file"]})
+            if page_ids:
+                sets.append({"id": L["base"], "label": L["title"], "group": label, "depth": 0,
+                             "items": page_ids, "link": L["file"]})
+                sets += secs
+
+    vocab = [w for w in bn.vocab_entries() if w["type"] != "sound"]
+    for _, subs in bn.GROUPS:
+        for u in subs:
+            ids = [word_item(w) for w in vocab if u in w["uses"]]
+            ids = [i for i in ids if i]
+            if ids:
+                sets.append({"id": "sit:" + slug(u), "label": u, "group": "By situation", "depth": 0, "items": ids})
+
+    if QUIZZES.exists():
+        for path in sorted(QUIZZES.glob("*.md")):
+            q = parse_quiz(path)
+            ids = []
+            for n in q["words"]:
+                if n not in word_by_s:
+                    raise SystemExit(f"{path.name}: word not in vocab.csv: {n}")
+                i = word_item(word_by_s[n])
+                if i:
+                    ids.append(i)
+            ids += [i for i in (sent_item(en, zh, py) for en, zh, py, *_ in q["en2zh"]) if i]
+            ids += [read_item(zh, en, py) for zh, en, py, *_ in q["zh2en"]]
+            if ids:
+                sets.append({"id": "quiz:" + path.stem, "label": q["title"], "group": "Custom quizzes", "depth": 0,
+                             "items": ids, "about": q["about"]})
+
+    page = QUIZ_TEMPLATE.read_text(encoding="utf8")
+    start = page.index("/* QUIZ DATA START")
+    start = page.index("\n", start) + 1
+    end = page.index("/* QUIZ DATA END */")
+    blob = "var QUIZ = " + json.dumps({"items": items, "sets": sets}, ensure_ascii=False, separators=(",", ":")) + ";\n"
+    (OUT / "quiz.html").write_text(page[:start] + blob + page[end:], encoding="utf8")
+    return len(sets), len(items)
+
+
+def quiz_link(set_id):
+    return "quiz.html?set=" + set_id.replace("#", "%23")
 
 # ---------------------------------------------------------------- main
 def main():
@@ -711,6 +842,8 @@ def main():
                                                skip="" if has_words else "ztw"), encoding="utf8")
 
     (OUT / "index.html").write_text(render_index(lessons, grammar, arts_by_chapter, all_arts), encoding="utf8")
+    nsets, nitems = build_quiz(lessons, grammar, word_by_s, arts_by_chapter)
+    print(f"Wrote topics/quiz.html ({nsets} quiz topics, {nitems} questions)")
     print(f"Wrote {len(lessons)} vocabulary and {len(grammar)} grammar topic pages ({len(all_arts)} sections), and topics/index.html")
     if unused:
         print(f"Not in any lesson yet ({len(unused)}): {' '.join(unused)}")
