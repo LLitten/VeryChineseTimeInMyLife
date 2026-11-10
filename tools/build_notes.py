@@ -29,7 +29,7 @@ GROUPS = [
     ("Out & about", ["Transport", "Directions", "Places in town", "Shopping & money"]),
     ("Time", ["Clock & calendar", "Making plans", "Weather"]),
     ("Home & life", ["Daily routine", "Around the house", "School & work", "Animals & plants",
-                     "Colors & clothes", "Health & body", "Free time & hobbies"]),
+                     "Colors & clothes", "Health & body", "Free time & hobbies", "Games & art"]),
     ("Building blocks", ["Describing things", "Numbers & counting", "Grammar glue"]),
 ]
 # Zhuyin chart rows (type "sound") use this situation. They appear in the

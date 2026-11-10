@@ -15,6 +15,7 @@ One line per session: date, what happened, what to focus on next. Add a line at 
 | Nov 2026 | Turned the topic pages into 8 short lessons (words, tips, examples, practice), plus grammar pages. Notes page trimmed to words and phrases. | Work through the People and Conversation lessons |
 | Nov 2026 | Rewrote grammar as 11 lessons, checked against the AllSet Chinese Grammar Wiki, with sources on every section. | Grammar lessons 2 (questions) and 3 (negation) |
 | Nov 2026 | Lessons rewritten as textbook-style pages with sub-sections and explanations. Added 136 core words from LTL and four new topics: Colors & clothes, Body & health, Feelings, Jobs & free time. | Read the new Feelings and Body & health lessons |
+| Nov 2026 | Added two lessons: Game development (team roles, making a game, game art) and Art & drawing. 41 new words, with Taiwan and mainland terms. | Check Taiwan game job titles with friends |
 
 ## Baseline exam (November 2026)
 

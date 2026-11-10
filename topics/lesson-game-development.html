@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Game development · Mandarin lessons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #edf1f5; --surface: #ffffff; --ink: #16222e; --muted: #5a6978; --line: #cbd5df;
+  --accent: #1d6f8a; --accent-soft: #dcecf2; --accent-ink: #ffffff; --bad: #b3261e; --good: #2e7d32;
+  --serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --serif-tc: "Noto Serif TC", "Songti TC", "PMingLiU", "Noto Serif SC", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1820; --surface: #17232e; --ink: #e6edf3; --muted: #94a3b2; --line: #2b3b49;
+    --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620; --bad: #ff8a80; --good: #81c784;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1820; --surface: #17232e; --ink: #e6edf3; --muted: #94a3b2; --line: #2b3b49;
+  --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620; --bad: #ff8a80; --good: #81c784;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+main { max-width: 700px; margin: 0 auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px calc(40px + env(safe-area-inset-bottom, 0px)); }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, .peekable:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; justify-content: space-between; font-size: 14px; color: var(--muted); }
+.crumbs a { color: var(--muted); text-decoration: none; }
+.crumbs a:hover { color: var(--accent); }
+.mini { display: flex; flex: 1 1 180px; max-width: 260px; }
+.mini input { width: 100%; min-height: 36px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; }
+h1 { font-size: 27px; line-height: 1.2; margin: 14px 0 6px; }
+h2 { font-size: 20px; margin: 30px 0 8px; padding-bottom: 4px; border-bottom: 2px solid var(--line); }
+h3 { font-size: 16px; margin: 20px 0 6px; }
+p { margin: 8px 0; }
+code { font-size: 0.9em; }
+.lead { margin: 0 0 12px; color: var(--muted); }
+.intro { font-size: 17px; }
+.zh, .zhi { font-family: var(--serif); }
+.kw { color: var(--accent); }
+.bad { color: var(--bad); font-weight: 700; }
+/* fact box, like AllSet's */
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 10px 0 14px; padding: 10px 14px; font-size: 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.facts dt { color: var(--muted); font-weight: 700; }
+.facts dd { margin: 0; }
+.chip { display: inline-block; margin: 0 4px 4px 0; padding: 1px 9px; font-size: 13px; text-decoration: none; color: var(--accent); border: 1px solid var(--accent); border-radius: 12px; }
+.chip.lv { color: var(--muted); border-color: var(--line); }
+.toc { margin: 6px 0 0; padding: 8px 14px 8px 32px; font-size: 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.toc li { margin: 2px 0; }
+.toggles { display: flex; flex-wrap: wrap; gap: 6px; position: sticky; top: 0; z-index: 5; margin: 10px -16px 0; padding: 8px 16px; background: var(--bg); }
+.tg { appearance: none; min-height: 34px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--muted); background: none; border: 1.5px dashed var(--line); border-radius: 17px; cursor: pointer; }
+.tg[aria-pressed="true"] { color: var(--ink); background: var(--surface); border-style: solid; border-color: var(--accent); }
+.structure { margin: 8px 0; padding: 12px 16px; font-size: 18px; font-weight: 600; text-align: center; background: var(--surface); border: 1.5px solid var(--line); border-left: 5px solid var(--accent); border-radius: 10px; }
+.structure .zhi { font-weight: 700; }
+/* key words table */
+.words { display: grid; gap: 0; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.3fr); gap: 10px; align-items: center; padding: 8px 12px; border-top: 1px solid var(--line); }
+.row:first-child { border-top: 0; }
+.no-tw .row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); }
+.no-tw .c-tw { display: none; }
+.row .zh { display: block; font-weight: 700; font-size: 22px; line-height: 1.2; overflow-wrap: anywhere; }
+.c-tw .zh { font-family: var(--serif-tc); }
+.zh.same { color: var(--muted); font-weight: 500; }
+.zh.m { font-size: 19px; } .zh.l { font-size: 16px; }
+.py, .zy { display: block; font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
+.zy { font-family: var(--serif-tc); }
+.mean { font-size: 15px; }
+.note, .from { display: block; font-size: 13px; color: var(--muted); }
+.from { font-style: italic; }
+/* examples, stacked like AllSet */
+.examples { margin: 6px 0; padding: 0; list-style: none; }
+.examples li { padding: 8px 0 8px 12px; border-left: 3px solid var(--accent-soft); margin: 6px 0; }
+.examples .zhi { display: block; font-size: 19px; line-height: 1.4; }
+.examples .mean { display: block; }
+.who { display: inline-grid; place-items: center; width: 24px; height: 24px; margin-right: 6px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font: 700 13px var(--sans); vertical-align: 3px; }
+.notes, .watch { margin: 6px 0; padding-left: 20px; }
+.notes li, .watch li { margin: 4px 0; }
+.watch { list-style: none; padding: 10px 14px; background: var(--surface); border: 1.5px solid var(--line); border-left: 5px solid var(--bad); border-radius: 10px; }
+.hide-p .peekable:not(.peek) .py,
+.hide-z .peekable:not(.peek) .zy,
+.hide-m .peekable:not(.peek) .mean { filter: blur(7px); }
+.peekable { cursor: pointer; }
+.try { display: block; margin: 6px 0; padding: 10px 12px; background: var(--surface); border: 1.5px dashed var(--accent); border-radius: 12px; }
+.try .q { display: block; font-weight: 600; }
+.try .ans { display: block; margin-top: 4px; filter: blur(8px); }
+.try.peek .ans { filter: none; }
+.try .zhi { font-size: 19px; }
+.try .pyx { display: block; font-size: 14px; color: var(--muted); }
+.try .hint { display: block; font-size: 12px; color: var(--muted); }
+.try.peek .hint { display: none; }
+.refs { margin: 6px 0; padding-left: 20px; font-size: 14px; }
+.refs li { margin: 3px 0; }
+.cards { display: grid; gap: 8px; }
+.card { display: block; padding: 12px 14px; color: var(--ink); text-decoration: none; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.card:hover { border-color: var(--accent); }
+.card b { display: block; }
+.card .sub { display: block; margin-top: 2px; font-size: 14px; color: var(--muted); }
+.card .tags { display: block; margin-top: 6px; }
+.card .tags span { display: inline-block; margin: 0 4px 2px 0; padding: 0 8px; font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 10px; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 30px; font-size: 15px; }
+.pager a { max-width: 48%; }
+.foot { margin-top: 30px; font-size: 13px; color: var(--muted); }
+/* search page */
+.search { display: block; width: 100%; min-height: 48px; padding: 10px 14px; font: inherit; font-size: 17px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
+.fbtn { appearance: none; min-height: 34px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 17px; cursor: pointer; }
+.fbtn[aria-pressed="true"] { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+.sel { min-height: 34px; padding: 4px 10px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 17px; }
+.count { margin: 12px 0 6px; font-size: 14px; color: var(--muted); }
+.chapter-list { margin: 4px 0 0; padding-left: 20px; font-size: 14px; }
+.contents { margin: 8px 0; padding: 10px 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.contents ol { margin: 4px 0 0; padding-left: 22px; }
+.contents li { margin: 3px 0; }
+.lvl { margin-left: 4px; padding: 0 7px; font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 9px; }
+.sect { margin-top: 34px; scroll-margin-top: 56px; }
+.sect h2 { font-size: 22px; border-bottom: 3px solid var(--accent); }
+.sect h3 { scroll-margin-top: 56px; margin: 18px 0 6px; padding-bottom: 2px; font-size: 15px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); }
+.jump { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 8px 0 0; font-size: 14px; }
+.totop { margin: 14px 0 0; font-size: 14px; text-align: right; }
+.card .ttl { font-weight: 700; text-decoration: none; }
+.card .secs { display: block; margin-top: 6px; font-size: 14px; line-height: 1.7; }
+#contents { scroll-margin-top: 56px; }
+.quizme { font-weight: 700; }
+.quizbtn { display: inline-block; padding: 8px 16px; font-weight: 700; text-decoration: none; color: var(--accent-ink); background: var(--accent); border-radius: 20px; }
+.subsec { margin: 22px 0 0; padding: 4px 0 0 14px; border-left: 3px solid var(--accent-soft); }
+.sect h3.subh { margin: 0 0 6px; padding: 0; font-size: 18px; letter-spacing: 0; text-transform: none; color: var(--ink); border: 0; }
+.explain { margin: 4px 0 10px; }
+.exlabel { margin: 12px 0 2px; font-size: 13px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+<div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">All tools</a> › <a href="index.html">Lessons</a></nav><form class="mini" action="index.html" role="search"><input type="search" name="q" placeholder="Search lessons" aria-label="Search lessons"></form></div>
+<div class="toggles" id="toggles" data-skip="" aria-label="Show or hide"></div>
+<h1>Game development</h1>
+<p class="intro">These words help you talk about making games: who does what on a team, how a game gets built and released, and the art that goes into it. Taiwan and the mainland use different words for several roles, so both are shown.</p>
+<p class="lead">Vocabulary topic 13 of 14. Jump to a section, or read top to bottom.</p>
+<p><a class="quizbtn" href="quiz.html?set=lesson-game-development">Quiz yourself on Game development</a></p>
+<nav id="contents" class="contents" aria-label="Contents"><b>Contents</b><ol><li><a href="#the-game-team">The game team</a></li><li><a href="#making-a-game">Making a game</a></li><li><a href="#inside-a-game">Inside a game</a></li><li><a href="#game-art">Game art</a></li></ol></nav>
+<section class="sect" id="the-game-team"><h2>1. The game team</h2>
+<dl class="facts"><dt>Used for</dt><dd><a class="chip" href="index.html?tag=Games &amp; art">Games &amp; art</a><a class="chip" href="index.html?tag=School &amp; work">School &amp; work</a></dd><dt>Keywords</dt><dd><span class="zhi">企划、程序、程式、策划、美术、设计、制作人、工程师</span></dd></dl>
+<p class="intro">Many studios split a team into three parts: 程式 (programming) is the skeleton, 美術 (art) is the skin, and 企劃 (design) is the soul.</p>
+<nav class="jump" aria-label="In this section"><a href="#the-game-team-programming-art-and-design">Programming, art and design</a> <a href="#the-game-team-other-roles">Other roles</a> <a href="#the-game-team-practice">Practice</a> <a href="#the-game-team-sources">Sources</a> <a class="quizme" href="quiz.html?set=lesson-game-development%23the-game-team">Quiz me</a></nav>
+<div class="subsec"><h3 class="subh" id="the-game-team-programming-art-and-design">Programming, art and design</h3>
+<p class="explain">Taiwan says 程式 and 企劃; the mainland says 程序 and 策划. Your Taiwanese friends will notice which one you use.</p>
+<div class="words"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">程式</span><span class="py">chéngshì</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">程式</span><span class="zy">ㄔㄥˊ ㄕˋ</span></span><span><span class="mean">program, code (Taiwan)</span><span class="note">Taiwan word. The mainland says 程序.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">程序</span><span class="py">chéngxù</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">程序</span><span class="zy">ㄔㄥˊ ㄒㄩˋ</span></span><span><span class="mean">program, code (mainland)</span><span class="note">Taiwan says 程式.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">美术</span><span class="py">měishù</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">美術</span><span class="zy">ㄇㄟˇ ㄕㄨˋ</span></span><span><span class="mean">art; the art team</span><span class="note">游戏美术 = game artist.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">企划</span><span class="py">qǐhuà</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">企劃</span><span class="zy">ㄑㄧˇ ㄏㄨㄚˋ</span></span><span><span class="mean">game designer, planner (Taiwan)</span><span class="note">Taiwan word. The mainland says 策划.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">策划</span><span class="py">cèhuà</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">策劃</span><span class="zy">ㄘㄜˋ ㄏㄨㄚˋ</span></span><span><span class="mean">game designer, planner (mainland)</span><span class="note">Taiwan says 企劃.</span></span></div></div>
+<p class="exlabel">Examples</p><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我是游戏<b class="kw">美术</b>。</span><span class="py">wǒ shì yóuxì měishù.</span><span class="mean">I&#x27;m a game artist.</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">他是<b class="kw">企划</b>。</span><span class="py">tā shì qǐhuà.</span><span class="mean">He&#x27;s a game designer.</span></li></ul>
+</div>
+<div class="subsec"><h3 class="subh" id="the-game-team-other-roles">Other roles</h3>
+<div class="words"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">工程师</span><span class="py">gōngchéngshī</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">工程師</span><span class="zy">ㄍㄨㄥ ㄔㄥˊ ㄕ</span></span><span><span class="mean">engineer</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">制作人</span><span class="py">zhìzuòrén</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">製作人</span><span class="zy">ㄓˋ ㄗㄨㄛˋ ㄖㄣˊ</span></span><span><span class="mean">producer</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">设计</span><span class="py">shèjì</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">設計</span><span class="zy">ㄕㄜˋ ㄐㄧˋ</span></span><span><span class="mean">design; to design</span></span></div></div>
+<p class="exlabel">Examples</p><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我是<b class="kw">工程师</b>，我写<b class="kw">程式</b>。</span><span class="py">wǒ shì gōngchéngshī, wǒ xiě chéngshì.</span><span class="mean">I&#x27;m an engineer. I write code.</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">她是我们的<b class="kw">制作人</b>。</span><span class="py">tā shì wǒmen de zhìzuòrén.</span><span class="mean">She&#x27;s our producer.</span></li></ul>
+</div>
+<h3 id="the-game-team-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: I&#x27;m a game artist.. Tap to show the answer."><span class="q">I&#x27;m a game artist.</span><span class="ans"><span class="zhi" lang="zh-Hans">我是游戏美术。</span><span class="pyx">wǒ shì yóuxì měishù.</span></span><span class="hint">Say it, then tap to check</span></div><div class="try peekable" tabindex="0" aria-label="Practice: What do you do on the team?. Tap to show the answer."><span class="q">What do you do on the team?</span><span class="ans"><span class="zhi" lang="zh-Hans">你在团队做什么？</span><span class="pyx">nǐ zài tuánduì zuò shénme?</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="the-game-team-sources">Sources</h3><ul class="refs"><li>Words: added by Claude (8)</li><li><a href="https://www.cake.me/resources/industry-job-overview/game-industry?locale=ja" target="_blank" rel="noopener">Cake: Game industry job overview (Taiwan)</a></li><li><a href="https://www.csie.ntust.edu.tw/var/file/38/1038/img/2176/224882319.pdf" target="_blank" rel="noopener">NTUST course outline: programming, art and design</a></li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="making-a-game"><h2>2. Making a game</h2>
+<dl class="facts"><dt>Used for</dt><dd><a class="chip" href="index.html?tag=Games &amp; art">Games &amp; art</a><a class="chip" href="index.html?tag=School &amp; work">School &amp; work</a></dd><dt>Keywords</dt><dd><span class="zhi">上线、开发、引擎、更新、测试、游戏、软件、游戏开发</span></dd></dl>
+<nav class="jump" aria-label="In this section"><a href="#making-a-game-building-it">Building it</a> <a href="#making-a-game-testing-and-launching">Testing and launching</a> <a href="#making-a-game-practice">Practice</a> <a href="#making-a-game-sources">Sources</a> <a class="quizme" href="quiz.html?set=lesson-game-development%23making-a-game">Quiz me</a></nav>
+<div class="subsec"><h3 class="subh" id="making-a-game-building-it">Building it</h3>
+<p class="explain">A game engine (引擎) is the software a game is built in. Taiwan calls software 軟體; the mainland says 软件.</p>
+<div class="words"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">游戏</span><span class="py">yóuxì</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">遊戲</span><span class="zy">ㄧㄡˊ ㄒㄧˋ</span></span><span><span class="mean">game</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">开发</span><span class="py">kāifā</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">開發</span><span class="zy">ㄎㄞ ㄈㄚ</span></span><span><span class="mean">to develop</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh m" lang="zh-Hans">游戏开发</span><span class="py">yóuxì kāifā</span></span><span class="c-tw"><span class="zh m" lang="zh-Hant-TW">遊戲開發</span><span class="zy">ㄧㄡˊ ㄒㄧˋ ㄎㄞ ㄈㄚ</span></span><span><span class="mean">game development</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">引擎</span><span class="py">yǐnqíng</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">引擎</span><span class="zy">ㄧㄣˇ ㄑㄧㄥˊ</span></span><span><span class="mean">engine (game engine)</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">软件</span><span class="py">ruǎnjiàn</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">软件</span><span class="zy">ㄖㄨㄢˇ ㄐㄧㄢˋ</span></span><span><span class="mean">software (mainland)</span><span class="note">Taiwan says 軟體 (ruǎntǐ).</span></span></div></div>
+<p class="exlabel">Examples</p><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">你用什么<b class="kw">引擎</b>？</span><span class="py">nǐ yòng shénme yǐnqíng?</span><span class="mean">What engine do you use?</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我在做<b class="kw">游戏开发</b>。</span><span class="py">wǒ zài zuò yóuxì kāifā.</span><span class="mean">I work in game development.</span></li></ul>
+</div>
+<div class="subsec"><h3 class="subh" id="making-a-game-testing-and-launching">Testing and launching</h3>
+<p class="explain">上线 means &quot;go live.&quot; After launch, games keep getting 更新 (updates).</p>
+<div class="words"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">测试</span><span class="py">cèshì</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">測試</span><span class="zy">ㄘㄜˋ ㄕˋ</span></span><span><span class="mean">testing; to test</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">上线</span><span class="py">shàngxiàn</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">上線</span><span class="zy">ㄕㄤˋ ㄒㄧㄢˋ</span></span><span><span class="mean">to launch, go live</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">更新</span><span class="py">gēngxīn</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">更新</span><span class="zy">ㄍㄥ ㄒㄧㄣ</span></span><span><span class="mean">update; to update</span></span></div></div>
+<p class="exlabel">Examples</p><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我们下个月<b class="kw">上线</b>。</span><span class="py">wǒmen xià ge yuè shàngxiàn.</span><span class="mean">We launch next month.</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">今天要<b class="kw">测试</b>新的关卡。</span><span class="py">jīntiān yào cèshì xīn de guānqiǎ.</span><span class="mean">Today we&#x27;re testing the new level.</span></li></ul>
+</div>
+<h3 id="making-a-game-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: What engine do you use?. Tap to show the answer."><span class="q">What engine do you use?</span><span class="ans"><span class="zhi" lang="zh-Hans">你用什么引擎？</span><span class="pyx">nǐ yòng shénme yǐnqíng?</span></span><span class="hint">Say it, then tap to check</span></div><div class="try peekable" tabindex="0" aria-label="Practice: We launch next month.. Tap to show the answer."><span class="q">We launch next month.</span><span class="ans"><span class="zhi" lang="zh-Hans">我们下个月上线。</span><span class="pyx">wǒmen xià ge yuè shàngxiàn.</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="making-a-game-sources">Sources</h3><ul class="refs"><li>Words: added by Claude (8)</li><li><a href="https://cloud.tencent.com/developer/news/47394" target="_blank" rel="noopener">Tencent Cloud: game development roles and stages</a></li><li><a href="https://juejin.cn/post/6963173130713956382" target="_blank" rel="noopener">Juejin: game development terms</a></li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="inside-a-game"><h2>3. Inside a game</h2>
+<dl class="facts"><dt>Used for</dt><dd><a class="chip" href="index.html?tag=Free time &amp; hobbies">Free time &amp; hobbies</a><a class="chip" href="index.html?tag=Games &amp; art">Games &amp; art</a></dd><dt>Keywords</dt><dd><span class="zhi">关卡、存档、玩家、角色、玩游戏</span></dd></dl>
+<p class="intro">Useful for talking about any game you&#x27;re playing, not just making one.</p>
+<nav class="jump" aria-label="In this section"><a href="#inside-a-game-players-and-characters">Players and characters</a> <a href="#inside-a-game-levels-and-saving">Levels and saving</a> <a href="#inside-a-game-practice">Practice</a> <a href="#inside-a-game-sources">Sources</a> <a class="quizme" href="quiz.html?set=lesson-game-development%23inside-a-game">Quiz me</a></nav>
+<div class="subsec"><h3 class="subh" id="inside-a-game-players-and-characters">Players and characters</h3>
+<div class="words"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">玩家</span><span class="py">wánjiā</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">玩家</span><span class="zy">ㄨㄢˊ ㄐㄧㄚ</span></span><span><span class="mean">player</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">角色</span><span class="py">juésè</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">角色</span><span class="zy">ㄐㄩㄝˊ ㄙㄜˋ</span></span><span><span class="mean">character</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">玩游戏</span><span class="py">wán yóuxì</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">玩遊戲</span><span class="zy">ㄨㄢˊ ㄧㄡˊ ㄒㄧˋ</span></span><span><span class="mean">to play games</span></span></div></div>
+<p class="exlabel">Examples</p><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">你最喜欢哪个<b class="kw">角色</b>？</span><span class="py">nǐ zuì xǐhuan nǎge juésè?</span><span class="mean">Which character is your favorite?</span></li></ul>
+</div>
+<div class="subsec"><h3 class="subh" id="inside-a-game-levels-and-saving">Levels and saving</h3>
+<div class="words"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">关卡</span><span class="py">guānqiǎ</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">關卡</span><span class="zy">ㄍㄨㄢ ㄑㄧㄚˇ</span></span><span><span class="mean">level, stage</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">存档</span><span class="py">cúndàng</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">存檔</span><span class="zy">ㄘㄨㄣˊ ㄉㄤˋ</span></span><span><span class="mean">save file; to save</span></span></div></div>
+<p class="exlabel">Examples</p><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">这个<b class="kw">关卡</b>太难了！</span><span class="py">zhège guānqiǎ tài nán le!</span><span class="mean">This level is too hard!</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">别忘了<b class="kw">存档</b>。</span><span class="py">bié wàng le cúndàng.</span><span class="mean">Don&#x27;t forget to save.</span></li></ul>
+</div>
+<h3 id="inside-a-game-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: This level is too hard!. Tap to show the answer."><span class="q">This level is too hard!</span><span class="ans"><span class="zhi" lang="zh-Hans">这个关卡太难了！</span><span class="pyx">zhège guānqiǎ tài nán le!</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="inside-a-game-sources">Sources</h3><ul class="refs"><li>Words: added by Claude (5)</li><li>Tips and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="game-art"><h2>4. Game art</h2>
+<dl class="facts"><dt>Used for</dt><dd><a class="chip" href="index.html?tag=Games &amp; art">Games &amp; art</a><a class="chip" href="index.html?tag=Free time &amp; hobbies">Free time &amp; hobbies</a></dd><dt>Keywords</dt><dd><span class="zhi">动画、原画、场景、建模、特效、界面、草图、角色</span></dd></dl>
+<p class="intro">Game art usually moves from 2D to 3D: concept art first, then modeling and textures, then animation and effects.</p>
+<nav class="jump" aria-label="In this section"><a href="#game-art-concept-art">Concept art</a> <a href="#game-art-3d-modeling-and-textures">3D modeling and textures</a> <a href="#game-art-animation-and-effects">Animation and effects</a> <a href="#game-art-environments-and-ui">Environments and UI</a> <a href="#game-art-practice">Practice</a> <a href="#game-art-sources">Sources</a> <a class="quizme" href="quiz.html?set=lesson-game-development%23game-art">Quiz me</a></nav>
+<div class="subsec"><h3 class="subh" id="game-art-concept-art">Concept art</h3>
+<p class="explain">原画 artists design the look of characters and places before anything is built.</p>
+<div class="words"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">原画</span><span class="py">yuánhuà</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">原畫</span><span class="zy">ㄩㄢˊ ㄏㄨㄚˋ</span></span><span><span class="mean">concept art</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">草图</span><span class="py">cǎotú</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">草圖</span><span class="zy">ㄘㄠˇ ㄊㄨˊ</span></span><span><span class="mean">rough sketch, draft</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">角色</span><span class="py">juésè</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">角色</span><span class="zy">ㄐㄩㄝˊ ㄙㄜˋ</span></span><span><span class="mean">character</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">设计</span><span class="py">shèjì</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">設計</span><span class="zy">ㄕㄜˋ ㄐㄧˋ</span></span><span><span class="mean">design; to design</span></span></div></div>
+<p class="exlabel">Examples</p><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我在画<b class="kw">原画</b>。</span><span class="py">wǒ zài huà yuánhuà.</span><span class="mean">I&#x27;m doing concept art.</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">这是<b class="kw">角色</b>的<b class="kw">草图</b>。</span><span class="py">zhè shì juésè de cǎotú.</span><span class="mean">This is a rough sketch of the character.</span></li></ul>
+</div>
+<div class="subsec"><h3 class="subh" id="game-art-3d-modeling-and-textures">3D modeling and textures</h3>
+<p class="explain">建模 builds the 3D shape; 贴图 paints its surface. In Taiwan, 貼圖 also means LINE stickers.</p>
+<div class="words"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">建模</span><span class="py">jiànmó</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">建模</span><span class="zy">ㄐㄧㄢˋ ㄇㄛˊ</span></span><span><span class="mean">3D modeling</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">贴图</span><span class="py">tiētú</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">貼圖</span><span class="zy">ㄊㄧㄝ ㄊㄨˊ</span></span><span><span class="mean">textures</span><span class="note">In Taiwan, 貼圖 also means LINE stickers.</span></span></div></div>
+<p class="exlabel">Examples</p><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我会<b class="kw">建模</b>，也会做<b class="kw">贴图</b>。</span><span class="py">wǒ huì jiànmó, yě huì zuò tiētú.</span><span class="mean">I can model, and do textures too.</span></li></ul>
+</div>
+<div class="subsec"><h3 class="subh" id="game-art-animation-and-effects">Animation and effects</h3>
+<div class="words"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">动画</span><span class="py">dònghuà</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">動畫</span><span class="zy">ㄉㄨㄥˋ ㄏㄨㄚˋ</span></span><span><span class="mean">animation; cartoon</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">特效</span><span class="py">tèxiào</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">特效</span><span class="zy">ㄊㄜˋ ㄒㄧㄠˋ</span></span><span><span class="mean">visual effects</span></span></div></div>
+<p class="exlabel">Examples</p><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">这个<b class="kw">特效</b>好漂亮！</span><span class="py">zhège tèxiào hǎo piàoliang!</span><span class="mean">This effect is so pretty!</span></li></ul>
+</div>
+<div class="subsec"><h3 class="subh" id="game-art-environments-and-ui">Environments and UI</h3>
+<p class="explain">场景 is the world a game takes place in. The mainland writes UI as 界面; Taiwan writes 介面.</p>
+<div class="words"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">场景</span><span class="py">chǎngjǐng</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">場景</span><span class="zy">ㄔㄤˇ ㄐㄧㄥˇ</span></span><span><span class="mean">environment, scene</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">界面</span><span class="py">jièmiàn</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">介面</span><span class="zy">ㄐㄧㄝˋ ㄇㄧㄢˋ</span></span><span><span class="mean">interface, UI</span><span class="note">Taiwan writes 介面.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">颜色</span><span class="py">yánsè</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">顏色</span><span class="zy">ㄧㄢˊ ㄙㄜˋ</span></span><span><span class="mean">color</span></span></div></div>
+<p class="exlabel">Examples</p><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我做<b class="kw">场景</b>美术。</span><span class="py">wǒ zuò chǎngjǐng měishù.</span><span class="mean">I&#x27;m an environment artist.</span></li></ul>
+</div>
+<h3 id="game-art-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: I&#x27;m doing concept art.. Tap to show the answer."><span class="q">I&#x27;m doing concept art.</span><span class="ans"><span class="zhi" lang="zh-Hans">我在画原画。</span><span class="pyx">wǒ zài huà yuánhuà.</span></span><span class="hint">Say it, then tap to check</span></div><div class="try peekable" tabindex="0" aria-label="Practice: I can do 3D modeling.. Tap to show the answer."><span class="q">I can do 3D modeling.</span><span class="ans"><span class="zhi" lang="zh-Hans">我会建模。</span><span class="pyx">wǒ huì jiànmó.</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="game-art-sources">Sources</h3><ul class="refs"><li>Words: added by Claude (11)</li><li><a href="https://www.cake.me/resources/industry-job-overview/game-industry?locale=ja" target="_blank" rel="noopener">Cake: Game industry job overview (Taiwan)</a></li><li><a href="https://gamerboom.com/archives/90267" target="_blank" rel="noopener">Gamerboom: game team roles</a></li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="see-also"><h2>See also</h2><h3>Related topics</h3><ul class="refs"><li><a href="lesson-art-and-drawing.html">Lesson: Art &amp; drawing</a> <span class="note" style="display:inline">Drawing and sketching, color, kinds of art, and art tools.</span></li><li><a href="lesson-jobs-and-free-time.html">Lesson: Jobs &amp; free time</a> <span class="note" style="display:inline">Talking about jobs, hobbies, sports and what you like to do.</span></li><li><a href="lesson-building-blocks.html">Lesson: Building blocks</a> <span class="note" style="display:inline">Pronouns, numbers, measure words, describing words and opposites, and the small words that hold sentences together.</span></li></ul></section>
+<nav class="pager"><a href="lesson-jobs-and-free-time.html">← Jobs &amp; free time</a><a href="lesson-art-and-drawing.html">Art &amp; drawing →</a></nav>
+<p class="foot">Built from handwritten notes. Tips and unmarked examples were written by Claude; each article lists its sources. Native-speaker friends have the last word on usage.</p>
+</main>
+<script>
+(function () {
+  var KEY = "topic-view";
+  var view = { p: true, z: true, m: true, tw: true };
+  try { var s = JSON.parse(localStorage.getItem(KEY) || "{}"); for (var k in view) if (k in s) view[k] = s[k]; } catch (e) {}
+  var main = document.querySelector("main");
+  function apply() {
+    main.classList.toggle("hide-p", !view.p);
+    main.classList.toggle("hide-z", !view.z);
+    main.classList.toggle("hide-m", !view.m);
+    main.classList.toggle("no-tw", !view.tw);
+  }
+  var box = document.getElementById("toggles");
+  if (box) {
+    [["p", "Pinyin"], ["z", "Zhuyin"], ["m", "Meaning"], ["tw", "TW column"]].forEach(function (t) {
+      if (box.dataset.skip && box.dataset.skip.indexOf(t[0]) !== -1) return;
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "tg"; b.textContent = t[1];
+      b.setAttribute("aria-pressed", String(view[t[0]]));
+      b.addEventListener("click", function () {
+        view[t[0]] = !view[t[0]];
+        b.setAttribute("aria-pressed", String(view[t[0]]));
+        try { localStorage.setItem(KEY, JSON.stringify(view)); } catch (e) {}
+        apply();
+      });
+      box.appendChild(b);
+    });
+  }
+  document.addEventListener("click", function (ev) {
+    var r = ev.target.closest(".peekable");
+    if (r) r.classList.toggle("peek");
+  });
+  document.addEventListener("keydown", function (ev) {
+    if ((ev.key === "Enter" || ev.key === " ") && ev.target.classList && ev.target.classList.contains("peekable")) {
+      ev.preventDefault(); ev.target.classList.toggle("peek");
+    }
+  });
+  apply();
+})();
+</script>
+</body>
+</html>

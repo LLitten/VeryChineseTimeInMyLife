@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Art &amp; drawing · Mandarin lessons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #edf1f5; --surface: #ffffff; --ink: #16222e; --muted: #5a6978; --line: #cbd5df;
+  --accent: #1d6f8a; --accent-soft: #dcecf2; --accent-ink: #ffffff; --bad: #b3261e; --good: #2e7d32;
+  --serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --serif-tc: "Noto Serif TC", "Songti TC", "PMingLiU", "Noto Serif SC", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1820; --surface: #17232e; --ink: #e6edf3; --muted: #94a3b2; --line: #2b3b49;
+    --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620; --bad: #ff8a80; --good: #81c784;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1820; --surface: #17232e; --ink: #e6edf3; --muted: #94a3b2; --line: #2b3b49;
+  --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620; --bad: #ff8a80; --good: #81c784;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+main { max-width: 700px; margin: 0 auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px calc(40px + env(safe-area-inset-bottom, 0px)); }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, .peekable:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; justify-content: space-between; font-size: 14px; color: var(--muted); }
+.crumbs a { color: var(--muted); text-decoration: none; }
+.crumbs a:hover { color: var(--accent); }
+.mini { display: flex; flex: 1 1 180px; max-width: 260px; }
+.mini input { width: 100%; min-height: 36px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; }
+h1 { font-size: 27px; line-height: 1.2; margin: 14px 0 6px; }
+h2 { font-size: 20px; margin: 30px 0 8px; padding-bottom: 4px; border-bottom: 2px solid var(--line); }
+h3 { font-size: 16px; margin: 20px 0 6px; }
+p { margin: 8px 0; }
+code { font-size: 0.9em; }
+.lead { margin: 0 0 12px; color: var(--muted); }
+.intro { font-size: 17px; }
+.zh, .zhi { font-family: var(--serif); }
+.kw { color: var(--accent); }
+.bad { color: var(--bad); font-weight: 700; }
+/* fact box, like AllSet's */
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 10px 0 14px; padding: 10px 14px; font-size: 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.facts dt { color: var(--muted); font-weight: 700; }
+.facts dd { margin: 0; }
+.chip { display: inline-block; margin: 0 4px 4px 0; padding: 1px 9px; font-size: 13px; text-decoration: none; color: var(--accent); border: 1px solid var(--accent); border-radius: 12px; }
+.chip.lv { color: var(--muted); border-color: var(--line); }
+.toc { margin: 6px 0 0; padding: 8px 14px 8px 32px; font-size: 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.toc li { margin: 2px 0; }
+.toggles { display: flex; flex-wrap: wrap; gap: 6px; position: sticky; top: 0; z-index: 5; margin: 10px -16px 0; padding: 8px 16px; background: var(--bg); }
+.tg { appearance: none; min-height: 34px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--muted); background: none; border: 1.5px dashed var(--line); border-radius: 17px; cursor: pointer; }
+.tg[aria-pressed="true"] { color: var(--ink); background: var(--surface); border-style: solid; border-color: var(--accent); }
+.structure { margin: 8px 0; padding: 12px 16px; font-size: 18px; font-weight: 600; text-align: center; background: var(--surface); border: 1.5px solid var(--line); border-left: 5px solid var(--accent); border-radius: 10px; }
+.structure .zhi { font-weight: 700; }
+/* key words table */
+.words { display: grid; gap: 0; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.3fr); gap: 10px; align-items: center; padding: 8px 12px; border-top: 1px solid var(--line); }
+.row:first-child { border-top: 0; }
+.no-tw .row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); }
+.no-tw .c-tw { display: none; }
+.row .zh { display: block; font-weight: 700; font-size: 22px; line-height: 1.2; overflow-wrap: anywhere; }
+.c-tw .zh { font-family: var(--serif-tc); }
+.zh.same { color: var(--muted); font-weight: 500; }
+.zh.m { font-size: 19px; } .zh.l { font-size: 16px; }
+.py, .zy { display: block; font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
+.zy { font-family: var(--serif-tc); }
+.mean { font-size: 15px; }
+.note, .from { display: block; font-size: 13px; color: var(--muted); }
+.from { font-style: italic; }
+/* examples, stacked like AllSet */
+.examples { margin: 6px 0; padding: 0; list-style: none; }
+.examples li { padding: 8px 0 8px 12px; border-left: 3px solid var(--accent-soft); margin: 6px 0; }
+.examples .zhi { display: block; font-size: 19px; line-height: 1.4; }
+.examples .mean { display: block; }
+.who { display: inline-grid; place-items: center; width: 24px; height: 24px; margin-right: 6px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font: 700 13px var(--sans); vertical-align: 3px; }
+.notes, .watch { margin: 6px 0; padding-left: 20px; }
+.notes li, .watch li { margin: 4px 0; }
+.watch { list-style: none; padding: 10px 14px; background: var(--surface); border: 1.5px solid var(--line); border-left: 5px solid var(--bad); border-radius: 10px; }
+.hide-p .peekable:not(.peek) .py,
+.hide-z .peekable:not(.peek) .zy,
+.hide-m .peekable:not(.peek) .mean { filter: blur(7px); }
+.peekable { cursor: pointer; }
+.try { display: block; margin: 6px 0; padding: 10px 12px; background: var(--surface); border: 1.5px dashed var(--accent); border-radius: 12px; }
+.try .q { display: block; font-weight: 600; }
+.try .ans { display: block; margin-top: 4px; filter: blur(8px); }
+.try.peek .ans { filter: none; }
+.try .zhi { font-size: 19px; }
+.try .pyx { display: block; font-size: 14px; color: var(--muted); }
+.try .hint { display: block; font-size: 12px; color: var(--muted); }
+.try.peek .hint { display: none; }
+.refs { margin: 6px 0; padding-left: 20px; font-size: 14px; }
+.refs li { margin: 3px 0; }
+.cards { display: grid; gap: 8px; }
+.card { display: block; padding: 12px 14px; color: var(--ink); text-decoration: none; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.card:hover { border-color: var(--accent); }
+.card b { display: block; }
+.card .sub { display: block; margin-top: 2px; font-size: 14px; color: var(--muted); }
+.card .tags { display: block; margin-top: 6px; }
+.card .tags span { display: inline-block; margin: 0 4px 2px 0; padding: 0 8px; font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 10px; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 30px; font-size: 15px; }
+.pager a { max-width: 48%; }
+.foot { margin-top: 30px; font-size: 13px; color: var(--muted); }
+/* search page */
+.search { display: block; width: 100%; min-height: 48px; padding: 10px 14px; font: inherit; font-size: 17px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
+.fbtn { appearance: none; min-height: 34px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 17px; cursor: pointer; }
+.fbtn[aria-pressed="true"] { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+.sel { min-height: 34px; padding: 4px 10px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 17px; }
+.count { margin: 12px 0 6px; font-size: 14px; color: var(--muted); }
+.chapter-list { margin: 4px 0 0; padding-left: 20px; font-size: 14px; }
+.contents { margin: 8px 0; padding: 10px 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.contents ol { margin: 4px 0 0; padding-left: 22px; }
+.contents li { margin: 3px 0; }
+.lvl { margin-left: 4px; padding: 0 7px; font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 9px; }
+.sect { margin-top: 34px; scroll-margin-top: 56px; }
+.sect h2 { font-size: 22px; border-bottom: 3px solid var(--accent); }
+.sect h3 { scroll-margin-top: 56px; margin: 18px 0 6px; padding-bottom: 2px; font-size: 15px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); }
+.jump { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 8px 0 0; font-size: 14px; }
+.totop { margin: 14px 0 0; font-size: 14px; text-align: right; }
+.card .ttl { font-weight: 700; text-decoration: none; }
+.card .secs { display: block; margin-top: 6px; font-size: 14px; line-height: 1.7; }
+#contents { scroll-margin-top: 56px; }
+.quizme { font-weight: 700; }
+.quizbtn { display: inline-block; padding: 8px 16px; font-weight: 700; text-decoration: none; color: var(--accent-ink); background: var(--accent); border-radius: 20px; }
+.subsec { margin: 22px 0 0; padding: 4px 0 0 14px; border-left: 3px solid var(--accent-soft); }
+.sect h3.subh { margin: 0 0 6px; padding: 0; font-size: 18px; letter-spacing: 0; text-transform: none; color: var(--ink); border: 0; }
+.explain { margin: 4px 0 10px; }
+.exlabel { margin: 12px 0 2px; font-size: 13px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+<div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">All tools</a> › <a href="index.html">Lessons</a></nav><form class="mini" action="index.html" role="search"><input type="search" name="q" placeholder="Search lessons" aria-label="Search lessons"></form></div>
+<div class="toggles" id="toggles" data-skip="" aria-label="Show or hide"></div>
+<h1>Art &amp; drawing</h1>
+<p class="intro">These words help you talk about making art, whether it&#x27;s a quick sketch or a finished illustration. Many art words share the character 画 (huà, draw, picture), which makes them easier to recognize.</p>
+<p class="lead">Vocabulary topic 14 of 14. Jump to a section, or read top to bottom.</p>
+<p><a class="quizbtn" href="quiz.html?set=lesson-art-and-drawing">Quiz yourself on Art &amp; drawing</a></p>
+<nav id="contents" class="contents" aria-label="Contents"><b>Contents</b><ol><li><a href="#drawing">Drawing</a></li><li><a href="#kinds-of-art">Kinds of art</a></li><li><a href="#art-tools">Art tools</a></li></ol></nav>
+<section class="sect" id="drawing"><h2>1. Drawing</h2>
+<dl class="facts"><dt>Used for</dt><dd><a class="chip" href="index.html?tag=Games &amp; art">Games &amp; art</a><a class="chip" href="index.html?tag=Free time &amp; hobbies">Free time &amp; hobbies</a></dd><dt>Keywords</dt><dd><span class="zhi">画、上色、水彩、画画、素描、线条、草图、颜料</span></dd></dl>
+<p class="intro">画 is both &quot;to draw&quot; and &quot;a picture.&quot; 画画 is &quot;to draw (pictures)&quot; as an activity.</p>
+<nav class="jump" aria-label="In this section"><a href="#drawing-drawing-and-sketching">Drawing and sketching</a> <a href="#drawing-color">Color</a> <a href="#drawing-practice">Practice</a> <a href="#drawing-sources">Sources</a> <a class="quizme" href="quiz.html?set=lesson-art-and-drawing%23drawing">Quiz me</a></nav>
+<div class="subsec"><h3 class="subh" id="drawing-drawing-and-sketching">Drawing and sketching</h3>
+<p class="explain">A 草图 is a rough first sketch; 素描 is a sketch or drawing study, often in pencil.</p>
+<div class="words"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">画</span><span class="py">huà</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">畫</span><span class="zy">ㄏㄨㄚˋ</span></span><span><span class="mean">to draw; a picture</span><span class="note">画画 = to draw (pictures).</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">画画</span><span class="py">huàhuà</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">畫畫</span><span class="zy">ㄏㄨㄚˋ ㄏㄨㄚˋ</span></span><span><span class="mean">to draw, paint</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">素描</span><span class="py">sùmiáo</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">素描</span><span class="zy">ㄙㄨˋ ㄇㄧㄠˊ</span></span><span><span class="mean">sketch; sketching</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">草图</span><span class="py">cǎotú</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">草圖</span><span class="zy">ㄘㄠˇ ㄊㄨˊ</span></span><span><span class="mean">rough sketch, draft</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">线条</span><span class="py">xiàntiáo</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">線條</span><span class="zy">ㄒㄧㄢˋ ㄊㄧㄠˊ</span></span><span><span class="mean">line, linework</span></span></div></div>
+<p class="exlabel">Examples</p><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我喜欢<b class="kw">画画</b>。</span><span class="py">wǒ xǐhuan huàhuà.</span><span class="mean">I like to draw.</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我先<b class="kw">画</b><b class="kw">草图</b>。</span><span class="py">wǒ xiān huà cǎotú.</span><span class="mean">I&#x27;ll do a rough sketch first.</span></li></ul>
+</div>
+<div class="subsec"><h3 class="subh" id="drawing-color">Color</h3>
+<p class="explain">上色 is &quot;to color in,&quot; after the linework is done.</p>
+<div class="words"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">上色</span><span class="py">shàngsè</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">上色</span><span class="zy">ㄕㄤˋ ㄙㄜˋ</span></span><span><span class="mean">to color in</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">颜色</span><span class="py">yánsè</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">顏色</span><span class="zy">ㄧㄢˊ ㄙㄜˋ</span></span><span><span class="mean">color</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">颜料</span><span class="py">yánliào</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">顏料</span><span class="zy">ㄧㄢˊ ㄌㄧㄠˋ</span></span><span><span class="mean">paint, pigment</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">水彩</span><span class="py">shuǐcǎi</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">水彩</span><span class="zy">ㄕㄨㄟˇ ㄘㄞˇ</span></span><span><span class="mean">watercolor</span></span></div></div>
+<p class="exlabel">Examples</p><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我还没<b class="kw">上色</b>。</span><span class="py">wǒ hái méi shàngsè.</span><span class="mean">I haven&#x27;t colored it yet.</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我喜欢用<b class="kw">水彩</b>。</span><span class="py">wǒ xǐhuan yòng shuǐcǎi.</span><span class="mean">I like using watercolor.</span></li></ul>
+</div>
+<h3 id="drawing-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: I like to draw.. Tap to show the answer."><span class="q">I like to draw.</span><span class="ans"><span class="zhi" lang="zh-Hans">我喜欢画画。</span><span class="pyx">wǒ xǐhuan huàhuà.</span></span><span class="hint">Say it, then tap to check</span></div><div class="try peekable" tabindex="0" aria-label="Practice: I haven&#x27;t colored it yet.. Tap to show the answer."><span class="q">I haven&#x27;t colored it yet.</span><span class="ans"><span class="zhi" lang="zh-Hans">我还没上色。</span><span class="pyx">wǒ hái méi shàngsè.</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="drawing-sources">Sources</h3><ul class="refs"><li>Words: added by Claude (9)</li><li><a href="https://ling-app.com/blog/chinese-art-vocabulary/" target="_blank" rel="noopener">Ling: Chinese art vocabulary</a></li><li><a href="https://lingolandedu.com/zh-tw/vocabulary/topic-vocabularies/arts-and-crafts/verbs-related-to-art" target="_blank" rel="noopener">Lingoland: Art-related verbs</a></li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="kinds-of-art"><h2>2. Kinds of art</h2>
+<dl class="facts"><dt>Used for</dt><dd><a class="chip" href="index.html?tag=Games &amp; art">Games &amp; art</a><a class="chip" href="index.html?tag=School &amp; work">School &amp; work</a><a class="chip" href="index.html?tag=Free time &amp; hobbies">Free time &amp; hobbies</a></dd><dt>Keywords</dt><dd><span class="zhi">作品、动画、插画、漫画、画家、美术、艺术、设计</span></dd></dl>
+<nav class="jump" aria-label="In this section"><a href="#kinds-of-art-art-in-general">Art in general</a> <a href="#kinds-of-art-illustration-comics-and-animation">Illustration, comics and animation</a> <a href="#kinds-of-art-practice">Practice</a> <a href="#kinds-of-art-sources">Sources</a> <a class="quizme" href="quiz.html?set=lesson-art-and-drawing%23kinds-of-art">Quiz me</a></nav>
+<div class="subsec"><h3 class="subh" id="kinds-of-art-art-in-general">Art in general</h3>
+<p class="explain">艺术 is &quot;art&quot; in the broad sense; 美术 is visual art, and also the art team at a game studio.</p>
+<div class="words"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">艺术</span><span class="py">yìshù</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">藝術</span><span class="zy">ㄧˋ ㄕㄨˋ</span></span><span><span class="mean">art</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">美术</span><span class="py">měishù</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">美術</span><span class="zy">ㄇㄟˇ ㄕㄨˋ</span></span><span><span class="mean">art; the art team</span><span class="note">游戏美术 = game artist.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">画家</span><span class="py">huàjiā</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">畫家</span><span class="zy">ㄏㄨㄚˋ ㄐㄧㄚ</span></span><span><span class="mean">painter, artist</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">作品</span><span class="py">zuòpǐn</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">作品</span><span class="zy">ㄗㄨㄛˋ ㄆㄧㄣˇ</span></span><span><span class="mean">a work, piece (of art)</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">设计</span><span class="py">shèjì</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">設計</span><span class="zy">ㄕㄜˋ ㄐㄧˋ</span></span><span><span class="mean">design; to design</span></span></div></div>
+<p class="exlabel">Examples</p><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">这是我的<b class="kw">作品</b>。</span><span class="py">zhè shì wǒ de zuòpǐn.</span><span class="mean">This is my work.</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">他是<b class="kw">画家</b>。</span><span class="py">tā shì huàjiā.</span><span class="mean">He&#x27;s a painter.</span></li></ul>
+</div>
+<div class="subsec"><h3 class="subh" id="kinds-of-art-illustration-comics-and-animation">Illustration, comics and animation</h3>
+<div class="words"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">插画</span><span class="py">chāhuà</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">插畫</span><span class="zy">ㄔㄚ ㄏㄨㄚˋ</span></span><span><span class="mean">illustration</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">漫画</span><span class="py">mànhuà</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">漫畫</span><span class="zy">ㄇㄢˋ ㄏㄨㄚˋ</span></span><span><span class="mean">comics, manga</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">动画</span><span class="py">dònghuà</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">動畫</span><span class="zy">ㄉㄨㄥˋ ㄏㄨㄚˋ</span></span><span><span class="mean">animation; cartoon</span></span></div></div>
+<p class="exlabel">Examples</p><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我画<b class="kw">插画</b>。</span><span class="py">wǒ huà chāhuà.</span><span class="mean">I draw illustrations.</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">你看<b class="kw">漫画</b>吗？</span><span class="py">nǐ kàn mànhuà ma?</span><span class="mean">Do you read comics?</span></li></ul>
+</div>
+<h3 id="kinds-of-art-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: This is my work.. Tap to show the answer."><span class="q">This is my work.</span><span class="ans"><span class="zhi" lang="zh-Hans">这是我的作品。</span><span class="pyx">zhè shì wǒ de zuòpǐn.</span></span><span class="hint">Say it, then tap to check</span></div><div class="try peekable" tabindex="0" aria-label="Practice: Do you read comics?. Tap to show the answer."><span class="q">Do you read comics?</span><span class="ans"><span class="zhi" lang="zh-Hans">你看漫画吗？</span><span class="pyx">nǐ kàn mànhuà ma?</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="kinds-of-art-sources">Sources</h3><ul class="refs"><li>Words: added by Claude (8)</li><li><a href="https://ling-app.com/blog/chinese-art-vocabulary/" target="_blank" rel="noopener">Ling: Chinese art vocabulary</a></li><li>Wording and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="art-tools"><h2>3. Art tools</h2>
+<dl class="facts"><dt>Used for</dt><dd><a class="chip" href="index.html?tag=School &amp; work">School &amp; work</a><a class="chip" href="index.html?tag=Games &amp; art">Games &amp; art</a></dd><dt>Keywords</dt><dd><span class="zhi">笔、纸、电脑、铅笔</span></dd></dl>
+<nav class="jump" aria-label="In this section"><a href="#art-tools-pens-pencils-and-paper">Pens, pencils and paper</a> <a href="#art-tools-practice">Practice</a> <a href="#art-tools-sources">Sources</a> <a class="quizme" href="quiz.html?set=lesson-art-and-drawing%23art-tools">Quiz me</a></nav>
+<div class="subsec"><h3 class="subh" id="art-tools-pens-pencils-and-paper">Pens, pencils and paper</h3>
+<p class="explain">笔 is any pen or brush; 铅笔 (&quot;lead pen&quot;) is a pencil.</p>
+<div class="words"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">笔</span><span class="py">bǐ</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">筆</span><span class="zy">ㄅㄧˇ</span></span><span><span class="mean">pen, brush</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">铅笔</span><span class="py">qiānbǐ</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">鉛筆</span><span class="zy">ㄑㄧㄢ ㄅㄧˇ</span></span><span><span class="mean">pencil</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">纸</span><span class="py">zhǐ</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">紙</span><span class="zy">ㄓˇ</span></span><span><span class="mean">paper</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">电脑</span><span class="py">diànnǎo</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">電腦</span><span class="zy">ㄉㄧㄢˋ ㄋㄠˇ</span></span><span><span class="mean">computer</span></span></div></div>
+<p class="exlabel">Examples</p><ul class="examples"><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我用<b class="kw">铅笔</b>画素描。</span><span class="py">wǒ yòng qiānbǐ huà sùmiáo.</span><span class="mean">I sketch with a pencil.</span></li><li class="peekable" tabindex="0"><span class="zhi" lang="zh-Hans">我在<b class="kw">电脑</b>上画画。</span><span class="py">wǒ zài diànnǎo shàng huàhuà.</span><span class="mean">I draw on the computer.</span></li></ul>
+</div>
+<h3 id="art-tools-practice">Practice</h3><div class="try peekable" tabindex="0" aria-label="Practice: I draw on the computer.. Tap to show the answer."><span class="q">I draw on the computer.</span><span class="ans"><span class="zhi" lang="zh-Hans">我在电脑上画画。</span><span class="pyx">wǒ zài diànnǎo shàng huàhuà.</span></span><span class="hint">Say it, then tap to check</span></div>
+<h3 id="art-tools-sources">Sources</h3><ul class="refs"><li>Words: added by Claude (3), HSK 1 list (1)</li><li>Tips and unmarked examples: Claude</li></ul>
+<p class="totop"><a href="#contents">↑ Contents</a></p></section>
+<section class="sect" id="see-also"><h2>See also</h2><h3>Related topics</h3><ul class="refs"><li><a href="lesson-game-development.html">Lesson: Game development</a> <span class="note" style="display:inline">The game team, making and launching a game, words inside a game, and game art.</span></li><li><a href="lesson-colors-and-clothes.html">Lesson: Colors &amp; clothes</a> <span class="note" style="display:inline">Colors, what you&#x27;re wearing, and describing how things look.</span></li><li><a href="lesson-jobs-and-free-time.html">Lesson: Jobs &amp; free time</a> <span class="note" style="display:inline">Talking about jobs, hobbies, sports and what you like to do.</span></li></ul></section>
+<nav class="pager"><a href="lesson-game-development.html">← Game development</a><a href="index.html">All topics →</a></nav>
+<p class="foot">Built from handwritten notes. Tips and unmarked examples were written by Claude; each article lists its sources. Native-speaker friends have the last word on usage.</p>
+</main>
+<script>
+(function () {
+  var KEY = "topic-view";
+  var view = { p: true, z: true, m: true, tw: true };
+  try { var s = JSON.parse(localStorage.getItem(KEY) || "{}"); for (var k in view) if (k in s) view[k] = s[k]; } catch (e) {}
+  var main = document.querySelector("main");
+  function apply() {
+    main.classList.toggle("hide-p", !view.p);
+    main.classList.toggle("hide-z", !view.z);
+    main.classList.toggle("hide-m", !view.m);
+    main.classList.toggle("no-tw", !view.tw);
+  }
+  var box = document.getElementById("toggles");
+  if (box) {
+    [["p", "Pinyin"], ["z", "Zhuyin"], ["m", "Meaning"], ["tw", "TW column"]].forEach(function (t) {
+      if (box.dataset.skip && box.dataset.skip.indexOf(t[0]) !== -1) return;
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "tg"; b.textContent = t[1];
+      b.setAttribute("aria-pressed", String(view[t[0]]));
+      b.addEventListener("click", function () {
+        view[t[0]] = !view[t[0]];
+        b.setAttribute("aria-pressed", String(view[t[0]]));
+        try { localStorage.setItem(KEY, JSON.stringify(view)); } catch (e) {}
+        apply();
+      });
+      box.appendChild(b);
+    });
+  }
+  document.addEventListener("click", function (ev) {
+    var r = ev.target.closest(".peekable");
+    if (r) r.classList.toggle("peek");
+  });
+  document.addEventListener("keydown", function (ev) {
+    if ((ev.key === "Enter" || ev.key === " ") && ev.target.classList && ev.target.classList.contains("peekable")) {
+      ev.preventDefault(); ev.target.classList.toggle("peek");
+    }
+  });
+  apply();
+})();
+</script>
+</body>
+</html>
