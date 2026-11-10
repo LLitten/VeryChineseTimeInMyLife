@@ -24,6 +24,8 @@ Lesson format (lessons/ and grammar/ use the same one). Keep it short: no long p
                                     (for a word listed twice, add its type: 听 [measure word])
   - A short tip                     the first tip is the section's intro; the rest are notes.
                                     Tips containing ❌ go under "Watch out". (**bold**, `code` work)
+  ### Sub-section title            a sub-section with its own explanation, words, tips and examples
+  A line of plain text              explanation (one or two sentences)
   ### Examples
   - 中文 | pinyin | English | from    an example; the optional 4th part says where it's from
                                     (e.g. "your notes", "AllSet"); unmarked examples are Claude's
@@ -47,6 +49,7 @@ ROOT = bn.ROOT
 OUT = ROOT / "topics"
 LESSONS = ROOT / "lessons"
 GRAMMAR = ROOT / "grammar"
+WORDS = {}  # filled in main(): vocab.csv rows by `simplified` (and `simplified [type]`)
 SOURCE_LABEL = {"notes": "your notes", "hsk-list": "HSK 1 list", "added": "added by Claude"}
 CJK = r"[㄀-ㄯ一-鿿]"
 
@@ -104,7 +107,7 @@ def parse_lesson(path, prefix):
     name = re.sub(r"^\d+-", "", path.stem)
     L = {"title": name, "summary": "", "related": [], "see": [], "file": f"{prefix}-{name}.html",
          "base": f"{prefix}-{name}", "sections": [], "kind": prefix}
-    sec = None
+    sec = cur = None
     for raw in path.read_text(encoding="utf8").splitlines():
         st = raw.strip()
         if not st:
@@ -121,11 +124,18 @@ def parse_lesson(path, prefix):
                 if label.strip():
                     L["see"].append((label.strip(), url.strip()))
         elif st.startswith("## "):
-            sec = {"title": st[3:].strip(), "tag": "", "pattern": "", "intro": [], "words": [], "tips": [],
-                   "examples": [], "try": [], "sources": []}
+            sec = cur = {"title": st[3:].strip(), "tag": "", "pattern": "", "intro": [], "words": [], "tips": [],
+                         "examples": [], "try": [], "sources": [], "subs": []}
             L["sections"].append(sec)
-        elif sec is None or st.startswith("### "):
+        elif sec is None:
             continue
+        elif st.startswith("### "):
+            name = st[4:].strip()
+            if name.lower() in ("examples", "try it", "practice"):
+                cur = sec
+            else:
+                cur = {"title": name, "intro": [], "words": [], "tips": [], "examples": []}
+                sec["subs"].append(cur)
         elif st.startswith("tag:"):
             sec["tag"] = st[4:].strip()
         elif st.startswith("pattern:"):
@@ -134,7 +144,7 @@ def parse_lesson(path, prefix):
             label, _, url = st[7:].partition("|")
             sec["sources"].append((label.strip(), url.strip()))
         elif st.startswith("words:"):
-            sec["words"] += [w.strip() for w in st[6:].split(",") if w.strip()]
+            cur["words"] += [w.strip() for w in st[6:].split(",") if w.strip()]
         elif st.startswith("- try:"):
             parts = [x.strip() for x in st[6:].split("|")] + ["", ""]
             sec["try"].append(parts[:3])
@@ -142,13 +152,13 @@ def parse_lesson(path, prefix):
             body = st[2:]
             m = re.match(r"^([A-Za-z][\w ]{0,11}):\s*(.+)$", body)
             if m and "|" in m.group(2):
-                sec["examples"].append((m.group(1), [x.strip() for x in m.group(2).split("|")] + ["", "", ""]))
+                cur["examples"].append((m.group(1), [x.strip() for x in m.group(2).split("|")] + ["", "", ""]))
             elif "|" in body:
-                sec["examples"].append((None, [x.strip() for x in body.split("|")] + ["", "", ""]))
+                cur["examples"].append((None, [x.strip() for x in body.split("|")] + ["", "", ""]))
             else:
-                sec["tips"].append(body)
+                cur["tips"].append(body)
         else:
-            sec["intro"].append(st)
+            cur["intro"].append(st)
     return L
 
 
@@ -277,6 +287,10 @@ code { font-size: 0.9em; }
 .card .ttl { font-weight: 700; text-decoration: none; }
 .card .secs { display: block; margin-top: 6px; font-size: 14px; line-height: 1.7; }
 #contents { scroll-margin-top: 56px; }
+.subsec { margin: 22px 0 0; padding: 4px 0 0 14px; border-left: 3px solid var(--accent-soft); }
+.sect h3.subh { margin: 0 0 6px; padding: 0; font-size: 18px; letter-spacing: 0; text-transform: none; color: var(--ink); border: 0; }
+.explain { margin: 4px 0 10px; }
+.exlabel { margin: 12px 0 2px; font-size: 13px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted); }
 """
 
 TOGGLE_JS = """
@@ -392,6 +406,7 @@ def make_articles(chapter, word_by_s):
     arts, seen = [], set()
     for i, s in enumerate(chapter["sections"], 1):
         words = [word_by_s[w] for w in s["words"]]
+        allw = words + [word_by_s[w] for sub in s["subs"] for w in sub["words"]]
         watch = [t for t in s["tips"] if "❌" in t]
         tips = [t for t in s["tips"] if "❌" not in t]
         if s["intro"]:
@@ -402,7 +417,7 @@ def make_articles(chapter, word_by_s):
             intro, notes = "", []
         level = level_of(s["tag"])
         counts = {}
-        for w in words:
+        for w in allw:
             for u in w["uses"]:
                 if u != bn.SOUND_USE:
                     counts[u] = counts.get(u, 0) + 1
@@ -412,7 +427,7 @@ def make_articles(chapter, word_by_s):
         keys = set()
         if s["pattern"]:
             keys.update(re.findall(CJK + "+", s["pattern"]))
-        for w in words:
+        for w in allw:
             k = re.sub(r"[？?…!！。]", "", w["s"])
             if re.search(CJK, k):
                 keys.add(k)
@@ -422,18 +437,20 @@ def make_articles(chapter, word_by_s):
         if anchor in seen:
             anchor = f"{anchor}-{i}"
         seen.add(anchor)
+        subtext = [" ".join([sub["title"]] + sub["intro"] + sub["tips"] + [" ".join(p[:3]) for _, p in sub["examples"]])
+                   for sub in s["subs"]]
         text = " ".join([s["title"], chapter["title"], s["pattern"], intro, " ".join(s["tips"]), " ".join(tags)]
-                        + [" ".join([w["s"], w["t"], w["p"], w["m"], w["n"]]) for w in words]
-                        + [" ".join(p[:3]) for _, p in s["examples"]])
+                        + [" ".join([w["s"], w["t"], w["p"], w["m"], w["n"]]) for w in allw]
+                        + [" ".join(p[:3]) for _, p in s["examples"]] + subtext)
         arts.append({"sec": s, "n": i, "title": s["title"], "anchor": anchor, "file": f'{chapter["file"]}#{anchor}',
-                     "chapter": chapter, "words": words, "intro": intro, "notes": notes, "watch": watch,
+                     "chapter": chapter, "words": words, "allw": allw, "intro": intro, "notes": notes, "watch": watch,
                      "level": level, "uses": uses, "keys": keys, "keywords": keywords, "tags": tags,
                      "search": plain(text)})
     return arts
 
 
 def sources_items(a):
-    s, words = a["sec"], a["words"]
+    s, words = a["sec"], a["allw"]
     items = []
     if words:
         counts = {}
@@ -443,9 +460,23 @@ def sources_items(a):
         items.append("Words: " + ", ".join(f"{k} ({n})" for k, n in counts.items()))
     for label, url in s["sources"]:
         items.append(f'<a href="{esc(url)}" target="_blank" rel="noopener">{esc(label)}</a>' if url else esc(label))
-    if s["tips"] or s["examples"] or s["try"]:
+    if s["tips"] or s["examples"] or s["try"] or s["subs"]:
         items.append("Wording and unmarked examples: Claude" if s["sources"] else "Tips and unmarked examples: Claude")
     return items
+
+
+def render_sub(sub, anchor, keys):
+    """A sub-section: a short explanation, then its words, notes and examples."""
+    out = [f'<div class="subsec"><h3 class="subh" id="{anchor}">{esc(sub["title"])}</h3>']
+    out += [f'<p class="explain">{inline(p)}</p>' for p in sub["intro"]]
+    if sub["words"]:
+        out.append('<div class="words">' + "".join(word_row(WORDS[w]) for w in sub["words"]) + "</div>")
+    if sub["tips"]:
+        out.append('<ul class="notes">' + "".join(f"<li>{inline(t)}</li>" for t in sub["tips"]) + "</ul>")
+    if sub["examples"]:
+        out.append('<p class="exlabel">Examples</p><ul class="examples">' + "".join(example_li(w, p, keys) for w, p in sub["examples"]) + "</ul>")
+    out.append("</div>")
+    return "\n".join(out)
 
 
 def render_section(a):
@@ -475,6 +506,8 @@ def render_section(a):
         parts.append(("notes", "Notes"))
     if a["watch"]:
         parts.append(("watch", "Watch out"))
+    for sub in s["subs"]:
+        parts.append((slug(sub["title"]), sub["title"]))
     if s["try"]:
         parts.append(("practice", "Practice"))
     parts.append(("sources", "Sources"))
@@ -492,6 +525,8 @@ def render_section(a):
         out.append(f'<h3 id="{an}-notes">Notes</h3><ul class="notes">' + "".join(f"<li>{inline(t)}</li>" for t in a["notes"]) + "</ul>")
     if a["watch"]:
         out.append(f'<h3 id="{an}-watch">Watch out</h3><ul class="watch">' + "".join(f"<li>{inline(t)}</li>" for t in a["watch"]) + "</ul>")
+    for sub in s["subs"]:
+        out.append(render_sub(sub, f'{an}-{slug(sub["title"])}', a["keys"]))
     if s["try"]:
         out.append(f'<h3 id="{an}-practice">Practice</h3>' + "".join(try_card(*t) for t in s["try"]))
     out.append(f'<h3 id="{an}-sources">Sources</h3><ul class="refs">' + "".join(f"<li>{x}</li>" for x in sources_items(a)) + "</ul>")
@@ -643,10 +678,14 @@ def main():
     everything = lessons + grammar
     by_title = {L["title"]: L for L in everything}
 
-    missing = sorted({w for L in everything for s in L["sections"] for w in s["words"] if w not in word_by_s})
+    WORDS.update(word_by_s)
+
+    def names(s):
+        return s["words"] + [w for sub in s["subs"] for w in sub["words"]]
+    missing = sorted({w for L in everything for s in L["sections"] for w in names(s) if w not in word_by_s})
     if missing:
         raise SystemExit(f"Lessons name words that aren't in vocab.csv: {missing}")
-    used = {id(word_by_s[w]) for L in everything for s in L["sections"] for w in s["words"]}
+    used = {id(word_by_s[w]) for L in everything for s in L["sections"] for w in names(s)}
     unused = [w["s"] for w in vocab if id(w) not in used]
 
     OUT.mkdir(exist_ok=True)
@@ -662,7 +701,7 @@ def main():
     for group, label in ((lessons, "Vocabulary topic"), (grammar, "Grammar topic")):
         for i, ch in enumerate(group):
             arts = arts_by_chapter[ch["file"]]
-            has_words = any(a["words"] for a in arts)
+            has_words = any(a["allw"] for a in arts)
             (OUT / ch["file"]).write_text(page(f"{ch['title']} · Mandarin lessons", crumbs,
                                                render_chapter(ch, arts, by_title, i, group, label),
                                                skip="" if has_words else "ztw"), encoding="utf8")

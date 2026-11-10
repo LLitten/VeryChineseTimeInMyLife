@@ -1,55 +1,77 @@
 # Home & life
-summary: Your daily routine, things around the house, school and work, animals and plants.
-related: Time; Grammar: Location and "there is"; Grammar: Complements (what happens after the verb)
+summary: Your daily routine, rooms and things at home, school and work, and animals.
+related: Time; Jobs & free time; Grammar: Location and "there is"; Grammar: Complements (what happens after the verb)
 
 ## Daily routine
-words: 起床, 洗澡, 吃饭, 睡觉, 看, 看到, 看见, 听到, 做
-- Time goes before the verb: 我十一点睡觉.
-- 看 = look, watch or read. 看到 and 看见 = actually saw it.
-- 做 = do or make: 做饭 (cook).
-### Examples
+Daily routines are a time word + a verb: 我七点起床 (I get up at seven).
+### Morning and night
+起床 get up · 洗澡 shower · 吃饭 eat · 睡觉 go to sleep.
+words: 起床, 洗澡, 吃饭, 睡觉
 - 我晚上洗澡。 | wǒ wǎnshang xǐzǎo. | I shower in the evening.
 - 你几点睡觉？ | nǐ jǐ diǎn shuìjiào? | What time do you go to bed?
+### Seeing and hearing
+看 is look, watch or read. 看到 and 看见 mean you actually saw it; 听到 means you heard it.
+words: 看, 看到, 看见, 听到
 - 我看到你了！ | wǒ kàndào nǐ le! | I see you!
+### Doing things
+做 is "do" or "make": 做饭 (cook), 做什么 (do what).
+words: 做
+- 你在做什么？ | nǐ zài zuò shénme? | What are you doing?
 ### Try it
 - try: I get up at eight. | 我八点起床。 | wǒ bā diǎn qǐchuáng.
 - try: I didn't hear it. | 我没听到。 | wǒ méi tīngdào.
 source: AllSet: Result complements "-dao" and "-jian" | https://resources.allsetlearning.com/chinese/grammar/Result_complements_%22-dao%22_and_%22-jian%22
 
 ## Around the house
-words: 家, 桌子, 椅子, 电视, 电脑, 书, 衣服, 东西, 杯子, 把
-- Place + 有 + thing = there is: 桌子上有书.
-- 把 counts things you hold, or with a handle: 一把椅子.
-- 杯子 is the cup itself. 一杯水 is a glass of water.
-### Examples
+Say what's in a room with place + 有 + thing: 客厅里有沙发 (there's a sofa in the living room).
+### Rooms
+Most rooms end in 室 (room) or 房 / 厅 (hall): 卧室, 厨房, 客厅.
+words: 家, 房间, 客厅, 卧室, 厨房, 浴室, 住
+- 我家有三个房间。 | wǒ jiā yǒu sān ge fángjiān. | My home has three rooms.
+- 你住在哪里？ | nǐ zhù zài nǎlǐ? | Where do you live?
+### Furniture
+床 bed · 沙发 sofa · 桌子 table · 椅子 chair. 把 counts chairs and things with a handle.
+words: 床, 沙发, 桌子, 椅子, 把, 门, 窗户, 灯
+- 客厅里有一个沙发。 | kètīng lǐ yǒu yí ge shāfā. | There's a sofa in the living room.
+- 有两把椅子。 | yǒu liǎng bǎ yǐzi. | There are two chairs.
+### Things at home
+电视, 电脑, 冰箱: many machines start with 电 (electric). 东西 means "things, stuff."
+words: 电视, 电脑, 冰箱, 书, 衣服, 东西, 杯子
 - 桌子上有一个杯子。 | zhuōzi shàng yǒu yí ge bēizi. | There's a cup on the table.
 - 我在家看电视。 | wǒ zài jiā kàn diànshì. | I'm watching TV at home.
-- 你住在哪里？ | nǐ zhù zài nǎlǐ? | Where do you live?
 ### Try it
-- try: There are two chairs. | 有两把椅子。 | yǒu liǎng bǎ yǐzi.
+- try: There's a bed in the bedroom. | 卧室里有一张床。 | wòshì lǐ yǒu yì zhāng chuáng.
 source: AllSet: Expressing existence with "you" | https://resources.allsetlearning.com/chinese/grammar/ASG04ZCI
+source: LTL: The house in Chinese | https://ltl-taiwan.com/house-in-chinese/
 
 ## School and work
-words: 学校, 公司, 老师, 学生, 同学, 学, 学习, 读, 写, 字, 汉字, 本
-- 学 + subject: 学中文. To read a book, say 看书, not 学书.
-- 本 counts books: 一本书.
-- 在 + place + 工作 = work at: 在公司工作.
-### Examples
+### Studying
+学 + subject: 学中文. To read a book, say 看书, not 学书.
+words: 学校, 学, 学习, 读, 写, 字, 汉字, 本
 - 我在学中文。 | wǒ zài xué Zhōngwén. | I'm learning Chinese.
 - 这个字怎么写？ | zhège zì zěnme xiě? | How do you write this character?
-- 我有三本书。 | wǒ yǒu sān běn shū. | I have three books.
+### People at school and work
+老师 teacher · 学生 student · 同学 classmate. More jobs are in the Jobs & free time lesson.
+words: 老师, 学生, 同学, 公司, 工作
+- 我在公司工作。 | wǒ zài gōngsī gōngzuò. | I work at a company.
 ### Try it
-- try: I work at a company. | 我在公司工作。 | wǒ zài gōngsī gōngzuò.
+- try: I have three books. | 我有三本书。 | wǒ yǒu sān běn shū.
 
 ## Animals and plants
-words: 狗, 猫, 只, 条, 头, 匹, 棵, 株, 朵, 根, 颗, 粒, 瓣
-- 只 is the usual measure word for animals: 一只猫.
-- 条 is for long, thin things: 一条鱼 (a fish).
-- 朵 flowers · 棵 trees · 颗 small round things · 粒 grains.
-### Examples
+### Pets
+狗 dog, 猫 cat. 只 is the usual measure word for animals: 一只猫.
+words: 狗, 猫, 只
 - 我有一只狗。 | wǒ yǒu yì zhī gǒu. | I have a dog.
-- 一朵花 | yì duǒ huā | a flower
+### Farm animals
+These also name meats: 牛 → 牛肉 (beef), 猪 → 猪肉 (pork), 鸡 → 鸡肉 (chicken).
+words: 牛, 猪, 鸡, 马, 鸟, 兔子, 鱼
+- 我喜欢兔子。 | wǒ xǐhuan tùzi. | I like rabbits.
+### Measure words for animals and plants
+条 long things (fish, snakes) · 头 large animals · 匹 horses · 朵 flowers · 棵 trees · 株 plants · 根 thin things · 颗 small round things · 粒 grains · 瓣 cloves.
+words: 条, 头, 匹, 朵, 棵, 株, 根, 颗, 粒, 瓣
 - 一条鱼 | yì tiáo yú | a fish
+- 一朵花 | yì duǒ huā | a flower
 ### Try it
 - try: two cats | 两只猫 | liǎng zhī māo
 source: AllSet: Measure words for counting | https://resources.allsetlearning.com/chinese/grammar/Measure_words_for_counting
+source: LTL: Animals in Chinese | https://ltl-school.com/chinese-animal-names/
