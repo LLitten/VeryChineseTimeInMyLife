@@ -223,7 +223,7 @@ var QUIZ = null;
     var groups = {};
     SETS.forEach(function (s) {
       if (!groups[s.group]) { groups[s.group] = el("optgroup"); groups[s.group].label = s.group; sel.appendChild(groups[s.group]); }
-      var o = el("option", "", (s.depth ? " " : "") + s.label + " (" + s.items.length + ")"); o.value = s.id; groups[s.group].appendChild(o);
+      var o = el("option", "", (s.depth ? "\u2003› " + s.label.split(" › ").pop() : s.label) + " (" + s.items.length + ")"); o.value = s.id; groups[s.group].appendChild(o);
     });
     sel.value = chosen;
     app.appendChild(sel);

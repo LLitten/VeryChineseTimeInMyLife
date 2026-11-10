@@ -36,6 +36,8 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 | `topics/` | Generated textbook pages: `index.html` (search by topic, tag, word, pinyin or English; filters for vocabulary/grammar, level and situation; every topic listed with direct links to its sections) and one page per lesson file. Each `## Section` is a section of its topic's page, laid out like an AllSet article, with contents at the top and jump links. Keep it to one click from the index to any section. Don't edit by hand. |
 | `tools/build_notes.py` | Regenerates the notes page's word list from `vocab.csv`, then the lesson and grammar pages (via `tools/build_topics.py`). Also defines the situation groups. |
 | `tools/fill_zhuyin.py` | Fills in zhuyin for new `vocab.csv` rows. |
+| `quizzes/` | Hand-written quizzes (format below). `topics/quiz.html` is built from these plus every lesson page and section, and every situation tag. |
+| `tools/quiz-template.html` | The quiz page: setup, typed answers, automatic checking, results. The build fills in its data. |
 
 ### `vocab.csv` columns
 - `simplified`, `traditional_tw` (blank when the same as simplified), `pinyin`, `meaning`
@@ -63,6 +65,19 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 - **Publishing:** the site deploys from `main` with GitHub Pages, usually within a couple of minutes of a push. Pages must stay mobile-friendly and self-contained (no build step; Google Fonts is the only external resource).
 - **Log sessions:** add a dated line to the session log in `progress.md` at the end of each study session.
 - **The repo is public.** Don't add anything private about the learner or their friends.
+
+## Quizzes
+`topics/quiz.html` quizzes any lesson page, any section (each has a "Quiz me" link), any situation tag, or a hand-written quiz. Questions come from the lessons automatically: every word (English → Chinese, Chinese → English, Chinese → pinyin) and every "Try it" item and short example (sentences, English → Chinese). Rounds default to 5. Answers are typed and checked: Chinese accepts simplified or Taiwan forms and ignores punctuation; pinyin accepts tone marks or numbers and reports wrong tones as "close"; English accepts any listed meaning. The learner can always overrule the checker. Misses are stored in the browser (per device) and can be asked first.
+
+To make a custom quiz when the learner asks ("quiz me on ordering food"), add `quizzes/<n>-<name>.md` and rebuild:
+```
+# Title
+about: one line shown on the quiz page
+words: 咖啡, 茶                                   (word questions; must be in vocab.csv)
+- en>zh: A coffee, please. | 我要一杯咖啡。 / 一杯咖啡。 | wǒ yào yì bēi kāfēi.
+- zh>en: 太甜了！ | It's too sweet! / So sweet! | tài tián le!
+```
+Give alternative answers separated by ` / `. Use `progress.md` (mistakes to watch) to target weak spots. Keep `quizzes/1-example.md` as the format reference.
 
 ## Session ritual for the learner
 1. Point the model at this file, plus the one or two files relevant to today's topic.
