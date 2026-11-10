@@ -225,6 +225,25 @@ code { font-size: 0.9em; }
 /* key words table */
 .words { display: grid; gap: 0; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; }
 .row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.3fr); gap: 10px; align-items: center; padding: 8px 12px; border-top: 1px solid var(--line); }
+.wrow { border-top: 1px solid var(--line); }
+.wrow:first-child { border-top: 0; }
+.wrow .row { border-top: 0; padding-right: 26px; position: relative; }
+.caret { position: absolute; right: 9px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 13px; transition: transform .15s; }
+.wrow.open .caret { transform: translateY(-50%) rotate(180deg); }
+.wrow.open .row { background: var(--accent-soft); }
+.det { padding: 8px 12px 12px; font-size: 14px; border-top: 1px dashed var(--line); }
+.det p { margin: 4px 0; }
+.det .zh-i, .det .zy-i { font-family: var(--serif-tc); }
+.det .zh-i { font-size: 18px; font-weight: 700; }
+.det .zy-i { color: var(--muted); }
+.det .dh { margin-top: 8px; font-weight: 600; } .det .dh small { font-weight: 400; color: var(--muted); }
+.bd { list-style: none; margin: 4px 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 6px; }
+.bd li { display: grid; justify-items: center; text-align: center; padding: 6px 4px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.bc { font-size: 26px; font-weight: 700; line-height: 1.2; color: var(--ink); text-decoration: none; }
+.bc .bt { font-family: var(--serif-tc); font-size: 16px; color: var(--muted); margin-left: 4px; font-weight: 500; }
+.bp { font-size: 13px; color: var(--muted); } .bm { font-size: 13px; overflow-wrap: anywhere; }
+.det .links a.lnk { display: inline-block; margin-left: 6px; font-size: 20px; }
+.det .meta { margin-top: 8px; } .det .src { font-size: 13px; color: var(--muted); font-style: italic; }
 .row:first-child { border-top: 0; }
 .no-tw .row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); }
 .no-tw .c-tw { display: none; }
@@ -328,11 +347,17 @@ TOGGLE_JS = """
   }
   document.addEventListener("click", function (ev) {
     var r = ev.target.closest(".peekable");
-    if (r) r.classList.toggle("peek");
+    if (r) { r.classList.toggle("peek"); openRow(r); }
   });
+  function openRow(r) {
+    var w = r.parentNode, d = w && w.classList.contains("wrow") ? w.querySelector(".det") : null;
+    if (!d) return;
+    var open = d.hidden;
+    d.hidden = !open; w.classList.toggle("open", open); r.setAttribute("aria-expanded", String(open));
+  }
   document.addEventListener("keydown", function (ev) {
     if ((ev.key === "Enter" || ev.key === " ") && ev.target.classList && ev.target.classList.contains("peekable")) {
-      ev.preventDefault(); ev.target.classList.toggle("peek");
+      ev.preventDefault(); ev.target.classList.toggle("peek"); openRow(ev.target);
     }
   });
   apply();
@@ -370,6 +395,144 @@ def page(title, crumbs, body, toggles=True, skip="", script="", search=True):
 
 
 # ---------------------------------------------------------------- pieces
+SYLLABLES = set("""
+a ai an ang ao e ei en eng er o ou
+ba bai ban bang bao bei ben beng bi bian biao bie bin bing bo bu
+pa pai pan pang pao pei pen peng pi pian piao pie pin ping po pou pu
+ma mai man mang mao me mei men meng mi mian miao mie min ming miu mo mou mu
+fa fan fang fei fen feng fo fou fu
+da dai dan dang dao de dei den deng di dia dian diao die ding diu dong dou du duan dui dun duo
+ta tai tan tang tao te teng ti tian tiao tie ting tong tou tu tuan tui tun tuo
+na nai nan nang nao ne nei nen neng ni nian niang niao nie nin ning niu nong nou nu nuan nuo nv nve
+la lai lan lang lao le lei leng li lia lian liang liao lie lin ling liu lo long lou lu luan lun luo lv lve
+ga gai gan gang gao ge gei gen geng gong gou gu gua guai guan guang gui gun guo
+ka kai kan kang kao ke kei ken keng kong kou ku kua kuai kuan kuang kui kun kuo
+ha hai han hang hao he hei hen heng hong hou hu hua huai huan huang hui hun huo
+ji jia jian jiang jiao jie jin jing jiong jiu ju juan jue jun
+qi qia qian qiang qiao qie qin qing qiong qiu qu quan que qun
+xi xia xian xiang xiao xie xin xing xiong xiu xu xuan xue xun
+zha zhai zhan zhang zhao zhe zhei zhen zheng zhi zhong zhou zhu zhua zhuai zhuan zhuang zhui zhun zhuo
+cha chai chan chang chao che chen cheng chi chong chou chu chua chuai chuan chuang chui chun chuo
+sha shai shan shang shao she shei shen sheng shi shou shu shua shuai shuan shuang shui shun shuo
+ra ran rang rao re ren reng ri rong rou ru rua ruan rui run ruo
+za zai zan zang zao ze zei zen zeng zi zong zou zu zuan zui zun zuo
+ca cai can cang cao ce cen ceng ci cong cou cu cuan cui cun cuo
+sa sai san sang sao se sen seng si song sou su suan sui sun suo
+ya yan yang yao ye yi yin ying yo yong you yu yuan yue yun
+wa wai wan wang wei wen weng wo wu
+""".split())
+
+
+def split_pinyin(py, n):
+    """Split a pinyin word into exactly n syllables (keeping tone marks), or None."""
+    d = unicodedata.normalize("NFD", py.lower())
+    letters = []  # (base letter, original NFD slice) per letter; None marks a forced break
+    for ch in d:
+        if unicodedata.combining(ch):
+            if letters and letters[-1]:
+                letters[-1][1] += ch
+                if ch == "̈":
+                    letters[-1][0] = "v"
+        elif "a" <= ch <= "z":
+            letters.append([ch, ch])
+        elif letters and letters[-1] is not None:
+            letters.append(None)
+    while letters and letters[-1] is None:
+        letters.pop()
+    m = len(letters)
+    # best[i][k]: a way to split letters[i:] into k syllables
+    from functools import lru_cache
+
+    @lru_cache(None)
+    def go(i, k):
+        if i == m:
+            return () if k == 0 else None
+        if letters[i] is None:
+            return go(i + 1, k)
+        if k == 0:
+            return None
+        for j in range(min(m, i + 6), i, -1):
+            chunk = letters[i:j]
+            if any(c is None for c in chunk):
+                continue
+            base = "".join(c[0] for c in chunk)
+            if base in SYLLABLES:
+                rest = go(j, k - 1)
+                if rest is not None:
+                    return ((i, j),) + rest
+        return None
+
+    out = go(0, n)
+    if out is None:
+        return None
+    return [unicodedata.normalize("NFC", "".join(c[1] for c in letters[a:b])) for a, b in out]
+
+
+def toneless(py):
+    return "".join(c for c in unicodedata.normalize("NFD", py.lower()) if "a" <= c <= "z")
+
+
+def char_breakdown(e):
+    """Per-character rows: (simplified, traditional, pinyin, meaning)."""
+    chars = re.findall(CJK, e["s"])
+    if len(chars) < 2 or len(chars) != len([c for c in e["s"] if re.match(r"\w", c)]):
+        return []
+    tw = re.findall(CJK, e["t"]) if e["t"] else chars
+    if len(tw) != len(chars):
+        tw = chars
+    sylls = split_pinyin(e["p"], len(chars)) or [""] * len(chars)
+    parts = [x.strip() for x in e["b"].split(" + ")] if e["b"] else []
+    if len(parts) != len(chars):
+        parts = []
+    rows = []
+    for i, ch in enumerate(chars):
+        own = WORDS.get(ch)
+        if own and own["type"] == "sound":
+            own = None
+        py = sylls[i]
+        if not py and own:
+            py = own["p"]
+        if parts:
+            mean = parts[i]
+        elif own and (not sylls[i] or toneless(own["p"]) == toneless(sylls[i])):
+            mean = own["m"]
+        else:
+            mean = ""
+        rows.append((ch, tw[i], py, mean))
+    return rows
+
+
+def word_details(e):
+    out = []
+    if e["t"] and e["type"] != "sound":
+        zy = f' <span class="zy-i" lang="zh-Hant-TW">{esc(e["z"])}</span>' if e.get("z") else ""
+        out.append(f'<p>Taiwan form: <span class="zh-i" lang="zh-Hant-TW">{esc(e["t"])}</span>{zy}</p>')
+    rows = char_breakdown(e) if e["type"] != "sound" else []
+    if e["b"] and not (rows and len(e["b"].split(" + ")) == len(rows)):
+        out.append(f'<p>Literally: {esc(e["b"])}</p>')  # otherwise the parts show under each character
+    if rows:
+        cells = []
+        for ch, t, py, mean in rows:
+            tw = f'<span class="bt" lang="zh-Hant-TW">{esc(t)}</span>' if t != ch else ""
+            cells.append(f'<li><a class="bc" href="https://www.strokeorder.com/chinese/{esc(ch)}" target="_blank" rel="noopener noreferrer" '
+                         f'aria-label="Stroke order for {esc(ch)}"><span lang="zh-Hans">{esc(ch)}</span>{tw}</a>'
+                         f'<span class="bp">{esc(py)}</span><span class="bm">{esc(mean)}</span></li>')
+        out.append('<p class="dh">Character by character <small>(tap a character for its stroke order)</small></p>'
+                   '<ul class="bd">' + "".join(cells) + "</ul>")
+    elif e["type"] != "sound":
+        chars = list(dict.fromkeys(re.findall(CJK, e["s"]) + re.findall(CJK, e["t"] or "")))
+        if chars:
+            links = "".join(f'<a class="lnk" href="https://www.strokeorder.com/chinese/{esc(c)}" target="_blank" '
+                            f'rel="noopener noreferrer" aria-label="Stroke order for {esc(c)}">{esc(c)}</a>' for c in chars)
+            out.append(f'<p class="links"><small>Stroke order:</small>{links}</p>')
+    src = f'From {e["by"]}.' if e.get("by") else {"notes": "From your notes.", "hsk-list": "From the HSK 1 list.",
+                                                   "added": "Added by Claude: check with friends."}.get(e["src"], "")
+    tags = "".join(f'<a class="chip" href="index.html?tag={esc(u)}">{esc(u)}</a>' for u in e["uses"])
+    meta = f'<span class="src">{esc(src)}</span>' if src else ""
+    out.append(f'<p class="meta">{tags}{meta}</p>')
+    return "".join(out)
+
+
 def word_row(e):
     tw = e["t"] or e["s"]
     same = "" if e["t"] else " same"
@@ -381,9 +544,10 @@ def word_row(e):
     else:
         zy = f'<span class="zy">{esc(e["z"])}</span>' if e.get("z") else ""
         tw_cell = f'<span class="c-tw"><span class="zh{size_class(tw)}{same}" lang="zh-Hant-TW">{esc(tw)}</span>{zy}</span>'
-    return (f'<div class="row peekable" tabindex="0">'
+    return (f'<div class="wrow"><div class="row peekable" tabindex="0" role="button" aria-expanded="false">'
             f'<span><span class="zh{size_class(e["s"])}" lang="zh-Hans">{esc(e["s"])}</span><span class="py">{esc(e["p"])}</span></span>'
-            f'{tw_cell}<span><span class="mean">{esc(e["m"])}</span>{note}</span></div>')
+            f'{tw_cell}<span><span class="mean">{esc(e["m"])}</span>{note}</span><span class="caret" aria-hidden="true">▾</span></div>'
+            f'<div class="det" hidden>{word_details(e)}</div></div>')
 
 
 def example_li(who, parts, keys):

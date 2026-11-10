@@ -45,10 +45,10 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 - `topic`: the learner's notebook topic. **This is the organizing scheme; keep it.**
 - `type`: verb, noun, adjective, measure word, time word, direction word, phrase, and so on.
 - `use`: situations, separated by semicolons, for example `Drinks; Eating out & ordering`. Use only the names in `GROUPS` in `tools/build_notes.py` (the build stops on unknown names). To add a situation, add it there first.
-- `parts`: literal meaning of each character. `note`: usage notes.
+- `parts`: literal meaning of each character, separated by ` + `, one per character (mark sound-loans `(sound)`). When the count matches the characters, lesson pages show each meaning under its character in the tap-to-open breakdown. `note`: usage notes.
 - `hsk1`: `yes` if the word is on the 150-word HSK 1 list (HSK 2.0, hsk.academy). Reference only: the learner isn't studying for the HSK exam, so the site doesn't filter by it.
 - `source`: `notes` (handwritten notes), `hsk-list` (HSK 1 word not yet in the notes), or `added` (added by an AI; check with friends).
-- `taught_by`: where the learner picked up this word outside the notebook's courses: a friend's first name (e.g. Koa, Tim) or another source such as "a YouTube video". Shown as "from …". "a friend" is a placeholder for the learner to fill in. The repo is public, so use a first name or nickname only. Shown on lesson word cards, in lesson source lines, and in the notes page's word details.
+- `taught_by`: where the learner picked up this word outside the notebook's courses: a friend's first name (e.g. Koa, Tim) or another source such as "a YouTube video". Shown as "from …". "a friend" is a placeholder for the learner to fill in. The repo is public, so use a first name or nickname only. Shown on lesson word rows, in lesson source lines, and in word details.
 - `check`: `check` only if a fact itself is uncertain. Currently none are set.
 
 ## Rules for changing the repo
