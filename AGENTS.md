@@ -33,7 +33,7 @@ Hold real conversations in Mandarin with friends, several of them from Taiwan. S
 | `study-plan.md` | Daily routine, weekly rhythm, four-week roadmap and checkpoints. |
 | `lessons/` | Lessons in Markdown, one per situation group plus Pronunciation. Each section lists its words (pulled from `vocab.csv`), short tips, example sentences and a "Try it" practice. Format is described at the top of `tools/build_topics.py`. |
 | `index.html`, `tools/` | The website: a home page, the notes page (words and phrases only), recall quiz, vocabulary check and vocabulary exam. |
-| `topics/` | Generated lesson and grammar pages. Don't edit by hand. |
+| `topics/` | Generated textbook pages, laid out like AllSet articles: `index.html` (search by topic, tag, word, pinyin or English; filter by vocabulary/grammar, level and situation), one page per chapter (lesson file), and one short article per `## Section`. Don't edit by hand. |
 | `tools/build_notes.py` | Regenerates the notes page's word list from `vocab.csv`, then the lesson and grammar pages (via `tools/build_topics.py`). Also defines the situation groups. |
 | `tools/fill_zhuyin.py` | Fills in zhuyin for new `vocab.csv` rows. |
 

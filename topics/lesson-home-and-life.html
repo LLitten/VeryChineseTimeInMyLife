@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Home &amp; life · Mandarin lesson</title>
+<title>Home &amp; life · Mandarin lessons</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #edf1f5; --surface: #ffffff; --ink: #16222e; --muted: #5a6978; --line: #cbd5df;
-  --accent: #1d6f8a; --accent-soft: #dcecf2; --accent-ink: #ffffff;
+  --accent: #1d6f8a; --accent-soft: #dcecf2; --accent-ink: #ffffff; --bad: #b3261e; --good: #2e7d32;
   --serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
   --serif-tc: "Noto Serif TC", "Songti TC", "PMingLiU", "Noto Serif SC", serif;
   --sans: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -18,126 +18,115 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0f1820; --surface: #17232e; --ink: #e6edf3; --muted: #94a3b2; --line: #2b3b49;
-    --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620;
+    --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620; --bad: #ff8a80; --good: #81c784;
   }
 }
 :root[data-theme="dark"] {
   --bg: #0f1820; --surface: #17232e; --ink: #e6edf3; --muted: #94a3b2; --line: #2b3b49;
-  --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620;
+  --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620; --bad: #ff8a80; --good: #81c784;
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.45; -webkit-text-size-adjust: 100%; }
-main { max-width: 680px; margin: 0 auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px calc(40px + env(safe-area-inset-bottom, 0px)); }
-.crumbs { font-size: 14px; color: var(--muted); }
-.crumbs a { color: var(--muted); text-decoration: none; }
-.crumbs a:hover, .crumbs a:focus-visible { color: var(--accent); }
-h1 { font-size: 26px; line-height: 1.2; margin: 10px 0 6px; }
-.lead { margin: 0 0 14px; color: var(--muted); }
-h2 { font-size: 19px; margin: 28px 0 8px; }
-h2 small { font-size: 14px; font-weight: 400; color: var(--muted); margin-left: 6px; }
-h3 { font-size: 16px; margin: 0 0 4px; }
-p { margin: 8px 0; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+main { max-width: 700px; margin: 0 auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px calc(40px + env(safe-area-inset-bottom, 0px)); }
 a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, .peekable:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; justify-content: space-between; font-size: 14px; color: var(--muted); }
+.crumbs a { color: var(--muted); text-decoration: none; }
+.crumbs a:hover { color: var(--accent); }
+.mini { display: flex; flex: 1 1 180px; max-width: 260px; }
+.mini input { width: 100%; min-height: 36px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; }
+h1 { font-size: 27px; line-height: 1.2; margin: 14px 0 6px; }
+h2 { font-size: 20px; margin: 30px 0 8px; padding-bottom: 4px; border-bottom: 2px solid var(--line); }
+h3 { font-size: 16px; margin: 20px 0 6px; }
+p { margin: 8px 0; }
 code { font-size: 0.9em; }
-.toggles { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; position: sticky; top: 0; z-index: 5; padding: 8px 0; background: var(--bg); }
-.tg { appearance: none; min-height: 36px; padding: 5px 12px; font: inherit; font-size: 14px; color: var(--muted); background: none; border: 1.5px dashed var(--line); border-radius: 18px; cursor: pointer; }
+.lead { margin: 0 0 12px; color: var(--muted); }
+.intro { font-size: 17px; }
+.zh, .zhi { font-family: var(--serif); }
+.kw { color: var(--accent); }
+.bad { color: var(--bad); font-weight: 700; }
+/* fact box, like AllSet's */
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 10px 0 14px; padding: 10px 14px; font-size: 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.facts dt { color: var(--muted); font-weight: 700; }
+.facts dd { margin: 0; }
+.chip { display: inline-block; margin: 0 4px 4px 0; padding: 1px 9px; font-size: 13px; text-decoration: none; color: var(--accent); border: 1px solid var(--accent); border-radius: 12px; }
+.chip.lv { color: var(--muted); border-color: var(--line); }
+.toc { margin: 6px 0 0; padding: 8px 14px 8px 32px; font-size: 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.toc li { margin: 2px 0; }
+.toggles { display: flex; flex-wrap: wrap; gap: 6px; position: sticky; top: 0; z-index: 5; margin: 10px -16px 0; padding: 8px 16px; background: var(--bg); }
+.tg { appearance: none; min-height: 34px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--muted); background: none; border: 1.5px dashed var(--line); border-radius: 17px; cursor: pointer; }
 .tg[aria-pressed="true"] { color: var(--ink); background: var(--surface); border-style: solid; border-color: var(--accent); }
-.tg:focus-visible, .row:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-.list { display: grid; gap: 6px; }
-.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr); gap: 10px; align-items: center; padding: 10px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
-.no-tw .row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
+.structure { margin: 8px 0; padding: 12px 16px; font-size: 18px; font-weight: 600; text-align: center; background: var(--surface); border: 1.5px solid var(--line); border-left: 5px solid var(--accent); border-radius: 10px; }
+.structure .zhi { font-weight: 700; }
+/* key words table */
+.words { display: grid; gap: 0; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.3fr); gap: 10px; align-items: center; padding: 8px 12px; border-top: 1px solid var(--line); }
+.row:first-child { border-top: 0; }
+.no-tw .row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); }
 .no-tw .c-tw { display: none; }
-.zh { display: block; font-family: var(--serif); font-weight: 700; font-size: 24px; line-height: 1.2; overflow-wrap: anywhere; }
+.row .zh { display: block; font-weight: 700; font-size: 22px; line-height: 1.2; overflow-wrap: anywhere; }
 .c-tw .zh { font-family: var(--serif-tc); }
 .zh.same { color: var(--muted); font-weight: 500; }
-.zh.m { font-size: 20px; } .zh.l { font-size: 17px; }
-.py, .zy { display: block; margin-top: 3px; font-size: 15px; color: var(--muted); overflow-wrap: anywhere; }
+.zh.m { font-size: 19px; } .zh.l { font-size: 16px; }
+.py, .zy { display: block; font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
 .zy { font-family: var(--serif-tc); }
 .mean { font-size: 15px; }
-.note { display: block; margin-top: 4px; font-size: 13px; color: var(--muted); }
-.phrase { display: block; padding: 10px 12px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
-.phrase .zh { font-size: 21px; }
-.phrase .mean { display: block; margin-top: 3px; }
-.dlg { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 10px; padding: 10px 12px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
-.who { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 14px; }
-.dlg .zh { font-size: 19px; }
-.dlg .mean { display: block; margin-top: 3px; }
-.hide-p .row:not(.peek) .py, .hide-p .phrase:not(.peek) .py, .hide-p .dlg:not(.peek) .py,
-.hide-z .row:not(.peek) .zy,
-.hide-m .row:not(.peek) .mean, .hide-m .phrase:not(.peek) .mean, .hide-m .dlg:not(.peek) .mean { filter: blur(7px); }
+.note, .from { display: block; font-size: 13px; color: var(--muted); }
+.from { font-style: italic; }
+/* examples, stacked like AllSet */
+.examples { margin: 6px 0; padding: 0; list-style: none; }
+.examples li { padding: 8px 0 8px 12px; border-left: 3px solid var(--accent-soft); margin: 6px 0; }
+.examples .zhi { display: block; font-size: 19px; line-height: 1.4; }
+.examples .mean { display: block; }
+.who { display: inline-grid; place-items: center; width: 24px; height: 24px; margin-right: 6px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font: 700 13px var(--sans); vertical-align: 3px; }
+.notes, .watch { margin: 6px 0; padding-left: 20px; }
+.notes li, .watch li { margin: 4px 0; }
+.watch { list-style: none; padding: 10px 14px; background: var(--surface); border: 1.5px solid var(--line); border-left: 5px solid var(--bad); border-radius: 10px; }
+.hide-p .peekable:not(.peek) .py,
+.hide-z .peekable:not(.peek) .zy,
+.hide-m .peekable:not(.peek) .mean { filter: blur(7px); }
 .peekable { cursor: pointer; }
-.pat { padding: 12px 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; margin-top: 8px; }
-.tag { display: inline-block; margin-left: 4px; padding: 1px 8px; font-size: 12px; font-weight: 400; color: var(--muted); border: 1px solid var(--line); border-radius: 9px; vertical-align: 2px; }
-.ex { font-family: var(--serif); font-size: 17px; }
-.pat ul { margin: 6px 0 0; padding-left: 18px; }
+.try { display: block; margin: 6px 0; padding: 10px 12px; background: var(--surface); border: 1.5px dashed var(--accent); border-radius: 12px; }
+.try .q { display: block; font-weight: 600; }
+.try .ans { display: block; margin-top: 4px; filter: blur(8px); }
+.try.peek .ans { filter: none; }
+.try .zhi { font-size: 19px; }
+.try .pyx { display: block; font-size: 14px; color: var(--muted); }
+.try .hint { display: block; font-size: 12px; color: var(--muted); }
+.try.peek .hint { display: none; }
+.refs { margin: 6px 0; padding-left: 20px; font-size: 14px; }
+.refs li { margin: 3px 0; }
 .cards { display: grid; gap: 8px; }
 .card { display: block; padding: 12px 14px; color: var(--ink); text-decoration: none; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
 .card:hover { border-color: var(--accent); }
 .card b { display: block; }
-.card span { display: block; margin-top: 2px; font-size: 14px; color: var(--muted); }
-.subnav { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; padding: 0; list-style: none; }
-.subnav a { display: inline-block; padding: 4px 11px; font-size: 14px; text-decoration: none; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); }
-.pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; font-size: 15px; }
-.foot { margin-top: 28px; font-size: 13px; color: var(--muted); }
-.lesson { margin-top: 30px; padding-top: 4px; border-top: 2px solid var(--line); scroll-margin-top: 60px; }
-.lesson h2 { margin-top: 14px; }
-.lesson h3 { margin: 18px 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
-.tips { margin-top: 14px; padding: 2px 14px 10px; background: var(--accent-soft); border-radius: 12px; }
-.tips ul { margin: 0; padding-left: 18px; }
-.tips li { margin-top: 5px; }
-.try { display: block; padding: 10px 12px; background: var(--surface); border: 1.5px dashed var(--accent); border-radius: 12px; cursor: pointer; }
-.try .q { display: block; font-weight: 600; }
-.try .ans { display: block; margin-top: 4px; filter: blur(8px); }
-.try.peek .ans { filter: none; }
-.try .zh { font-size: 20px; }
-.try .pyx { display: block; font-size: 15px; color: var(--muted); }
-.try .hint { display: block; margin-top: 4px; font-size: 12px; color: var(--muted); }
-.try.peek .hint { display: none; }
-.subnav li a { color: var(--accent); }
-.pattern { margin: 10px 0 0; padding: 10px 14px; font-weight: 600; background: var(--surface); border-left: 4px solid var(--accent); border-radius: 8px; }
-.from { display: block; margin-top: 4px; font-size: 12px; color: var(--muted); font-style: italic; }
-.src { margin: 14px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
-.src span { font-weight: 700; }
-.src a { color: var(--muted); }
-.lesson h2 .tag { font-size: 12px; vertical-align: 3px; }
+.card .sub { display: block; margin-top: 2px; font-size: 14px; color: var(--muted); }
+.card .tags { display: block; margin-top: 6px; }
+.card .tags span { display: inline-block; margin: 0 4px 2px 0; padding: 0 8px; font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 10px; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 30px; font-size: 15px; }
+.pager a { max-width: 48%; }
+.foot { margin-top: 30px; font-size: 13px; color: var(--muted); }
+/* search page */
+.search { display: block; width: 100%; min-height: 48px; padding: 10px 14px; font: inherit; font-size: 17px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
+.fbtn { appearance: none; min-height: 34px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 17px; cursor: pointer; }
+.fbtn[aria-pressed="true"] { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+.sel { min-height: 34px; padding: 4px 10px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 17px; }
+.count { margin: 12px 0 6px; font-size: 14px; color: var(--muted); }
+.chapter-list { margin: 4px 0 0; padding-left: 20px; font-size: 14px; }
 </style>
 </head>
 <body>
 <main>
-<nav class="crumbs"><a href="../index.html">← All tools</a> · <a href="index.html">Lessons</a></nav>
-<div class="toggles" id="toggles" data-skip="" aria-label="Show or hide"></div>
+<div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">All tools</a> › <a href="index.html">Lessons</a></nav><form class="mini" action="index.html" role="search"><input type="search" name="q" placeholder="Search lessons" aria-label="Search lessons"></form></div>
+
 <h1>Home &amp; life</h1>
-<p class="lead">Your daily routine, things around the house, school and work, animals and plants.</p>
-<ul class="subnav"><li><a href="#daily-routine">Daily routine</a></li><li><a href="#around-the-house">Around the house</a></li><li><a href="#school-and-work">School and work</a></li><li><a href="#animals-and-plants">Animals and plants</a></li></ul>
-<section class="lesson" id="daily-routine"><h2>Daily routine</h2>
-<h3>Words</h3><div class="list"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">起床</span><span class="py">qǐchuáng</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">起床</span><span class="zy">ㄑㄧˇ ㄔㄨㄤˊ</span></span><span><span class="mean">get out of bed</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">洗澡</span><span class="py">xǐzǎo</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">洗澡</span><span class="zy">ㄒㄧˇ ㄗㄠˇ</span></span><span><span class="mean">to take a shower</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">吃饭</span><span class="py">chīfàn</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">吃飯</span><span class="zy">ㄔ ㄈㄢˋ</span></span><span><span class="mean">to eat a meal</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">睡觉</span><span class="py">shuìjiào</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">睡覺</span><span class="zy">ㄕㄨㄟˋ ㄐㄧㄠˋ</span></span><span><span class="mean">to sleep, go to bed</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">看</span><span class="py">kàn</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">看</span><span class="zy">ㄎㄢˋ</span></span><span><span class="mean">to look, read</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">看到</span><span class="py">kàndào</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">看到</span><span class="zy">ㄎㄢˋ ㄉㄠˋ</span></span><span><span class="mean">to see</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">看见</span><span class="py">kànjiàn</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">看見</span><span class="zy">ㄎㄢˋ ㄐㄧㄢˋ</span></span><span><span class="mean">to see</span><span class="note">Like 看到: you actually saw it.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">听到</span><span class="py">tīngdào</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">聽到</span><span class="zy">ㄊㄧㄥ ㄉㄠˋ</span></span><span><span class="mean">to hear</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">做</span><span class="py">zuò</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">做</span><span class="zy">ㄗㄨㄛˋ</span></span><span><span class="mean">to do, to make</span><span class="note">Same sound as 坐 (to sit).</span></span></div></div>
-<div class="tips"><h3>How to use them</h3><ul><li>Time goes before the verb: 我十一点睡觉.</li><li>看 = look, watch or read. 看到 and 看见 = actually saw it.</li><li>做 = do or make: 做饭 (cook).</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我晚上洗澡。</span><span class="py">wǒ wǎnshang xǐzǎo.</span><span class="mean">I shower in the evening.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">你几点睡觉？</span><span class="py">nǐ jǐ diǎn shuìjiào?</span><span class="mean">What time do you go to bed?</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我看到你了！</span><span class="py">wǒ kàndào nǐ le!</span><span class="mean">I see you!</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: I get up at eight.. Tap to show the answer."><span class="q">I get up at eight.</span><span class="ans"><span class="zh" lang="zh-Hans">我八点起床。</span><span class="pyx">wǒ bā diǎn qǐchuáng.</span></span><span class="hint">Say it, then tap to check</span></div><div class="try peekable" tabindex="0" aria-label="Practice: I didn&#x27;t hear it.. Tap to show the answer."><span class="q">I didn&#x27;t hear it.</span><span class="ans"><span class="zh" lang="zh-Hans">我没听到。</span><span class="pyx">wǒ méi tīngdào.</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> Words: your notes (7), HSK 1 list (2) · <a href="https://resources.allsetlearning.com/chinese/grammar/Result_complements_%22-dao%22_and_%22-jian%22" target="_blank" rel="noopener">AllSet: Result complements &quot;-dao&quot; and &quot;-jian&quot;</a> · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="around-the-house"><h2>Around the house</h2>
-<h3>Words</h3><div class="list"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">家</span><span class="py">jiā</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">家</span><span class="zy">ㄐㄧㄚ</span></span><span><span class="mean">home, family</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">桌子</span><span class="py">zhuōzi</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">桌子</span><span class="zy">ㄓㄨㄛ ˙ㄗ</span></span><span><span class="mean">table, desk</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">椅子</span><span class="py">yǐzi</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">椅子</span><span class="zy">ㄧˇ ˙ㄗ</span></span><span><span class="mean">chair</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">电视</span><span class="py">diànshì</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">電視</span><span class="zy">ㄉㄧㄢˋ ㄕˋ</span></span><span><span class="mean">TV</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">电脑</span><span class="py">diànnǎo</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">電腦</span><span class="zy">ㄉㄧㄢˋ ㄋㄠˇ</span></span><span><span class="mean">computer</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">书</span><span class="py">shū</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">書</span><span class="zy">ㄕㄨ</span></span><span><span class="mean">book</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">衣服</span><span class="py">yīfu</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">衣服</span><span class="zy">ㄧ ˙ㄈㄨ</span></span><span><span class="mean">clothes</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">东西</span><span class="py">dōngxi</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">東西</span><span class="zy">ㄉㄨㄥ ˙ㄒㄧ</span></span><span><span class="mean">thing, stuff</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">杯子</span><span class="py">bēizi</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">杯子</span><span class="zy">ㄅㄟ ˙ㄗ</span></span><span><span class="mean">cup, glass</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">把</span><span class="py">bǎ</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">把</span><span class="zy">ㄅㄚˇ</span></span><span><span class="mean">things held in one hand</span></span></div></div>
-<div class="tips"><h3>How to use them</h3><ul><li>Place + 有 + thing = there is: 桌子上有书.</li><li>把 counts things you hold, or with a handle: 一把椅子.</li><li>杯子 is the cup itself. 一杯水 is a glass of water.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">桌子上有一个杯子。</span><span class="py">zhuōzi shàng yǒu yí ge bēizi.</span><span class="mean">There&#x27;s a cup on the table.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我在家看电视。</span><span class="py">wǒ zài jiā kàn diànshì.</span><span class="mean">I&#x27;m watching TV at home.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">你住在哪里？</span><span class="py">nǐ zhù zài nǎlǐ?</span><span class="mean">Where do you live?</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: There are two chairs.. Tap to show the answer."><span class="q">There are two chairs.</span><span class="ans"><span class="zh" lang="zh-Hans">有两把椅子。</span><span class="pyx">yǒu liǎng bǎ yǐzi.</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> Words: HSK 1 list (5), your notes (5) · <a href="https://resources.allsetlearning.com/chinese/grammar/ASG04ZCI" target="_blank" rel="noopener">AllSet: Expressing existence with &quot;you&quot;</a> · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="school-and-work"><h2>School and work</h2>
-<h3>Words</h3><div class="list"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">学校</span><span class="py">xuéxiào</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">學校</span><span class="zy">ㄒㄩㄝˊ ㄒㄧㄠˋ</span></span><span><span class="mean">school</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">公司</span><span class="py">gōngsī</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">公司</span><span class="zy">ㄍㄨㄥ ㄙ</span></span><span><span class="mean">company</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">老师</span><span class="py">lǎoshī</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">老師</span><span class="zy">ㄌㄠˇ ㄕ</span></span><span><span class="mean">teacher</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">学生</span><span class="py">xuésheng</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">學生</span><span class="zy">ㄒㄩㄝˊ ˙ㄕㄥ</span></span><span><span class="mean">student</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">同学</span><span class="py">tóngxué</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">同學</span><span class="zy">ㄊㄨㄥˊ ㄒㄩㄝˊ</span></span><span><span class="mean">classmate</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">学</span><span class="py">xué</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">學</span><span class="zy">ㄒㄩㄝˊ</span></span><span><span class="mean">to learn, study</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">学习</span><span class="py">xuéxí</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">學習</span><span class="zy">ㄒㄩㄝˊ ㄒㄧˊ</span></span><span><span class="mean">to study</span><span class="note">学习 is the fuller verb; 学 alone is common in speech.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">读</span><span class="py">dú</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">讀</span><span class="zy">ㄉㄨˊ</span></span><span><span class="mean">to read (aloud)</span><span class="note">Reading aloud or studying a text. 看书 is reading silently.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">写</span><span class="py">xiě</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">寫</span><span class="zy">ㄒㄧㄝˇ</span></span><span><span class="mean">to write</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">字</span><span class="py">zì</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">字</span><span class="zy">ㄗˋ</span></span><span><span class="mean">character, word</span><span class="note">Look-alike: 子 (as in 儿子).</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">汉字</span><span class="py">Hànzì</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">漢字</span><span class="zy">ㄏㄢˋ ㄗˋ</span></span><span><span class="mean">Chinese character</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">本</span><span class="py">běn</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">本</span><span class="zy">ㄅㄣˇ</span></span><span><span class="mean">books</span><span class="note">这本书.</span></span></div></div>
-<div class="tips"><h3>How to use them</h3><ul><li>学 + subject: 学中文. To read a book, say 看书, not 学书.</li><li>本 counts books: 一本书.</li><li>在 + place + 工作 = work at: 在公司工作.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我在学中文。</span><span class="py">wǒ zài xué Zhōngwén.</span><span class="mean">I&#x27;m learning Chinese.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">这个字怎么写？</span><span class="py">zhège zì zěnme xiě?</span><span class="mean">How do you write this character?</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我有三本书。</span><span class="py">wǒ yǒu sān běn shū.</span><span class="mean">I have three books.</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: I work at a company.. Tap to show the answer."><span class="q">I work at a company.</span><span class="ans"><span class="zh" lang="zh-Hans">我在公司工作。</span><span class="pyx">wǒ zài gōngsī gōngzuò.</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> Words: your notes (7), HSK 1 list (5) · Tips and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="animals-and-plants"><h2>Animals and plants</h2>
-<h3>Words</h3><div class="list"><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">狗</span><span class="py">gǒu</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">狗</span><span class="zy">ㄍㄡˇ</span></span><span><span class="mean">dog</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">猫</span><span class="py">māo</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">貓</span><span class="zy">ㄇㄠ</span></span><span><span class="mean">cat</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">只</span><span class="py">zhī</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">只</span><span class="zy">ㄓ</span></span><span><span class="mean">most animals and birds</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">条</span><span class="py">tiáo</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">條</span><span class="zy">ㄊㄧㄠˊ</span></span><span><span class="mean">long, thin animals</span><span class="note">fish, snakes, dragons.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">头</span><span class="py">tóu</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">頭</span><span class="zy">ㄊㄡˊ</span></span><span><span class="mean">large animals; bulb vegetables</span><span class="note">pigs, onions.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">匹</span><span class="py">pǐ</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">匹</span><span class="zy">ㄆㄧˇ</span></span><span><span class="mean">horses, mules</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">棵</span><span class="py">kē</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">棵</span><span class="zy">ㄎㄜ</span></span><span><span class="mean">trees, grass, cabbage</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">株</span><span class="py">zhū</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">株</span><span class="zy">ㄓㄨ</span></span><span><span class="mean">smaller trees and plants</span><span class="note">flowers still in the ground.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">朵</span><span class="py">duǒ</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">朵</span><span class="zy">ㄉㄨㄛˇ</span></span><span><span class="mean">flowers; clouds</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">根</span><span class="py">gēn</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">根</span><span class="zy">ㄍㄣ</span></span><span><span class="mean">long, thin objects</span><span class="note">a carrot, thin strands.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">颗</span><span class="py">kē</span></span><span class="c-tw"><span class="zh" lang="zh-Hant-TW">顆</span><span class="zy">ㄎㄜ</span></span><span><span class="mean">small round objects</span><span class="note">a cherry.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">粒</span><span class="py">lì</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">粒</span><span class="zy">ㄌㄧˋ</span></span><span><span class="mean">grains, small round things</span><span class="note">rice.</span></span></div><div class="row peekable" tabindex="0"><span><span class="zh" lang="zh-Hans">瓣</span><span class="py">bàn</span></span><span class="c-tw"><span class="zh same" lang="zh-Hant-TW">瓣</span><span class="zy">ㄅㄢˋ</span></span><span><span class="mean">segments, cloves</span><span class="note">a clove of garlic.</span></span></div></div>
-<div class="tips"><h3>How to use them</h3><ul><li>只 is the usual measure word for animals: 一只猫.</li><li>条 is for long, thin things: 一条鱼 (a fish).</li><li>朵 flowers · 棵 trees · 颗 small round things · 粒 grains.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我有一只狗。</span><span class="py">wǒ yǒu yì zhī gǒu.</span><span class="mean">I have a dog.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">一朵花</span><span class="py">yì duǒ huā</span><span class="mean">a flower</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">一条鱼</span><span class="py">yì tiáo yú</span><span class="mean">a fish</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: two cats. Tap to show the answer."><span class="q">two cats</span><span class="ans"><span class="zh" lang="zh-Hans">两只猫</span><span class="pyx">liǎng zhī māo</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> Words: your notes (12), HSK 1 list (1) · <a href="https://resources.allsetlearning.com/chinese/grammar/Measure_words_for_counting" target="_blank" rel="noopener">AllSet: Measure words for counting</a> · Wording and unmarked examples: Claude</p>
-</section><h2>Related</h2><div class="cards"><a class="card" href="lesson-time.html"><b>Lesson: Time</b><span>Days and dates, clock time, parts of the day, making plans, and the weather.</span></a><a class="card" href="grammar-location.html"><b>Grammar: Location and &quot;there is&quot;</b><span>在 for where things are, 有 for &quot;there is&quot; and &quot;have&quot;, and direction words.</span></a><a class="card" href="grammar-complements.html"><b>Grammar: Complements (what happens after the verb)</b><span>Verb + 到 for results, and verb + 来 / 去 for direction.</span></a></div><nav class="pager"><a href="lesson-time.html">← Time</a><a href="lesson-building-blocks.html">Building blocks →</a></nav>
-<p class="foot">Built from handwritten notes. Lesson tips and examples, and grammar examples, were written by Claude unless marked (your notes). Native-speaker friends have the last word on usage.</p>
+<p class="intro">Your daily routine, things around the house, school and work, animals and plants.</p>
+<p class="lead">Vocabulary chapter 6 of 8 · 4 short articles. Read them in order, or jump to one.</p>
+<div class="cards"><a class="card" href="lesson-home-and-life-1-daily-routine.html"><b>1. Daily routine</b><span class="sub">Time goes before the verb: 我十一点睡觉.</span><span class="tags"><span>Daily routine</span></span></a><a class="card" href="lesson-home-and-life-2-around-the-house.html"><b>2. Around the house</b><span class="sub">Place + 有 + thing = there is: 桌子上有书.</span><span class="tags"><span>Around the house</span><span>School &amp; work</span><span>Shopping &amp; money</span></span></a><a class="card" href="lesson-home-and-life-3-school-and-work.html"><b>3. School and work</b><span class="sub">学 + subject: 学中文. To read a book, say 看书, not 学书.</span><span class="tags"><span>School &amp; work</span><span>Places in town</span><span>Family &amp; friends</span></span></a><a class="card" href="lesson-home-and-life-4-animals-and-plants.html"><b>4. Animals and plants</b><span class="sub">只 is the usual measure word for animals: 一只猫.</span><span class="tags"><span>Animals &amp; plants</span><span>Numbers &amp; counting</span><span>Around the house</span></span></a></div>
+<h2>Related chapters</h2><div class="cards"><a class="card" href="lesson-time.html"><b>Lesson: Time</b><span class="sub">Days and dates, clock time, parts of the day, making plans, and the weather.</span></a><a class="card" href="grammar-location.html"><b>Grammar: Location and &quot;there is&quot;</b><span class="sub">在 for where things are, 有 for &quot;there is&quot; and &quot;have&quot;, and direction words.</span></a><a class="card" href="grammar-complements.html"><b>Grammar: Complements (what happens after the verb)</b><span class="sub">Verb + 到 for results, and verb + 来 / 去 for direction.</span></a></div>
+<nav class="pager"><a href="lesson-time.html">← Time</a><a href="lesson-building-blocks.html">Building blocks →</a></nav>
+<p class="foot">Built from handwritten notes. Tips and unmarked examples were written by Claude; each article lists its sources. Native-speaker friends have the last word on usage.</p>
 </main>
 <script>
 (function () {

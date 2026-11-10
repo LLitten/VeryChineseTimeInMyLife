@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Verbs and helping verbs · Mandarin grammar lesson</title>
+<title>Verbs and helping verbs · Mandarin lessons</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #edf1f5; --surface: #ffffff; --ink: #16222e; --muted: #5a6978; --line: #cbd5df;
-  --accent: #1d6f8a; --accent-soft: #dcecf2; --accent-ink: #ffffff;
+  --accent: #1d6f8a; --accent-soft: #dcecf2; --accent-ink: #ffffff; --bad: #b3261e; --good: #2e7d32;
   --serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
   --serif-tc: "Noto Serif TC", "Songti TC", "PMingLiU", "Noto Serif SC", serif;
   --sans: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -18,155 +18,116 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0f1820; --surface: #17232e; --ink: #e6edf3; --muted: #94a3b2; --line: #2b3b49;
-    --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620;
+    --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620; --bad: #ff8a80; --good: #81c784;
   }
 }
 :root[data-theme="dark"] {
   --bg: #0f1820; --surface: #17232e; --ink: #e6edf3; --muted: #94a3b2; --line: #2b3b49;
-  --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620;
+  --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620; --bad: #ff8a80; --good: #81c784;
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.45; -webkit-text-size-adjust: 100%; }
-main { max-width: 680px; margin: 0 auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px calc(40px + env(safe-area-inset-bottom, 0px)); }
-.crumbs { font-size: 14px; color: var(--muted); }
-.crumbs a { color: var(--muted); text-decoration: none; }
-.crumbs a:hover, .crumbs a:focus-visible { color: var(--accent); }
-h1 { font-size: 26px; line-height: 1.2; margin: 10px 0 6px; }
-.lead { margin: 0 0 14px; color: var(--muted); }
-h2 { font-size: 19px; margin: 28px 0 8px; }
-h2 small { font-size: 14px; font-weight: 400; color: var(--muted); margin-left: 6px; }
-h3 { font-size: 16px; margin: 0 0 4px; }
-p { margin: 8px 0; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+main { max-width: 700px; margin: 0 auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px calc(40px + env(safe-area-inset-bottom, 0px)); }
 a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, .peekable:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; justify-content: space-between; font-size: 14px; color: var(--muted); }
+.crumbs a { color: var(--muted); text-decoration: none; }
+.crumbs a:hover { color: var(--accent); }
+.mini { display: flex; flex: 1 1 180px; max-width: 260px; }
+.mini input { width: 100%; min-height: 36px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; }
+h1 { font-size: 27px; line-height: 1.2; margin: 14px 0 6px; }
+h2 { font-size: 20px; margin: 30px 0 8px; padding-bottom: 4px; border-bottom: 2px solid var(--line); }
+h3 { font-size: 16px; margin: 20px 0 6px; }
+p { margin: 8px 0; }
 code { font-size: 0.9em; }
-.toggles { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; position: sticky; top: 0; z-index: 5; padding: 8px 0; background: var(--bg); }
-.tg { appearance: none; min-height: 36px; padding: 5px 12px; font: inherit; font-size: 14px; color: var(--muted); background: none; border: 1.5px dashed var(--line); border-radius: 18px; cursor: pointer; }
+.lead { margin: 0 0 12px; color: var(--muted); }
+.intro { font-size: 17px; }
+.zh, .zhi { font-family: var(--serif); }
+.kw { color: var(--accent); }
+.bad { color: var(--bad); font-weight: 700; }
+/* fact box, like AllSet's */
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 10px 0 14px; padding: 10px 14px; font-size: 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.facts dt { color: var(--muted); font-weight: 700; }
+.facts dd { margin: 0; }
+.chip { display: inline-block; margin: 0 4px 4px 0; padding: 1px 9px; font-size: 13px; text-decoration: none; color: var(--accent); border: 1px solid var(--accent); border-radius: 12px; }
+.chip.lv { color: var(--muted); border-color: var(--line); }
+.toc { margin: 6px 0 0; padding: 8px 14px 8px 32px; font-size: 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.toc li { margin: 2px 0; }
+.toggles { display: flex; flex-wrap: wrap; gap: 6px; position: sticky; top: 0; z-index: 5; margin: 10px -16px 0; padding: 8px 16px; background: var(--bg); }
+.tg { appearance: none; min-height: 34px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--muted); background: none; border: 1.5px dashed var(--line); border-radius: 17px; cursor: pointer; }
 .tg[aria-pressed="true"] { color: var(--ink); background: var(--surface); border-style: solid; border-color: var(--accent); }
-.tg:focus-visible, .row:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-.list { display: grid; gap: 6px; }
-.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr); gap: 10px; align-items: center; padding: 10px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
-.no-tw .row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
+.structure { margin: 8px 0; padding: 12px 16px; font-size: 18px; font-weight: 600; text-align: center; background: var(--surface); border: 1.5px solid var(--line); border-left: 5px solid var(--accent); border-radius: 10px; }
+.structure .zhi { font-weight: 700; }
+/* key words table */
+.words { display: grid; gap: 0; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.3fr); gap: 10px; align-items: center; padding: 8px 12px; border-top: 1px solid var(--line); }
+.row:first-child { border-top: 0; }
+.no-tw .row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); }
 .no-tw .c-tw { display: none; }
-.zh { display: block; font-family: var(--serif); font-weight: 700; font-size: 24px; line-height: 1.2; overflow-wrap: anywhere; }
+.row .zh { display: block; font-weight: 700; font-size: 22px; line-height: 1.2; overflow-wrap: anywhere; }
 .c-tw .zh { font-family: var(--serif-tc); }
 .zh.same { color: var(--muted); font-weight: 500; }
-.zh.m { font-size: 20px; } .zh.l { font-size: 17px; }
-.py, .zy { display: block; margin-top: 3px; font-size: 15px; color: var(--muted); overflow-wrap: anywhere; }
+.zh.m { font-size: 19px; } .zh.l { font-size: 16px; }
+.py, .zy { display: block; font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
 .zy { font-family: var(--serif-tc); }
 .mean { font-size: 15px; }
-.note { display: block; margin-top: 4px; font-size: 13px; color: var(--muted); }
-.phrase { display: block; padding: 10px 12px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
-.phrase .zh { font-size: 21px; }
-.phrase .mean { display: block; margin-top: 3px; }
-.dlg { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 10px; padding: 10px 12px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
-.who { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 14px; }
-.dlg .zh { font-size: 19px; }
-.dlg .mean { display: block; margin-top: 3px; }
-.hide-p .row:not(.peek) .py, .hide-p .phrase:not(.peek) .py, .hide-p .dlg:not(.peek) .py,
-.hide-z .row:not(.peek) .zy,
-.hide-m .row:not(.peek) .mean, .hide-m .phrase:not(.peek) .mean, .hide-m .dlg:not(.peek) .mean { filter: blur(7px); }
+.note, .from { display: block; font-size: 13px; color: var(--muted); }
+.from { font-style: italic; }
+/* examples, stacked like AllSet */
+.examples { margin: 6px 0; padding: 0; list-style: none; }
+.examples li { padding: 8px 0 8px 12px; border-left: 3px solid var(--accent-soft); margin: 6px 0; }
+.examples .zhi { display: block; font-size: 19px; line-height: 1.4; }
+.examples .mean { display: block; }
+.who { display: inline-grid; place-items: center; width: 24px; height: 24px; margin-right: 6px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font: 700 13px var(--sans); vertical-align: 3px; }
+.notes, .watch { margin: 6px 0; padding-left: 20px; }
+.notes li, .watch li { margin: 4px 0; }
+.watch { list-style: none; padding: 10px 14px; background: var(--surface); border: 1.5px solid var(--line); border-left: 5px solid var(--bad); border-radius: 10px; }
+.hide-p .peekable:not(.peek) .py,
+.hide-z .peekable:not(.peek) .zy,
+.hide-m .peekable:not(.peek) .mean { filter: blur(7px); }
 .peekable { cursor: pointer; }
-.pat { padding: 12px 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; margin-top: 8px; }
-.tag { display: inline-block; margin-left: 4px; padding: 1px 8px; font-size: 12px; font-weight: 400; color: var(--muted); border: 1px solid var(--line); border-radius: 9px; vertical-align: 2px; }
-.ex { font-family: var(--serif); font-size: 17px; }
-.pat ul { margin: 6px 0 0; padding-left: 18px; }
+.try { display: block; margin: 6px 0; padding: 10px 12px; background: var(--surface); border: 1.5px dashed var(--accent); border-radius: 12px; }
+.try .q { display: block; font-weight: 600; }
+.try .ans { display: block; margin-top: 4px; filter: blur(8px); }
+.try.peek .ans { filter: none; }
+.try .zhi { font-size: 19px; }
+.try .pyx { display: block; font-size: 14px; color: var(--muted); }
+.try .hint { display: block; font-size: 12px; color: var(--muted); }
+.try.peek .hint { display: none; }
+.refs { margin: 6px 0; padding-left: 20px; font-size: 14px; }
+.refs li { margin: 3px 0; }
 .cards { display: grid; gap: 8px; }
 .card { display: block; padding: 12px 14px; color: var(--ink); text-decoration: none; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
 .card:hover { border-color: var(--accent); }
 .card b { display: block; }
-.card span { display: block; margin-top: 2px; font-size: 14px; color: var(--muted); }
-.subnav { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; padding: 0; list-style: none; }
-.subnav a { display: inline-block; padding: 4px 11px; font-size: 14px; text-decoration: none; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); }
-.pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; font-size: 15px; }
-.foot { margin-top: 28px; font-size: 13px; color: var(--muted); }
-.lesson { margin-top: 30px; padding-top: 4px; border-top: 2px solid var(--line); scroll-margin-top: 60px; }
-.lesson h2 { margin-top: 14px; }
-.lesson h3 { margin: 18px 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
-.tips { margin-top: 14px; padding: 2px 14px 10px; background: var(--accent-soft); border-radius: 12px; }
-.tips ul { margin: 0; padding-left: 18px; }
-.tips li { margin-top: 5px; }
-.try { display: block; padding: 10px 12px; background: var(--surface); border: 1.5px dashed var(--accent); border-radius: 12px; cursor: pointer; }
-.try .q { display: block; font-weight: 600; }
-.try .ans { display: block; margin-top: 4px; filter: blur(8px); }
-.try.peek .ans { filter: none; }
-.try .zh { font-size: 20px; }
-.try .pyx { display: block; font-size: 15px; color: var(--muted); }
-.try .hint { display: block; margin-top: 4px; font-size: 12px; color: var(--muted); }
-.try.peek .hint { display: none; }
-.subnav li a { color: var(--accent); }
-.pattern { margin: 10px 0 0; padding: 10px 14px; font-weight: 600; background: var(--surface); border-left: 4px solid var(--accent); border-radius: 8px; }
-.from { display: block; margin-top: 4px; font-size: 12px; color: var(--muted); font-style: italic; }
-.src { margin: 14px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
-.src span { font-weight: 700; }
-.src a { color: var(--muted); }
-.lesson h2 .tag { font-size: 12px; vertical-align: 3px; }
+.card .sub { display: block; margin-top: 2px; font-size: 14px; color: var(--muted); }
+.card .tags { display: block; margin-top: 6px; }
+.card .tags span { display: inline-block; margin: 0 4px 2px 0; padding: 0 8px; font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 10px; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 30px; font-size: 15px; }
+.pager a { max-width: 48%; }
+.foot { margin-top: 30px; font-size: 13px; color: var(--muted); }
+/* search page */
+.search { display: block; width: 100%; min-height: 48px; padding: 10px 14px; font: inherit; font-size: 17px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
+.fbtn { appearance: none; min-height: 34px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 17px; cursor: pointer; }
+.fbtn[aria-pressed="true"] { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+.sel { min-height: 34px; padding: 4px 10px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 17px; }
+.count { margin: 12px 0 6px; font-size: 14px; color: var(--muted); }
+.chapter-list { margin: 4px 0 0; padding-left: 20px; font-size: 14px; }
 </style>
 </head>
 <body>
 <main>
-<nav class="crumbs"><a href="../index.html">← All tools</a> · <a href="index.html">Lessons</a></nav>
-<div class="toggles" id="toggles" data-skip="ztw" aria-label="Show or hide"></div>
+<div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">All tools</a> › <a href="index.html">Lessons</a></nav><form class="mini" action="index.html" role="search"><input type="search" name="q" placeholder="Search lessons" aria-label="Search lessons"></form></div>
+
 <h1>Verbs and helping verbs</h1>
-<p class="lead">Want, can, may, have to, let, and verbs for names and going places.</p>
-<p class="src"><span>Also covered in Yoyo Chinese:</span> <a href="https://yoyochinese.com/courses/beginner-conversational-chinese" target="_blank" rel="noopener">Beginner Conversational, Unit 12: Wants and Desires</a></p>
-<ul class="subnav"><li><a href="#want">Want: 要, 想, 喜欢</a></li><li><a href="#going-to">Going to: 要</a></li><li><a href="#can-and">Can: 会 and 能</a></li><li><a href="#may">May: 可以</a></li><li><a href="#have-to-don-t-need-to">Have to: 得 · Don&#x27;t need to: 不用</a></li><li><a href="#let-or-make-someone">Let or make someone: 让</a></li><li><a href="#going-places">Going places: 去</a></li><li><a href="#names-and">Names: 叫 and 姓</a></li></ul>
-<section class="lesson" id="want"><h2>Want: 要, 想, 喜欢 <span class="tag">A1 #27</span></h2>
-<p class="pattern">Subject + 要 / 想 / 喜欢 + verb</p>
-<div class="tips"><h3>How it works</h3><ul><li>要 = want to. It can sound firm, like a plan.</li><li>想 = would like to. Softer, and negated with 不想.</li><li>喜欢 + verb = like doing.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我要喝水。</span><span class="py">wǒ yào hē shuǐ.</span><span class="mean">I want water.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我想买水。</span><span class="py">wǒ xiǎng mǎi shuǐ.</span><span class="mean">I&#x27;d like to buy water.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我喜欢吃饭。</span><span class="py">wǒ xǐhuan chīfàn.</span><span class="mean">I like eating.</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: What do you want to eat?. Tap to show the answer."><span class="q">What do you want to eat?</span><span class="ans"><span class="zh" lang="zh-Hans">你要吃什么？</span><span class="pyx">nǐ yào chī shénme?</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/ASGXVEAR" target="_blank" rel="noopener">AllSet: Wanting to do something with &quot;yao&quot;</a> · <a href="https://resources.allsetlearning.com/chinese/grammar/Expressing_%22would_like_to%22_with_%22xiang%22" target="_blank" rel="noopener">AllSet: Expressing &quot;would like to&quot; with &quot;xiang&quot;</a> · 喜欢 + verb: your notes · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="going-to"><h2>Going to: 要 <span class="tag">A1 #25</span></h2>
-<p class="pattern">Subject + time + 要 + verb</p>
-<div class="tips"><h3>How it works</h3><ul><li>For plans you expect to carry out.</li><li>Use a time word, or 要 may sound like &quot;want.&quot;</li><li>Don&#x27;t use 在 for the future. 在 + verb means right now.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我明天要去北京。</span><span class="py">wǒ míngtiān yào qù Běijīng.</span><span class="mean">I&#x27;m going to Beijing tomorrow.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">他就要来了。</span><span class="py">tā jiù yào lái le.</span><span class="mean">He&#x27;s about to arrive.</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: I&#x27;m going to buy a phone tomorrow.. Tap to show the answer."><span class="q">I&#x27;m going to buy a phone tomorrow.</span><span class="ans"><span class="zh" lang="zh-Hans">我明天要买手机。</span><span class="pyx">wǒ míngtiān yào mǎi shǒujī.</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/ASGVT2KN" target="_blank" rel="noopener">AllSet: Expressing &quot;be going to&quot; with &quot;yao&quot;</a> · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="can-and"><h2>Can: 会 and 能 <span class="tag">A1 #24 · #23</span></h2>
-<p class="pattern">Subject + 会 / 能 + verb</p>
-<div class="tips"><h3>How it works</h3><ul><li>会 = a learned skill: languages, driving, cooking. 不会 = don&#x27;t know how.</li><li>会 also means &quot;will&quot;: 明天会很好.</li><li>能 = able to, when circumstances allow. Also for polite requests: 我能…吗？</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我会说中文。</span><span class="py">wǒ huì shuō Zhōngwén.</span><span class="mean">I can speak Chinese.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我会画画。</span><span class="py">wǒ huì huàhuà.</span><span class="mean">I can draw.</span><span class="from">your notes</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我能问你一个问题吗？</span><span class="py">wǒ néng wèn nǐ yí ge wèntí ma?</span><span class="mean">Could I ask you a question?</span><span class="from">AllSet</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: Can you speak English?. Tap to show the answer."><span class="q">Can you speak English?</span><span class="ans"><span class="zh" lang="zh-Hans">你会说英语吗？</span><span class="pyx">nǐ huì shuō Yīngyǔ ma?</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/ASGRHM0E" target="_blank" rel="noopener">AllSet: Expressing a learned skill with &quot;hui&quot;</a> · <a href="https://resources.allsetlearning.com/chinese/grammar/ASG9PQ40" target="_blank" rel="noopener">AllSet: Expressing ability or possibility with &quot;neng&quot;</a> · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="may"><h2>May: 可以 <span class="tag">A1 #26</span></h2>
-<p class="pattern">Subject + 可以 + verb</p>
-<div class="tips"><h3>How it works</h3><ul><li>Permission, like &quot;may.&quot;</li><li>不可以 = not allowed.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我可以坐这儿吗？ 可以。</span><span class="py">wǒ kěyǐ zuò zhèr ma? kěyǐ.</span><span class="mean">May I sit here? Sure.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">这里不可以吃东西。</span><span class="py">zhèlǐ bù kěyǐ chī dōngxi.</span><span class="mean">No eating here.</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: May I come in?. Tap to show the answer."><span class="q">May I come in?</span><span class="ans"><span class="zh" lang="zh-Hans">我可以进来吗？</span><span class="pyx">wǒ kěyǐ jìnlái ma?</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/ASG6SPYK" target="_blank" rel="noopener">AllSet: Expressing permission with &quot;keyi&quot;</a> · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="have-to-don-t-need-to"><h2>Have to: 得 · Don&#x27;t need to: 不用 <span class="tag">B1</span></h2>
-<p class="pattern">Subject + 得 + verb · Subject + 不用 + verb</p>
-<div class="tips"><h3>How it works</h3><ul><li>得 here is said děi and means &quot;have to.&quot;</li><li>&quot;Don&#x27;t need to&quot; is 不用, not 不得 and not 不要.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我们得走了。</span><span class="py">wǒmen děi zǒu le.</span><span class="mean">We have to go.</span><span class="from">AllSet</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">你不用来。</span><span class="py">nǐ búyòng lái.</span><span class="mean">You don&#x27;t need to come.</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: I have to work.. Tap to show the answer."><span class="q">I have to work.</span><span class="ans"><span class="zh" lang="zh-Hans">我得工作。</span><span class="pyx">wǒ děi gōngzuò.</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/Expressing_%22must%22_with_%22dei%22" target="_blank" rel="noopener">AllSet: Expressing &quot;must&quot; with &quot;dei&quot;</a> · <a href="https://resources.allsetlearning.com/chinese/grammar/Expressing_%22don%27t_need_to%22_with_%22buyong%22" target="_blank" rel="noopener">AllSet: Expressing &quot;don&#x27;t need to&quot; with &quot;buyong&quot;</a> · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="let-or-make-someone"><h2>Let or make someone: 让 <span class="tag">B1</span></h2>
-<p class="pattern">Subject + 让 + person + verb</p>
-<div class="tips"><h3>How it works</h3><ul><li>让 = let, make, or ask someone to.</li><li>想让 = want someone to: 我想让你学习.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">他让我睡觉。</span><span class="py">tā ràng wǒ shuìjiào.</span><span class="mean">He lets me sleep.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">你让我很高兴。</span><span class="py">nǐ ràng wǒ hěn gāoxìng.</span><span class="mean">You make me happy.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">你为什么不让我去？</span><span class="py">nǐ wèishénme bú ràng wǒ qù?</span><span class="mean">Why won&#x27;t you let me go?</span><span class="from">AllSet</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: I want you to come.. Tap to show the answer."><span class="q">I want you to come.</span><span class="ans"><span class="zh" lang="zh-Hans">我想让你来。</span><span class="pyx">wǒ xiǎng ràng nǐ lái.</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/Causative_verbs" target="_blank" rel="noopener">AllSet: Causative verbs</a> · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="going-places"><h2>Going places: 去 <span class="tag">A1 #21</span></h2>
-<p class="pattern">Subject + 去 + place · Subject + 去 + verb</p>
-<div class="tips"><h3>How it works</h3><ul><li>No word for &quot;to&quot;: 我去学校.</li><li>No 在 after 去.</li><li>去 + verb = go to do something: 我去买东西.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我明天去学校。</span><span class="py">wǒ míngtiān qù xuéxiào.</span><span class="mean">I&#x27;m going to school tomorrow.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我去买东西。</span><span class="py">wǒ qù mǎi dōngxi.</span><span class="mean">I&#x27;m going shopping.</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: I&#x27;m going to the bank.. Tap to show the answer."><span class="q">I&#x27;m going to the bank.</span><span class="ans"><span class="zh" lang="zh-Hans">我去银行。</span><span class="pyx">wǒ qù yínháng.</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/ASGFYNCL" target="_blank" rel="noopener">AllSet: Using the verb &quot;qu&quot;</a> · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="names-and"><h2>Names: 叫 and 姓 <span class="tag">A1 #20 · #22</span></h2>
-<p class="pattern">Subject + 叫 + name · Subject + 姓 + surname</p>
-<div class="tips"><h3>How it works</h3><ul><li>叫 = to be called. Works for people, pets and places.</li><li>姓 = surname. The polite question is 您贵姓？</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我叫安娜。你叫什么名字？</span><span class="py">wǒ jiào Ānnà. nǐ jiào shénme míngzi?</span><span class="mean">I&#x27;m Anna. What&#x27;s your name?</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我姓王。</span><span class="py">wǒ xìng Wáng.</span><span class="mean">My surname is Wang.</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: What&#x27;s your name?. Tap to show the answer."><span class="q">What&#x27;s your name?</span><span class="ans"><span class="zh" lang="zh-Hans">你叫什么名字？</span><span class="pyx">nǐ jiào shénme míngzi?</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/ASGUGWVZ" target="_blank" rel="noopener">AllSet: Using the verb &quot;jiao&quot;</a> · <a href="https://resources.allsetlearning.com/chinese/grammar/ASGPS9NY" target="_blank" rel="noopener">AllSet: Using the verb &quot;xing&quot;</a> · Wording and unmarked examples: Claude</p>
-</section><h2>Related</h2><div class="cards"><a class="card" href="lesson-conversation.html"><b>Lesson: Conversation</b><span>Reacting, giving opinions, asking questions, polite words, and what to say when you&#x27;re stuck.</span></a><a class="card" href="lesson-out-and-about.html"><b>Lesson: Out &amp; about</b><span>Places in town, directions, getting around, and shopping.</span></a></div><nav class="pager"><a href="grammar-linking-words.html">← Linking words</a><a href="grammar-complements.html">Complements (what happens after the verb) →</a></nav>
-<p class="foot">Built from handwritten notes. Lesson tips and examples, and grammar examples, were written by Claude unless marked (your notes). Native-speaker friends have the last word on usage.</p>
+<p class="intro">Want, can, may, have to, let, and verbs for names and going places.</p>
+<p class="lead">Grammar chapter 6 of 11 · 8 short articles. Read them in order, or jump to one.</p>
+<div class="cards"><a class="card" href="grammar-verbs-and-helping-verbs-1-want.html"><b>1. Want: 要, 想, 喜欢</b><span class="sub">要 = want to. It can sound firm, like a plan.</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-verbs-and-helping-verbs-2-going-to.html"><b>2. Going to: 要</b><span class="sub">For plans you expect to carry out.</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-verbs-and-helping-verbs-3-can-and.html"><b>3. Can: 会 and 能</b><span class="sub">会 = a learned skill: languages, driving, cooking. 不会 = don&#x27;t know how.</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-verbs-and-helping-verbs-4-may.html"><b>4. May: 可以</b><span class="sub">Permission, like &quot;may.&quot;</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-verbs-and-helping-verbs-5-have-to-don-t-need-to.html"><b>5. Have to: 得 · Don&#x27;t need to: 不用</b><span class="sub">得 here is said děi and means &quot;have to.&quot;</span><span class="tags"><span>B1</span></span></a><a class="card" href="grammar-verbs-and-helping-verbs-6-let-or-make-someone.html"><b>6. Let or make someone: 让</b><span class="sub">让 = let, make, or ask someone to.</span><span class="tags"><span>B1</span></span></a><a class="card" href="grammar-verbs-and-helping-verbs-7-going-places.html"><b>7. Going places: 去</b><span class="sub">No word for &quot;to&quot;: 我去学校.</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-verbs-and-helping-verbs-8-names-and.html"><b>8. Names: 叫 and 姓</b><span class="sub">叫 = to be called. Works for people, pets and places.</span><span class="tags"><span>A1</span></span></a></div>
+<h2>Related chapters</h2><div class="cards"><a class="card" href="lesson-conversation.html"><b>Lesson: Conversation</b><span class="sub">Reacting, giving opinions, asking questions, polite words, and what to say when you&#x27;re stuck.</span></a><a class="card" href="lesson-out-and-about.html"><b>Lesson: Out &amp; about</b><span class="sub">Places in town, directions, getting around, and shopping.</span></a></div>
+<h2>Further reading</h2><ul class="refs"><li>Also covered in Yoyo Chinese: <a href="https://yoyochinese.com/courses/beginner-conversational-chinese" target="_blank" rel="noopener">Beginner Conversational, Unit 12: Wants and Desires</a></li></ul>
+<nav class="pager"><a href="grammar-linking-words.html">← Linking words</a><a href="grammar-complements.html">Complements (what happens after the verb) →</a></nav>
+<p class="foot">Built from handwritten notes. Tips and unmarked examples were written by Claude; each article lists its sources. Native-speaker friends have the last word on usage.</p>
 </main>
 <script>
 (function () {

@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Adverbs and describing · Mandarin grammar lesson</title>
+<title>Adverbs and describing · Mandarin lessons</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #edf1f5; --surface: #ffffff; --ink: #16222e; --muted: #5a6978; --line: #cbd5df;
-  --accent: #1d6f8a; --accent-soft: #dcecf2; --accent-ink: #ffffff;
+  --accent: #1d6f8a; --accent-soft: #dcecf2; --accent-ink: #ffffff; --bad: #b3261e; --good: #2e7d32;
   --serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
   --serif-tc: "Noto Serif TC", "Songti TC", "PMingLiU", "Noto Serif SC", serif;
   --sans: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -18,146 +18,116 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0f1820; --surface: #17232e; --ink: #e6edf3; --muted: #94a3b2; --line: #2b3b49;
-    --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620;
+    --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620; --bad: #ff8a80; --good: #81c784;
   }
 }
 :root[data-theme="dark"] {
   --bg: #0f1820; --surface: #17232e; --ink: #e6edf3; --muted: #94a3b2; --line: #2b3b49;
-  --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620;
+  --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620; --bad: #ff8a80; --good: #81c784;
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.45; -webkit-text-size-adjust: 100%; }
-main { max-width: 680px; margin: 0 auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px calc(40px + env(safe-area-inset-bottom, 0px)); }
-.crumbs { font-size: 14px; color: var(--muted); }
-.crumbs a { color: var(--muted); text-decoration: none; }
-.crumbs a:hover, .crumbs a:focus-visible { color: var(--accent); }
-h1 { font-size: 26px; line-height: 1.2; margin: 10px 0 6px; }
-.lead { margin: 0 0 14px; color: var(--muted); }
-h2 { font-size: 19px; margin: 28px 0 8px; }
-h2 small { font-size: 14px; font-weight: 400; color: var(--muted); margin-left: 6px; }
-h3 { font-size: 16px; margin: 0 0 4px; }
-p { margin: 8px 0; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+main { max-width: 700px; margin: 0 auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px calc(40px + env(safe-area-inset-bottom, 0px)); }
 a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, .peekable:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; justify-content: space-between; font-size: 14px; color: var(--muted); }
+.crumbs a { color: var(--muted); text-decoration: none; }
+.crumbs a:hover { color: var(--accent); }
+.mini { display: flex; flex: 1 1 180px; max-width: 260px; }
+.mini input { width: 100%; min-height: 36px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; }
+h1 { font-size: 27px; line-height: 1.2; margin: 14px 0 6px; }
+h2 { font-size: 20px; margin: 30px 0 8px; padding-bottom: 4px; border-bottom: 2px solid var(--line); }
+h3 { font-size: 16px; margin: 20px 0 6px; }
+p { margin: 8px 0; }
 code { font-size: 0.9em; }
-.toggles { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; position: sticky; top: 0; z-index: 5; padding: 8px 0; background: var(--bg); }
-.tg { appearance: none; min-height: 36px; padding: 5px 12px; font: inherit; font-size: 14px; color: var(--muted); background: none; border: 1.5px dashed var(--line); border-radius: 18px; cursor: pointer; }
+.lead { margin: 0 0 12px; color: var(--muted); }
+.intro { font-size: 17px; }
+.zh, .zhi { font-family: var(--serif); }
+.kw { color: var(--accent); }
+.bad { color: var(--bad); font-weight: 700; }
+/* fact box, like AllSet's */
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 10px 0 14px; padding: 10px 14px; font-size: 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.facts dt { color: var(--muted); font-weight: 700; }
+.facts dd { margin: 0; }
+.chip { display: inline-block; margin: 0 4px 4px 0; padding: 1px 9px; font-size: 13px; text-decoration: none; color: var(--accent); border: 1px solid var(--accent); border-radius: 12px; }
+.chip.lv { color: var(--muted); border-color: var(--line); }
+.toc { margin: 6px 0 0; padding: 8px 14px 8px 32px; font-size: 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.toc li { margin: 2px 0; }
+.toggles { display: flex; flex-wrap: wrap; gap: 6px; position: sticky; top: 0; z-index: 5; margin: 10px -16px 0; padding: 8px 16px; background: var(--bg); }
+.tg { appearance: none; min-height: 34px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--muted); background: none; border: 1.5px dashed var(--line); border-radius: 17px; cursor: pointer; }
 .tg[aria-pressed="true"] { color: var(--ink); background: var(--surface); border-style: solid; border-color: var(--accent); }
-.tg:focus-visible, .row:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-.list { display: grid; gap: 6px; }
-.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr); gap: 10px; align-items: center; padding: 10px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
-.no-tw .row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
+.structure { margin: 8px 0; padding: 12px 16px; font-size: 18px; font-weight: 600; text-align: center; background: var(--surface); border: 1.5px solid var(--line); border-left: 5px solid var(--accent); border-radius: 10px; }
+.structure .zhi { font-weight: 700; }
+/* key words table */
+.words { display: grid; gap: 0; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.3fr); gap: 10px; align-items: center; padding: 8px 12px; border-top: 1px solid var(--line); }
+.row:first-child { border-top: 0; }
+.no-tw .row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); }
 .no-tw .c-tw { display: none; }
-.zh { display: block; font-family: var(--serif); font-weight: 700; font-size: 24px; line-height: 1.2; overflow-wrap: anywhere; }
+.row .zh { display: block; font-weight: 700; font-size: 22px; line-height: 1.2; overflow-wrap: anywhere; }
 .c-tw .zh { font-family: var(--serif-tc); }
 .zh.same { color: var(--muted); font-weight: 500; }
-.zh.m { font-size: 20px; } .zh.l { font-size: 17px; }
-.py, .zy { display: block; margin-top: 3px; font-size: 15px; color: var(--muted); overflow-wrap: anywhere; }
+.zh.m { font-size: 19px; } .zh.l { font-size: 16px; }
+.py, .zy { display: block; font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
 .zy { font-family: var(--serif-tc); }
 .mean { font-size: 15px; }
-.note { display: block; margin-top: 4px; font-size: 13px; color: var(--muted); }
-.phrase { display: block; padding: 10px 12px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
-.phrase .zh { font-size: 21px; }
-.phrase .mean { display: block; margin-top: 3px; }
-.dlg { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 10px; padding: 10px 12px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
-.who { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 14px; }
-.dlg .zh { font-size: 19px; }
-.dlg .mean { display: block; margin-top: 3px; }
-.hide-p .row:not(.peek) .py, .hide-p .phrase:not(.peek) .py, .hide-p .dlg:not(.peek) .py,
-.hide-z .row:not(.peek) .zy,
-.hide-m .row:not(.peek) .mean, .hide-m .phrase:not(.peek) .mean, .hide-m .dlg:not(.peek) .mean { filter: blur(7px); }
+.note, .from { display: block; font-size: 13px; color: var(--muted); }
+.from { font-style: italic; }
+/* examples, stacked like AllSet */
+.examples { margin: 6px 0; padding: 0; list-style: none; }
+.examples li { padding: 8px 0 8px 12px; border-left: 3px solid var(--accent-soft); margin: 6px 0; }
+.examples .zhi { display: block; font-size: 19px; line-height: 1.4; }
+.examples .mean { display: block; }
+.who { display: inline-grid; place-items: center; width: 24px; height: 24px; margin-right: 6px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font: 700 13px var(--sans); vertical-align: 3px; }
+.notes, .watch { margin: 6px 0; padding-left: 20px; }
+.notes li, .watch li { margin: 4px 0; }
+.watch { list-style: none; padding: 10px 14px; background: var(--surface); border: 1.5px solid var(--line); border-left: 5px solid var(--bad); border-radius: 10px; }
+.hide-p .peekable:not(.peek) .py,
+.hide-z .peekable:not(.peek) .zy,
+.hide-m .peekable:not(.peek) .mean { filter: blur(7px); }
 .peekable { cursor: pointer; }
-.pat { padding: 12px 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; margin-top: 8px; }
-.tag { display: inline-block; margin-left: 4px; padding: 1px 8px; font-size: 12px; font-weight: 400; color: var(--muted); border: 1px solid var(--line); border-radius: 9px; vertical-align: 2px; }
-.ex { font-family: var(--serif); font-size: 17px; }
-.pat ul { margin: 6px 0 0; padding-left: 18px; }
+.try { display: block; margin: 6px 0; padding: 10px 12px; background: var(--surface); border: 1.5px dashed var(--accent); border-radius: 12px; }
+.try .q { display: block; font-weight: 600; }
+.try .ans { display: block; margin-top: 4px; filter: blur(8px); }
+.try.peek .ans { filter: none; }
+.try .zhi { font-size: 19px; }
+.try .pyx { display: block; font-size: 14px; color: var(--muted); }
+.try .hint { display: block; font-size: 12px; color: var(--muted); }
+.try.peek .hint { display: none; }
+.refs { margin: 6px 0; padding-left: 20px; font-size: 14px; }
+.refs li { margin: 3px 0; }
 .cards { display: grid; gap: 8px; }
 .card { display: block; padding: 12px 14px; color: var(--ink); text-decoration: none; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
 .card:hover { border-color: var(--accent); }
 .card b { display: block; }
-.card span { display: block; margin-top: 2px; font-size: 14px; color: var(--muted); }
-.subnav { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; padding: 0; list-style: none; }
-.subnav a { display: inline-block; padding: 4px 11px; font-size: 14px; text-decoration: none; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); }
-.pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; font-size: 15px; }
-.foot { margin-top: 28px; font-size: 13px; color: var(--muted); }
-.lesson { margin-top: 30px; padding-top: 4px; border-top: 2px solid var(--line); scroll-margin-top: 60px; }
-.lesson h2 { margin-top: 14px; }
-.lesson h3 { margin: 18px 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
-.tips { margin-top: 14px; padding: 2px 14px 10px; background: var(--accent-soft); border-radius: 12px; }
-.tips ul { margin: 0; padding-left: 18px; }
-.tips li { margin-top: 5px; }
-.try { display: block; padding: 10px 12px; background: var(--surface); border: 1.5px dashed var(--accent); border-radius: 12px; cursor: pointer; }
-.try .q { display: block; font-weight: 600; }
-.try .ans { display: block; margin-top: 4px; filter: blur(8px); }
-.try.peek .ans { filter: none; }
-.try .zh { font-size: 20px; }
-.try .pyx { display: block; font-size: 15px; color: var(--muted); }
-.try .hint { display: block; margin-top: 4px; font-size: 12px; color: var(--muted); }
-.try.peek .hint { display: none; }
-.subnav li a { color: var(--accent); }
-.pattern { margin: 10px 0 0; padding: 10px 14px; font-weight: 600; background: var(--surface); border-left: 4px solid var(--accent); border-radius: 8px; }
-.from { display: block; margin-top: 4px; font-size: 12px; color: var(--muted); font-style: italic; }
-.src { margin: 14px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
-.src span { font-weight: 700; }
-.src a { color: var(--muted); }
-.lesson h2 .tag { font-size: 12px; vertical-align: 3px; }
+.card .sub { display: block; margin-top: 2px; font-size: 14px; color: var(--muted); }
+.card .tags { display: block; margin-top: 6px; }
+.card .tags span { display: inline-block; margin: 0 4px 2px 0; padding: 0 8px; font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 10px; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 30px; font-size: 15px; }
+.pager a { max-width: 48%; }
+.foot { margin-top: 30px; font-size: 13px; color: var(--muted); }
+/* search page */
+.search { display: block; width: 100%; min-height: 48px; padding: 10px 14px; font: inherit; font-size: 17px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
+.fbtn { appearance: none; min-height: 34px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 17px; cursor: pointer; }
+.fbtn[aria-pressed="true"] { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+.sel { min-height: 34px; padding: 4px 10px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 17px; }
+.count { margin: 12px 0 6px; font-size: 14px; color: var(--muted); }
+.chapter-list { margin: 4px 0 0; padding-left: 20px; font-size: 14px; }
 </style>
 </head>
 <body>
 <main>
-<nav class="crumbs"><a href="../index.html">← All tools</a> · <a href="index.html">Lessons</a></nav>
-<div class="toggles" id="toggles" data-skip="ztw" aria-label="Show or hide"></div>
+<div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">All tools</a> › <a href="index.html">Lessons</a></nav><form class="mini" action="index.html" role="search"><input type="search" name="q" placeholder="Search lessons" aria-label="Search lessons"></form></div>
+
 <h1>Adverbs and describing</h1>
-<p class="lead">很, 太…了, 都, 也, where adverbs go, 地 and 多 + adjective.</p>
-<p class="src"><span>Also covered in Yoyo Chinese:</span> <a href="https://yoyochinese.com/courses/chinese-grammar-series" target="_blank" rel="noopener">Grammar Series, Unit 6: Adjectives</a></p>
-<ul class="subnav"><li><a href="#noun-adjective">Noun + 很 + adjective</a></li><li><a href="#adjective">太 + adjective + 了</a></li><li><a href="#all-both">都: all, both</a></li><li><a href="#also-too">也: also, too</a></li><li><a href="#where-adverbs-go">Where adverbs go</a></li><li><a href="#adjective-verb">Adjective + 地 + verb</a></li><li><a href="#how-with-adjective">How …? with 多 + adjective</a></li></ul>
-<section class="lesson" id="noun-adjective"><h2>Noun + 很 + adjective <span class="tag">A1 #34</span></h2>
-<p class="pattern">Noun + 很 + adjective</p>
-<div class="tips"><h3>How it works</h3><ul><li>No 是 before an adjective: 他很高, not ❌ 他是高.</li><li>很 is often just a link here, not really &quot;very.&quot;</li><li>非常 means &quot;extremely.&quot;</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">他很高。</span><span class="py">tā hěn gāo.</span><span class="mean">He&#x27;s tall.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我很好。</span><span class="py">wǒ hěn hǎo.</span><span class="mean">I&#x27;m good.</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: The weather is hot.. Tap to show the answer."><span class="q">The weather is hot.</span><span class="ans"><span class="zh" lang="zh-Hans">天气很热。</span><span class="pyx">tiānqì hěn rè.</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/ASG17BLH" target="_blank" rel="noopener">AllSet: Simple &quot;noun + adjective&quot; sentences</a> · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="adjective"><h2>太 + adjective + 了 <span class="tag">A1 #33</span></h2>
-<p class="pattern">太 + adjective + 了</p>
-<div class="tips"><h3>How it works</h3><ul><li>&quot;Too&quot; as a complaint, or &quot;so&quot; as praise.</li><li>Keep the 了.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">太好了！</span><span class="py">tài hǎo le!</span><span class="mean">Great!</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">天气太热了。</span><span class="py">tiānqì tài rè le.</span><span class="mean">It&#x27;s too hot.</span><span class="from">your notes</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">你太好了。</span><span class="py">nǐ tài hǎo le.</span><span class="mean">You&#x27;re so great.</span><span class="from">AllSet</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: Too expensive!. Tap to show the answer."><span class="q">Too expensive!</span><span class="ans"><span class="zh" lang="zh-Hans">太贵了！</span><span class="pyx">tài guì le!</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/ASG8HVFN" target="_blank" rel="noopener">AllSet: Expressing &quot;excessively&quot; with &quot;tai&quot;</a> · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="all-both"><h2>都: all, both <span class="tag">A1 #3</span></h2>
-<p class="pattern">Subject + 都 + verb</p>
-<div class="tips"><h3>How it works</h3><ul><li>都 goes after the subject, never at the start of the sentence.</li><li>After any time word: 我们今天都在家.</li><li>With two people, it means &quot;both.&quot;</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我们都说英语。</span><span class="py">wǒmen dōu shuō Yīngyǔ.</span><span class="mean">We all speak English.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">他们都在上海。</span><span class="py">tāmen dōu zài Shànghǎi.</span><span class="mean">They&#x27;re all in Shanghai.</span><span class="from">AllSet</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: We&#x27;re all students.. Tap to show the answer."><span class="q">We&#x27;re all students.</span><span class="ans"><span class="zh" lang="zh-Hans">我们都是学生。</span><span class="pyx">wǒmen dōu shì xuésheng.</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/ASG9YK09" target="_blank" rel="noopener">AllSet: The &quot;all&quot; adverb &quot;dou&quot;</a> · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="also-too"><h2>也: also, too <span class="tag">A1 #4</span></h2>
-<p class="pattern">Subject + 也 + verb</p>
-<div class="tips"><h3>How it works</h3><ul><li>也 goes before the verb, never at the end like English &quot;too.&quot;</li><li>In negatives, 也 goes before 不 or 没: 我也不去 (I&#x27;m not going either).</li><li>With adjectives, 也 goes before 很: 他也很高.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我也是学生。</span><span class="py">wǒ yě shì xuésheng.</span><span class="mean">I&#x27;m a student too.</span><span class="from">AllSet</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我也不喜欢。</span><span class="py">wǒ yě bù xǐhuan.</span><span class="mean">I don&#x27;t like it either.</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: Me too.. Tap to show the answer."><span class="q">Me too.</span><span class="ans"><span class="zh" lang="zh-Hans">我也是。</span><span class="pyx">wǒ yě shì.</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/ASGG25MD" target="_blank" rel="noopener">AllSet: The &quot;also&quot; adverb &quot;ye&quot;</a> · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="where-adverbs-go"><h2>Where adverbs go <span class="tag">Beyond A1</span></h2>
-<p class="pattern">Subject + adverb + verb</p>
-<div class="tips"><h3>How it works</h3><ul><li>After the subject, before the verb: 我很喜欢这本书.</li><li>Most adverbs can&#x27;t come before the subject. 也许 and 可能 can: 可能他不来.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我很喜欢这本书。</span><span class="py">wǒ hěn xǐhuan zhè běn shū.</span><span class="mean">I really like this book.</span><span class="from">your notes</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">可能他不来。</span><span class="py">kěnéng tā bù lái.</span><span class="mean">Maybe he isn&#x27;t coming.</span></div></div>
-<p class="src"><span>Sources:</span> Your notes. Matches the 都 and 也 articles on AllSet. · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="adjective-verb"><h2>Adjective + 地 + verb <span class="tag">B1</span></h2>
-<p class="pattern">Adjective + 地 + verb</p>
-<div class="tips"><h3>How it works</h3><ul><li>地 turns an adjective into an adverb, like &quot;-ly.&quot;</li><li>Two-syllable adjectives can double first: 清清楚楚地说.</li><li>Not very common in speech. Plain adverbs don&#x27;t need it.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">清楚地说</span><span class="py">qīngchu de shuō</span><span class="mean">speak clearly</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">他清清楚楚地说。</span><span class="py">tā qīngqīngchǔchǔ de shuō.</span><span class="mean">He spoke very clearly.</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/Turning_adjectives_into_adverbs" target="_blank" rel="noopener">AllSet: Turning adjectives into adverbs</a> · <a href="https://resources.allsetlearning.com/chinese/grammar/Reduplication_of_adjectives" target="_blank" rel="noopener">AllSet: Reduplication of adjectives</a> · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="how-with-adjective"><h2>How …? with 多 + adjective <span class="tag">A2</span></h2>
-<p class="pattern">Subject + 多 + adjective？</p>
-<div class="tips"><h3>How it works</h3><ul><li>Asks about degree: 多高 (how tall), 多大 (how big, how old).</li><li>For a small child&#x27;s age, 几岁 is more natural.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">你多高？</span><span class="py">nǐ duō gāo?</span><span class="mean">How tall are you?</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">他女儿多大了？ 七岁。</span><span class="py">tā nǚ&#x27;ér duō dà le? qī suì.</span><span class="mean">How old is his daughter? Seven.</span><span class="from">your notes</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: How old are you?. Tap to show the answer."><span class="q">How old are you?</span><span class="ans"><span class="zh" lang="zh-Hans">你多大了？</span><span class="pyx">nǐ duō dà le?</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/Asking_about_degree_with_%22duo%22" target="_blank" rel="noopener">AllSet: Asking about degree with &quot;duo&quot;</a> · Wording and unmarked examples: Claude</p>
-</section><h2>Related</h2><div class="cards"><a class="card" href="lesson-building-blocks.html"><b>Lesson: Building blocks</b><span>Pronouns, numbers, measure words, describing words, and the small words that hold sentences together.</span></a><a class="card" href="lesson-food-and-drink.html"><b>Lesson: Food &amp; drink</b><span>Drinks, food and flavors, and ordering at a restaurant.</span></a></div><nav class="pager"><a href="grammar-negation.html">← Negation</a><a href="grammar-linking-words.html">Linking words →</a></nav>
-<p class="foot">Built from handwritten notes. Lesson tips and examples, and grammar examples, were written by Claude unless marked (your notes). Native-speaker friends have the last word on usage.</p>
+<p class="intro">很, 太…了, 都, 也, where adverbs go, 地 and 多 + adjective.</p>
+<p class="lead">Grammar chapter 4 of 11 · 7 short articles. Read them in order, or jump to one.</p>
+<div class="cards"><a class="card" href="grammar-adverbs-and-describing-1-noun-adjective.html"><b>1. Noun + 很 + adjective</b><span class="sub">很 is often just a link here, not really &quot;very.&quot;</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-adverbs-and-describing-2-adjective.html"><b>2. 太 + adjective + 了</b><span class="sub">&quot;Too&quot; as a complaint, or &quot;so&quot; as praise.</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-adverbs-and-describing-3-all-both.html"><b>3. 都: all, both</b><span class="sub">都 goes after the subject, never at the start of the sentence.</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-adverbs-and-describing-4-also-too.html"><b>4. 也: also, too</b><span class="sub">也 goes before the verb, never at the end like English &quot;too.&quot;</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-adverbs-and-describing-5-where-adverbs-go.html"><b>5. Where adverbs go</b><span class="sub">After the subject, before the verb: 我很喜欢这本书.</span><span class="tags"><span>Beyond A1</span></span></a><a class="card" href="grammar-adverbs-and-describing-6-adjective-verb.html"><b>6. Adjective + 地 + verb</b><span class="sub">地 turns an adjective into an adverb, like &quot;-ly.&quot;</span><span class="tags"><span>B1</span></span></a><a class="card" href="grammar-adverbs-and-describing-7-how-with-adjective.html"><b>7. How …? with 多 + adjective</b><span class="sub">Asks about degree: 多高 (how tall), 多大 (how big, how old).</span><span class="tags"><span>A2</span></span></a></div>
+<h2>Related chapters</h2><div class="cards"><a class="card" href="lesson-building-blocks.html"><b>Lesson: Building blocks</b><span class="sub">Pronouns, numbers, measure words, describing words, and the small words that hold sentences together.</span></a><a class="card" href="lesson-food-and-drink.html"><b>Lesson: Food &amp; drink</b><span class="sub">Drinks, food and flavors, and ordering at a restaurant.</span></a></div>
+<h2>Further reading</h2><ul class="refs"><li>Also covered in Yoyo Chinese: <a href="https://yoyochinese.com/courses/chinese-grammar-series" target="_blank" rel="noopener">Grammar Series, Unit 6: Adjectives</a></li></ul>
+<nav class="pager"><a href="grammar-negation.html">← Negation</a><a href="grammar-linking-words.html">Linking words →</a></nav>
+<p class="foot">Built from handwritten notes. Tips and unmarked examples were written by Claude; each article lists its sources. Native-speaker friends have the last word on usage.</p>
 </main>
 <script>
 (function () {

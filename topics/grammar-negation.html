@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Negation · Mandarin grammar lesson</title>
+<title>Negation · Mandarin lessons</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #edf1f5; --surface: #ffffff; --ink: #16222e; --muted: #5a6978; --line: #cbd5df;
-  --accent: #1d6f8a; --accent-soft: #dcecf2; --accent-ink: #ffffff;
+  --accent: #1d6f8a; --accent-soft: #dcecf2; --accent-ink: #ffffff; --bad: #b3261e; --good: #2e7d32;
   --serif: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
   --serif-tc: "Noto Serif TC", "Songti TC", "PMingLiU", "Noto Serif SC", serif;
   --sans: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -18,141 +18,116 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0f1820; --surface: #17232e; --ink: #e6edf3; --muted: #94a3b2; --line: #2b3b49;
-    --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620;
+    --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620; --bad: #ff8a80; --good: #81c784;
   }
 }
 :root[data-theme="dark"] {
   --bg: #0f1820; --surface: #17232e; --ink: #e6edf3; --muted: #94a3b2; --line: #2b3b49;
-  --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620;
+  --accent: #5bb3d0; --accent-soft: #1b3644; --accent-ink: #0b1620; --bad: #ff8a80; --good: #81c784;
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.45; -webkit-text-size-adjust: 100%; }
-main { max-width: 680px; margin: 0 auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px calc(40px + env(safe-area-inset-bottom, 0px)); }
-.crumbs { font-size: 14px; color: var(--muted); }
-.crumbs a { color: var(--muted); text-decoration: none; }
-.crumbs a:hover, .crumbs a:focus-visible { color: var(--accent); }
-h1 { font-size: 26px; line-height: 1.2; margin: 10px 0 6px; }
-.lead { margin: 0 0 14px; color: var(--muted); }
-h2 { font-size: 19px; margin: 28px 0 8px; }
-h2 small { font-size: 14px; font-weight: 400; color: var(--muted); margin-left: 6px; }
-h3 { font-size: 16px; margin: 0 0 4px; }
-p { margin: 8px 0; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+main { max-width: 700px; margin: 0 auto; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px calc(40px + env(safe-area-inset-bottom, 0px)); }
 a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, .peekable:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; justify-content: space-between; font-size: 14px; color: var(--muted); }
+.crumbs a { color: var(--muted); text-decoration: none; }
+.crumbs a:hover { color: var(--accent); }
+.mini { display: flex; flex: 1 1 180px; max-width: 260px; }
+.mini input { width: 100%; min-height: 36px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; }
+h1 { font-size: 27px; line-height: 1.2; margin: 14px 0 6px; }
+h2 { font-size: 20px; margin: 30px 0 8px; padding-bottom: 4px; border-bottom: 2px solid var(--line); }
+h3 { font-size: 16px; margin: 20px 0 6px; }
+p { margin: 8px 0; }
 code { font-size: 0.9em; }
-.toggles { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; position: sticky; top: 0; z-index: 5; padding: 8px 0; background: var(--bg); }
-.tg { appearance: none; min-height: 36px; padding: 5px 12px; font: inherit; font-size: 14px; color: var(--muted); background: none; border: 1.5px dashed var(--line); border-radius: 18px; cursor: pointer; }
+.lead { margin: 0 0 12px; color: var(--muted); }
+.intro { font-size: 17px; }
+.zh, .zhi { font-family: var(--serif); }
+.kw { color: var(--accent); }
+.bad { color: var(--bad); font-weight: 700; }
+/* fact box, like AllSet's */
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 10px 0 14px; padding: 10px 14px; font-size: 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.facts dt { color: var(--muted); font-weight: 700; }
+.facts dd { margin: 0; }
+.chip { display: inline-block; margin: 0 4px 4px 0; padding: 1px 9px; font-size: 13px; text-decoration: none; color: var(--accent); border: 1px solid var(--accent); border-radius: 12px; }
+.chip.lv { color: var(--muted); border-color: var(--line); }
+.toc { margin: 6px 0 0; padding: 8px 14px 8px 32px; font-size: 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.toc li { margin: 2px 0; }
+.toggles { display: flex; flex-wrap: wrap; gap: 6px; position: sticky; top: 0; z-index: 5; margin: 10px -16px 0; padding: 8px 16px; background: var(--bg); }
+.tg { appearance: none; min-height: 34px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--muted); background: none; border: 1.5px dashed var(--line); border-radius: 17px; cursor: pointer; }
 .tg[aria-pressed="true"] { color: var(--ink); background: var(--surface); border-style: solid; border-color: var(--accent); }
-.tg:focus-visible, .row:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-.list { display: grid; gap: 6px; }
-.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr); gap: 10px; align-items: center; padding: 10px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
-.no-tw .row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
+.structure { margin: 8px 0; padding: 12px 16px; font-size: 18px; font-weight: 600; text-align: center; background: var(--surface); border: 1.5px solid var(--line); border-left: 5px solid var(--accent); border-radius: 10px; }
+.structure .zhi { font-weight: 700; }
+/* key words table */
+.words { display: grid; gap: 0; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.3fr); gap: 10px; align-items: center; padding: 8px 12px; border-top: 1px solid var(--line); }
+.row:first-child { border-top: 0; }
+.no-tw .row { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); }
 .no-tw .c-tw { display: none; }
-.zh { display: block; font-family: var(--serif); font-weight: 700; font-size: 24px; line-height: 1.2; overflow-wrap: anywhere; }
+.row .zh { display: block; font-weight: 700; font-size: 22px; line-height: 1.2; overflow-wrap: anywhere; }
 .c-tw .zh { font-family: var(--serif-tc); }
 .zh.same { color: var(--muted); font-weight: 500; }
-.zh.m { font-size: 20px; } .zh.l { font-size: 17px; }
-.py, .zy { display: block; margin-top: 3px; font-size: 15px; color: var(--muted); overflow-wrap: anywhere; }
+.zh.m { font-size: 19px; } .zh.l { font-size: 16px; }
+.py, .zy { display: block; font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
 .zy { font-family: var(--serif-tc); }
 .mean { font-size: 15px; }
-.note { display: block; margin-top: 4px; font-size: 13px; color: var(--muted); }
-.phrase { display: block; padding: 10px 12px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
-.phrase .zh { font-size: 21px; }
-.phrase .mean { display: block; margin-top: 3px; }
-.dlg { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 10px; padding: 10px 12px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
-.who { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 14px; }
-.dlg .zh { font-size: 19px; }
-.dlg .mean { display: block; margin-top: 3px; }
-.hide-p .row:not(.peek) .py, .hide-p .phrase:not(.peek) .py, .hide-p .dlg:not(.peek) .py,
-.hide-z .row:not(.peek) .zy,
-.hide-m .row:not(.peek) .mean, .hide-m .phrase:not(.peek) .mean, .hide-m .dlg:not(.peek) .mean { filter: blur(7px); }
+.note, .from { display: block; font-size: 13px; color: var(--muted); }
+.from { font-style: italic; }
+/* examples, stacked like AllSet */
+.examples { margin: 6px 0; padding: 0; list-style: none; }
+.examples li { padding: 8px 0 8px 12px; border-left: 3px solid var(--accent-soft); margin: 6px 0; }
+.examples .zhi { display: block; font-size: 19px; line-height: 1.4; }
+.examples .mean { display: block; }
+.who { display: inline-grid; place-items: center; width: 24px; height: 24px; margin-right: 6px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font: 700 13px var(--sans); vertical-align: 3px; }
+.notes, .watch { margin: 6px 0; padding-left: 20px; }
+.notes li, .watch li { margin: 4px 0; }
+.watch { list-style: none; padding: 10px 14px; background: var(--surface); border: 1.5px solid var(--line); border-left: 5px solid var(--bad); border-radius: 10px; }
+.hide-p .peekable:not(.peek) .py,
+.hide-z .peekable:not(.peek) .zy,
+.hide-m .peekable:not(.peek) .mean { filter: blur(7px); }
 .peekable { cursor: pointer; }
-.pat { padding: 12px 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; margin-top: 8px; }
-.tag { display: inline-block; margin-left: 4px; padding: 1px 8px; font-size: 12px; font-weight: 400; color: var(--muted); border: 1px solid var(--line); border-radius: 9px; vertical-align: 2px; }
-.ex { font-family: var(--serif); font-size: 17px; }
-.pat ul { margin: 6px 0 0; padding-left: 18px; }
+.try { display: block; margin: 6px 0; padding: 10px 12px; background: var(--surface); border: 1.5px dashed var(--accent); border-radius: 12px; }
+.try .q { display: block; font-weight: 600; }
+.try .ans { display: block; margin-top: 4px; filter: blur(8px); }
+.try.peek .ans { filter: none; }
+.try .zhi { font-size: 19px; }
+.try .pyx { display: block; font-size: 14px; color: var(--muted); }
+.try .hint { display: block; font-size: 12px; color: var(--muted); }
+.try.peek .hint { display: none; }
+.refs { margin: 6px 0; padding-left: 20px; font-size: 14px; }
+.refs li { margin: 3px 0; }
 .cards { display: grid; gap: 8px; }
 .card { display: block; padding: 12px 14px; color: var(--ink); text-decoration: none; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
 .card:hover { border-color: var(--accent); }
 .card b { display: block; }
-.card span { display: block; margin-top: 2px; font-size: 14px; color: var(--muted); }
-.subnav { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; padding: 0; list-style: none; }
-.subnav a { display: inline-block; padding: 4px 11px; font-size: 14px; text-decoration: none; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); }
-.pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; font-size: 15px; }
-.foot { margin-top: 28px; font-size: 13px; color: var(--muted); }
-.lesson { margin-top: 30px; padding-top: 4px; border-top: 2px solid var(--line); scroll-margin-top: 60px; }
-.lesson h2 { margin-top: 14px; }
-.lesson h3 { margin: 18px 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
-.tips { margin-top: 14px; padding: 2px 14px 10px; background: var(--accent-soft); border-radius: 12px; }
-.tips ul { margin: 0; padding-left: 18px; }
-.tips li { margin-top: 5px; }
-.try { display: block; padding: 10px 12px; background: var(--surface); border: 1.5px dashed var(--accent); border-radius: 12px; cursor: pointer; }
-.try .q { display: block; font-weight: 600; }
-.try .ans { display: block; margin-top: 4px; filter: blur(8px); }
-.try.peek .ans { filter: none; }
-.try .zh { font-size: 20px; }
-.try .pyx { display: block; font-size: 15px; color: var(--muted); }
-.try .hint { display: block; margin-top: 4px; font-size: 12px; color: var(--muted); }
-.try.peek .hint { display: none; }
-.subnav li a { color: var(--accent); }
-.pattern { margin: 10px 0 0; padding: 10px 14px; font-weight: 600; background: var(--surface); border-left: 4px solid var(--accent); border-radius: 8px; }
-.from { display: block; margin-top: 4px; font-size: 12px; color: var(--muted); font-style: italic; }
-.src { margin: 14px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
-.src span { font-weight: 700; }
-.src a { color: var(--muted); }
-.lesson h2 .tag { font-size: 12px; vertical-align: 3px; }
+.card .sub { display: block; margin-top: 2px; font-size: 14px; color: var(--muted); }
+.card .tags { display: block; margin-top: 6px; }
+.card .tags span { display: inline-block; margin: 0 4px 2px 0; padding: 0 8px; font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 10px; }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 30px; font-size: 15px; }
+.pager a { max-width: 48%; }
+.foot { margin-top: 30px; font-size: 13px; color: var(--muted); }
+/* search page */
+.search { display: block; width: 100%; min-height: 48px; padding: 10px 14px; font: inherit; font-size: 17px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+.filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
+.fbtn { appearance: none; min-height: 34px; padding: 4px 12px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 17px; cursor: pointer; }
+.fbtn[aria-pressed="true"] { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+.sel { min-height: 34px; padding: 4px 10px; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 17px; }
+.count { margin: 12px 0 6px; font-size: 14px; color: var(--muted); }
+.chapter-list { margin: 4px 0 0; padding-left: 20px; font-size: 14px; }
 </style>
 </head>
 <body>
 <main>
-<nav class="crumbs"><a href="../index.html">← All tools</a> · <a href="index.html">Lessons</a></nav>
-<div class="toggles" id="toggles" data-skip="ztw" aria-label="Show or hide"></div>
+<div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">All tools</a> › <a href="index.html">Lessons</a></nav><form class="mini" action="index.html" role="search"><input type="search" name="q" placeholder="Search lessons" aria-label="Search lessons"></form></div>
+
 <h1>Negation</h1>
-<p class="lead">不, 没, 别, 不太 and &quot;not as … as.&quot;</p>
-<p class="src"><span>Also covered in Yoyo Chinese:</span> <a href="https://yoyochinese.com/courses/chinese-grammar-series" target="_blank" rel="noopener">Grammar Series, Unit 2: Negation</a> · <a href="https://yoyochinese.com/courses/beginner-conversational-chinese" target="_blank" rel="noopener">Beginner Conversational, Unit 10: Expressing &quot;No&quot; and &quot;Know&quot;</a></p>
-<ul class="subnav"><li><a href="#verb-adjective">不 + verb / adjective</a></li><li><a href="#verb-didn-t">没(有) + verb: didn&#x27;t</a></li><li><a href="#noun-don-t-have">没有 + noun: don&#x27;t have</a></li><li><a href="#don-t">Don&#x27;t: 别 / 不要</a></li><li><a href="#adjective-not-very">不太 + adjective: not very</a></li><li><a href="#not-as-as">Not as … as: 没有</a></li></ul>
-<section class="lesson" id="verb-adjective"><h2>不 + verb / adjective <span class="tag">A1 #2</span></h2>
-<p class="pattern">Subject + 不 + verb / adjective</p>
-<div class="tips"><h3>How it works</h3><ul><li>For now, the future, habits, and things you don&#x27;t want to do.</li><li>不 is bù, but bú before a 4th tone: 不是 bú shì.</li><li>Never 不有. 有 only takes 没.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我不吃鱼。</span><span class="py">wǒ bù chī yú.</span><span class="mean">I don&#x27;t eat fish.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">他不高。</span><span class="py">tā bù gāo.</span><span class="mean">He isn&#x27;t tall.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我们不喝酒。</span><span class="py">wǒmen bù hē jiǔ.</span><span class="mean">We don&#x27;t drink alcohol.</span><span class="from">AllSet</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: I&#x27;m not going.. Tap to show the answer."><span class="q">I&#x27;m not going.</span><span class="ans"><span class="zh" lang="zh-Hans">我不去。</span><span class="pyx">wǒ bú qù.</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/ASGIPYFV" target="_blank" rel="noopener">AllSet: Standard negation with &quot;bu&quot;</a> · <a href="https://yoyochinese.com/lesson/Chinese-Negation-Word-bu/notes" target="_blank" rel="noopener">Yoyo Chinese: Grammar Series, Lesson 4 (不)</a> · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="verb-didn-t"><h2>没(有) + verb: didn&#x27;t <span class="tag">A1 #29</span></h2>
-<p class="pattern">Subject + 没(有) + verb</p>
-<div class="tips"><h3>How it works</h3><ul><li>For things that didn&#x27;t happen, or haven&#x27;t happened yet.</li><li>No 了 after the verb: ❌ 我没吃了.</li><li>没钱了 (&quot;out of money&quot;) is a different 了, and it&#x27;s fine.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我昨天没吃饭。</span><span class="py">wǒ zuótiān méi chīfàn.</span><span class="mean">I didn&#x27;t eat yesterday.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我没有去上班。</span><span class="py">wǒ méiyǒu qù shàngbān.</span><span class="mean">I didn&#x27;t go to work.</span><span class="from">AllSet</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: I didn&#x27;t go yesterday.. Tap to show the answer."><span class="q">I didn&#x27;t go yesterday.</span><span class="ans"><span class="zh" lang="zh-Hans">我昨天没去。</span><span class="pyx">wǒ zuótiān méi qù.</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/ASGAUCXK" target="_blank" rel="noopener">AllSet: Negation of past actions with &quot;meiyou&quot;</a> · <a href="https://yoyochinese.com/lesson/Chinese-Negation-Word-mei/notes" target="_blank" rel="noopener">Yoyo Chinese: Grammar Series, Lesson 5 (没)</a> · 没钱了 note: Claude · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="noun-don-t-have"><h2>没有 + noun: don&#x27;t have <span class="tag">A1 #1</span></h2>
-<p class="pattern">没(有) + noun</p>
-<div class="tips"><h3>How it works</h3><ul><li>The negative of 有 (have, there is).</li><li>没有 can shorten to 没.</li><li>The number and measure word usually drop out: 我没有书.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我没有书。</span><span class="py">wǒ méiyǒu shū.</span><span class="mean">I don&#x27;t have a book.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">没有办法。</span><span class="py">méiyǒu bànfǎ.</span><span class="mean">There&#x27;s no way.</span><span class="from">your notes</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: I don&#x27;t have money.. Tap to show the answer."><span class="q">I don&#x27;t have money.</span><span class="ans"><span class="zh" lang="zh-Hans">我没有钱。</span><span class="pyx">wǒ méiyǒu qián.</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/ASGPNV3Q" target="_blank" rel="noopener">AllSet: Negation of &quot;you&quot; with &quot;mei&quot;</a> · <a href="https://yoyochinese.com/lesson/Chinese-Negation-Word-mei/notes" target="_blank" rel="noopener">Yoyo Chinese: Grammar Series, Lesson 5 (没)</a> · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="don-t"><h2>Don&#x27;t: 别 / 不要 <span class="tag">A1 #30</span></h2>
-<p class="pattern">别 / 不要 + verb</p>
-<div class="tips"><h3>How it works</h3><ul><li>Usually no subject, as in English &quot;Don&#x27;t …&quot;.</li><li>不要 is said búyào. 别 and 不要 are mostly interchangeable.</li><li>Add 了 to mean &quot;stop&quot;: 别说了. It can also mean &quot;don&#x27;t (yet)&quot;: 别买了，太贵了.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">别走！</span><span class="py">bié zǒu!</span><span class="mean">Don&#x27;t go!</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">不要说英文。</span><span class="py">búyào shuō Yīngwén.</span><span class="mean">Don&#x27;t speak English.</span><span class="from">AllSet</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">别说了。</span><span class="py">bié shuō le.</span><span class="mean">Stop talking.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">别气我。</span><span class="py">bié qì wǒ.</span><span class="mean">Don&#x27;t make me mad.</span><span class="from">your notes</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: Stop crying!. Tap to show the answer."><span class="q">Stop crying!</span><span class="ans"><span class="zh" lang="zh-Hans">别哭了！</span><span class="pyx">bié kū le!</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/ASGIVZJU" target="_blank" rel="noopener">AllSet: Negative commands with &quot;buyao&quot;</a> · <a href="https://yoyochinese.com/lesson/Chinese-Negation-words-bie-and-bu-yao/notes" target="_blank" rel="noopener">Yoyo Chinese: Grammar Series, Lesson 6 (别 and 不要)</a> · <a href="https://resources.allsetlearning.com/chinese/grammar/Expressing_%22stop_doing%22_with_%22bie%E2%80%A6_le%22" target="_blank" rel="noopener">AllSet: Expressing &quot;stop doing&quot; with &quot;bie… le&quot;</a> · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="adjective-not-very"><h2>不太 + adjective: not very <span class="tag">A2</span></h2>
-<p class="pattern">Subject + 不太 + adjective</p>
-<div class="tips"><h3>How it works</h3><ul><li>The opposite of 太: &quot;not too,&quot; &quot;not very.&quot;</li><li>No 了: 不太好, not ❌ 不太好了.</li><li>Works with a few feeling verbs too: 不太喜欢.</li><li>Said bú tài.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我不太高兴。</span><span class="py">wǒ bú tài gāoxìng.</span><span class="mean">I&#x27;m not very happy.</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">我家不太大。</span><span class="py">wǒ jiā bú tài dà.</span><span class="mean">My home isn&#x27;t very big.</span><span class="from">AllSet</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: I don&#x27;t really like it.. Tap to show the answer."><span class="q">I don&#x27;t really like it.</span><span class="ans"><span class="zh" lang="zh-Hans">我不太喜欢。</span><span class="pyx">wǒ bú tài xǐhuan.</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/Expressing_%22not_very%22_with_%22bu_tai%22" target="_blank" rel="noopener">AllSet: Expressing &quot;not very&quot; with &quot;bu tai&quot;</a> · Wording and unmarked examples: Claude</p>
-</section>
-<section class="lesson" id="not-as-as"><h2>Not as … as: 没有 <span class="tag">A2</span></h2>
-<p class="pattern">A + 没有 + B + adjective</p>
-<div class="tips"><h3>How it works</h3><ul><li>A is not as … as B. A has less of it.</li></ul></div>
-<h3>Examples</h3><div class="list"><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">你没有我高。</span><span class="py">nǐ méiyǒu wǒ gāo.</span><span class="mean">You&#x27;re not as tall as me.</span><span class="from">your notes</span></div><div class="phrase peekable" tabindex="0"><span class="zh" lang="zh-Hans">今天没有昨天热。</span><span class="py">jīntiān méiyǒu zuótiān rè.</span><span class="mean">Today isn&#x27;t as hot as yesterday.</span></div></div>
-<h3>Try it</h3><div class="list"><div class="try peekable" tabindex="0" aria-label="Practice: Tea isn&#x27;t as good as coffee.. Tap to show the answer."><span class="q">Tea isn&#x27;t as good as coffee.</span><span class="ans"><span class="zh" lang="zh-Hans">茶没有咖啡好喝。</span><span class="pyx">chá méiyǒu kāfēi hǎohē.</span></span><span class="hint">Say it, then tap to check</span></div></div>
-<p class="src"><span>Sources:</span> <a href="https://resources.allsetlearning.com/chinese/grammar/Basic_comparisons_with_%22meiyou%22" target="_blank" rel="noopener">AllSet: Basic comparisons with &quot;meiyou&quot;</a> · Wording and unmarked examples: Claude</p>
-</section><h2>Related</h2><div class="cards"><a class="card" href="lesson-building-blocks.html"><b>Lesson: Building blocks</b><span>Pronouns, numbers, measure words, describing words, and the small words that hold sentences together.</span></a><a class="card" href="lesson-conversation.html"><b>Lesson: Conversation</b><span>Reacting, giving opinions, asking questions, polite words, and what to say when you&#x27;re stuck.</span></a></div><nav class="pager"><a href="grammar-questions.html">← Yes / no and other questions</a><a href="grammar-adverbs-and-describing.html">Adverbs and describing →</a></nav>
-<p class="foot">Built from handwritten notes. Lesson tips and examples, and grammar examples, were written by Claude unless marked (your notes). Native-speaker friends have the last word on usage.</p>
+<p class="intro">不, 没, 别, 不太 and &quot;not as … as.&quot;</p>
+<p class="lead">Grammar chapter 3 of 11 · 6 short articles. Read them in order, or jump to one.</p>
+<div class="cards"><a class="card" href="grammar-negation-1-verb-adjective.html"><b>1. 不 + verb / adjective</b><span class="sub">For now, the future, habits, and things you don&#x27;t want to do.</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-negation-2-verb-didn-t.html"><b>2. 没(有) + verb: didn&#x27;t</b><span class="sub">For things that didn&#x27;t happen, or haven&#x27;t happened yet.</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-negation-3-noun-don-t-have.html"><b>3. 没有 + noun: don&#x27;t have</b><span class="sub">The negative of 有 (have, there is).</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-negation-4-don-t.html"><b>4. Don&#x27;t: 别 / 不要</b><span class="sub">Usually no subject, as in English &quot;Don&#x27;t …&quot;.</span><span class="tags"><span>A1</span></span></a><a class="card" href="grammar-negation-5-adjective-not-very.html"><b>5. 不太 + adjective: not very</b><span class="sub">The opposite of 太: &quot;not too,&quot; &quot;not very.&quot;</span><span class="tags"><span>A2</span></span></a><a class="card" href="grammar-negation-6-not-as-as.html"><b>6. Not as … as: 没有</b><span class="sub">A is not as … as B. A has less of it.</span><span class="tags"><span>A2</span></span></a></div>
+<h2>Related chapters</h2><div class="cards"><a class="card" href="lesson-building-blocks.html"><b>Lesson: Building blocks</b><span class="sub">Pronouns, numbers, measure words, describing words, and the small words that hold sentences together.</span></a><a class="card" href="lesson-conversation.html"><b>Lesson: Conversation</b><span class="sub">Reacting, giving opinions, asking questions, polite words, and what to say when you&#x27;re stuck.</span></a></div>
+<h2>Further reading</h2><ul class="refs"><li>Also covered in Yoyo Chinese: <a href="https://yoyochinese.com/courses/chinese-grammar-series" target="_blank" rel="noopener">Grammar Series, Unit 2: Negation</a></li><li>Also covered in Yoyo Chinese: <a href="https://yoyochinese.com/courses/beginner-conversational-chinese" target="_blank" rel="noopener">Beginner Conversational, Unit 10: Expressing &quot;No&quot; and &quot;Know&quot;</a></li></ul>
+<nav class="pager"><a href="grammar-questions.html">← Yes / no and other questions</a><a href="grammar-adverbs-and-describing.html">Adverbs and describing →</a></nav>
+<p class="foot">Built from handwritten notes. Tips and unmarked examples were written by Claude; each article lists its sources. Native-speaker friends have the last word on usage.</p>
 </main>
 <script>
 (function () {
